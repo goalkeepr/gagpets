@@ -1,0 +1,13 @@
+services:
+  node:
+    image: "node:22"
+    working_dir: /app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+    expose:
+      - "8029"
+    ports:
+      - "8029:8029"
+    command: sh -c "npm install && npm start"

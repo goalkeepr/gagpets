@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Recipe Database</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        input[type="checkbox"] {
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        select, input {
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button.secondary {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        button.secondary:hover {
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .table-container {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        :root {
+            --first-column-width: 140px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        th {
+            background: linear-gradient(135deg, #495057, #6c757d);
+            color: white;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th.sticky-left {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0 !important;
+            z-index: 30 !important;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.15) !important;
+            background: linear-gradient(135deg, #495057, #6c757d) !important;
+            border-right: 2px solid #fff;
+        }
+
+        th.sticky-left-second {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 140px !important;
+            z-index: 25 !important;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.15) !important;
+            background: linear-gradient(135deg, #495057, #6c757d) !important;
+            border-right: 2px solid #fff;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #f1f3f4;
+            transition: background-color 0.2s ease;
+        }
+
+        td.sticky-left {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0 !important;
+            background: white !important;
+            z-index: 20 !important;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.15) !important;
+            border-right: 2px solid #f1f3f4;
+        }
+
+        td.sticky-left-second {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 140px !important;
+            background: white !important;
+            z-index: 15 !important;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.15) !important;
+            border-right: 2px solid #f1f3f4;
+        }
+
+        tr:hover td.sticky-left,
+        tr:hover td.sticky-left-second {
+            background-color: #f8f9fa !important;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr.selected {
+            background-color: #e3f2fd !important;
+            border-left: 4px solid #2196f3 !important;
+        }
+
+        tr.selected:hover {
+            background-color: #e3f2fd !important;
+        }
+
+        tr.selected td.sticky-left,
+        tr.selected td.sticky-left-second {
+            background-color: #e3f2fd !important;
+        }
+
+        tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .verified-yes {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .verified-no {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+        }
+
+        .ingredient-cell {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .ingredient-cell.has-ingredient {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            color: #856404;
+        }
+
+        .rarity-normal { border-left: 4px solid #6c757d; }
+        .rarity-uncommon { border-left: 4px solid #28a745; }
+        .rarity-rare { border-left: 4px solid #007bff; }
+        .rarity-legendary { border-left: 4px solid #ffc107; }
+        .rarity-mythical { border-left: 4px solid #e83e8c; }
+        .rarity-divine { border-left: 4px solid #6f42c1; }
+        .rarity-prismatic { border-left: 4px solid #fd7e14; }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                padding: 20px;
+            }
+            
+            .filters {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions {
+                justify-content: stretch;
+            }
+            
+            button {
+                flex: 1;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+
+        .search-highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            z-index: 1000;
+            font-size: 12px;
+        }
+
+        .filter-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍳 Cooking Recipe Database</h1>
+            <p>Complete recipe collection with ingredient breakdown and verification status</p>
+        </div>
+
+        <div class="controls">
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalRecipes">0</span>
+                    <div class="stat-label">Total Recipes</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="totalIngredients">0</span>
+                    <div class="stat-label">Unique Ingredients</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="verifiedRecipes">0</span>
+                    <div class="stat-label">Verified Recipes</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="filteredCount">0</span>
+                    <div class="stat-label">Showing</div>
+                </div>
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="itemFilter">Food Item</label>
+                    <select id="itemFilter">
+                        <option value="">All Items</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rarityFilter">Rarity</label>
+                    <select id="rarityFilter">
+                        <option value="">All Rarities</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="verifiedFilter">Verification Status</label>
+                    <select id="verifiedFilter">
+                        <option value="">All</option>
+                        <option value="Yes">Verified Only</option>
+                        <option value="No">Unverified Only</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="ingredientSearch">Search Ingredients</label>
+                    <input type="text" id="ingredientSearch" placeholder="e.g., Tomato, Corn">
+                </div>
+            </div>
+
+            <div class="actions">
+                <button onclick="clearFilters()">Clear Filters</button>
+                <label style="display: flex; align-items: center; gap: 8px; color: #495057; font-weight: 600;">
+                    <input type="checkbox" id="hideEmptyColumns" checked onchange="app.applyFilters()">
+                    Hide Empty Ingredient Columns
+                </label>
+                <button onclick="downloadCSV()" class="secondary">Download CSV</button>
+                <button onclick="downloadJSON()" class="secondary">Download JSON</button>
+                <button onclick="copyTableData()">Copy to Clipboard</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div id="loading" class="loading">Loading recipe data...</div>
+            <table id="recipeTable" style="display: none;">
+                <thead id="tableHead"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+            <div id="noResults" class="no-results" style="display: none;">
+                No recipes match your current filters.
+            </div>
+        </div>
+    </div>
+
+    <script src="recipe_data.js"></script>
+    <script>
+        class RecipeApp {
+            constructor() {
+                this.allData = null;
+                this.filteredData = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.setupEventListeners();
+                this.populateFilters();
+                this.renderTable();
+                this.updateStats();
+            }
+
+            async loadData() {
+                // In a real app, this would be an API call
+                // For now, we'll use the imported data
+                this.allData = getRecipeTable();
+                this.filteredData = { ...this.allData };
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('recipeTable').style.display = 'table';
+            }
+
+            setupEventListeners() {
+                document.getElementById('itemFilter').addEventListener('change', () => this.applyFilters());
+                document.getElementById('rarityFilter').addEventListener('change', () => this.applyFilters());
+                document.getElementById('verifiedFilter').addEventListener('change', () => this.applyFilters());
+                document.getElementById('ingredientSearch').addEventListener('input', () => this.applyFilters());
+                
+                // Add click-outside detection to reset filters
+                document.addEventListener('click', (event) => {
+                    const tableContainer = document.querySelector('.table-container');
+                    const controls = document.querySelector('.controls');
+                    
+                    // Check if click is outside both table and controls
+                    if (!tableContainer.contains(event.target) && !controls.contains(event.target)) {
+                        this.resetFilters();
+                    }
+                });
+                
+                // Prevent table clicks from bubbling up to document
+                document.querySelector('.table-container').addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+                
+                // Prevent controls clicks from bubbling up to document
+                document.querySelector('.controls').addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+            }
+
+            populateFilters() {
+                // Populate item filter
+                const items = [...new Set(this.allData.rows.map(row => row.Item))].sort();
+                const itemFilter = document.getElementById('itemFilter');
+                items.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    itemFilter.appendChild(option);
+                });
+
+                // Populate rarity filter
+                const rarities = [...new Set(this.allData.rows.map(row => row.Rarity))].sort();
+                const rarityFilter = document.getElementById('rarityFilter');
+                rarities.forEach(rarity => {
+                    const option = document.createElement('option');
+                    option.value = rarity;
+                    option.textContent = rarity;
+                    rarityFilter.appendChild(option);
+                });
+            }
+
+            applyFilters() {
+                const itemFilter = document.getElementById('itemFilter').value;
+                const rarityFilter = document.getElementById('rarityFilter').value;
+                const verifiedFilter = document.getElementById('verifiedFilter').value;
+                const ingredientSearch = document.getElementById('ingredientSearch').value.toLowerCase();
+                const hideEmptyColumns = document.getElementById('hideEmptyColumns').checked;
+
+                let filteredRows = this.allData.rows.filter(row => {
+                    // Item filter
+                    if (itemFilter && row.Item !== itemFilter) return false;
+                    
+                    // Rarity filter
+                    if (rarityFilter && row.Rarity !== rarityFilter) return false;
+                    
+                    // Verified filter
+                    if (verifiedFilter && row.Verified !== verifiedFilter) return false;
+                    
+                    // Ingredient search
+                    if (ingredientSearch) {
+                        const searchTerms = ingredientSearch.split(',').map(term => term.trim());
+                        const hasIngredient = searchTerms.some(term => {
+                            return this.allData.headers.some(header => {
+                                if (header === 'Item' || header === 'Rarity' || header === 'Option' || header === 'Verified' || header === 'Note') return false;
+                                return header.toLowerCase().includes(term) && row[header] > 0;
+                            });
+                        });
+                        if (!hasIngredient) return false;
+                    }
+                    
+                    return true;
+                });
+
+                // Determine which columns to show
+                let visibleHeaders = [...this.allData.headers];
+                
+                if (hideEmptyColumns && filteredRows.length > 0) {
+                    // Find ingredient columns that have at least one non-zero value
+                    const usedIngredients = new Set();
+                    
+                    filteredRows.forEach(row => {
+                        this.allData.headers.forEach(header => {
+                            // Skip non-ingredient columns
+                            if (header === 'Item' || header === 'Rarity' || header === 'Option' || header === 'Verified' || header === 'Note') {
+                                return;
+                            }
+                            
+                            if (row[header] && row[header] > 0) {
+                                usedIngredients.add(header);
+                            }
+                        });
+                    });
+                    
+                    // Filter headers to only include non-ingredient columns and used ingredients
+                    visibleHeaders = this.allData.headers.filter(header => {
+                        if (header === 'Item' || header === 'Rarity' || header === 'Option' || header === 'Verified' || header === 'Note') {
+                            return true; // Always show these columns
+                        }
+                        return usedIngredients.has(header);
+                    });
+                }
+
+                this.filteredData = {
+                    headers: visibleHeaders,
+                    rows: filteredRows,
+                    recipeCount: filteredRows.length,
+                    ingredientCount: visibleHeaders.filter(h => 
+                        h !== 'Item' && h !== 'Rarity' && h !== 'Option' && h !== 'Verified' && h !== 'Note'
+                    ).length
+                };
+
+                this.renderTable();
+                this.updateStats();
+            }
+
+            renderTable() {
+                const tableHead = document.getElementById('tableHead');
+                const tableBody = document.getElementById('tableBody');
+                const noResults = document.getElementById('noResults');
+
+                // Clear existing content
+                tableHead.innerHTML = '';
+                tableBody.innerHTML = '';
+
+                if (this.filteredData.rows.length === 0) {
+                    document.getElementById('recipeTable').style.display = 'none';
+                    noResults.style.display = 'block';
+                    return;
+                }
+
+                document.getElementById('recipeTable').style.display = 'table';
+                noResults.style.display = 'none';
+
+                // Create header
+                const headerRow = document.createElement('tr');
+                this.filteredData.headers.forEach((header, index) => {
+                    const th = document.createElement('th');
+                    th.textContent = header;
+                    
+                    // Make Item and Rarity columns sticky
+                    if (header === 'Item') {
+                        th.classList.add('sticky-left');
+                        th.style.width = '140px';
+                        th.style.minWidth = '140px';
+                        th.style.maxWidth = '140px';
+                    } else if (header === 'Rarity') {
+                        th.classList.add('sticky-left-second');
+                        th.style.width = '140px';
+                        th.style.minWidth = '140px';
+                        th.style.maxWidth = '140px';
+                    }
+                    
+                    if (header !== 'Item' && header !== 'Rarity' && header !== 'Option' && header !== 'Verified' && header !== 'Note') {
+                        th.classList.add('tooltip');
+                        th.setAttribute('data-tooltip', `Ingredient: ${header}`);
+                    }
+                    
+                    headerRow.appendChild(th);
+                });
+                tableHead.appendChild(headerRow);
+
+                // Create rows
+                this.filteredData.rows.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.classList.add(`rarity-${row.Rarity.toLowerCase()}`);
+                    
+                    this.filteredData.headers.forEach((header, index) => {
+                        const td = document.createElement('td');
+                        const value = row[header] || 0;
+                        
+                        // Make Item and Rarity columns sticky
+                        if (header === 'Item') {
+                            td.classList.add('sticky-left');
+                        } else if (header === 'Rarity') {
+                            td.classList.add('sticky-left-second');
+                        }
+                        
+                        if (header === 'Verified') {
+                            td.classList.add(value === 'Yes' ? 'verified-yes' : 'verified-no');
+                        } else if (header !== 'Item' && header !== 'Rarity' && header !== 'Option' && header !== 'Note') {
+                            td.classList.add('ingredient-cell');
+                            if (value > 0) {
+                                td.classList.add('has-ingredient');
+                            }
+                        }
+                        
+                        td.textContent = value;
+                        tr.appendChild(td);
+                    });
+                    
+                    // Add click event listener for row selection
+                    tr.addEventListener('click', () => this.selectRow(tr));
+                    
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            updateStats() {
+                document.getElementById('totalRecipes').textContent = this.allData.recipeCount;
+                document.getElementById('totalIngredients').textContent = this.allData.ingredientCount;
+                document.getElementById('verifiedRecipes').textContent = 
+                    this.allData.rows.filter(row => row.Verified === 'Yes').length;
+                document.getElementById('filteredCount').textContent = this.filteredData.recipeCount;
+                
+                // Update displayed ingredients count if we're hiding empty columns
+                const hideEmptyColumns = document.getElementById('hideEmptyColumns')?.checked;
+                if (hideEmptyColumns) {
+                    const displayedIngredients = this.filteredData.ingredientCount || 
+                        this.filteredData.headers.filter(h => 
+                            h !== 'Item' && h !== 'Rarity' && h !== 'Option' && h !== 'Verified' && h !== 'Note'
+                        ).length;
+                    
+                    // Update the ingredients stat to show filtered count
+                    const ingredientStat = document.getElementById('totalIngredients').parentElement;
+                    const ingredientLabel = ingredientStat.querySelector('.stat-label');
+                    if (displayedIngredients < this.allData.ingredientCount) {
+                        ingredientLabel.textContent = `Shown Ingredients (${displayedIngredients}/${this.allData.ingredientCount})`;
+                        document.getElementById('totalIngredients').textContent = displayedIngredients;
+                    } else {
+                        ingredientLabel.textContent = 'Unique Ingredients';
+                        document.getElementById('totalIngredients').textContent = this.allData.ingredientCount;
+                    }
+                } else {
+                    // Reset to original label
+                    const ingredientStat = document.getElementById('totalIngredients').parentElement;
+                    const ingredientLabel = ingredientStat.querySelector('.stat-label');
+                    ingredientLabel.textContent = 'Unique Ingredients';
+                    document.getElementById('totalIngredients').textContent = this.allData.ingredientCount;
+                }
+            }
+
+            exportToCSV() {
+                const csvRows = [];
+                csvRows.push(this.filteredData.headers.join(','));
+                
+                this.filteredData.rows.forEach(row => {
+                    const csvRow = this.filteredData.headers.map(header => {
+                        const value = row[header] || 0;
+                        if (typeof value === 'string' && value.includes(',')) {
+                            return `"${value}"`;
+                        }
+                        return value;
+                    });
+                    csvRows.push(csvRow.join(','));
+                });
+                
+                return csvRows.join('\n');
+            }
+
+            exportToJSON() {
+                return JSON.stringify(this.filteredData, null, 2);
+            }
+
+            selectRow(tr) {
+                // Remove previous selection
+                const previousSelected = document.querySelector('tr.selected');
+                if (previousSelected) {
+                    previousSelected.classList.remove('selected');
+                }
+                
+                // Add selection to clicked row
+                tr.classList.add('selected');
+                
+                // Get the food item from the first cell (Item column)
+                const itemCell = tr.querySelector('td.sticky-left');
+                if (itemCell) {
+                    const foodItem = itemCell.textContent.trim();
+                    
+                    // Apply filter for this food item
+                    document.getElementById('itemFilter').value = foodItem;
+                    
+                    // Apply the filters
+                    this.applyFilters();
+                    
+                    // Show notification
+                    this.showNotification(`Filtered by ${foodItem}`);
+                    
+                    // Scroll to top of table to show filtered results
+                    document.getElementById('recipeTable').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+            }
+
+            resetFilters() {
+                // Clear all filters
+                document.getElementById('itemFilter').value = '';
+                document.getElementById('rarityFilter').value = '';
+                document.getElementById('verifiedFilter').value = '';
+                document.getElementById('ingredientSearch').value = '';
+                document.getElementById('hideEmptyColumns').checked = true;
+                
+                // Remove row selection
+                const selectedRow = document.querySelector('tr.selected');
+                if (selectedRow) {
+                    selectedRow.classList.remove('selected');
+                }
+                
+                // Apply the cleared filters
+                this.applyFilters();
+                
+                // Show notification
+                this.showNotification('Filters cleared');
+            }
+
+            showNotification(message) {
+                // Remove existing notification
+                const existing = document.querySelector('.filter-notification');
+                if (existing) {
+                    existing.remove();
+                }
+                
+                // Create new notification
+                const notification = document.createElement('div');
+                notification.className = 'filter-notification';
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                // Show notification
+                setTimeout(() => notification.classList.add('show'), 100);
+                
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Global app instance
+        let app;
+
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new RecipeApp();
+        });
+
+        // Global functions for buttons
+        function clearFilters() {
+            app.resetFilters();
+        }
+
+        function downloadCSV() {
+            const csv = app.exportToCSV();
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cooking_recipes.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function downloadJSON() {
+            const json = app.exportToJSON();
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cooking_recipes.json';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function copyTableData() {
+            const csv = app.exportToCSV();
+            navigator.clipboard.writeText(csv).then(() => {
+                // Show temporary success message
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy to clipboard');
+            });
+        }
+    </script>
+</body>
+</html>

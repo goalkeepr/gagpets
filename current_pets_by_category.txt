@@ -1,0 +1,119 @@
+=== dragon.js ===
+reddragon
+=== spirit.js ===
+corruptedkodama
+kodama
+=== dinosaurs.js ===
+ankylosaurus
+brontosaurus
+dilophosaurus
+iguanodon
+pachycephalosaurus
+parasaurolophus
+pterodactyl
+raptor
+spinosaurus
+stegosaurus
+trex
+=== aquatic.js ===
+axolotl
+crab
+kappa
+koi
+mimicoctopus
+seal
+seaotter
+seaturtle
+starfish
+=== birds.js ===
+baldeagle
+bloodowl
+chicken
+cookedowl
+flamingo
+hyacinthmacaw
+kiwi
+nightowl
+ostrich
+owl
+peacock
+rooster
+scarletmacaw
+seagull
+tanchozuru
+toucan
+=== insects.js ===
+bearbee
+bee
+butterfly
+caterpillar
+discobee
+dragonfly
+giantant
+goldenbee
+honeybee
+moth
+packbee
+petalbee
+prayingmantis
+queenbee
+redgiantant
+tarantulahawk
+wasp
+=== mammals.js ===
+baconpig
+bloodhedgehog
+brownmouse
+capybara
+cat
+cow
+deer
+dog
+fennecfox
+goldenlab
+greymouse
+hamster
+hedgehog
+kitsune
+meerkat
+mole
+monkey
+mooncat
+nihonzaru
+orangetabby
+panda
+raccoon
+redfox
+spotteddeer
+=== herbivores.js ===
+bagelbunny
+blackbunny
+bunny
+=== amphibians.js ===
+echofrog
+frog
+=== mollusks.js ===
+snail
+=== fruits.js ===
+bloodkiwi
+=== undead.js ===
+chickenzombie
+=== other.js ===
+corruptedkitsune
+corruptedkodama
+football
+kodama
+manekineko
+mizuchi
+raiju
+=== reptiles.js ===
+sandsnake
+tsuchinoko
+turtle
+=== food.js ===
+bagelbunny
+frenchfryferret
+mochimouse
+pancakemole
+spaghettisloth
+sushibear

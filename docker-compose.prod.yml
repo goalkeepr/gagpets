@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8029:8029"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8029/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
