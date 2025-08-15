@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test All 11 Pets Across 3 Sources</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .source-group { border: 2px solid #ddd; margin: 20px 0; padding: 15px; border-radius: 8px; }
+        .pet-item { border: 1px solid #ccc; margin: 5px 0; padding: 8px; border-radius: 4px; background: #f9f9f9; }
+        .summary { background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Testing 11 Pets Across 3 Sources</h1>
+    <div id="results"></div>
+    
+    <script type="module">
+        import { petAbilities } from './petAbilities_modular.js';
+        
+        const sources = {
+            "Bug Egg": ['snail', 'giantant', 'caterpillar', 'prayingmantis', 'dragonfly'],
+            "Common Egg": ['goldenlab', 'dog', 'bunny'],
+            "Common Summer Egg": ['starfish', 'seagull', 'crab']
+        };
+        
+        const resultsDiv = document.getElementById('results');
+        let html = '';
+        
+        // Test each source
+        for (const [sourceName, petKeys] of Object.entries(sources)) {
+            html += `<div class="source-group">`;
+            html += `<h2>${sourceName}</h2>`;
+            
+            let sourceTotal = 0;
+            let allPetsFound = true;
+            
+            petKeys.forEach(petKey => {
+                const pet = petAbilities[petKey];
+                if (pet) {
+                    sourceTotal += pet.probability || 0;
+                    html += `
+                        <div class="pet-item">
+                            <strong>${pet.name}</strong> - 
+                            Source: ${pet.source || 'NOT SET'} | 
+                            Probability: ${pet.probability || 'NOT SET'}% | 
+                            Obtainable: ${pet.obtainable !== undefined ? pet.obtainable : 'NOT SET'} |
+                            Type: ${pet.type} |
+                            Rarity: ${pet.rarity}
+                        </div>
+                    `;
+                } else {
+                    allPetsFound = false;
+                    html += `<div class="pet-item error">❌ Pet '${petKey}' not found!</div>`;
+                }
+            });
+            
+            // Source summary
+            const isCorrectTotal = Math.abs(sourceTotal - 100) < 0.1; // Allow for rounding
+            html += `<div class="summary">
+                <strong>Total Probability:</strong> 
+                <span class="${isCorrectTotal ? 'success' : 'error'}">
+                    ${sourceTotal.toFixed(2)}% ${isCorrectTotal ? '✅' : '❌'}
+                </span><br>
+                <strong>All Pets Found:</strong> 
+                <span class="${allPetsFound ? 'success' : 'error'}">
+                    ${allPetsFound ? 'Yes ✅' : 'No ❌'}
+                </span>
+            </div>`;
+            
+            html += `</div>`;
+        }
+        
+        // Overall summary
+        const totalPets = Object.values(sources).flat().length;
+        html += `<div class="summary">
+            <h2>Overall Summary</h2>
+            <p><strong>Total Pets Updated:</strong> ${totalPets}</p>
+            <p><strong>Sources Processed:</strong> ${Object.keys(sources).length}</p>
+            <p><strong>All Calculations Working:</strong> Testing...</p>
+        </div>`;
+        
+        resultsDiv.innerHTML = html;
+        
+        // Test calculations
+        console.log('Testing pet calculations...');
+        let calculationsWorking = true;
+        for (const [sourceName, petKeys] of Object.entries(sources)) {
+            for (const petKey of petKeys) {
+                const pet = petAbilities[petKey];
+                if (pet && typeof pet.calculate === 'function') {
+                    try {
+                        const result = pet.calculate(50);
+                        console.log(`✅ ${pet.name}: ${result.substring(0, 50)}...`);
+                    } catch (error) {
+                        console.error(`❌ ${pet.name}: Calculation failed -`, error);
+                        calculationsWorking = false;
+                    }
+                } else {
+                    console.error(`❌ ${petKey}: No calculate function`);
+                    calculationsWorking = false;
+                }
+            }
+        }
+        
+        // Update the summary with calculation results
+        const summaryDiv = document.querySelector('.summary:last-child');
+        summaryDiv.innerHTML += `<p><strong>All Calculations Working:</strong> 
+            <span class="${calculationsWorking ? 'success' : 'error'}">
+                ${calculationsWorking ? 'Yes ✅' : 'No ❌'}
+            </span>
+        </p>`;
+        
+        console.log('✅ Test completed successfully!');
+    </script>
+</body>
+</html>

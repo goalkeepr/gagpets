@@ -11,6 +11,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Uncommon",
+        source: "Bee Egg",
+        probability: 65,
+        obtainable: true,
         description: "Pollinates fruits with mutations",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -37,6 +40,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Bug Egg",
+        probability: 30,
+        obtainable: true,
         description: "Duplicates harvested fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -62,6 +68,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Divine",
+        source: "Anti Bee Egg",
+        probability: 0.25,
+        obtainable: true,
         description: "Pollinates fruits and boosts nearby plant growth",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -90,6 +99,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Anti Bee Egg",
+        probability: 1,
+        obtainable: true,
         description: "Transforms heavily mutated fruits into rainbow fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -116,6 +128,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Bee Egg",
+        probability: 5,
+        obtainable: true,
         description: "Attempts to pollinate but creates Honey Glazed fruits instead",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -142,6 +157,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Legendary",
+        source: "Bug Egg",
+        probability: 25,
+        obtainable: true,
         description: "Accelerates growth of leafy plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -165,6 +183,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Divine",
+        source: "Bug Egg",
+        probability: 1,
+        obtainable: true,
         description: "Turns fruits into gold",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -191,6 +212,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Unreleased",
+        probability: 0,
+        obtainable: false,
         description: "Pollinates fruits and provides gold harvest chance",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -218,6 +242,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Rare",
+        source: "Bee Egg",
+        probability: 25,
+        obtainable: true,
         description: "Pollinates fruits with mutations",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -244,6 +271,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Legendary",
+        source: "Anti Bee Egg",
+        probability: 13.75,
+        obtainable: true,
         description: "Sings to restore pet hunger",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -270,6 +300,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Crafting",
+        probability: 0,
+        obtainable: true,
         description: "Pollinates fruits and increases backpack size",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -294,6 +327,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Legendary",
+        source: "Bee Egg",
+        probability: 4,
+        obtainable: true,
         description: "Pollinates fruits and preserves Flower type fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -318,6 +354,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Bug Egg",
+        probability: 4,
+        obtainable: true,
         description: "Prays to grant variant chance bonuses to nearby fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -347,6 +386,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Divine",
+        source: "Bee Egg",
+        probability: 1,
+        obtainable: true,
         description: "Pollinates fruits and refreshes pet abilities",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -378,6 +420,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Mythical",
+        source: "Mythical Egg",
+        probability: 8.93,
+        obtainable: true,
         description: "Duplicates harvested fruits with fruit-type bonus",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -407,6 +452,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Legendary",
+        source: "Anti Bee Egg",
+        probability: 30,
+        obtainable: true,
         description: "Pollinates fruits and stings pets to advance cooldowns",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -439,6 +487,9 @@ export const INSECT_PETS = {
         },
         type: "insect",
         rarity: "Rare",
+        source: "Anti Bee Egg",
+        probability: 55,
+        obtainable: true,
         description: "Pollinates fruits and stings pets to advance cooldowns",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

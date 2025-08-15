@@ -10,6 +10,9 @@ export const PRIMATES_PETS = {
         type: TYPES.MAMMAL,
         rarity: RARITIES.UNCOMMON,
         description: "Playful primate that swings around gathering fruits",
+        source: "Rare Egg",
+        probability: 8.33,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -35,6 +38,9 @@ export const PRIMATES_PETS = {
         type: TYPES.MAMMAL,
         rarity: RARITIES.RARE,
         description: "Intelligent ape that uses tools to improve garden efficiency",
+        source: "Rare Summer Egg",
+        probability: 15,
+        obtainable: true,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -60,6 +66,9 @@ export const PRIMATES_PETS = {
         type: TYPES.MAMMAL,
         rarity: RARITIES.UNCOMMON,
         description: "Japanese macaque that enjoys hot springs for relaxation bonuses",
+        source: "Zen Egg",
+        probability: 31,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -84,6 +93,9 @@ export const PRIMATES_PETS = {
         icon: ICONS.SILVERMONKEY,
         type: TYPES.MAMMAL,
         rarity: RARITIES.EPIC,
+        source: "Legendary Egg",
+        probability: 42.55,
+        obtainable: false,
         description: "Mystical monkey with silver fur that reflects moonlight for magical bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

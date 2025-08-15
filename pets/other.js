@@ -13,6 +13,9 @@ export const OTHER_PETS = {
         type: "other",
         rarity: "Legendary",
         description: "Touchdown: Occasionally runs to the Gear Shop or Seed Shop (whichever is farther) and does a touchdown which awards you with sheckles or a Watering Can",
+        source: "Event",
+        probability: 0,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -35,6 +38,9 @@ export const OTHER_PETS = {
         },
         type: "other",
         rarity: "Uncommon",
+        source: "Kitsune Chest",
+        probability: 34.50,
+        obtainable: false,
         description: "Fortune Cat: Occasionally does a wave of good luck and grants increased chance to get your fruit back after selling it",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -87,6 +93,9 @@ export const OTHER_PETS = {
         type: "other",
         rarity: "Legendary",
         description: "Corrupted Tree Spirit: Collecting Zen type fruits have a chance to mutate with Corrupt.",
+        source: "Quest",
+        probability: 4.35,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -110,6 +119,9 @@ export const OTHER_PETS = {
         type: "other",
         rarity: "Mythical",
         description: "Lightning Beast: Occasionally devours a fruit with Shocked for bonus value, spits a chain lightning that mutates fruit with Static or Shocked if its a Thunderstorm",
+        source: "Event",
+        probability: 0,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -118,9 +130,9 @@ export const OTHER_PETS = {
             const baseSeconds = 622;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (2.6 * kg));
-            const targets = 4 + (0.15 * kg);
-            const shockedChance = 20 + (0.15 * kg);
+            const seconds = Math.max(60, adjustedBaseSeconds - (2.6 * kg));
+            const targets = Math.min(9, 4 + (0.15 * kg));
+            const shockedChance = Math.min(35, 20 + (0.15 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -128,29 +140,7 @@ export const OTHER_PETS = {
         },
         perKgImpact: () => "Each additional kg decreases lightning time by 2.6 seconds, increases targets by 0.15, and increases Shocked chance by 0.15%"
     },
-    mizuchi: {
-        name: "Mizuchi",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/1/1c/Mizuchi.png",
-            fallback: "🐉"
-        },
-        type: "other",
-        rarity: "Divine",
-        description: "Water Diety: When selling fruits with Wet/Drenched mutation, there is chance a random mutation from that fruit will be applied to a fruit in your garden!",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const chance = 4 + (kg / 10);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `When selling fruits with Wet/Drenched mutation: There is a <strong>${chance.toFixed(2)}%</strong> chance a random mutation from that fruit will be applied to a fruit in your garden!${displayText}`;
-        },
-        perKgImpact: () => "Each additional kg increases mutation spread chance by 0.1%"
-    },
+
     corruptedkitsune: {
         name: "Corrupted Kitsune",
         icon: {

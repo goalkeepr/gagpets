@@ -4,31 +4,6 @@ import { getModifierDetails } from '../utils/modifiers.js';
 import Utils from '../utils/calculations.js';
 
 export const CANINES_PETS = {
-    dog: {
-        name: "Dog",
-        icon: ICONS.DOG,
-        type: TYPES.MAMMAL,
-        rarity: RARITIES.COMMON,
-        description: "Loyal companion that boosts morale and provides friendship bonus",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const baseMoraleBonus = 15;
-            const moraleBonus = baseMoraleBonus + (kg * 0.25);
-            const range = 10 + (kg * 0.2);
-            
-            const moraleBonusMod = baseMoraleBonus * modifier;
-            const moraleBonusTotal = moraleBonus + moraleBonusMod;
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Provides constant loyalty! All pets within <strong>${range.toFixed(1)}</strong> studs get <strong>${moraleBonusTotal.toFixed(1)}%</strong> morale boost${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg increases morale bonus by 0.25% and range by 0.2 studs"
-    },
-
     fennecfox: {
         name: "Fennec Fox",
         icon: ICONS.FENNECFOX,
@@ -59,6 +34,9 @@ export const CANINES_PETS = {
         type: TYPES.MAMMAL,
         rarity: RARITIES.UNCOMMON,
         description: "Independent spirit that provides steady resource generation",
+        source: "Zen Egg",
+        probability: 40,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

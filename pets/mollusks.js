@@ -11,6 +11,9 @@ export const MOLLUSK_PETS = {
         },
         type: "mollusk",
         rarity: "Legendary",
+        source: "Bug Egg",
+        probability: 40,
+        obtainable: true,
         description: "Increases seed drop chances",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

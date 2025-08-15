@@ -11,6 +11,9 @@ export const AMPHIBIAN_PETS = {
         },
         type: "amphibian",
         rarity: "Mythical",
+        source: "Night Egg",
+        probability: 8.23,
+        obtainable: false,
         description: "Croaks to advance plant growth by 24 hours",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -37,6 +40,9 @@ export const AMPHIBIAN_PETS = {
         },
         type: "amphibian",
         rarity: "Legendary",
+        source: "Night Egg",
+        probability: 17.63,
+        obtainable: false,
         description: "Croaks to advance plant growth by 24 hours",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

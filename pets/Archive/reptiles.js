@@ -12,6 +12,9 @@ export const reptilePets = {
         },
         type: "reptile",
         rarity: "Legendary",
+        source: "Oasis Egg",
+        probability: 34.50,
+        obtainable: false,
         description: "Duplicates purchased items from seed/gear shop",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -35,6 +38,9 @@ export const reptilePets = {
         },
         type: "reptile",
         rarity: "Legendary",
+        source: "Legendary Egg",
+        probability: 2.13,
+        obtainable: false,
         description: "Extends sprinkler duration",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

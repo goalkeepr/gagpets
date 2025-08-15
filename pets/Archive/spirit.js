@@ -12,6 +12,9 @@ export const spiritPets = {
         },
         type: "spirit",
         rarity: "Ultra Rare",
+        source: "Kitsune Chest",
+        probability: 14.50,
+        obtainable: false,
         description: "Forest spirit that applies tranquil mutation",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

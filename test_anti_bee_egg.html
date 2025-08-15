@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Anti Bee Egg Pets</title>
+</head>
+<body>
+    <h1>Testing Anti Bee Egg Pets</h1>
+    <div id="results"></div>
+    
+    <script type="module">
+        import { petAbilities } from './petAbilities_modular.js';
+        
+        const antiBeeEggPets = ['wasp', 'tarantulahawk', 'moth', 'butterfly', 'discobee'];
+        const resultsDiv = document.getElementById('results');
+        
+        let html = '<h2>Anti Bee Egg Pets:</h2>';
+        
+        antiBeeEggPets.forEach(petKey => {
+            const pet = petAbilities[petKey];
+            if (pet) {
+                html += `
+                    <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+                        <h3>${pet.name}</h3>
+                        <p><strong>Type:</strong> ${pet.type}</p>
+                        <p><strong>Rarity:</strong> ${pet.rarity}</p>
+                        <p><strong>Source:</strong> ${pet.source || 'NOT SET'}</p>
+                        <p><strong>Probability:</strong> ${pet.probability || 'NOT SET'}%</p>
+                        <p><strong>Obtainable:</strong> ${pet.obtainable !== undefined ? pet.obtainable : 'NOT SET'}</p>
+                        <p><strong>Has calculate function:</strong> ${typeof pet.calculate === 'function'}</p>
+                        ${typeof pet.calculate === 'function' ? 
+                            `<p><strong>Test calculation (50kg):</strong> ${pet.calculate(50)}</p>` : 
+                            ''
+                        }
+                    </div>
+                `;
+            } else {
+                html += `<p style="color: red;">❌ Pet '${petKey}' not found!</p>`;
+            }
+        });
+        
+        resultsDiv.innerHTML = html;
+        
+        console.log('✅ Test completed successfully!');
+    </script>
+</body>
+</html>

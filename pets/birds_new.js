@@ -12,6 +12,9 @@ const birdPets = {
         type: "bird",
         rarity: "Rare",
         description: "Increases egg hatch speed",
+        source: "Rare Egg",
+        probability: 16.67,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -38,6 +41,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Legendary",
+        source: "Paradise Egg",
+        probability: 40,
+        obtainable: true,
         description: "Provides age bonuses to hatched pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -65,6 +71,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Common",
+        source: "Common Summer Egg",
+        probability: 25,
+        obtainable: true,
         description: "Increases seed drop chances for shoveling plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -122,6 +131,9 @@ const birdPets = {
         type: "bird",
         rarity: "Legendary",
         description: "Takes flight and advances egg hatch times with chance for multiplied effect",
+        source: "Event",
+        probability: 0,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -213,6 +225,9 @@ const birdPets = {
         type: "bird",
         rarity: "Rare",
         description: "Stands on one leg to boost nearby plant and fruit growth",
+        source: "Rare Summer Egg",
+        probability: 30,
+        obtainable: true,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -242,6 +257,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Mythical",
+        source: "Oasis Egg",
+        probability: 5,
+        obtainable: false,
         description: "Applies Cloudtouched mutations to nearby fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -301,6 +319,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Mythical",
+        source: "Night Egg",
+        probability: 3.53,
+        obtainable: false,
         description: "Provides XP bonuses to all active pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -349,6 +370,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Legendary",
+        source: "Paradise Egg",
+        probability: 30,
+        obtainable: true,
         description: "Fans feathers to advance nearby pets' cooldowns",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -378,6 +402,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Legendary",
+        source: "Paradise Egg",
+        probability: 8,
+        obtainable: true,
         description: "Applies Verdant mutations to nearby fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -437,6 +464,9 @@ const birdPets = {
         type: "bird",
         rarity: "Rare",
         description: "Provides size and variant bonuses to tropical plants",
+        source: "Rare Summer Egg",
+        probability: 25,
+        obtainable: true,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

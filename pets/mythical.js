@@ -10,6 +10,9 @@ export const MYTHICAL_PETS = {
         type: TYPES.MYTHICAL,
         rarity: RARITIES.LEGENDARY,
         description: "Nine-tailed fox spirit that provides mystical wisdom",
+        source: "Zen Egg",
+        probability: 0.08,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -34,6 +37,9 @@ export const MYTHICAL_PETS = {
         icon: ICONS.CORRUPTEDKITSUNE,
         type: TYPES.MYTHICAL,
         rarity: RARITIES.MYTHICAL,
+        source: "Kitsune Chest",
+        probability: 1,
+        obtainable: false,
         description: "Dark fox spirit that provides sinister power bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -60,6 +66,9 @@ export const MYTHICAL_PETS = {
         type: TYPES.MYTHICAL,
         rarity: RARITIES.MYTHICAL,
         description: "Water dragon that controls rain and river flow",
+        source: "Unreleased",
+        probability: 0,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -77,31 +86,6 @@ export const MYTHICAL_PETS = {
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, controls water flow! Provides <strong>${waterControl.toFixed(1)}%</strong> irrigation efficiency and <strong>${rainBonus.toFixed(1)}%</strong> rain blessing${displayText}!`;
         },
         perKgImpact: () => "Each additional kg decreases control time by 8 seconds, increases water control by 0.6%, and increases rain bonus by 0.7%"
-    },
-
-    raiju: {
-        name: "Raiju",
-        icon: ICONS.RAIJU,
-        type: TYPES.MYTHICAL,
-        rarity: RARITIES.LEGENDARY,
-        description: "Lightning beast that charges the air with electrical energy",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const baseSeconds = 180;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(20, adjustedBaseSeconds - (3 * kg));
-            const electricCharge = 30 + (kg * 0.5);
-            const energyBonus = 25 + (kg * 0.4);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, releases lightning! Charges the area with <strong>${electricCharge.toFixed(1)}%</strong> electrical energy and <strong>${energyBonus.toFixed(1)}%</strong> activity speed${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases lightning time by 3 seconds, increases charge by 0.5%, and increases energy bonus by 0.4%"
     },
 
     reddragon: {
@@ -135,6 +119,9 @@ export const MYTHICAL_PETS = {
         type: TYPES.MYTHICAL,
         rarity: RARITIES.RARE,
         description: "Shapeshifting raccoon dog that brings luck and mischief",
+        source: "Zen Egg",
+        probability: 20.82,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -185,6 +172,9 @@ export const MYTHICAL_PETS = {
         type: TYPES.MYTHICAL,
         rarity: RARITIES.LEGENDARY,
         description: "Sacred crane that brings longevity and prosperity",
+        source: "Zen Egg",
+        probability: 4.60,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

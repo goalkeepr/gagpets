@@ -9,48 +9,25 @@ export const DOMESTIC_PETS = {
         icon: ICONS.CHICKEN,
         type: TYPES.DOMESTIC,
         rarity: RARITIES.COMMON,
-        description: "Lays eggs that provide regular food supply",
+        source: "Uncommon Egg",
+        probability: 25,
+        obtainable: false,
+        description: "Increases egg hatch speed",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const baseSeconds = 300;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(30, adjustedBaseSeconds - (4 * kg));
-            const eggValue = 8 + (kg * 0.15);
+            const hatchSpeed = 10 + (kg / 10);
+            
+            const hatchSpeedMod = 10 * modifier;
+            const hatchSpeedTotal = hatchSpeed + hatchSpeedMod;
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, lays an egg! Provides <strong>${eggValue.toFixed(2)}</strong> food supply${displayText}!`;
+            return `Increases egg hatch speed by <strong>${hatchSpeedTotal.toFixed(1)}%</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases laying time by 4 seconds and increases egg value by 0.15"
-    },
-
-    cow: {
-        name: "Cow",
-        icon: ICONS.COW,
-        type: TYPES.DOMESTIC,
-        rarity: RARITIES.UNCOMMON,
-        description: "Produces milk for sustained nutrition bonuses",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const baseSeconds = 600;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(60, adjustedBaseSeconds - (5 * kg));
-            const milkValue = 25 + (kg * 0.4);
-            const duration = 180 + (kg * 2);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, produces milk! <strong>${milkValue.toFixed(1)}</strong> nutrition for <strong>${Utils.formatTime(duration)}</strong>${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases production time by 5 seconds, increases milk value by 0.4, and extends duration by 2 seconds"
+        perKgImpact: () => "Each additional kg increases egg hatch speed by 0.1%"
     },
 
     pig: {
@@ -59,6 +36,9 @@ export const DOMESTIC_PETS = {
         type: TYPES.DOMESTIC,
         rarity: RARITIES.COMMON,
         description: "Snorts around finding truffles and valuable items",
+        source: "Rare Egg",
+        probability: 16.67,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

@@ -11,6 +11,9 @@ const aquaticPets = {
         },
         type: "aquatic",
         rarity: "Common",
+        source: "Common Summer Egg",
+        probability: 50,
+        obtainable: true,
         description: "Gains experience to grow older",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -42,6 +45,9 @@ const aquaticPets = {
         },
         type: "aquatic",
         rarity: "Common",
+        source: "Common Summer Egg",
+        probability: 25,
+        obtainable: true,
         description: "Steals money from other players",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -74,6 +80,9 @@ const aquaticPets = {
         type: "aquatic",
         rarity: "Rare",
         description: "Provides experience bonuses and water effects",
+        source: "Rare Summer Egg",
+        probability: 20,
+        obtainable: true,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -105,6 +114,9 @@ const aquaticPets = {
         },
         type: "aquatic",
         rarity: "Mythical",
+        source: "Oasis Egg",
+        probability: 15,
+        obtainable: false,
         description: "Preserves Summer type fruits after collecting",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -134,6 +146,9 @@ const aquaticPets = {
         type: "aquatic",
         rarity: "Mythical",
         description: "Sprays water to apply Wet mutations with chance for Bloodlit",
+        source: "Zen Egg",
+        probability: 3.50,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -189,6 +204,9 @@ const aquaticPets = {
         },
         type: "aquatic",
         rarity: "Mythical",
+        source: "Paradise Egg",
+        probability: 1,
+        obtainable: true,
         description: "Mimics and copies abilities from other pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -216,6 +234,9 @@ const aquaticPets = {
         },
         type: "aquatic",
         rarity: "Legendary",
+        source: "Legendary Egg",
+        probability: 10.64,
+        obtainable: false,
         description: "Sprays water on nearby plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -244,6 +265,9 @@ const aquaticPets = {
         type: "aquatic",
         rarity: "Rare",
         description: "Provides chance to get pets back as eggs when selling",
+        source: "Rare Summer Egg",
+        probability: 10,
+        obtainable: true,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

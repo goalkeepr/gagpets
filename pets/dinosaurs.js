@@ -13,6 +13,9 @@ export const DINOSAUR_PETS = {
         },
         type: "dinosaur",
         rarity: "Legendary",
+        source: "Dinosaur Egg",
+        probability: 35,
+        obtainable: false,
         description: "Provides amber mutations and movement speed",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -40,6 +43,9 @@ export const DINOSAUR_PETS = {
         },
         type: "dinosaur",
         rarity: "Legendary",
+        source: "Dinosaur Egg",
+        probability: 28,
+        obtainable: false,
         description: "Duplicates harvested fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -70,6 +76,9 @@ export const DINOSAUR_PETS = {
         },
         type: "dinosaur",
         rarity: "Divine",
+        source: "Dinosaur Egg",
+        probability: 0.5,
+        obtainable: false,
         description: "Devours and spreads mutations throughout the garden",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -103,6 +112,9 @@ export const DINOSAUR_PETS = {
         type: "dinosaur",
         rarity: "Mythical",
         description: "Protects against fruit theft by duplicating stolen fruit",
+        source: "Primal Egg",
+        probability: 1,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -130,6 +142,9 @@ export const DINOSAUR_PETS = {
         },
         type: "dinosaur",
         rarity: "Mythical",
+        source: "Dinosaur Egg",
+        probability: 1,
+        obtainable: false,
         description: "Increases size and weight of pets hatched from eggs",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -160,6 +175,9 @@ export const DINOSAUR_PETS = {
         type: "dinosaur",
         rarity: "Mythical",
         description: "Spits venom to advance cooldowns or grant XP to multiple pets",
+        source: "Primal Egg",
+        probability: 3,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -190,6 +208,9 @@ export const DINOSAUR_PETS = {
         type: "dinosaur",
         rarity: "Legendary",
         description: "Provides XP bonuses to all active dinosaur pets",
+        source: "Primal Egg",
+        probability: 32.50,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -218,6 +239,9 @@ export const DINOSAUR_PETS = {
         type: "dinosaur",
         rarity: "Legendary",
         description: "Provides chances to duplicate crafted items",
+        source: "Primal Egg",
+        probability: 28,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -246,6 +270,9 @@ export const DINOSAUR_PETS = {
         type: "dinosaur",
         rarity: "Legendary",
         description: "Reduces cosmetic crate open times with chance for multiplied effect",
+        source: "Primal Egg",
+        probability: 35,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -275,6 +302,9 @@ export const DINOSAUR_PETS = {
         },
         type: "dinosaur",
         rarity: "Mythical",
+        source: "Dinosaur Egg",
+        probability: 3,
+        obtainable: false,
         description: "Flaps wings to send ripples causing fruit to get Windstruck with chance for Twisted",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -316,6 +346,9 @@ export const DINOSAUR_PETS = {
         type: "dinosaur",
         rarity: "Divine",
         description: "Devours mutations and spreads them with roar",
+        source: "Primal Egg",
+        probability: 0.50,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

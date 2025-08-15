@@ -1,3 +1,4 @@
+
 import { getModifierDetails } from '../utils/modifiers.js';
 import Utils from '../utils/calculations.js';
 
@@ -11,6 +12,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Paradise Egg",
+        probability: 21,
+        obtainable: true,
         description: "Provides area buffs to nearby pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -40,6 +44,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Mythical",
+        source: "Mythical Egg",
+        probability: 26.79,
+        obtainable: true,
         description: "Provides experience and jump height bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -73,6 +80,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Divine",
+        source: "Night Egg",
+        probability: 0.12,
+        obtainable: false,
         description: "Steals and duplicates crops from other plots",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -99,6 +109,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Divine",
+        source: "Mythical Egg",
+        probability: 1.79,
+        obtainable: true,
         description: "Steals seeds from other players' crops",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -125,6 +138,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Blood Moon Shop",
+        probability: 0,
+        obtainable: false,
         description: "Provides size and variant bonuses to prickly plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -166,6 +182,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Rare",
+        source: "Night Egg",
+        probability: 47,
+        obtainable: false,
         description: "Provides size bonuses to prickly plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -197,6 +216,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Mythical",
+        source: "Mythical Egg",
+        probability: 35.71,
+        obtainable: true,
         description: "Provides experience and movement speed bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -230,6 +252,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Culinarian Chest",
+        probability: 34.5,
+        obtainable: true,
         description: "Emits aura that boosts variant chance for new fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -267,6 +292,9 @@ export const MAMMAL_PETS = {
         type: "mammal",
         rarity: "Uncommon",
         description: "Naps to provide size bonuses to nearby fruits",
+        source: "Uncommon Egg",
+        probability: 25,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -295,6 +323,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Legendary Egg",
+        probability: 42.55,
+        obtainable: false,
         description: "Provides growth bonuses to nearby plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -320,6 +351,9 @@ export const MAMMAL_PETS = {
         type: "mammal",
         rarity: "Uncommon",
         description: "Preserves berry fruits after harvest",
+        source: "Uncommon Egg",
+        probability: 25,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -345,6 +379,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Common",
+        source: "Common Egg",
+        probability: 33.33,
+        obtainable: true,
         description: "Digs up random seeds",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -372,6 +409,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Divine",
+        source: "Oasis Egg",
+        probability: 0.50,
+        obtainable: false,
         description: "Copies mutations from other players' fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -398,6 +438,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Common",
+        source: "Common Egg",
+        probability: 33.33,
+        obtainable: true,
         description: "Digs up random seeds with improved success rate",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -426,6 +469,9 @@ export const MAMMAL_PETS = {
         type: "mammal",
         rarity: "Mythical",
         description: "Reduces egg hatch times",
+        source: "Event",
+        probability: 0,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -481,6 +527,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Oasis Egg",
+        probability: 45,
+        obtainable: false,
         description: "Does lookouts that advance other pets' cooldowns",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -508,6 +557,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Night Egg",
+        probability: 23.50,
+        obtainable: false,
         description: "Digs underground to find treasure",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -557,6 +609,9 @@ export const MAMMAL_PETS = {
         },
         type: "mammal",
         rarity: "Legendary",
+        source: "Twilight Shop",
+        probability: 0,
+        obtainable: false,
         description: "Naps to provide size bonuses and preserves Night type fruits",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -614,6 +669,9 @@ export const MAMMAL_PETS = {
         type: "mammal",
         rarity: "Rare",
         description: "Naps to provide size bonuses to nearby fruits",
+        source: "Rare Egg",
+        probability: 33.33,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
@@ -675,6 +733,9 @@ export const MAMMAL_PETS = {
         type: "mammal",
         rarity: "Rare",
         description: "Preserves berry fruits after harvest",
+        source: "Rare Egg",
+        probability: 25,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

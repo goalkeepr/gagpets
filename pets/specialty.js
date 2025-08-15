@@ -9,6 +9,9 @@ export const SPECIALTY_PETS = {
         icon: ICONS.FRENCHFRYFERRET,
         type: TYPES.SPECIALTY,
         rarity: RARITIES.EPIC,
+        source: "Gourmet Egg",
+        probability: 1,
+        obtainable: true,
         description: "Unique ferret that loves french fries and provides crispy bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -34,6 +37,9 @@ export const SPECIALTY_PETS = {
         icon: ICONS.MOCHIMOUSE,
         type: TYPES.SPECIALTY,
         rarity: RARITIES.RARE,
+        source: "Cooking Event",
+        probability: 0,
+        obtainable: true,
         description: "Soft and squishy mouse that provides comfort and sweetness bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -60,6 +66,9 @@ export const SPECIALTY_PETS = {
         icon: ICONS.MOONCAT,
         type: TYPES.SPECIALTY,
         rarity: RARITIES.LEGENDARY,
+        source: "Twilight Shop",
+        probability: 0,
+        obtainable: false,
         description: "Mystical feline that channels lunar energy for nighttime bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -86,6 +95,9 @@ export const SPECIALTY_PETS = {
         icon: ICONS.PANCAKEMOLE,
         type: TYPES.SPECIALTY,
         rarity: RARITIES.UNCOMMON,
+        source: "Gourmet Egg",
+        probability: 38,
+        obtainable: true,
         description: "Flat mole that loves pancakes and provides breakfast bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -111,6 +123,9 @@ export const SPECIALTY_PETS = {
         icon: ICONS.SPAGHETTISLOTH,
         type: TYPES.SPECIALTY,
         rarity: RARITIES.EPIC,
+        source: "Gourmet Egg",
+        probability: 4,
+        obtainable: true,
         description: "Slow-moving sloth that loves pasta and provides relaxation bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -137,6 +152,9 @@ export const SPECIALTY_PETS = {
         icon: ICONS.SUSHIBEAR,
         type: TYPES.SPECIALTY,
         rarity: RARITIES.RARE,
+        source: "Gourmet Egg",
+        probability: 7,
+        obtainable: true,
         description: "Cultured bear that appreciates fine sushi and provides gourmet bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -158,81 +176,5 @@ export const SPECIALTY_PETS = {
         perKgImpact: () => "Each additional kg decreases crafting time by 6 seconds, increases gourmet bonus by 0.5%, craftsmanship by 0.4%, and refinement by 0.35%"
     },
 
-    tarantulahawk: {
-        name: "Tarantula Hawk",
-        icon: ICONS.TARANTULAHAWK,
-        type: TYPES.SPECIALTY,
-        rarity: RARITIES.EPIC,
-        description: "Fearsome wasp that hunts large spiders and provides intimidation bonuses",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const baseSeconds = 240;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(24, adjustedBaseSeconds - (3 * kg));
-            const huntingSuccess = 45 + (kg * 0.7);
-            const intimidation = 35 + (kg * 0.6);
-            const fearFactor = 40 + (kg * 0.65);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, hunts fearlessly! Provides <strong>${huntingSuccess.toFixed(1)}%</strong> pest elimination, <strong>${intimidation.toFixed(1)}%</strong> area intimidation, and <strong>${fearFactor.toFixed(1)}%</strong> deterrent effect${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases hunt time by 3 seconds, increases success by 0.7%, intimidation by 0.6%, and fear factor by 0.65%"
-    },
-
-    redgiantant: {
-        name: "Red Giant Ant",
-        icon: ICONS.REDGIANTANT,
-        type: TYPES.SPECIALTY,
-        rarity: RARITIES.MYTHICAL,
-        description: "Massive red ant that provides industrial-level work capacity",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const baseSeconds = 180;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(18, adjustedBaseSeconds - (2.5 * kg));
-            const workCapacity = 50 + (kg * 0.8);
-            const industrialEfficiency = 40 + (kg * 0.7);
-            const teamwork = 35 + (kg * 0.6);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, works industriously! Provides <strong>${workCapacity.toFixed(1)}%</strong> work capacity, <strong>${industrialEfficiency.toFixed(1)}%</strong> industrial efficiency, and <strong>${teamwork.toFixed(1)}%</strong> coordinated teamwork${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases work time by 2.5 seconds, increases capacity by 0.8%, efficiency by 0.7%, and teamwork by 0.6%"
-    },
-
-    sandsnake: {
-        name: "Sand Snake",
-        icon: ICONS.SANDSNAKE,
-        type: TYPES.SPECIALTY,
-        rarity: RARITIES.UNCOMMON,
-        description: "Desert snake that burrows through sand to aerate soil",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            
-            const baseSeconds = 300;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(30, adjustedBaseSeconds - (4 * kg));
-            const soilAeration = 28 + (kg * 0.45);
-            const burrowingEffect = 22 + (kg * 0.35);
-            const desertAdaptation = 18 + (kg * 0.3);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, burrows through sand! Provides <strong>${soilAeration.toFixed(1)}%</strong> soil aeration, <strong>${burrowingEffect.toFixed(1)}%</strong> underground improvement, and <strong>${desertAdaptation.toFixed(1)}%</strong> drought resistance${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases burrow time by 4 seconds, increases aeration by 0.45%, burrowing effect by 0.35%, and desert adaptation by 0.3%"
-    }
 };
+

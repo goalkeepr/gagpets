@@ -11,6 +11,9 @@ export const fruits = {
         },
         type: "fruit",
         rarity: "Mythical",
+        source: "Blood Moon Shop",
+        probability: 0,
+        obtainable: false,
         description: "Reduces egg hatch times",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

@@ -157,6 +157,9 @@ export const foodPets = {
         },
         type: "food",
         rarity: "Legendary",
+        source: "Event",
+        probability: 0,
+        obtainable: true,
         description: "Provides XP bonuses to Food type pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

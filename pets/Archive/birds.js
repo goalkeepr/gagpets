@@ -93,6 +93,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Divine",
+        source: "Blood Moon Shop",
+        probability: 0,
+        obtainable: false,
         description: "Provides XP bonuses to all active pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -121,6 +124,9 @@ const birdPets = {
         },
         type: "bird",
         rarity: "Legendary",
+        source: "Event",
+        probability: 0,
+        obtainable: false,
         description: "Takes flight and advances egg hatch times with chance for multiplied effect",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

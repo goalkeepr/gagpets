@@ -11,6 +11,9 @@ export const HERBIVORE_PETS = {
         },
         type: "herbivore",
         rarity: "Common",
+        source: "Common Egg",
+        probability: 33.33,
+        obtainable: true,
         description: "Eats carrots for value bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -41,6 +44,9 @@ export const HERBIVORE_PETS = {
         },
         type: "herbivore",
         rarity: "Legendary",
+        source: "Gourmet Egg",
+        probability: 50,
+        obtainable: true,
         description: "Eats carrots for enhanced value bonuses",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
@@ -72,6 +78,9 @@ export const HERBIVORE_PETS = {
         type: "herbivore",
         rarity: "Uncommon",
         description: "Eats carrots for value bonuses",
+        source: "Uncommon Egg",
+        probability: 25,
+        obtainable: false,
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             

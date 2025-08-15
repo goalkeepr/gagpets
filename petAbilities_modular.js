@@ -8,7 +8,7 @@ import { petMutationOptions } from './data/mutations.js';
 // Import all pet categories
 import { AMPHIBIAN_PETS } from './pets/amphibians.js';
 import { AQUATIC_PETS } from './pets/aquatic.js';
-import { BIRD_PETS } from './pets/birds.js';
+import { BIRD_PETS } from './pets/birds_new.js';
 import { CANINES_PETS } from './pets/canines.js';
 import { DINOSAUR_PETS } from './pets/dinosaurs.js';
 import { DOMESTIC_PETS } from './pets/domestic.js';

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Bee Egg Pets</title>
+</head>
+<body>
+    <h1>Testing Bee Egg Pets</h1>
+    <div id="results"></div>
+    
+    <script type="module">
+        import { petAbilities } from './petAbilities_modular.js';
+        
+        const beeEggPets = ['bee', 'honeybee', 'bearbee', 'petalbee', 'queenbee'];
+        const resultsDiv = document.getElementById('results');
+        
+        let html = '<h2>Bee Egg Pets:</h2>';
+        
+        beeEggPets.forEach(petKey => {
+            const pet = petAbilities[petKey];
+            if (pet) {
+                html += `
+                    <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+                        <h3>${pet.name}</h3>
+                        <p><strong>Type:</strong> ${pet.type}</p>
+                        <p><strong>Rarity:</strong> ${pet.rarity}</p>
+                        <p><strong>Source:</strong> ${pet.source || 'NOT SET'}</p>
+                        <p><strong>Probability:</strong> ${pet.probability || 'NOT SET'}%</p>
+                        <p><strong>Obtainable:</strong> ${pet.obtainable !== undefined ? pet.obtainable : 'NOT SET'}</p>
+                        <p><strong>Has calculate function:</strong> ${typeof pet.calculate === 'function'}</p>
+                    </div>
+                `;
+            } else {
+                html += `<p style="color: red;">❌ Pet '${petKey}' not found!</p>`;
+            }
+        });
+        
+        // Summary
+        html += '<h2>Summary:</h2>';
+        const totalProbability = beeEggPets.reduce((sum, petKey) => {
+            const pet = petAbilities[petKey];
+            return sum + (pet?.probability || 0);
+        }, 0);
+        html += `<p><strong>Total probability:</strong> ${totalProbability}% (should be 100%)</p>`;
+        
+        resultsDiv.innerHTML = html;
+        
+        console.log('✅ Bee Egg test completed successfully!');
+    </script>
+</body>
+</html>
