@@ -124,13 +124,12 @@ export const foodPets = {
     },
     frenchfryferret: {
         name: "French Fry Ferret",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/7/7e/FrenchFryFerret.png",
-            fallback: "🍟"
-        },
-        type: "food",
-        rarity: "Mythical",
+        icon: ICONS.FRENCHFRYFERRET,
+        type: TYPES.SPECIALTY,
+        rarity: RARITIES.EPIC,
+        source: "Gourmet Egg",
+        probability: 1,
+        obtainable: true,
         description: "Increases pet levels",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";

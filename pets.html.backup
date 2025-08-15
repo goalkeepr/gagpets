@@ -34,42 +34,42 @@
                         <option value="all">All Sources</option>
                         <option value="Anti Bee Egg">🐝 Anti Bee Egg</option>
                         <option value="Bee Egg">🐝 Bee Egg</option>
-                        <option value="Bug Egg">🐛 Bug Egg</option>
-                        <option value="Common Egg">🥚 Common Egg</option>
-                        <option value="Common Summer Egg">🏖️ Common Summer Egg</option>
-                        <option value="Dinosaur Egg">� Dinosaur Egg</option>
-                        <option value="Gourmet Egg">�️ Gourmet Egg</option>
+                        <option value="Rare Egg">� Rare Egg</option>
                         <option value="Legendary Egg">🥚 Legendary Egg</option>
                         <option value="Mythical Egg">🥚 Mythical Egg</option>
-                        <option value="Night Egg">� Night Egg</option>
-                        <option value="Oasis Egg">🏜️ Oasis Egg</option>
-                        <option value="Paradise Egg">� Paradise Egg</option>
                         <option value="Primal Egg">🥚 Primal Egg</option>
-                        <option value="Rare Egg">🥚 Rare Egg</option>
-                        <option value="Rare Summer Egg">�️ Rare Summer Egg</option>
-                        <option value="Uncommon Egg">� Uncommon Egg</option>
-                        <option value="Zen Egg">� Zen Egg</option>
+                        <option value="Common Summer Egg">�️ Common Summer Egg</option>
+                        <option value="Rare Summer Egg">🏖️ Rare Summer Egg</option>
+                        <option value="Bug Egg">🐛 Bug Egg</option>
+                        <option value="Dinosaur Egg">🦕 Dinosaur Egg</option>
+                        <option value="Night Egg">🌙 Night Egg</option>
+                        <option value="Anti Bee Egg">🐝 Anti Bee Egg</option>
+                        <option value="Bee Egg">🐝 Bee Egg</option>
+                        <option value="Gourmet Egg">🍽️ Gourmet Egg</option>
+                        <option value="Oasis Egg">🏜️ Oasis Egg</option>
+                        <option value="Paradise Egg">🌺 Paradise Egg</option>
+                        <option value="Zen Egg">🧘 Zen Egg</option>
                         <option value="other">🔮 Other</option>
                     </select>
                     <!-- Desktop button version -->
                     <div id="typeFilters" class="type-filters desktop-filter-buttons">
                         <button type="button" class="filter-btn active" data-type="all">All</button>
+                        <button type="button" class="filter-btn" data-type="Common Egg"><span class="source-icon-placeholder" data-source="Common Egg"></span>Common</button>
+                        <button type="button" class="filter-btn" data-type="Uncommon Egg"><span class="source-icon-placeholder" data-source="Uncommon Egg"></span>Uncommon</button>
+                        <button type="button" class="filter-btn" data-type="Rare Egg"><span class="source-icon-placeholder" data-source="Rare Egg"></span>Rare</button>
+                        <button type="button" class="filter-btn" data-type="Legendary Egg"><span class="source-icon-placeholder" data-source="Legendary Egg"></span>Legendary</button>
+                        <button type="button" class="filter-btn" data-type="Mythical Egg">� Mythical</button>
+                        <button type="button" class="filter-btn" data-type="Primal Egg"><span class="source-icon-placeholder" data-source="Primal Egg"></span>Primal</button>
+                        <button type="button" class="filter-btn" data-type="Common Summer Egg"><span class="source-icon-placeholder" data-source="Common Summer Egg"></span>Common Summer</button>
+                        <button type="button" class="filter-btn" data-type="Rare Summer Egg"><span class="source-icon-placeholder" data-source="Rare Summer Egg"></span>Rare Summer</button>
+                        <button type="button" class="filter-btn" data-type="Bug Egg"><span class="source-icon-placeholder" data-source="Bug Egg"></span>Bug</button>
+                        <button type="button" class="filter-btn" data-type="Dinosaur Egg"><span class="source-icon-placeholder" data-source="Dinosaur Egg"></span>Dinosaur</button>
+                        <button type="button" class="filter-btn" data-type="Night Egg"><span class="source-icon-placeholder" data-source="Night Egg"></span>Night</button>
                         <button type="button" class="filter-btn" data-type="Anti Bee Egg"><span class="source-icon-placeholder" data-source="Anti Bee Egg"></span>Anti Bee</button>
                         <button type="button" class="filter-btn" data-type="Bee Egg"><span class="source-icon-placeholder" data-source="Bee Egg"></span>Bee</button>
-                        <button type="button" class="filter-btn" data-type="Bug Egg"><span class="source-icon-placeholder" data-source="Bug Egg"></span>Bug</button>
-                        <button type="button" class="filter-btn" data-type="Common Egg"><span class="source-icon-placeholder" data-source="Common Egg"></span>Common</button>
-                        <button type="button" class="filter-btn" data-type="Common Summer Egg"><span class="source-icon-placeholder" data-source="Common Summer Egg"></span>Common Summer</button>
-                        <button type="button" class="filter-btn" data-type="Dinosaur Egg"><span class="source-icon-placeholder" data-source="Dinosaur Egg"></span>Dinosaur</button>
                         <button type="button" class="filter-btn" data-type="Gourmet Egg"><span class="source-icon-placeholder" data-source="Gourmet Egg"></span>Gourmet</button>
-                        <button type="button" class="filter-btn" data-type="Legendary Egg"><span class="source-icon-placeholder" data-source="Legendary Egg"></span>Legendary</button>
-                        <button type="button" class="filter-btn" data-type="Mythical Egg"><span class="source-icon-placeholder" data-source="Mythical Egg"></span>Mythical</button>
-                        <button type="button" class="filter-btn" data-type="Night Egg"><span class="source-icon-placeholder" data-source="Night Egg"></span>Night</button>
                         <button type="button" class="filter-btn" data-type="Oasis Egg"><span class="source-icon-placeholder" data-source="Oasis Egg"></span>Oasis</button>
                         <button type="button" class="filter-btn" data-type="Paradise Egg"><span class="source-icon-placeholder" data-source="Paradise Egg"></span>Paradise</button>
-                        <button type="button" class="filter-btn" data-type="Primal Egg"><span class="source-icon-placeholder" data-source="Primal Egg"></span>Primal</button>
-                        <button type="button" class="filter-btn" data-type="Rare Egg"><span class="source-icon-placeholder" data-source="Rare Egg"></span>Rare</button>
-                        <button type="button" class="filter-btn" data-type="Rare Summer Egg"><span class="source-icon-placeholder" data-source="Rare Summer Egg"></span>Rare Summer</button>
-                        <button type="button" class="filter-btn" data-type="Uncommon Egg"><span class="source-icon-placeholder" data-source="Uncommon Egg"></span>Uncommon</button>
                         <button type="button" class="filter-btn" data-type="Zen Egg"><span class="source-icon-placeholder" data-source="Zen Egg"></span>Zen</button>
                         <button type="button" class="filter-btn" data-type="other"><span class="source-icon-placeholder" data-source="other"></span>Other</button>
                     </div>
@@ -292,20 +292,20 @@
         const SOURCE_ICONS = {
             'Anti Bee Egg': 'https://static.wikia.nocookie.net/growagarden/images/e/e2/AntiBeeEgg.png',
             'Bee Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/8d/BeeEgg.png',
-            'Bug Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/86/Bugeggimage.png',
             'Common Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/95/CommonEgg.png',
-            'Common Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/62/CommonSummerEgg.png',
-            'Dinosaur Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/29/Dinosauregg.png',
-            'Gourmet Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/2a/Gourmet_Egg.png',
+            'Uncommon Egg': 'https://static.wikia.nocookie.net/growagarden/images/0/0c/Uncommon_Egg.webp',
+            'Rare Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/23/RareEgg.png',
             'Legendary Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/63/Legendary_Egg.webp',
             'Mythical Egg': 'https://static.wikia.nocookie.net/growagarden/images/4/4f/MythicalEggBetter.png',
+            'Primal Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/8f/PrimalEgg.png',
+            'Common Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/62/CommonSummerEgg.png',
+            'Rare Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6c/RareSummerEgg.png',
+            'Bug Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/86/Bugeggimage.png',
+            'Dinosaur Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/29/Dinosauregg.png',
+            'Gourmet Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/2a/Gourmet_Egg.png',
             'Night Egg': 'https://static.wikia.nocookie.net/growagarden/images/7/71/Night_Egg.png',
             'Oasis Egg': 'https://static.wikia.nocookie.net/growagarden/images/7/73/OasisEgg.png',
             'Paradise Egg': 'https://static.wikia.nocookie.net/growagarden/images/b/ba/ParadiseSummerEgg.png',
-            'Primal Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/8f/PrimalEgg.png',
-            'Rare Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/23/RareEgg.png',
-            'Rare Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6c/RareSummerEgg.png',
-            'Uncommon Egg': 'https://static.wikia.nocookie.net/growagarden/images/0/0c/Uncommon_Egg.webp',
             'Zen Egg': 'https://static.wikia.nocookie.net/growagarden/images/1/14/Zeneg.png',
             'other': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png'
         };

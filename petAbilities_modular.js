@@ -6,43 +6,49 @@ import { RARITIES, TYPES } from './data/constants.js';
 import { petMutationOptions } from './data/mutations.js';
 
 // Import all pet categories
-import { AMPHIBIAN_PETS } from './pets/amphibians.js';
-import { AQUATIC_PETS } from './pets/aquatic.js';
-import { BIRD_PETS } from './pets/birds_new.js';
-import { CANINES_PETS } from './pets/canines.js';
-import { DINOSAUR_PETS } from './pets/dinosaurs.js';
-import { DOMESTIC_PETS } from './pets/domestic.js';
-import { HERBIVORE_PETS } from './pets/herbivores.js';
-import { INSECT_PETS } from './pets/insects.js';
-import { MAMMAL_PETS } from './pets/mammals.js';
-import { MOLLUSK_PETS } from './pets/mollusks.js';
-import { MYTHICAL_PETS } from './pets/mythical.js';
-import { OTHER_PETS } from './pets/other.js';
-import { PRIMATES_PETS } from './pets/primates.js';
-import { SMALL_MAMMALS_PETS } from './pets/smallMammals.js';
-import { SPECIALTY_PETS } from './pets/specialty.js';
-import { UNDEAD_PETS } from './pets/undead.js';
-import { WILD_ANIMALS_PETS } from './pets/wildAnimals.js';
+import { ANTI_BEE_EGG_PETS } from './pets/antiBeeEgg.js';
+import { BEE_EGG_PETS } from './pets/beeEgg.js';
+import { birdPets as BIRD_PETS } from './pets/birds_new.js';
+import { BLOOD_MOON_SHOP_PETS } from './pets/bloodMoonShop.js';
+import { BUG_EGG_PETS } from './pets/bugEgg.js';
+import { CHESTS_EVENTS_OTHER_PETS } from './pets/chestsEventsOther.js';
+import { COMMON_EGG_PETS } from './pets/commonEgg.js';
+import { COMMON_SUMMER_EGG_PETS } from './pets/commonSummerEgg.js';
+import { DINOSAUR_EGG_PETS } from './pets/dinosaurEgg.js';
+import { GOURMET_EGG_PETS } from './pets/gourmetEgg.js';
+import { LEGENDARY_EGG_PETS } from './pets/legendaryEgg.js';
+import { MYTHICAL_EGG_PETS } from './pets/mythicalEgg.js';
+import { NIGHT_EGG_PETS } from './pets/nightEgg.js';
+import { OASIS_EGG_PETS } from './pets/oasisEgg.js';
+import { UNCOMMON_EGG_PETS } from './pets/uncommonEgg.js';
+import { PARADISE_EGG_PETS } from './pets/paradiseEgg.js';
+import { PRIMAL_EGG_PETS } from './pets/primalEgg.js';
+import { RARE_EGG_PETS } from './pets/rareEgg.js';
+import { RARE_SUMMER_EGG_PETS } from './pets/rareSummerEgg.js';
+import { ZEN_EGG_PETS } from './pets/zenEgg.js';
 
 // Combine all pets into a single object
 const petAbilities = {
-    ...AMPHIBIAN_PETS,
-    ...AQUATIC_PETS,
+    ...ANTI_BEE_EGG_PETS,
+    ...BEE_EGG_PETS,
     ...BIRD_PETS,
-    ...CANINES_PETS,
-    ...DINOSAUR_PETS,
-    ...DOMESTIC_PETS,
-    ...HERBIVORE_PETS,
-    ...INSECT_PETS,
-    ...MAMMAL_PETS,
-    ...MOLLUSK_PETS,
-    ...MYTHICAL_PETS,
-    ...OTHER_PETS,
-    ...PRIMATES_PETS,
-    ...SMALL_MAMMALS_PETS,
-    ...SPECIALTY_PETS,
-    ...UNDEAD_PETS,
-    ...WILD_ANIMALS_PETS
+    ...BLOOD_MOON_SHOP_PETS,
+    ...BUG_EGG_PETS,
+    ...CHESTS_EVENTS_OTHER_PETS,
+    ...COMMON_EGG_PETS,
+    ...COMMON_SUMMER_EGG_PETS,
+    ...DINOSAUR_EGG_PETS,
+    ...GOURMET_EGG_PETS,
+    ...LEGENDARY_EGG_PETS,
+    ...MYTHICAL_EGG_PETS,
+    ...NIGHT_EGG_PETS,
+    ...OASIS_EGG_PETS,
+    ...UNCOMMON_EGG_PETS,
+    ...PARADISE_EGG_PETS,
+    ...PRIMAL_EGG_PETS,
+    ...RARE_EGG_PETS,
+    ...RARE_SUMMER_EGG_PETS,
+    ...ZEN_EGG_PETS
     // Complete migration achieved! All 17 categories integrated with 109+ pets
 };
 
@@ -52,23 +58,22 @@ export {
     petMutationOptions, 
     getModifierDetails,
     // Export individual categories for selective imports
-    AMPHIBIAN_PETS,
-    AQUATIC_PETS,
+    ANTI_BEE_EGG_PETS,
+    BEE_EGG_PETS,
     BIRD_PETS,
-    CANINES_PETS,
-    DINOSAUR_PETS,
-    DOMESTIC_PETS,
-    HERBIVORE_PETS,
-    INSECT_PETS,
-    MAMMAL_PETS,
-    MOLLUSK_PETS,
-    MYTHICAL_PETS,
-    OTHER_PETS,
-    PRIMATES_PETS,
-    SMALL_MAMMALS_PETS,
-    SPECIALTY_PETS,
-    UNDEAD_PETS,
-    WILD_ANIMALS_PETS
+    BLOOD_MOON_SHOP_PETS,
+    BUG_EGG_PETS,
+    CHESTS_EVENTS_OTHER_PETS,
+    COMMON_EGG_PETS,
+    DINOSAUR_EGG_PETS,
+    GOURMET_EGG_PETS,
+    LEGENDARY_EGG_PETS,
+    MYTHICAL_EGG_PETS,
+    NIGHT_EGG_PETS,
+    OASIS_EGG_PETS,
+    PARADISE_EGG_PETS,
+    RARE_SUMMER_EGG_PETS,
+    UNCOMMON_EGG_PETS
 };
 
 // For backward compatibility, make functions available globally
@@ -137,24 +142,8 @@ export const getPetStats = () => {
             return acc;
         }, {}),
         categories: {
-            amphibians: Object.keys(AMPHIBIAN_PETS).length,
-            aquatic: Object.keys(AQUATIC_PETS).length,
-            birds: Object.keys(BIRD_PETS).length,
-            canines: Object.keys(CANINES_PETS).length,
-            dinosaurs: Object.keys(DINOSAUR_PETS).length,
-            domestic: Object.keys(DOMESTIC_PETS).length,
-            herbivores: Object.keys(HERBIVORE_PETS).length,
-            insects: Object.keys(INSECT_PETS).length,
-            mammals: Object.keys(MAMMAL_PETS).length,
-            mollusks: Object.keys(MOLLUSK_PETS).length,
-            mythical: Object.keys(MYTHICAL_PETS).length,
-            other: Object.keys(OTHER_PETS).length,
-            primates: Object.keys(PRIMATES_PETS).length,
-            smallMammals: Object.keys(SMALL_MAMMALS_PETS).length,
-            specialty: Object.keys(SPECIALTY_PETS).length,
-            undead: Object.keys(UNDEAD_PETS).length,
-            wildAnimals: Object.keys(WILD_ANIMALS_PETS).length
-            // Complete migration achieved - 17 categories total!
+            birds: Object.keys(BIRD_PETS).length
+            // Migration in progress - source-based categories only
         }
     };
 };

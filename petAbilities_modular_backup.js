@@ -17,6 +17,9 @@ import { INSECT_PETS } from './pets/insects.js';
 import { MAMMAL_PETS } from './pets/mammals.js';
 import { MOLLUSK_PETS } from './pets/mollusks.js';
 import { MYTHICAL_PETS } from './pets/mythical.js';
+// NOTE: This backup file contains imports for files that no longer exist after migration
+// If this backup is needed, the following imports should be removed:
+// - SMALL_MAMMALS_PETS, SPECIALTY_PETS (files migrated to source-based organization)
 import { OTHER_PETS } from './pets/other.js';
 import { PRIMATES_PETS } from './pets/primates.js';
 import { SMALL_MAMMALS_PETS } from './pets/smallMammals.js';
