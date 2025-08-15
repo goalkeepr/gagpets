@@ -37,7 +37,7 @@ const commonSummerEggPets = {
         name: "Starfish",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/9/9c/StarfishIcon.webp",
+            url: "https://static.wikia.nocookie.net/growagarden/images/6/62/StarfishIcon.webp",
             fallback: "⭐"
         },
         type: "aquatic",

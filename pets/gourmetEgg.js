@@ -8,7 +8,7 @@ export const GOURMET_EGG_PETS = {
         name: "Bagel Bunny",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/5/51/BagelBunny.png/revision/latest?cb=20250806114811",
+            url: "https://static.wikia.nocookie.net/growagarden/images/5/51/BagelBunny.png",
             fallback: "🥯"
         },
         type: "herbivore",

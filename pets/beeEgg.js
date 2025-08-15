@@ -6,7 +6,7 @@ export const BEE_EGG_PETS = {
         name: "Bee",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/d/d4/The_bee.png",
+            url: "https://static.wikia.nocookie.net/growagarden/images/f/f2/Beee.png",
             fallback: "🐝"
         },
         type: "insect",

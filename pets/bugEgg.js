@@ -35,7 +35,7 @@ export const BUG_EGG_PETS = {
         name: "Giant Ant",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/c/c5/Giant_ant.png",
+            url: "https://static.wikia.nocookie.net/growagarden/images/0/0b/GiantAntIcon.png",
             fallback: "🐜"
         },
         type: "insect",

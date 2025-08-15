@@ -133,7 +133,7 @@ const rareSummerEggPets = {
         name: "Orangutan",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/9/9e/OrangutanIcon.webp",
+            url: "https://static.wikia.nocookie.net/growagarden/images/4/47/OrangutanIcon.webp",
             fallback: "🦧"
         },
         type: "mammal",

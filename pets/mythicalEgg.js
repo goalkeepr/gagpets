@@ -139,7 +139,7 @@ export const MYTHICAL_EGG_PETS = {
         name: "Squirrel",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/7/74/Squirrel.png",
+            url: "https://static.wikia.nocookie.net/growagarden/images/9/93/Squirrel_Icon.png",
             fallback: "🐿️"
         },
         type: "mammal",

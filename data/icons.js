@@ -167,7 +167,7 @@ export const ICONS = {
     },
     GIANTANT: {
         type: "image",
-        url: "https://static.wikia.nocookie.net/growagarden/images/4/46/GiantAntImage.png",
+        url: "https://static.wikia.nocookie.net/growagarden/images/0/0b/GiantAntIcon.png",
         fallback: "🐜"
     },
     DISCOBEE: {
@@ -268,7 +268,7 @@ export const ICONS = {
     
     // Missing icon fallbacks - Canines
     FENNECFOX: { type: "emoji", fallback: "🦊" },
-    SHIBAINU: { type: "emoji", fallback: "🐕" },
+    SHIBAINU: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/b/bb/Shiba_Inu.png", fallback: "🐕" },
     
     // Missing icon fallbacks - Dinosaurs
     ANKYLOSAURUS: { type: "emoji", fallback: "🦕" },
@@ -282,9 +282,10 @@ export const ICONS = {
     VELOCIRAPTOR: { type: "emoji", fallback: "🦖" },
     
     // Missing icon fallbacks - Domestic
-    CHICKEN: { type: "emoji", fallback: "🐔" },
+    CHICKEN: {         type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/a/ac/Chicken_Pet.png", fallback: "🐔" },
     COW: { type: "emoji", fallback: "🐄" },
-    PIG: { type: "emoji", fallback: "🐷" },
+    PIG: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/8/82/Pig_no_back.png", fallback: "🐷" },
     
     // Missing icon fallbacks - Herbivores
     ALPACA: { type: "emoji", fallback: "🦙" },
@@ -327,35 +328,15 @@ export const ICONS = {
     CHIMPANZEE: { type: "emoji", fallback: "🐵" },
     GORILLA: { type: "emoji", fallback: "🦍" },
     LEMUR: { type: "emoji", fallback: "🐒" },
-    ORANGUTAN: { type: "emoji", fallback: "🦧" },
+    ORANGUTAN: { type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/4/47/OrangutanIcon.webp", fallback: "🦧" },
     
     // Missing icon fallbacks - Small Mammals
     FERRET: { type: "emoji", fallback: "🦦" },
     HAMSTER: { type: "emoji", fallback: "🐹" },
     HEDGEHOG: { type: "emoji", fallback: "🦔" },
     MOUSE: { type: "emoji", fallback: "🐭" },
-    SQUIRREL: { type: "emoji", fallback: "🐿️" },
-    
-    // Missing icon fallbacks - Specialty
-    ALIEN: { type: "emoji", fallback: "👽" },
-    ROBOT: { type: "emoji", fallback: "🤖" },
-    CYBORG: { type: "emoji", fallback: "🦾" },
-    GHOST: { type: "emoji", fallback: "👻" },
-    MUMMY: { type: "emoji", fallback: "🧟" },
-    VAMPIRE: { type: "emoji", fallback: "🧛" },
-    WEREWOLF: { type: "emoji", fallback: "🐺" },
-    WIZARD: { type: "emoji", fallback: "🧙" },
-    WITCH: { type: "emoji", fallback: "🧙‍♀️" },
-    
-    // Missing icon fallbacks - Undead
-    SKELETON: { type: "emoji", fallback: "💀" },
-    ZOMBIE: { type: "emoji", fallback: "🧟" },
-    
-    // Missing icon fallbacks - Wild Animals
-    JAGUAR: { type: "emoji", fallback: "🐆" },
-    LEOPARD: { type: "emoji", fallback: "🐆" },
-    PANTHER: { type: "emoji", fallback: "🐆" },
-    WOLF: { type: "emoji", fallback: "🐺" },
+    SQUIRREL: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/9/93/Squirrel_Icon.png", fallback: "🐿️" },
     
     // Additional missing icons - Dinosaurs
     PARASAUROLOPHUS: { type: "emoji", fallback: "🦕" },
@@ -376,7 +357,8 @@ export const ICONS = {
     PRAYINGMANTIS: { type: "emoji", fallback: "🦗" },
     
     // Additional missing icons - Mythical/Specialty
-    KITSUNE: { type: "emoji", fallback: "🦊" },
+    KITSUNE: {  type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/0/04/Kitsune.png", fallback: "🦊" },
     CORRUPTEDKITSUNE: { type: "emoji", fallback: "🦊" },
     MIZUCHI: { type: "emoji", fallback: "🐲" },
     BLOODKIWI: { type: "emoji", fallback: "🐦" },
@@ -398,35 +380,36 @@ export const ICONS = {
     METAPOD: { type: "emoji", fallback: "🐛" },
     CATERPIE: { type: "emoji", fallback: "🐛" },
     
+    // https://static.wikia.nocookie.net/growagarden/images/8/85/Monkey_Pet_V2.png/revision/latest/scale-to-width-down/268?cb=20250515232917
+    // https://static.wikia.nocookie.net/growagarden/images/d/db/Nihonzaru_.png/revision/latest?cb=20250719022615
+    // https://static.wikia.nocookie.net/growagarden/images/4/47/OrangutanIcon.webp/revision/latest?cb=20250621135443
+    // https://static.wikia.nocookie.net/growagarden/images/2/26/PancakeMole.png/revision/latest/scale-to-width-down/268?cb=20250806115043
     // Final batch of missing icons
     RAIJU: { type: "emoji", fallback: "⚡" },
     REDDRAGON: { type: "emoji", fallback: "🐉" },
-    TANUKI: { type: "emoji", fallback: "🦝" },
+    TANUKI: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/1/1f/Tanuki_.png", fallback: "🦝" },
     TSUCHINOKO: { type: "emoji", fallback: "🐍" },
-    TANCHOZURU: { type: "emoji", fallback: "🐦" },
-    MONKEY: { type: "emoji", fallback: "🐒" },
-    NIHONZARU: { type: "emoji", fallback: "🐒" },
-    SILVERMONKEY: { type: "emoji", fallback: "🐒" },
+    TANCHOZURU: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/d/d3/Tanchozuru_.png", fallback: "🐦" },
+    MONKEY: { type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/8/85/Monkey_Pet_V2.png", fallback: "🐒" },
+    NIHONZARU: {type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/d/db/Nihonzaru_.png", fallback: "🐒" },
+    SILVERMONKEY: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/a/a7/Silvermonkey.png",fallback: "🐒" },
     MOLE: { type: "emoji", fallback: "🦔" },
-    FRENCHFRYFERRET: { type: "emoji", fallback: "🍟" },
+    FRENCHFRYFERRET: {  type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/7/7e/FrenchFryFerret.png", fallback: "🍟" },
     MOCHIMOUSE: { type: "emoji", fallback: "🐭" },
     MOONCAT: { type: "emoji", fallback: "🐱" },
-    PANCAKEMOLE: { type: "emoji", fallback: "🥞" },
-    SPAGHETTISLOTH: { type: "emoji", fallback: "🍝" },
-    SUSHIBEAR: { type: "emoji", fallback: "🍣" },
-    PIZZARAT: { type: "emoji", fallback: "🍕" },
-    DONUTDOG: { type: "emoji", fallback: "🍩" },
-    COOKIECAT: { type: "emoji", fallback: "🍪" },
-    TACOTURTLE: { type: "emoji", fallback: "🌮" },
-    BURGERBIRD: { type: "emoji", fallback: "🍔" },
-    ICECREAMFISH: { type: "emoji", fallback: "🍦" },
-    CANDYCRAB: { type: "emoji", fallback: "🍭" },
+    PANCAKEMOLE: { type: "image",
+        url: "https://static.wikia.nocookie.net/growagarden/images/2/26/PancakeMole.png", fallback: "🥞" },
+    SPAGHETTISLOTH: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/8/8f/SpaghettiSloth.png", fallback: "🍝" },
+    SUSHIBEAR: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/5/5a/SushiBear.png", fallback: "🍣" },
     
     // Final 7 missing icons
     TARANTULAHAWK: { type: "emoji", fallback: "🕷️" },
     REDGIANTANT: { type: "emoji", fallback: "🐜" },
     SANDSNAKE: { type: "emoji", fallback: "🐍" },
-    POLARBEAR: { type: "emoji", fallback: "🐻‍❄️" },
+    POLARBEAR: { type: "image", url: "https://static.wikia.nocookie.net/growagarden/images/2/25/Polarbear.png", fallback: "🐻‍❄️" },
     MEERKAT: { type: "emoji", fallback: "🦫" },
     GOLDENLAB: { type: "emoji", fallback: "🐕" },
     ORANGETABBY: { type: "emoji", fallback: "🐱" }

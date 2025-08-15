@@ -553,7 +553,7 @@ select:focus-visible, input:focus-visible {
 }
 
 .pet-card .pet-type {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     color: var(--text-secondary);
     margin-top: 4px;
     opacity: 0.8;

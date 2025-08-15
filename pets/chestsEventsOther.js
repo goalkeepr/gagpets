@@ -65,7 +65,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         name: "Bacon Pig",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/b/b1/BaconPig.png/revision/latest?cb=20250809053320",
+            url: "https://static.wikia.nocookie.net/growagarden/images/b/b1/BaconPig.png",
             fallback: "🐷"
         },
         type: "mammal",
@@ -434,7 +434,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         name: "Corrupted Kodama",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/4/47/Placeholder.png",
+            url: "https://static.wikia.nocookie.net/growagarden/images/6/68/Corrupt_Kodama.png",
             fallback: "🌚"
         },
         type: "other",

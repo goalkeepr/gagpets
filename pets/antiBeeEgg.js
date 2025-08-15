@@ -134,7 +134,7 @@ export const ANTI_BEE_EGG_PETS = {
         name: "Disco Bee",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/b/ba/DiscoBee.png",
+            url: "https://static.wikia.nocookie.net/growagarden/images/f/f2/DiscoBeeIcon.gif",
             fallback: "🕺"
         },
         type: "insect",
