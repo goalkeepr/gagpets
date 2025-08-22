@@ -79,7 +79,7 @@ export const LEGENDARY_EGG_PETS = {
             const baseSeconds = 240;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (2.4 * kg));
+            const seconds = Math.max(5, adjustedBaseSeconds - (2.4 * kg));
             const range = 6 + (kg / 10);
             const waterEffect = 1.1 + (kg / 200);
             
@@ -107,7 +107,7 @@ export const LEGENDARY_EGG_PETS = {
             const baseSeconds = 600;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (6 * kg));
+            const seconds = Math.max(10, adjustedBaseSeconds - (6 * kg));
             const coldResistance = 25 + (kg / 4);
             const freezeImmunity = Math.min(100, 50 + (kg / 2));
             

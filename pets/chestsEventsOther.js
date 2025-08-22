@@ -25,7 +25,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 1510;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (16 * kg));
+            const seconds = Math.max(150, adjustedBaseSeconds - (16 * kg));
             const goldChance = 1 + (kg / 10);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -52,7 +52,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const seconds = Math.max(1, 1510 - (16 * kg));
+            const seconds = Math.max(150, 1510 - (16 * kg));
             const backpackIncrease = 25 + kg;
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -121,7 +121,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 15;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(20, adjustedBaseSeconds - kg);
             const reduction = 15 + (0.25 * kg);
             
             const reductionMod = 15 * modifier;
@@ -180,7 +180,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseNapInterval = 70;
             const napIntervalMod = baseNapInterval * modifier;
             const adjustedBaseNapInterval = baseNapInterval + napIntervalMod;
-            const napInterval = Math.max(1, adjustedBaseNapInterval - kg);
+            const napInterval = Math.max(15, adjustedBaseNapInterval - kg);
             const napDuration = 20 + (kg / 5);
             const range = 15 + (kg / 10);
             const sizeMultiplier = 1.35 + (kg / 100);
@@ -242,7 +242,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 180;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(60, adjustedBaseSeconds - kg);
             const bonus = 1.5 + (0.015 * kg);
             
             const bonusMod = 1.5 * modifier;
@@ -275,7 +275,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 1600;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (18 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (18 * kg));
             const zombifyChance = 20 + (kg / 5);
             const hatchSpeed = 10 + (kg / 10);
             
@@ -394,7 +394,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 143;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (0.6 * kg));
+            const seconds = Math.max(30, adjustedBaseSeconds - (0.6 * kg));
             const refundChance = 8 + (0.15 * kg);
             const duration = 10 + (kg / 4);
             
@@ -508,7 +508,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 1260;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (3.6 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (3.6 * kg));
             const chakraChance = 20 + (kg / 5);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -569,7 +569,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 806;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (12 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (12 * kg));
             const cookChance = 15 + (kg / 4);
             const xpBonus = 0.15 + (0.03 * kg);
             
@@ -600,7 +600,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(10, adjustedBaseSeconds - kg);
             const reduction = 25 + (kg / 4);
             
             const reductionMod = 25 * modifier;
@@ -691,7 +691,7 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(10, adjustedBaseSeconds - kg);
             const reduction = 45 + (0.45 * kg);
             
             const reductionMod = 45 * modifier;

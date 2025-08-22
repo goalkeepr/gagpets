@@ -23,7 +23,7 @@ export const BEE_EGG_PETS = {
             const baseSeconds = 1800;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (18 * kg));
+            const seconds = Math.max(150, adjustedBaseSeconds - (18 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -52,7 +52,7 @@ export const BEE_EGG_PETS = {
             const baseSeconds = 1210;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (12 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (12 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -81,7 +81,7 @@ export const BEE_EGG_PETS = {
             const baseSeconds = 1510;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const finalSeconds = Math.max(1, adjustedBaseSeconds - (16 * kg));
+            const finalSeconds = Math.max(60, adjustedBaseSeconds - (16 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -107,7 +107,7 @@ export const BEE_EGG_PETS = {
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const seconds = Math.max(1, 1510 - (16 * kg));
+            const seconds = Math.max(150, 1510 - (16 * kg));
             const flowerChance = 1 + (kg / 10);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -137,12 +137,12 @@ export const BEE_EGG_PETS = {
             const basePollinateSeconds = 1220;
             const pollinateSecondsMod = basePollinateSeconds *  modifier;
             const adjustedBasePollinateSeconds = basePollinateSeconds - pollinateSecondsMod;
-            const pollinateSeconds = Math.max(1, adjustedBasePollinateSeconds - (16 * kg));
+            const pollinateSeconds = Math.max(60, adjustedBasePollinateSeconds - (16 * kg));
             
             const baseRefreshSeconds = 1328;
             const refreshSecondsMod = baseRefreshSeconds * modifier;
             const adjustedBaseRefreshSeconds = baseRefreshSeconds - refreshSecondsMod;
-            const refreshSeconds = Math.max(1, adjustedBaseRefreshSeconds - (16 * kg));
+            const refreshSeconds = Math.max(60, adjustedBaseRefreshSeconds - (16 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             

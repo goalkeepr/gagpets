@@ -25,7 +25,7 @@ const rareEggPets = {
             const baseNapInterval = 90;
             const napIntervalMod = baseNapInterval * modifier;
             const adjustedBaseNapInterval = baseNapInterval + napIntervalMod;
-            const napInterval = Math.max(1, adjustedBaseNapInterval - kg);
+            const napInterval = Math.max(5, adjustedBaseNapInterval - kg);
             const napDuration = 15 + (0.15 * kg);
             const range = 15 + (0.15 * kg);
             const sizeMultiplier = 1.5 + (kg / 100);
@@ -81,7 +81,7 @@ const rareEggPets = {
             const baseSeconds = 200;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(20, adjustedBaseSeconds - (2.5 * kg));
+            const seconds = Math.max(5, adjustedBaseSeconds - (2.5 * kg));
             const findChance = 6 + (kg * 0.1);
             const truffleValue = 12 + (kg * 0.2);
             

@@ -55,7 +55,7 @@ export const MYTHICAL_EGG_PETS = {
             const baseSeconds = 502;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (5.89 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (5.89 * kg));
             const exp = 750 + (11 * kg);
             const jump = 12 + (kg / 10);
             
@@ -91,7 +91,7 @@ export const MYTHICAL_EGG_PETS = {
             const baseSeconds = 442.33;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const finalSeconds = Math.max(1, adjustedBaseSeconds - (5 * kg));
+            const finalSeconds = Math.max(15, adjustedBaseSeconds - (5 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -120,7 +120,7 @@ export const MYTHICAL_EGG_PETS = {
             const baseSeconds = 603;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (8.18 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (8.18 * kg));
             const exp = 500 + (8 * kg);
             const speed = 12 + (kg / 10);
             

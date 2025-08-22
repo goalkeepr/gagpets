@@ -23,7 +23,7 @@ const rareSummerEggPets = {
             const baseSeconds = 240;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (2 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (2 * kg));
             const duration = 15 + (kg / 2);
             const range = 13 + (0.3 * kg);
             const growthMultiplier = 15 + (kg / 4);
@@ -82,9 +82,9 @@ const rareSummerEggPets = {
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const expSeconds = Math.max(1, 720 - (6.5 * kg));
+            const expSeconds = Math.max(30, 720 - (6.5 * kg));
             const exp = 990 + (14 * kg);
-            const splashSeconds = Math.max(1, 164 - (3 * kg));
+            const splashSeconds = Math.max(30, 164 - (3 * kg));
             const wetChance = 12 + (0.2 * kg);
             
             const expMod = 990 * modifier;

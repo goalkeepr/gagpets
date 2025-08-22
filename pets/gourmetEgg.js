@@ -55,7 +55,7 @@ export const GOURMET_EGG_PETS = {
             const baseSeconds = 420;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(42, adjustedBaseSeconds - (4.5 * kg));
+            const seconds = Math.max(10, adjustedBaseSeconds - (4.5 * kg));
             const breakfastBonus = 28 + (kg * 0.45);
             const fluffiness = 22 + (kg * 0.35);
             
@@ -112,7 +112,7 @@ export const GOURMET_EGG_PETS = {
             const baseSeconds = 900;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(90, adjustedBaseSeconds - (8 * kg));
+            const seconds = Math.max(200, adjustedBaseSeconds - (8 * kg));
             const relaxation = 35 + (kg * 0.6);
             const pastaJoy = 25 + (kg * 0.4);
             const slowness = 40 + (kg * 0.7);

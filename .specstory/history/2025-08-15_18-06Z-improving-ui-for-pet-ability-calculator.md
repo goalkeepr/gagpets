@@ -247,3 +247,21 @@ The change will take effect immediately when you refresh the page or if you have
 
 ---
 
+_**User**_
+
+It's still sometimes extending beyond the border, and in some cases going to 2 lines. Make it smaller.
+
+---
+
+_**Assistant**_
+
+I can see from the screenshot that the source text is still wrapping to multiple lines and extending beyond the card borders. Let me make the font size even smaller to fix this issue. 
+```
+
+```
+I've reduced the font size from `0.7rem` to `0.6rem`. This should help prevent the source text from wrapping to multiple lines and extending beyond the card borders. The smaller text will be more compact and should fit better within the available space while still remaining readable.
+
+If it's still too large after this change, we could also consider adding some additional CSS properties like `overflow: hidden`, `text-overflow: ellipsis`, or `white-space: nowrap` to ensure the text stays on one line and truncates with "..." if needed.
+
+---
+

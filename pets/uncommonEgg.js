@@ -25,10 +25,10 @@ export const UNCOMMON_EGG_PETS = {
             const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const napInterval = Math.max(1, adjustedBaseSeconds - kg);
-            const napDuration = 10 + (kg / 10);
-            const range = 10 + (kg / 10);
-            const sizeMultiplier = 1.25 + (0.0025 * kg);
+            const napInterval = Math.max(5, adjustedBaseSeconds - kg);
+            const napDuration = Math.min(20, 10 + (kg / 10));
+            const range = Math.min(20, 10 + (kg / 10));
+            const sizeMultiplier = Math.min(4, 1.25 + (0.0025 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -86,7 +86,7 @@ export const UNCOMMON_EGG_PETS = {
             const baseSeconds = 45;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(5, adjustedBaseSeconds - kg);
             const bonus = 1.5 + (0.015 * kg);
             
             const bonusMod = 1.5 * modifier;

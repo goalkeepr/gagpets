@@ -52,7 +52,7 @@ export const PARADISE_EGG_PETS = {
             const baseSeconds = 606;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(15, adjustedBaseSeconds - (6 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (6 * kg));
             const range = 20 + (kg / 5);
             const cooldownAdvance = 65 + (0.6 * kg);
             
@@ -80,13 +80,13 @@ export const PARADISE_EGG_PETS = {
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const studs = 15.5 + (kg / 4);
+            const studs = 14.5 + (kg / 4);
             const xp = 3 + (0.3 * kg);
             
             const studsMod = 15.5 * modifier;
             const xpMod = 3 * modifier;
             const studsTotal = studs + studsMod;
-            const xpTotal = xp + xpMod;
+            const xpTotal = Math.min(30, xp + xpMod);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -115,7 +115,7 @@ export const PARADISE_EGG_PETS = {
             const baseSeconds = 524;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (5 * kg));
+            const seconds = Math.max(50, adjustedBaseSeconds - (5 * kg));
             const mutateChance = 15 + (kg / 2);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -145,7 +145,7 @@ export const PARADISE_EGG_PETS = {
             const baseSeconds = 1212;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(15, adjustedBaseSeconds - (12 * kg));
+            const seconds = Math.max(120, adjustedBaseSeconds - (12 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             

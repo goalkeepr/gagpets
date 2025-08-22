@@ -37,6 +37,11 @@ app.get('/recipes', (req, res) => {
     res.sendFile(path.join(__dirname, 'recipes.html'));
 });
 
+// Route for fruit types page
+app.get('/fruittypes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'fruittypes.html'));
+});
+
 // Health check route
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });

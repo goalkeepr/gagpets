@@ -23,12 +23,12 @@ export const ANTI_BEE_EGG_PETS = {
             const basePollinateSeconds = 1800;
             const pollinateSecondsMod = basePollinateSeconds * modifier;
             const adjustedBasePollinateSeconds = basePollinateSeconds + pollinateSecondsMod;
-            const pollinateSeconds = Math.max(1, adjustedBasePollinateSeconds - (18 * kg));
+            const pollinateSeconds = Math.max(60, adjustedBasePollinateSeconds - (18 * kg));
             
             const baseStingSeconds = 602;
             const stingSecondsMod = baseStingSeconds * modifier;
             const adjustedBaseStingSeconds = baseStingSeconds + stingSecondsMod;
-            const stingSeconds = Math.max(1, adjustedBaseStingSeconds - (6 * kg));
+            const stingSeconds = Math.max(60, adjustedBaseStingSeconds - (6 * kg));
             const cooldownAdvance = 60 + (0.6 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -58,12 +58,12 @@ export const ANTI_BEE_EGG_PETS = {
             const basePollinateSeconds = 1510;
             const pollinateSecondsMod = basePollinateSeconds * modifier;
             const adjustedBasePollinateSeconds = basePollinateSeconds + pollinateSecondsMod;
-            const pollinateSeconds = Math.max(1, adjustedBasePollinateSeconds - (16 * kg));
+            const pollinateSeconds = Math.max(150, adjustedBasePollinateSeconds - (16 * kg));
             
             const baseStingSeconds = 302;
             const stingSecondsMod = baseStingSeconds * modifier;
             const adjustedBaseStingSeconds = baseStingSeconds + stingSecondsMod;
-            const stingSeconds = Math.max(1, adjustedBaseStingSeconds - (3 * kg));
+            const stingSeconds = Math.max(150, adjustedBaseStingSeconds - (3 * kg));
             const cooldownAdvance = 80 + (0.8 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -93,7 +93,7 @@ export const ANTI_BEE_EGG_PETS = {
             const baseSeconds = 763;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (7 * kg));
+            const seconds = Math.max(70, adjustedBaseSeconds - (7 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -122,7 +122,7 @@ export const ANTI_BEE_EGG_PETS = {
             const baseSeconds = 1807.4;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (18 * kg));
+            const seconds = Math.max(180, adjustedBaseSeconds - (18 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -151,7 +151,7 @@ export const ANTI_BEE_EGG_PETS = {
             const baseSeconds = 1610;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (16 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (16 * kg));
             const growthMultiplier = 1.55 + (kg * 0.01);
             const range = 10 + (kg / 10);
             

@@ -90,7 +90,7 @@ const dinosaurEggPets = {
             const secondsMod = baseSeconds * modifier;
             const targetsMod = baseTargets * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const finalSeconds = Math.max(1, adjustedBaseSeconds - (12 * kg));
+            const finalSeconds = Math.max(15, adjustedBaseSeconds - (12 * kg));
             const targetsTotal = targets + targetsMod;
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -163,7 +163,7 @@ const dinosaurEggPets = {
             const twistedChanceMod = baseTwistedChance * modifier;
             const jumpBonusMod = baseJumpBonus * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const finalSeconds = Math.max(1, adjustedBaseSeconds - (6 * kg));
+            const finalSeconds = Math.max(33, adjustedBaseSeconds - (6 * kg));
             const fruitsTotal = fruits + fruitsMod;
             const twistedChanceTotal = twistedChance + twistedChanceMod;
             const jumpBonusTotal = jumpBonus + jumpBonusMod;

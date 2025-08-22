@@ -21,7 +21,7 @@ export const dragonPets = {
             const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(5, adjustedBaseSeconds - kg);
             const burnChance = 20 + (kg / 5);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";

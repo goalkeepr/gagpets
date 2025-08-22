@@ -88,7 +88,7 @@ const commonSummerEggPets = {
             const baseSeconds = 378;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (4.0 * kg));
+            const seconds = Math.max(30, adjustedBaseSeconds - (4.0 * kg));
             const sheckles = 225 + (25 * kg);
             
             const shecklesMod = 225 * modifier;

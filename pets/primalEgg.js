@@ -25,7 +25,7 @@ const primalEggPets = {
             const baseSeconds = 82;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (1.8 * kg));
+            const seconds = Math.max(10, adjustedBaseSeconds - (1.8 * kg));
             const reduction = 80 + (0.65 * kg);
             const chancePercent = 25.5 + (kg / 4);
             const multiplier = 1.5 + (kg / 5);
@@ -120,10 +120,10 @@ const primalEggPets = {
             const baseSeconds = 846;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (8.4 * kg));
+            const seconds = Math.max(80, adjustedBaseSeconds - (8.4 * kg));
             const targets = Math.min(5, 3 + (kg / 5));
-            const cooldownAdvance = Math.min(100, 40 + (kg / 4));
-            const xpGrant = Math.min(1500, 500 + (40 * kg));
+            const cooldownAdvance = Math.min(80, 40 + (kg / 4));
+            const xpGrant = Math.min(2500, 500 + (40 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -188,7 +188,7 @@ const primalEggPets = {
             const secondsMod = baseSeconds * modifier;
             const fruitsMod = baseFruits * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const finalSeconds = Math.max(1, adjustedBaseSeconds - (12 * kg));
+            const finalSeconds = Math.max(120, adjustedBaseSeconds - (12 * kg));
             const fruitsTotal = fruits + fruitsMod;
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";

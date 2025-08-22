@@ -23,7 +23,7 @@ export const OASIS_EGG_PETS = {
             const baseSeconds = 1350;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(15, adjustedBaseSeconds - (13 * kg));
+            const seconds = Math.max(120, adjustedBaseSeconds - (13 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -52,7 +52,7 @@ export const OASIS_EGG_PETS = {
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(40, adjustedBaseSeconds - kg);
             const advance = 15 + (kg / 4);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -82,7 +82,7 @@ export const OASIS_EGG_PETS = {
             const baseSeconds = 486;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (4 * kg));
+            const seconds = Math.max(40, adjustedBaseSeconds - (4 * kg));
             const mutateChance = 15 + (kg / 20);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";

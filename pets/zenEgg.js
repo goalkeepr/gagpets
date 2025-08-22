@@ -21,7 +21,7 @@ const zenEggPets = {
             const baseSeconds = 120;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(12, adjustedBaseSeconds - (1.8 * kg));
+            const seconds = Math.max(5, adjustedBaseSeconds - (1.8 * kg));
             const resourceGen = 4 + (kg * 0.1);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -76,7 +76,7 @@ const zenEggPets = {
             const baseSeconds = 300;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(30, adjustedBaseSeconds - (4 * kg));
+            const seconds = Math.max(80, adjustedBaseSeconds - (4 * kg));
             const luckBonus = 18 + (kg * 0.3);
             const mischiefChance = 12 + (kg * 0.2);
             
@@ -92,7 +92,7 @@ const zenEggPets = {
         icon: ICONS.TANCHOZURU,
         type: "mythical",
         rarity: "Legendary",
-        description: "Sacred crane that brings longevity and prosperity",
+        description: "Sacred crane that meditates to apply Tranquil mutations to nearby fruits",
         source: "Zen Egg",
         probability: 4.60,
         obtainable: false,
@@ -101,19 +101,20 @@ const zenEggPets = {
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const baseLongevity = 25;
-            const longevity = baseLongevity + (kg * 0.4);
-            const prosperity = 20 + (kg * 0.35);
-            const range = 25 + (kg * 0.5);
+            const baseCooldown = 627;
+            const cooldownMod = baseCooldown * modifier;
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(60, adjustedBaseCooldown - (1 * kg));
             
-            const longevityMod = baseLongevity * modifier;
-            const longevityTotal = longevity + longevityMod;
+            const duration = 10 + (0.1 * kg);
+            const range = 15 + (0.1 * kg);
+            const chance = 5 + (0.05 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Sacred presence! All pets within <strong>${range.toFixed(1)}</strong> studs gain <strong>${longevityTotal.toFixed(1)}%</strong> longevity and <strong>${prosperity.toFixed(1)}%</strong> prosperity bonuses${displayText}!`;
+            return `Every <strong>${Utils.formatTime(cooldown)}</strong>, meditates for <strong>${Utils.formatTime(duration)}</strong>, nearby fruits in a <strong>${range.toFixed(1)}</strong> studs have a <strong>${chance.toFixed(2)}%</strong> chance every second to mutate into Tranquil!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases longevity by 0.4%, prosperity by 0.35%, and range by 0.5 studs"
+        perKgImpact: () => "Each additional kg decreases cooldown by 1 second, increases duration by 0.1 seconds, increases range by 0.1 studs, and increases chance by 0.05%"
     },
 
     kappa: {
@@ -137,7 +138,7 @@ const zenEggPets = {
             const baseSeconds = 488;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (4 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (4 * kg));
             const range = 25 + (kg / 4);
             const bloodlitChance = 10 + (kg / 10);
             

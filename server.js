@@ -35,6 +35,11 @@ app.get('/recipes', (req, res) => {
     res.sendFile(path.join(__dirname, 'recipes.html'));
 });
 
+// Route for fruit types page
+app.get('/fruittypes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'fruittypes.html'));
+});
+
 // Health check route for production monitoring
 app.get('/health', (req, res) => {
     res.json({ 

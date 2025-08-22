@@ -106,7 +106,7 @@ export const BUG_EGG_PETS = {
             const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
+            const seconds = Math.max(5, adjustedBaseSeconds - kg);
             const duration = 10 + (kg / 10);
             const variantMultiplier = 1.5 + (kg / 200);
             const range = 10 + (kg / 10);
@@ -138,7 +138,7 @@ export const BUG_EGG_PETS = {
             const baseSeconds = 300;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (3 * kg));
+            const seconds = Math.max(60, adjustedBaseSeconds - (3 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
