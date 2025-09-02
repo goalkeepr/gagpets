@@ -15,6 +15,7 @@ import { CHESTS_EVENTS_OTHER_PETS } from './pets/chestsEventsOther.js';
 import { COMMON_EGG_PETS } from './pets/commonEgg.js';
 import { COMMON_SUMMER_EGG_PETS } from './pets/commonSummerEgg.js';
 import { DINOSAUR_EGG_PETS } from './pets/dinosaurEgg.js';
+import { ENCHANTED_EGG_PETS } from './pets/enchantedEgg.js';
 import { GOURMET_EGG_PETS } from './pets/gourmetEgg.js';
 import { LEGENDARY_EGG_PETS } from './pets/legendaryEgg.js';
 import { MYTHICAL_EGG_PETS } from './pets/mythicalEgg.js';
@@ -25,6 +26,8 @@ import { PARADISE_EGG_PETS } from './pets/paradiseEgg.js';
 import { PRIMAL_EGG_PETS } from './pets/primalEgg.js';
 import { RARE_EGG_PETS } from './pets/rareEgg.js';
 import { RARE_SUMMER_EGG_PETS } from './pets/rareSummerEgg.js';
+import { SPROUT_EGG_PETS } from './pets/sproutEgg.js';
+import { RAINBOW_EXOTIC_PETS } from './pets/rainbowExotic.js';
 import { ZEN_EGG_PETS } from './pets/zenEgg.js';
 
 // Combine all pets into a single object
@@ -38,6 +41,7 @@ const petAbilities = {
     ...COMMON_EGG_PETS,
     ...COMMON_SUMMER_EGG_PETS,
     ...DINOSAUR_EGG_PETS,
+    ...ENCHANTED_EGG_PETS,
     ...GOURMET_EGG_PETS,
     ...LEGENDARY_EGG_PETS,
     ...MYTHICAL_EGG_PETS,
@@ -48,8 +52,10 @@ const petAbilities = {
     ...PRIMAL_EGG_PETS,
     ...RARE_EGG_PETS,
     ...RARE_SUMMER_EGG_PETS,
+    ...SPROUT_EGG_PETS,
+    ...RAINBOW_EXOTIC_PETS,
     ...ZEN_EGG_PETS
-    // Complete migration achieved! All 17 categories integrated with 109+ pets
+    // Complete migration achieved! All 19 categories integrated with 124+ pets
 };
 
 // Export everything needed
@@ -66,6 +72,7 @@ export {
     CHESTS_EVENTS_OTHER_PETS,
     COMMON_EGG_PETS,
     DINOSAUR_EGG_PETS,
+    ENCHANTED_EGG_PETS,
     GOURMET_EGG_PETS,
     LEGENDARY_EGG_PETS,
     MYTHICAL_EGG_PETS,
@@ -73,6 +80,8 @@ export {
     OASIS_EGG_PETS,
     PARADISE_EGG_PETS,
     RARE_SUMMER_EGG_PETS,
+    SPROUT_EGG_PETS,
+    RAINBOW_EXOTIC_PETS,
     UNCOMMON_EGG_PETS
 };
 
@@ -96,7 +105,8 @@ export const getPetMutationDescription = (modifierType, kg = 50) => {
         "radiant": "Radiant Pet Mutation",
         "ascended": "Ascended Pet Mutation",
         "tranquil": "Tranquil Pet Mutation",
-        "corrupted": "Corrupted Pet Mutation"
+        "corrupted": "Corrupted Pet Mutation",
+        "glimmering": "Glimmering Pet Mutation"
     };
     
     const mutationKey = mutationMap[modifierType];

@@ -161,5 +161,26 @@ export const petMutationOptions = {
             return `<font color="rgba(247, 184, 184, 1)">CORRUPTED: Every <strong>${Utils.formatTime(cooldown)}</strong>, a nearby fruit is corrupted, applying the Corrupted mutation with <strong>${chance.toFixed(2)}%</strong> success rate!</font>${displayText}`;
         },
         perKgImpact: () => "Each additional kg decreases tranquility cooldown by 3 seconds and increases success rate by 0.03%"
+    },
+    "Glimmering Pet Mutation": {
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 1500;
+            const cooldownMod = baseCooldown * modifier;
+            const adjustedCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(1000, adjustedCooldown - (3 * kg));
+            
+            const baseChance = 20;
+            const chanceBonus = 0.03 * kg;
+            const chance = Math.min(30, baseChance + chanceBonus);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<font color="rgb(255, 215, 0)">GLIMMERING: Every <strong>${Utils.formatTime(cooldown)}</strong>, a nearby fruit begins to glimmer, applying the Glimmering mutation with <strong>${chance.toFixed(2)}%</strong> success rate!</font>${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg decreases glimmering cooldown by 3 seconds and increases success rate by 0.03%"
     }
 };

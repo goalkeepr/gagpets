@@ -23,6 +23,14 @@
         <div class="header">
             <h1>🌱 Grow a Garden</h1>
             <p>Pet Ability Calculator</p>
+            <button type="button" id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <span class="toggle-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="navigation-links">
+            <a href="fruittypes.html">🍎 Fruit Types</a>
+            <a href="recipes.html">🍳 Recipes</a>
         </div>
         
         <div class="calculator">
@@ -38,6 +46,7 @@
                         <option value="Common Egg">🥚 Common Egg</option>
                         <option value="Common Summer Egg">🏖️ Common Summer Egg</option>
                         <option value="Dinosaur Egg">� Dinosaur Egg</option>
+                        <option value="Enchanted Egg">✨ Enchanted Egg</option>
                         <option value="Gourmet Egg">�️ Gourmet Egg</option>
                         <option value="Legendary Egg">🥚 Legendary Egg</option>
                         <option value="Mythical Egg">🥚 Mythical Egg</option>
@@ -45,9 +54,11 @@
                         <option value="Oasis Egg">🏜️ Oasis Egg</option>
                         <option value="Paradise Egg">� Paradise Egg</option>
                         <option value="Primal Egg">🥚 Primal Egg</option>
+                        <option value="Rainbow Exotic">🌈 Rainbow Exotic</option>
                         <option value="Rare Egg">🥚 Rare Egg</option>
-                        <option value="Rare Summer Egg">�️ Rare Summer Egg</option>
-                        <option value="Uncommon Egg">� Uncommon Egg</option>
+                        <option value="Rare Summer Egg">🏖️ Rare Summer Egg</option>
+                        <option value="Sprout Egg">🌱 Sprout Egg</option>
+                        <option value="Uncommon Egg">🥚 Uncommon Egg</option>
                         <option value="Zen Egg">� Zen Egg</option>
                         <option value="other">🔮 Other</option>
                     </select>
@@ -60,6 +71,7 @@
                         <button type="button" class="filter-btn" data-type="Common Egg"><span class="source-icon-placeholder" data-source="Common Egg"></span>Common</button>
                         <button type="button" class="filter-btn" data-type="Common Summer Egg"><span class="source-icon-placeholder" data-source="Common Summer Egg"></span>Common Summer</button>
                         <button type="button" class="filter-btn" data-type="Dinosaur Egg"><span class="source-icon-placeholder" data-source="Dinosaur Egg"></span>Dinosaur</button>
+                        <button type="button" class="filter-btn" data-type="Enchanted Egg"><span class="source-icon-placeholder" data-source="Enchanted Egg"></span>Enchanted</button>
                         <button type="button" class="filter-btn" data-type="Gourmet Egg"><span class="source-icon-placeholder" data-source="Gourmet Egg"></span>Gourmet</button>
                         <button type="button" class="filter-btn" data-type="Legendary Egg"><span class="source-icon-placeholder" data-source="Legendary Egg"></span>Legendary</button>
                         <button type="button" class="filter-btn" data-type="Mythical Egg"><span class="source-icon-placeholder" data-source="Mythical Egg"></span>Mythical</button>
@@ -67,8 +79,10 @@
                         <button type="button" class="filter-btn" data-type="Oasis Egg"><span class="source-icon-placeholder" data-source="Oasis Egg"></span>Oasis</button>
                         <button type="button" class="filter-btn" data-type="Paradise Egg"><span class="source-icon-placeholder" data-source="Paradise Egg"></span>Paradise</button>
                         <button type="button" class="filter-btn" data-type="Primal Egg"><span class="source-icon-placeholder" data-source="Primal Egg"></span>Primal</button>
+                        <button type="button" class="filter-btn" data-type="Rainbow Exotic"><span class="source-icon-placeholder" data-source="Rainbow Exotic"></span>Rainbow Exotic</button>
                         <button type="button" class="filter-btn" data-type="Rare Egg"><span class="source-icon-placeholder" data-source="Rare Egg"></span>Rare</button>
                         <button type="button" class="filter-btn" data-type="Rare Summer Egg"><span class="source-icon-placeholder" data-source="Rare Summer Egg"></span>Rare Summer</button>
+                        <button type="button" class="filter-btn" data-type="Sprout Egg"><span class="source-icon-placeholder" data-source="Sprout Egg"></span>Sprout</button>
                         <button type="button" class="filter-btn" data-type="Uncommon Egg"><span class="source-icon-placeholder" data-source="Uncommon Egg"></span>Uncommon</button>
                         <button type="button" class="filter-btn" data-type="Zen Egg"><span class="source-icon-placeholder" data-source="Zen Egg"></span>Zen</button>
                         <button type="button" class="filter-btn" data-type="other"><span class="source-icon-placeholder" data-source="other"></span>Other</button>
@@ -159,6 +173,7 @@
                                 <option value="ascended">Ascended (applies dawnbound)</option>
                                 <option value="tranquil">Tranquil (applies tranquil)</option>
                                 <option value="corrupted">Corrupted (applies corrupted)</option>
+                                <option value="glimmering">Glimmering (applies Glimmering)</option>
                     </select>
                 </div>
                 
@@ -202,6 +217,7 @@
                                 <option value="ascended">Ascended (applies dawnbound)</option>
                                 <option value="tranquil">Tranquil (applies tranquil)</option>
                                 <option value="corrupted">Corrupted (applies corrupted)</option>
+                                <option value="glimmering">Glimmering (applies Glimmering)</option>
                             </select>
                         </div>
                         <div style="flex: 1;">
@@ -218,6 +234,7 @@
                                 <option value="ascended">Ascended (applies dawnbound)</option>
                                 <option value="tranquil">Tranquil (applies tranquil)</option>
                                 <option value="corrupted">Corrupted (applies corrupted)</option>
+                                <option value="glimmering">Glimmering (applies Glimmering)</option>
                             </select>
                         </div>
                     </div>
@@ -272,7 +289,8 @@
                     "radiant": "Radiant Pet Mutation",
                     "ascended": "Ascended Pet Mutation",
                     "tranquil": "Tranquil Pet Mutation",
-                    "corrupted": "Corrupted Pet Mutation"
+                    "corrupted": "Corrupted Pet Mutation",
+                    "glimmering": "Glimmering Pet Mutation"
                 };
                 
                 const mutationKey = mutationMap[modifierType];
@@ -296,6 +314,7 @@
             'Common Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/95/CommonEgg.png',
             'Common Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/62/CommonSummerEgg.png',
             'Dinosaur Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/29/Dinosauregg.png',
+            'Enchanted Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6b/EnchantedEgg.png',
             'Gourmet Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/2a/Gourmet_Egg.png',
             'Legendary Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/63/Legendary_Egg.webp',
             'Mythical Egg': 'https://static.wikia.nocookie.net/growagarden/images/4/4f/MythicalEggBetter.png',
@@ -303,8 +322,10 @@
             'Oasis Egg': 'https://static.wikia.nocookie.net/growagarden/images/7/73/OasisEgg.png',
             'Paradise Egg': 'https://static.wikia.nocookie.net/growagarden/images/b/ba/ParadiseSummerEgg.png',
             'Primal Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/8f/PrimalEgg.png',
+            'Rainbow Exotic': 'https://static.wikia.nocookie.net/growagarden/images/2/25/Images-GrowGarden-Vector_20250426011605.png',
             'Rare Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/23/RareEgg.png',
             'Rare Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6c/RareSummerEgg.png',
+            'Sprout Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/96/SproutEgg.png',
             'Uncommon Egg': 'https://static.wikia.nocookie.net/growagarden/images/0/0c/Uncommon_Egg.webp',
             'Zen Egg': 'https://static.wikia.nocookie.net/growagarden/images/1/14/Zeneg.png',
             'other': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png'
@@ -328,6 +349,7 @@
                 'Rare Summer Egg': '🏖️',
                 'Bug Egg': '🐛',
                 'Dinosaur Egg': '🦕',
+                'Enchanted Egg': '✨',
                 'Night Egg': '🌙',
                 'other': '🔮'
             };
@@ -1208,12 +1230,15 @@
                     'Primal Egg',
                     'Common Summer Egg',
                     'Rare Summer Egg',
+                    'Sprout Egg',
                     'Bug Egg',
                     'Dinosaur Egg',
+                    'Enchanted Egg',
                     'Gourmet Egg',
                     'Night Egg',
                     'Oasis Egg',
                     'Paradise Egg',
+                    'Rainbow Exotic',
                     'Zen Egg'
                 ];
                 return knownSources.includes(source);
@@ -1590,6 +1615,7 @@
                 this.setupButtons();
                 this.setupKeyboardNavigation();
                 this.initializeSourceIcons();
+                this.setupDarkModeToggle();
                 SinglePetSlider.init();
             },
 
@@ -1795,6 +1821,50 @@
                             // We'll leave dropdown as text-only for better compatibility
                         }
                     });
+                }
+            },
+
+            /**
+             * Setup dark mode toggle functionality
+             */
+            setupDarkModeToggle() {
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                if (!darkModeToggle) return;
+
+                // Initialize theme from localStorage or default to light
+                const savedTheme = localStorage.getItem('darkMode');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+                
+                this.setTheme(initialTheme);
+
+                // Toggle event listener
+                darkModeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    this.setTheme(newTheme);
+                });
+
+                // Listen for system theme changes
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (!localStorage.getItem('darkMode')) {
+                        this.setTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            },
+
+            /**
+             * Set the theme and save to localStorage
+             * @param {string} theme - 'light' or 'dark'
+             */
+            setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('darkMode', theme);
+                
+                // Update toggle button icon
+                const toggleIcon = document.querySelector('.dark-mode-toggle .toggle-icon');
+                if (toggleIcon) {
+                    toggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
                 }
             }
         };

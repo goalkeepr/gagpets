@@ -145,7 +145,7 @@ export const PARADISE_EGG_PETS = {
             const baseSeconds = 1212;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(120, adjustedBaseSeconds - (12 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (12 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             

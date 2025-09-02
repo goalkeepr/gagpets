@@ -22,7 +22,7 @@ export const ANTI_BEE_EGG_PETS = {
             
             const basePollinateSeconds = 1800;
             const pollinateSecondsMod = basePollinateSeconds * modifier;
-            const adjustedBasePollinateSeconds = basePollinateSeconds + pollinateSecondsMod;
+            const adjustedBasePollinateSeconds = basePollinateSeconds - pollinateSecondsMod;
             const pollinateSeconds = Math.max(60, adjustedBasePollinateSeconds - (18 * kg));
             
             const baseStingSeconds = 602;
@@ -57,7 +57,7 @@ export const ANTI_BEE_EGG_PETS = {
             
             const basePollinateSeconds = 1510;
             const pollinateSecondsMod = basePollinateSeconds * modifier;
-            const adjustedBasePollinateSeconds = basePollinateSeconds + pollinateSecondsMod;
+            const adjustedBasePollinateSeconds = basePollinateSeconds - pollinateSecondsMod;
             const pollinateSeconds = Math.max(150, adjustedBasePollinateSeconds - (16 * kg));
             
             const baseStingSeconds = 302;

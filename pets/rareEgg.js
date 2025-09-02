@@ -24,7 +24,7 @@ const rareEggPets = {
             
             const baseNapInterval = 90;
             const napIntervalMod = baseNapInterval * modifier;
-            const adjustedBaseNapInterval = baseNapInterval + napIntervalMod;
+            const adjustedBaseNapInterval = baseNapInterval - napIntervalMod;
             const napInterval = Math.max(5, adjustedBaseNapInterval - kg);
             const napDuration = 15 + (0.15 * kg);
             const range = 15 + (0.15 * kg);

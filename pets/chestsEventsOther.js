@@ -776,5 +776,507 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             return `All active pets gain an additional <strong>${xpBonusTotal.toFixed(2)} XP/s</strong>${displayText}!`;
         },
         perKgImpact: () => "Each additional kg increases all pets' XP bonus by 0.08 XP/s"
+    },
+
+    spriggan: {
+        name: "Spriggan",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/6/6f/Spriggan.png",
+            fallback: "🌳"
+        },
+        type: "nature",
+        rarity: "Legendary",
+        source: "Beanstalk Event",
+        probability: 0,
+        obtainable: true,
+        description: "Spreads roots to apply Bloom mutation to nearby fruits",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 1330;
+            const baseChance = 15;
+            const baseRange = 30;
+            const cooldown = Math.max(600, baseCooldown - (6 * kg));
+            const chance = Math.min(30, baseChance + (0.15 * kg));
+            const range = Math.min(60, baseRange + (0.3 * kg));
+            
+            const cooldownMod = baseCooldown * modifier;
+            const chanceMod = baseChance * modifier;
+            const rangeMod = baseRange * modifier;
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(600, adjustedBaseCooldown - (6 * kg));
+            const chanceTotal = Math.min(30, chance + chanceMod);
+            const rangeTotal = Math.min(60, range + rangeMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, spreads its roots and all fruit within <strong>${rangeTotal.toFixed(1)}</strong> studs have a <strong>${chanceTotal.toFixed(1)}%</strong> to get the Bloom mutation${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 6 seconds (min 10:00), increases Bloom chance by 0.15% (max 30%), and increases range by 0.3 studs (max 60)"
+    },
+
+    baconpig: {
+        name: "Bacon Pig",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/b/b1/BaconPig.png",
+            fallback: "🐷"
+        },
+        type: "mammal",
+        rarity: "Legendary",
+        source: "Culinarian Chest",
+        probability: 34.5,
+        obtainable: true,
+        description: "Emits aura that boosts variant chance for new fruits",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 120;
+            const baseDuration = 15;
+            const baseRange = 15;
+            const baseMultiplier = 2;
+            
+            const cooldown = Math.max(5, baseCooldown - kg);
+            const duration = baseDuration + (0.15 * kg);
+            const range = baseRange + (0.15 * kg);
+            const multiplier = baseMultiplier + (0.01 * kg);
+            
+            const cooldownMod = baseCooldown * modifier;
+            const durationMod = baseDuration * modifier;
+            const rangeMod = baseRange * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(5, adjustedBaseCooldown - kg);
+            const durationTotal = duration + durationMod;
+            const rangeTotal = range + rangeMod;
+            const multiplierTotal = multiplier + multiplierMod;
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, emits an aura for <strong>${Utils.formatTime(durationTotal)}</strong> granting <strong>${multiplierTotal.toFixed(2)}x</strong> chance for new fruit to grow as variants within <strong>${rangeTotal.toFixed(2)}</strong> studs${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 1 second (min 5s), increases duration by 0.15 seconds, increases range by 0.15 studs, and increases variant multiplier by 0.01x"
+    },
+
+    hotdogDaschund: {
+        name: "Hotdog Daschund",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/2/24/HotdogDaschund.png",
+            fallback: "🌭"
+        },
+        type: "food",
+        rarity: "Mythical",
+        source: "Culinarian Chest",
+        probability: 14.5,
+        obtainable: true,
+        description: "Drops mustard/ketchup puddles that boost pet performance",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 240;
+            const baseMultiplier = 0.2;
+            const baseAmount = 0.06;
+            const baseDuration = 30;
+            const baseRadius = 8;
+            
+            const cooldown = Math.max(80, baseCooldown - (1.5 * kg));
+            const multiplier = Math.min(0.4, baseMultiplier + (0.01 * kg));
+            const amount = Math.min(0.5, baseAmount + (0.05 * kg));
+            const duration = Math.min(45, baseDuration + (0.15 * kg));
+            const radius = Math.min(16, baseRadius + (0.08 * kg));
+            
+            const cooldownMod = baseCooldown * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const amountMod = baseAmount * modifier;
+            const durationMod = baseDuration * modifier;
+            const radiusMod = baseRadius * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(80, adjustedBaseCooldown - (1.5 * kg));
+            const multiplierTotal = Math.min(0.4, multiplier + multiplierMod);
+            const amountTotal = Math.min(0.5, amount + amountMod);
+            const durationTotal = Math.min(45, duration + durationMod);
+            const radiusTotal = Math.min(16, radius + radiusMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, drops a <strong>${radiusTotal.toFixed(1)} stud</strong> mustard or ketchup puddle that lasts <strong>${Utils.formatTime(durationTotal)}</strong>. Pets on mustard have their cooldowns tick by <strong>${amountTotal.toFixed(3)}</strong> faster and pets on ketchup gain <strong>${(multiplierTotal * 100).toFixed(1)}%</strong> more experience${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 1.5s (min 1:20), increases XP multiplier by 1% (max 40%), increases cooldown boost by 0.05 (max 0.5), increases duration by 0.15s (max 45s), and increases radius by 0.08 studs (max 16)"
+    },
+
+    lobsterThermidor: {
+        name: "Lobster Thermidor",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/d/dd/LobsterThermidor.png",
+            fallback: "🦞"
+        },
+        type: "food",
+        rarity: "Divine",
+        source: "Culinarian Chest",
+        probability: 1,
+        obtainable: true,
+        description: "Dual ability: Applies both Molten and Meteoric mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // First ability - Molten
+            const baseCooldown1 = 900;
+            const baseChance1 = 20;
+            const cooldown1 = Math.max(300, baseCooldown1 - (4.5 * kg));
+            const chance1 = baseChance1 + (0.1 * kg);
+            
+            // Second ability - Meteoric
+            const baseCooldown2 = 1800;
+            const baseChance2 = 10;
+            const cooldown2 = Math.max(500, baseCooldown2 - (8.5 * kg));
+            const chance2 = baseChance2 + (0.1 * kg);
+            
+            // Apply modifiers
+            const cooldown1Mod = baseCooldown1 * modifier;
+            const chance1Mod = baseChance1 * modifier;
+            const cooldown2Mod = baseCooldown2 * modifier;
+            const chance2Mod = baseChance2 * modifier;
+            
+            const adjustedBaseCooldown1 = baseCooldown1 - cooldown1Mod;
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldown2Mod;
+            const cooldown1Total = Math.max(300, adjustedBaseCooldown1 - (4.5 * kg));
+            const cooldown2Total = Math.max(500, adjustedBaseCooldown2 - (8.5 * kg));
+            const chance1Total = chance1 + chance1Mod;
+            const chance2Total = chance2 + chance2Mod;
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(cooldown1Total)}</strong>, <strong>${chance1Total.toFixed(1)}%</strong> chance a nearby fruit becomes Molten!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, <strong>${chance2Total.toFixed(1)}%</strong> chance a nearby fruit becomes Meteoric${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases Molten cooldown by 4.5s (min 5:00), decreases Meteoric cooldown by 8.5s (min 8:20), and increases both chances by 0.1%"
+    },
+
+    peachWasp: {
+        name: "Peach Wasp",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/4/4e/PeachWasp.png",
+            fallback: "🐝"
+        },
+        type: "insect",
+        rarity: "Mythical",
+        source: "Admin Abuse War",
+        probability: 0,
+        obtainable: false,
+        description: "Dual ability: Applies Plasma mutations and advances pet cooldowns",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // First ability - Plasma mutation
+            const baseCooldown1 = 1500;
+            const cooldown1 = Math.max(200, baseCooldown1 - (6.6 * kg));
+            
+            // Second ability - Advance pet cooldowns
+            const baseCooldown2 = 602;
+            const baseAmount = 60;
+            const cooldown2 = Math.max(300, baseCooldown2 - (3.5 * kg));
+            const amount = Math.min(120, baseAmount + (0.6 * kg));
+            
+            // Apply modifiers
+            const cooldown1Mod = baseCooldown1 * modifier;
+            const cooldown2Mod = baseCooldown2 * modifier;
+            const amountMod = baseAmount * modifier;
+            
+            const adjustedBaseCooldown1 = baseCooldown1 - cooldown1Mod;
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldown2Mod;
+            const cooldown1Total = Math.max(200, adjustedBaseCooldown1 - (6.6 * kg));
+            const cooldown2Total = Math.max(300, adjustedBaseCooldown2 - (3.5 * kg));
+            const amountTotal = Math.min(120, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(cooldown1Total)}</strong>, flies to a nearby fruit and Plasmafies it, applying Plasma mutation!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, stings a random pet and advances its ability cooldown by <strong>${amountTotal.toFixed(1)}s</strong>${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases Plasma cooldown by 6.6s (min 3:20), decreases sting cooldown by 3.5s (min 5:00), and increases cooldown advance by 0.6s (max 120s)"
+    },
+
+    appleGazelle: {
+        name: "Apple Gazelle",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/b/bc/AppleGazelle.png",
+            fallback: "🦌"
+        },
+        type: "mammal",
+        rarity: "Mythical",
+        source: "Admin Abuse War",
+        probability: 0,
+        obtainable: false,
+        description: "Dual ability: Duplicates apple fruits and applies Warped mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // First ability - Apple duplication
+            const baseChance1 = 4;
+            const chance1 = Math.min(7, baseChance1 + (0.025 * kg));
+            
+            // Second ability - Sugar Apple Warped mutation
+            const baseChance2 = 2;
+            const chance2 = Math.min(4, baseChance2 + (0.05 * kg));
+            
+            // Apply modifiers
+            const chance1Mod = baseChance1 * modifier;
+            const chance2Mod = baseChance2 * modifier;
+            const chance1Total = Math.min(7, chance1 + chance1Mod);
+            const chance2Total = Math.min(4, chance2 + chance2Mod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Fruits that have apple in the name have a <strong>${chance1Total.toFixed(2)}%</strong> chance to duplicate when collected!<br>Harvesting Sugar Apple crops have a <strong>${chance2Total.toFixed(2)}%</strong> chance to apply Warped mutation to a random fruit in your garden${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases apple duplication chance by 0.025% (max 7%) and increases Warped mutation chance by 0.05% (max 4%)"
+    },
+
+    lemonLion: {
+        name: "Lemon Lion",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/2/2e/Lemon_Lion.png",
+            fallback: "🦁"
+        },
+        type: "mammal",
+        rarity: "Mythical",
+        source: "Admin Abuse War",
+        probability: 0,
+        obtainable: false,
+        description: "Dual ability: Applies Brainrot mutations and grants citrus experience bonuses",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // First ability - Brainrot mutation
+            const baseCooldown1 = 912;
+            const cooldown1 = Math.min(300, baseCooldown1 - (3.5 * kg));
+            
+            // Second ability - Citrus experience bonus
+            const baseCooldown2 = 600;
+            const baseAmount = 1500;
+            const cooldown2 = Math.max(200, baseCooldown2 - (2.5 * kg));
+            const amount = Math.min(2500, baseAmount + (15 * kg));
+            
+            // Apply modifiers
+            const cooldown1Mod = baseCooldown1 * modifier;
+            const cooldown2Mod = baseCooldown2 * modifier;
+            const amountMod = baseAmount * modifier;
+            
+            const adjustedBaseCooldown1 = baseCooldown1 - cooldown1Mod;
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldown2Mod;
+            const cooldown1Total = Math.min(300, adjustedBaseCooldown1 - (3.5 * kg));
+            const cooldown2Total = Math.max(200, adjustedBaseCooldown2 - (2.5 * kg));
+            const amountTotal = Math.min(2500, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(cooldown1Total)}</strong>, roars and applies the Brainrot mutation to a random fruit!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, roars and infuses citrus with a random pet, granting <strong>${Utils.formatNumber(amountTotal)}</strong> bonus experience${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases Brainrot cooldown by 3.5s (max 5:00), decreases citrus cooldown by 2.5s (min 3:20), and increases experience bonus by 15 (max 2500)"
+    },
+
+    greenBean: {
+        name: "Green Bean",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/4/4b/GreenBean.png",
+            fallback: "🫘"
+        },
+        type: "plant",
+        rarity: "Divine",
+        source: "Admin Abuse War",
+        probability: 0,
+        obtainable: false,
+        description: "Sacrifices Beanstalk fruits to grow random plants with size bonuses",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 1800;
+            const baseMultiplier = 5;
+            const cooldown = Math.max(870, baseCooldown - (9 * kg));
+            const multiplier = Math.min(10, baseMultiplier + (0.1 * kg));
+            
+            // Apply modifiers
+            const cooldownMod = baseCooldown * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(870, adjustedBaseCooldown - (9 * kg));
+            const multiplierTotal = Math.min(10, multiplier + multiplierMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, sacrifices a random Beanstalk fruit in your garden to instantly grow a random plant with <strong>${multiplierTotal.toFixed(1)}x</strong> fruit size bonus! Ability cannot be mimicked or refreshed${displayText}.`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 9s (min 14:30) and increases size multiplier by 0.1x (max 10x)"
+    },
+
+    elk: {
+        name: "Elk",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/3/32/Elk.png",
+            fallback: "🦌"
+        },
+        type: "mammal",
+        rarity: "Uncommon",
+        source: "Skyroot Chest",
+        probability: 34.5,
+        obtainable: true,
+        description: "Berry fruits have a chance to stay after collecting",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseChance = 2.5;
+            const chance = Math.min(5, baseChance + (0.025 * kg));
+            
+            // Apply modifiers
+            const chanceMod = baseChance * modifier;
+            const chanceTotal = Math.min(5, chance + chanceMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>${chanceTotal.toFixed(2)}%</strong> chance berry fruit stays after collecting! Rarer plants have rarer chance to replant${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg increases berry preservation chance by 0.025% (max 5%)"
+    },
+
+    mandrake: {
+        name: "Mandrake",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/2/2f/MandrakePet.png",
+            fallback: "🧄"
+        },
+        type: "plant",
+        rarity: "Uncommon",
+        source: "Skyroot Chest",
+        probability: 14.5,
+        obtainable: true,
+        description: "Harvesting Mandrake crops applies Rot mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseChance = 3.5;
+            const chance = Math.min(7, baseChance + (0.05 * kg));
+            
+            // Apply modifiers
+            const chanceMod = baseChance * modifier;
+            const chanceTotal = Math.min(7, chance + chanceMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Harvesting Mandrake crops have a <strong>${chanceTotal.toFixed(2)}%</strong> chance to apply Rot mutation to a random fruit in your garden${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases Rot mutation chance by 0.05% (max 7%)"
+    },
+
+    griffin: {
+        name: "Griffin",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/7/7b/GriffinPet.png",
+            fallback: "🦅"
+        },
+        type: "mythical",
+        rarity: "Divine",
+        source: "Skyroot Chest",
+        probability: 1,
+        obtainable: true,
+        description: "Releases cyclones that advance pet cooldowns and apply Cyclonic mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 935;
+            const baseCooldownAmount = 65;
+            const baseChance = 10;
+            const cooldown = Math.max(300, baseCooldown - (2 * kg));
+            const cooldownAmount = Math.min(125, baseCooldownAmount + kg);
+            const chance = Math.min(30, baseChance + (0.15 * kg));
+            
+            // Apply modifiers
+            const cooldownMod = baseCooldown * modifier;
+            const cooldownAmountMod = baseCooldownAmount * modifier;
+            const chanceMod = baseChance * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(300, adjustedBaseCooldown - (2 * kg));
+            const cooldownAmountTotal = Math.min(125, cooldownAmount + cooldownAmountMod);
+            const chanceTotal = Math.min(30, chance + chanceMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, flaunts its wings and releases a Cyclone. Pets struck have cooldown advanced by <strong>${cooldownAmountTotal.toFixed(1)}s</strong> and fruits struck have a <strong>${chanceTotal.toFixed(1)}%</strong> chance to get the Cyclonic mutation${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 2s (min 5:00), increases cooldown advance by 1s (max 125s), and increases Cyclonic chance by 0.15% (max 30%)"
+    },
+
+    gnome: {
+        name: "Gnome",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/e/e4/GnomePet.png",
+            fallback: "🧙"
+        },
+        type: "humanoid",
+        rarity: "Legendary",
+        source: "Beanstalk Event",
+        probability: 0,
+        obtainable: true,
+        description: "Applies Gnomed mutations with bonus chance for Gnome cosmetics",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 600;
+            const baseChance = 1;
+            const baseAmount = 1;
+            const cooldown = Math.max(200, baseCooldown - (1.5 * kg));
+            const chance = Math.min(3, baseChance + (0.025 * kg));
+            const amount = Math.min(3, baseAmount + (0.025 * kg));
+            
+            // Apply modifiers
+            const cooldownMod = baseCooldown * modifier;
+            const chanceMod = baseChance * modifier;
+            const amountMod = baseAmount * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(200, adjustedBaseCooldown - (1.5 * kg));
+            const chanceTotal = Math.min(3, chance + chanceMod);
+            const amountTotal = Math.min(3, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, has a <strong>${chanceTotal.toFixed(2)}%</strong> chance to mutate a random fruit with the Gnomed mutation. Gains additional <strong>${amountTotal.toFixed(2)}%</strong> chance for every Gnome cosmetic in your garden${displayText}.`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 1.5s (min 3:20), increases base chance by 0.025% (max 3%), and increases cosmetic bonus by 0.025% (max 3%)"
     }    
 };
