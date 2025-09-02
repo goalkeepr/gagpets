@@ -147,25 +147,23 @@ export const MYTHICAL_EGG_PETS = {
         source: "Mythical Egg",
         probability: 27,
         obtainable: true,
-        description: "Gathers nuts for resource bonuses",
+        description: "Chance to not consume a use when using the Reclaimer",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const baseSeconds = 60;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - kg);
-            const resourceBonus = 1.5 + (kg / 20);
+            const baseChance = 10;
+            const chancePerKg = 0.3;
+            const chance = baseChance + (chancePerKg * kg);
             
-            const resourceBonusMod = 1.5 * modifier;
-            const resourceBonusTotal = resourceBonus + resourceBonusMod;
+            const chanceMod = baseChance * modifier;
+            const chanceTotal = chance + chanceMod;
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, gathers nuts providing <strong>${resourceBonusTotal.toFixed(3)}x</strong> resource gathering bonus${displayText}!`;
+            return `<strong>${chanceTotal.toFixed(1)}%</strong> chance to not consume a use when using the Reclaimer${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases gathering time by 1 second and increases resource bonus by 0.05x"
+        perKgImpact: () => "Each additional kg increases Reclaimer conservation chance by 0.3%"
     }
 };
