@@ -53,6 +53,45 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
+// GET /api - API information and documentation
+app.get('/api', (req, res) => {
+    res.json({
+        name: "Pet Abilities API",
+        version: "1.0.0",
+        description: "REST API for Grow a Garden pet abilities and calculations",
+        endpoints: {
+            "GET /api": {
+                description: "API information and documentation"
+            },
+            "GET /api/pets": {
+                description: "Returns list of all available pets with metadata",
+                response: {
+                    count: "number - Total number of pets",
+                    pets: "array - Array of pet objects with key, name, rarity, type, source, description"
+                }
+            },
+            "GET /api/pets/:petKey/ability": {
+                description: "Returns calculated ability text for a specific pet at given weight",
+                parameters: {
+                    petKey: "string - Pet identifier (path parameter)",
+                    weight: "number - Pet weight in kg (query parameter)"
+                },
+                response: {
+                    petKey: "string - Pet identifier",
+                    petName: "string - Pet display name", 
+                    weight: "number - Pet weight used for calculation",
+                    abilityText: "string - HTML-formatted ability description"
+                }
+            }
+        },
+        examples: {
+            "List all pets": "GET /api/pets",
+            "Get bunny ability at 50kg": "GET /api/pets/bunny/ability?weight=50",
+            "Get legendary pet ability": "GET /api/pets/tarantulahawk/ability?weight=75"
+        }
+    });
+});
+
 // GET /api/pets - Returns list of available pets
 app.get('/api/pets', async (req, res) => {
     try {
