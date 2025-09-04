@@ -117,7 +117,7 @@ Let me check if there might be another parameter name being used. Let me search 
 
 ---
 
-_**User (2025-09-04 01:20Z)**_
+_**User (2025-09-04 01:22Z)**_
 
 Can the parameters for the api be case-insensitive?
 
@@ -131,7 +131,71 @@ Let me examine the current parameter extraction in the server: Yes, we can defin
 ```
 
 ```
-Now let me also check if there are other API endpoints that could benefit from this case-insensitive parameter handling. Let me search for other 
+Now let me also check if there are other API endpoints that could benefit from this case-insensitive parameter handling. Let me search for other endpoints: Let me check if the `/api/pets` endpoint also uses query parameters: That endpoint doesn't use query parameters, so our change is sufficient.
+
+Now let me create a more elegant solution using a helper function. Let me add this helper function to make the code cleaner: Let me add a helper function near the top of the file, after the imports: Let me add a helper function after the imports: 
+```
+
+```
+Now let me update the endpoint to use this cleaner helper function: 
+```
+
+```
+Perfect! Now the API parameters are case-insensitive. Let me test this by starting the server and making some test calls: Great! Now let me test the case-insensitive parameters: Let me try a simpler approach: It seems the server stopped. Let me restart it and test. First, let me check if there was an error: The server was interrupted. Let me restart it: Let me check if the server is running: The server is running. Let me try a simple curl: Great! The server is working. Now let me test the case-insensitive parameters: Excellent! Now let me test with different cases: Perfect! Let me test one more variation: Excellent! The case-insensitive parameter handling is working perfectly. Let me clean up the server process: ## Summary
+
+**Yes, I've successfully made the API parameters case-insensitive!** 
+
+### What I implemented:
+
+1. **Helper Function**: Added a `getCaseInsensitiveParam()` function that:
+   - First tries an exact match with the parameter name
+   - Falls back to case-insensitive matching if no exact match is found
+   - Returns a default value if the parameter isn't found
+
+2. **Updated API Endpoint**: Modified the `/api/pets/:petKey/ability` endpoint to use this helper for both `weight` and `modifierType` parameters
+
+### Now these all work:
+
+```bash
+# Original case
+GET /api/pets/mimicoctopus/ability?weight=87&modifierType=rainbow
+
+# Capitalized  
+GET /api/pets/mimicoctopus/ability?Weight=87&ModifierType=rainbow
+
+# All uppercase/lowercase
+GET /api/pets/mimicoctopus/ability?WEIGHT=87&modifiertype=rainbow
+
+# Mixed case
+GET /api/pets/mimicoctopus/ability?wEiGhT=87&MoDiFiErTyPe=golden
+```
+
+### Benefits:
+
+- **Better API usability** - Users don't need to worry about exact case
+- **Backwards compatible** - Existing code still works
+- **Flexible** - Handles any combination of case variations
+- **Clean implementation** - Reusable helper function for future endpoints
+
+The API now correctly handles mutations regardless of how the parameter names are cased, which should resolve the issue you were experiencing where the website URL showed `modifierType=rainbow` but the API response showed `"modifierType":"none"`.
+
+---
+
+_**User (2025-09-04 03:12Z)**_
+
+The mutations like "shocked" etc are not showing their abilities in the /pets/xxx/ability API call.
+This is what I get:
+```
+{"petKey":"bee","petName":"Bee","weight":80,"modifierType":"shocked","abilityText":"Every <strong>6m</strong>, flies to a nearby fruit and pollinates it, applying Pollinated mutation!","cached":false}
+```
+
+I have attached the image of what I (correctly) see on the web site.
+
+---
+
+_**Assistant**_
+
+
 
 ---
 

@@ -147,7 +147,7 @@ app.get('/api/pets', async (req, res) => {
 // GET /api/pets/:petKey/ability - Returns pet ability text for given weight
 app.get('/api/pets/:petKey/ability', async (req, res) => {
     try {
-        const { petAbilities } = await import('./petAbilities_modular.js');
+        const { petAbilities, getPetMutationDescription } = await import('./petAbilities_modular.js');
         const { petKey } = req.params;
         
         // Extract parameters with case-insensitive support
@@ -194,16 +194,25 @@ app.get('/api/pets/:petKey/ability', async (req, res) => {
         }
 
         const abilityText = pet.calculate(validatedWeight, validatedModifier);
+        
+        // Add mutation description if modifier is not 'none' or 'golden' or 'rainbow'
+        let combinedAbilityText = abilityText;
+        if (validatedModifier !== 'none' && validatedModifier !== 'golden' && validatedModifier !== 'rainbow') {
+            const mutationDescription = getPetMutationDescription(validatedModifier, validatedWeight);
+            if (mutationDescription) {
+                combinedAbilityText = `${abilityText}\n\n<strong>Additional Pet Mutation:</strong>\n${mutationDescription}`;
+            }
+        }
 
         // Cache the result
-        calculationCache.set(validatedPetKey, validatedWeight, validatedModifier, abilityText);
+        calculationCache.set(validatedPetKey, validatedWeight, validatedModifier, combinedAbilityText);
 
         res.json({
             petKey: validatedPetKey,
             petName: pet.name,
             weight: validatedWeight,
             modifierType: validatedModifier,
-            abilityText: abilityText,
+            abilityText: combinedAbilityText,
             cached: false
         });
     } catch (error) {
