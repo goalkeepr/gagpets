@@ -12,6 +12,20 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || SERVER_CONFIG.DEFAULT_PORT;
 
+// Helper function to get query parameter in a case-insensitive way
+const getCaseInsensitiveParam = (query, paramName, defaultValue = undefined) => {
+    const queryKeys = Object.keys(query);
+    
+    // First try exact match
+    if (query[paramName] !== undefined) {
+        return query[paramName];
+    }
+    
+    // Then try case-insensitive search
+    const foundKey = queryKeys.find(key => key.toLowerCase() === paramName.toLowerCase());
+    return foundKey ? query[foundKey] : defaultValue;
+};
+
 // Enable compression for all responses
 app.use(compression());
 
@@ -135,7 +149,10 @@ app.get('/api/pets/:petKey/ability', async (req, res) => {
     try {
         const { petAbilities } = await import('./petAbilities_modular.js');
         const { petKey } = req.params;
-        const { weight, modifierType = 'none' } = req.query;
+        
+        // Extract parameters with case-insensitive support
+        const weight = getCaseInsensitiveParam(req.query, 'weight');
+        const modifierType = getCaseInsensitiveParam(req.query, 'modifierType', 'none');
 
         // Validate all inputs using centralized validation
         const validation = validatePetCalculationInputs({
