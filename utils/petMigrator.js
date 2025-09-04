@@ -45,9 +45,7 @@ class PetMigrator {
     // Generate category file
     generateCategoryFile(category, pets) {
         let content = `// ${category.charAt(0).toUpperCase() + category.slice(1)} pets\n`;
-        content += 'import { getModifierDetails } from \'../utils/modifiers.js\';\n';
-        content += 'import { ICONS } from \'../data/icons.js\';\n';
-        content += 'import { RARITY, PET_TYPES } from \'../data/constants.js\';\n\n';
+        content += 'import { RARITIES, TYPES } from \'../data/constants.js\';\n\n';
         content += `export const ${category}Pets = {\n`;
 
         pets.forEach(pet => {
