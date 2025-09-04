@@ -225,8 +225,7 @@ The application provides a comprehensive REST API for pet ability calculations a
 
 | Endpoint | Description |
 |----------|-------------|
-| `GET /health` | Health check endpoint for monitoring and uptime verification |
-| `GET /debug-modules` | Debug information about loaded pet modules and counts |
+| `GET /debug-modules` | Debug endpoint showing loaded pets and modules |
 
 ### API Usage Examples
 
