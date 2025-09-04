@@ -165,9 +165,25 @@ docker-compose -f docker-compose.prod.yml up -d
 The application provides a comprehensive REST API for pet ability calculations and data access:
 
 #### `GET /api`
-**API Documentation and Information**
-- Returns API metadata, available endpoints, and usage examples
 - Response includes version information and endpoint descriptions
+- **Response Format:**
+  ```json
+  {
+    "version": "1.0.0",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/pets",
+        "description": "List all available pets"
+      },
+      {
+        "method": "GET",
+        "path": "/api/pets/:petKey/ability",
+        "description": "Get ability calculation for a specific pet"
+      }
+    ],
+    "usage": "See endpoint documentation for details"
+  }
 
 #### `GET /api/pets`
 **List All Available Pets**
