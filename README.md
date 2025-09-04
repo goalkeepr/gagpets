@@ -152,12 +152,114 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## 🔍 API Endpoints
 
+### Web Interface Endpoints
+
 | Endpoint | Description |
 |----------|-------------|
 | `GET /` | Main pet calculator interface |
 | `GET /recipes` | Recipe browser interface |
 | `GET /fruittypes` | Fruit types reference |
-| `GET /health` | Health check for monitoring |
+
+### REST API Endpoints
+
+The application provides a comprehensive REST API for pet ability calculations and data access:
+
+#### `GET /api`
+- Response includes version information and endpoint descriptions
+- **Response Format:**
+  ```json
+  {
+    "version": "1.0.0",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/pets",
+        "description": "List all available pets"
+      },
+      {
+        "method": "GET",
+        "path": "/api/pets/:petKey/ability",
+        "description": "Get ability calculation for a specific pet"
+      }
+    ],
+    "usage": "See endpoint documentation for details"
+  }
+
+#### `GET /api/pets`
+**List All Available Pets**
+- Returns complete list of all 142+ pets with metadata
+- **Response Format:**
+  ```json
+  {
+    "count": 142,
+    "pets": [
+      {
+        "key": "bunny",
+        "name": "Bunny",
+        "rarity": "Common",
+        "type": "animal",
+        "source": "Common Egg",
+        "description": "A fluffy garden companion"
+      }
+    ]
+  }
+  ```
+
+#### `GET /api/pets/:petKey/ability`
+**Calculate Pet Ability for Specific Weight**
+- **Parameters:**
+  - `petKey` (path): Pet identifier (e.g., "bunny", "wasp", "tarantulahawk")
+  - `weight` (query): Pet weight in kilograms (positive number)
+- **Example:** `GET /api/pets/bunny/ability?weight=50`
+- **Response Format:**
+  ```json
+  {
+    "petKey": "bunny",
+    "petName": "Bunny",
+    "weight": 50,
+    "abilityText": "Every <strong>5s</strong>, eats a carrot for a <strong>2.250x</strong> value bonus!"
+  }
+  ```
+
+### Monitoring & Debug Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /debug-modules` | Debug endpoint showing loaded pets and modules |
+
+### API Usage Examples
+
+```bash
+# Get API documentation
+curl http://localhost:8029/api
+
+# List all available pets
+curl http://localhost:8029/api/pets
+
+# Calculate bunny ability at 50kg
+curl "http://localhost:8029/api/pets/bunny/ability?weight=50"
+
+# Calculate legendary pet ability
+curl "http://localhost:8029/api/pets/tarantulahawk/ability?weight=75"
+
+# Check server health
+curl http://localhost:8029/health
+```
+
+### Error Responses
+
+The API returns appropriate HTTP status codes and JSON error messages:
+
+- **404 Not Found:** Pet with specified key doesn't exist
+- **400 Bad Request:** Invalid or missing weight parameter
+- **500 Internal Server Error:** Calculation or server errors
+
+```json
+{
+  "error": "Pet not found",
+  "message": "Pet with key 'invalidpet' does not exist"
+}
+```
 
 ## 🎯 Game Integration
 
