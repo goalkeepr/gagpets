@@ -59,9 +59,9 @@ const petAbilities = {
 };
 
 // Export everything needed
-export { 
-    petAbilities, 
-    petMutationOptions, 
+export {
+    petAbilities,
+    petMutationOptions,
     getModifierDetails,
     // Export individual categories for selective imports
     ANTI_BEE_EGG_PETS,
@@ -95,28 +95,32 @@ if (typeof window !== 'undefined') {
 
 // Enhanced utility for getting pet mutation description
 export const getPetMutationDescription = (modifierType, kg = 50) => {
-    if (!petMutationOptions) return "";
-    
+    if (!petMutationOptions) {
+        return '';
+    }
+
     const mutationMap = {
-        "shocked": "Shocked Pet Mutation",
-        "frozen": "Frozen Pet Mutation", 
-        "windy": "Windy Pet Mutation",
-        "ironskin": "IronSkin Pet Mutation",
-        "radiant": "Radiant Pet Mutation",
-        "ascended": "Ascended Pet Mutation",
-        "tranquil": "Tranquil Pet Mutation",
-        "corrupted": "Corrupted Pet Mutation",
-        "glimmering": "Glimmering Pet Mutation"
+        'shocked': 'Shocked Pet Mutation',
+        'frozen': 'Frozen Pet Mutation',
+        'windy': 'Windy Pet Mutation',
+        'ironskin': 'IronSkin Pet Mutation',
+        'radiant': 'Radiant Pet Mutation',
+        'ascended': 'Ascended Pet Mutation',
+        'tranquil': 'Tranquil Pet Mutation',
+        'corrupted': 'Corrupted Pet Mutation',
+        'glimmering': 'Glimmering Pet Mutation'
     };
-    
+
     const mutationKey = mutationMap[modifierType];
-    if (!mutationKey || !petMutationOptions[mutationKey]) return "";
-    
+    if (!mutationKey || !petMutationOptions[mutationKey]) {
+        return '';
+    }
+
     if (typeof petMutationOptions[mutationKey].calculate === 'function') {
         return petMutationOptions[mutationKey].calculate(kg, 'none');
     }
-    
-    return "";
+
+    return '';
 };
 
 // Now assign getPetMutationDescription to window after it's defined

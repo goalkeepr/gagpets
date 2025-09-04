@@ -34,30 +34,28 @@ class PetMigrator {
         // This is a basic template - you'd expand this based on patterns you find
         const lines = petDefinition.split('\n');
         let converted = '';
-        
+
         // Add category import and structure
         converted += `// ${category} pet converted from original structure\n`;
         converted += petDefinition.replace(/name: "([^"]+)"/, 'name: "$1"');
-        
+
         return converted;
     }
 
     // Generate category file
     generateCategoryFile(category, pets) {
         let content = `// ${category.charAt(0).toUpperCase() + category.slice(1)} pets\n`;
-        content += `import { getModifierDetails } from '../utils/modifiers.js';\n`;
-        content += `import { ICONS } from '../data/icons.js';\n`;
-        content += `import { RARITY, PET_TYPES } from '../data/constants.js';\n\n`;
+        content += 'import { RARITIES, TYPES } from \'../data/constants.js\';\n\n';
         content += `export const ${category}Pets = {\n`;
-        
+
         pets.forEach(pet => {
             const petDef = this.extractPet(pet);
             if (petDef) {
                 content += `    ${petDef},\n`;
             }
         });
-        
-        content += `};\n`;
+
+        content += '};\n';
         return content;
     }
 
@@ -78,7 +76,7 @@ class PetMigrator {
         // Count different patterns (simplified analysis)
         const feedingKeywords = ['eats', 'feeds', 'bonus', 'value'];
         const experienceKeywords = ['experience', 'gains', 'grows'];
-        
+
         pets.forEach(pet => {
             const petDef = this.extractPet(pet.toLowerCase().replace(/\s+/g, ''));
             if (petDef) {
