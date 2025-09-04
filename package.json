@@ -6,12 +6,18 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "lint": "eslint *.js utils/*.js config/*.js data/*.js",
+    "lint:fix": "eslint *.js utils/*.js config/*.js data/*.js --fix"
   },
   "dependencies": {
+    "compression": "^1.8.1",
     "express": "^4.18.2"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.34.0"
   }
 }
