@@ -15,9 +15,9 @@ export const SERVER_CONFIG = {
  * Pet calculation constraints
  */
 export const PET_CONSTRAINTS = {
-    MIN_WEIGHT: 0,
-    MAX_WEIGHT: 1000,
-    DEFAULT_WEIGHT: 50,
+    MIN_WEIGHT: 0.88,
+    MAX_WEIGHT: 114.40,
+    DEFAULT_WEIGHT: 10.00,
     MIN_AGE: 1,
     MAX_AGE: 100,
     DEFAULT_AGE: 50
@@ -72,9 +72,9 @@ export const FILE_LIMITS = {
  * Error messages
  */
 export const ERROR_MESSAGES = {
-    INVALID_WEIGHT: 'Weight must be a number between 0 and 1000',
+    INVALID_WEIGHT: 'Weight must be a number between 0.88 and 114.40',
     INVALID_AGE: 'Age must be a number between 1 and 100',
-    PET_NOT_FOUND: 'Pet not found',
+    PET_NOT_FOUND: 'Pet not found, please choose from the available pets',
     CALCULATION_FAILED: 'Failed to calculate pet ability',
     MODULE_LOAD_FAILED: 'Failed to load pet data'
 };

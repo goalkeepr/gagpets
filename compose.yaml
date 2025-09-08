@@ -11,3 +11,4 @@ services:
     ports:
       - "8029:8029"
     command: sh -c "npm install && npm start"
+    restart: always

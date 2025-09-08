@@ -1278,5 +1278,217 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, has a <strong>${chanceTotal.toFixed(2)}%</strong> chance to mutate a random fruit with the Gnomed mutation. Gains additional <strong>${amountTotal.toFixed(2)}%</strong> chance for every Gnome cosmetic in your garden${displayText}.`;
         },
         perKgImpact: () => "Each additional kg decreases cooldown by 1.5s (min 3:20), increases base chance by 0.025% (max 3%), and increases cosmetic bonus by 0.025% (max 3%)"
-    }    
+    },
+    cardinal: {
+        name: "Cardinal",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/d/d2/Cardinal.png",
+            fallback: "🐦"
+        },
+        type: "bird",
+        rarity: "Common",
+        source: "Enchanted Chest",
+        probability: 34.5,
+        obtainable: true,
+        description: "All Magical type plants grow faster",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseRange = 30;
+            const baseMultiplier = 1.5;
+            const range = baseRange; // Range doesn't scale with weight based on provided data
+            const multiplier = Math.min(4, baseMultiplier + (0.05 * kg));
+            
+            // Apply modifiers
+            const rangeMod = baseRange * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const rangeTotal = range + rangeMod;
+            const multiplierTotal = Math.min(4, multiplier + multiplierMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `All Magical type plants within <strong>${rangeTotal.toFixed(0)}</strong> studs grow <strong>${multiplierTotal.toFixed(2)}x</strong> faster${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases growth multiplier by 0.05x (max 4x)"
+    },
+    shroomie: {
+        name: "Shroomie",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/f/ff/Shoomie.png",
+            fallback: "🍄"
+        },
+        type: "fungus",
+        rarity: "Legendary",
+        source: "Enchanted Chest",
+        probability: 14.5,
+        obtainable: true,
+        description: "All nearby plants have increased size bonus for every Fungus type plant planted",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseRange = 14.75;
+            const baseMultiplier = 0.004;
+            const range = Math.min(40, baseRange + (0.25 * kg));
+            const multiplier = Math.min(0.01, baseMultiplier + (0.001 * kg));
+            
+            // Apply modifiers
+            const rangeMod = baseRange * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const rangeTotal = Math.min(40, range + rangeMod);
+            const multiplierTotal = Math.min(0.01, multiplier + multiplierMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `All nearby plants within <strong>${rangeTotal.toFixed(2)}</strong> studs will have increased <strong>${multiplierTotal.toFixed(3)}x</strong> size bonus for every Fungus type plant planted in your garden! (Max 300)${displayText}.`;
+        },
+        perKgImpact: () => "Each additional kg increases range by 0.25 studs (max 40) and increases size multiplier by 0.001x (max 0.01x)"
+    },
+    phoenix: {
+        name: "Phoenix",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/c/c1/Phoenix.png",
+            fallback: "🔥"
+        },
+        type: "mythical",
+        rarity: "Divine",
+        source: "Enchanted Chest",
+        probability: 1,
+        obtainable: true,
+        description: "Dual ability: Provides age bonus to mutated pets and travels between fruits applying Flaming mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // First ability - Pet mutation age bonus
+            const baseChance1 = 4.8;
+            const chance1 = Math.min(9, baseChance1 + (0.1 * kg));
+            
+            // Second ability - Flaming mutation
+            const baseCooldown2 = 1200;
+            const baseChance2 = 20;
+            const baseAmount = 4;
+            const cooldown2 = Math.max(400, baseCooldown2 - (6.5 * kg));
+            const chance2 = Math.min(40, baseChance2 + (0.2 * kg));
+            const amount = Math.min(8, baseAmount + (0.1 * kg));
+            
+            // Apply modifiers
+            const chance1Mod = baseChance1 * modifier;
+            const cooldown2Mod = baseCooldown2 * modifier;
+            const chance2Mod = baseChance2 * modifier;
+            const amountMod = baseAmount * modifier;
+            
+            const chance1Total = Math.min(9, chance1 + chance1Mod);
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldown2Mod;
+            const cooldown2Total = Math.max(400, adjustedBaseCooldown2 - (6.5 * kg));
+            const chance2Total = Math.min(40, chance2 + chance2Mod);
+            const amountTotal = Math.min(8, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Pets taken from the pet mutation machine have a bonus <strong>1 - ${chance1Total.toFixed(1)}</strong> age to their age value!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, travels between <strong>${amountTotal.toFixed(1)}</strong> random fruit in your garden which get the Flaming mutation! Fruits passed have <strong>${chance2Total.toFixed(1)}%</strong> chance to mutated as well${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases age bonus by 0.1 (max 9), decreases travel cooldown by 6.5s (min 6:40), increases mutation chance by 0.2% (max 40%), and increases fruit amount by 0.1 (max 8)"
+    },
+    wisp: {
+        name: "Wisp",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/e/e7/Wisp.png",
+            fallback: "👻"
+        },
+        type: "spirit",
+        rarity: "Legendary",
+        source: "Fairy Fares Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Grants all other pets additional XP as long as you have a Wisp Well",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseAmount = 0.64;
+            const amount = Math.min(6.5, baseAmount + (0.1 * kg));
+            
+            // Apply modifiers
+            const amountMod = baseAmount * modifier;
+            const amountTotal = Math.min(6.5, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `As long as you have a Wisp Well in your garden: The Wisp will go to it to grant all other pets an additional bonus <strong>${amountTotal.toFixed(2)} XP/s</strong>${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg increases XP bonus by 0.1 XP/s (max 6.5 XP/s)"
+    },
+    drake: {
+        name: "Drake",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/d/da/Drake.png",
+            fallback: "🐉"
+        },
+        type: "dragon",
+        rarity: "Mythical",
+        source: "Fairy Fares Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Goes to active Cooking Kit and boosts cooking speed",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseAmount = 0.1;
+            const amount = Math.min(0.2, baseAmount + (0.01 * kg));
+            
+            // Apply modifiers
+            const amountMod = baseAmount * modifier;
+            const amountTotal = Math.min(0.2, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Goes to any active Cooking Kit and breathes fire on it, helping the cooking process and boosting cooking speed by <strong>${(amountTotal * 100).toFixed(1)}%</strong>${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases cooking speed boost by 1% (max 20%)"
+    },
+    luminoussprite: {
+        name: "Luminous Sprite",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/8/8e/Luminous_Sprite.png",
+            fallback: "✨"
+        },
+        type: "spirit",
+        rarity: "Mythical",
+        source: "Fairy Fares Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Flies to nearby fruit and applies Luminous mutation",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseCooldown = 920;
+            const cooldown = Math.max(120, baseCooldown - (3.5 * kg));
+            
+            // Apply modifiers
+            const cooldownMod = baseCooldown * modifier;
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldownTotal = Math.max(120, adjustedBaseCooldown - (3.5 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, flies to a nearby fruit and enchants it, applying Luminous mutation${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 3.5 seconds (min 2:00)"
+    }
 };

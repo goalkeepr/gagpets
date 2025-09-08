@@ -588,6 +588,127 @@ const rainbowExoticPets = {
             return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, flaunts its wings and releases <strong>${cycloneAmount}</strong> Cyclones. Pets struck have cooldown advanced by <strong>${cooldownAmountTotal.toFixed(1)}s</strong> and fruits struck have a <strong>${chanceTotal.toFixed(1)}%</strong> chance to get the Cyclonic mutation${displayText}!`;
         },
         perKgImpact: () => "Each additional kg decreases cooldown by 2s (min 2:30), increases cooldown advance by 1.5s (max 200s), and increases Cyclonic chance by 0.18% (max 50%)"
+    },
+
+    rainbowCardinal: {
+        name: "Rainbow Cardinal",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/1/1a/RainbowCardinal.png",
+            fallback: "🐦"
+        },
+        type: "bird",
+        rarity: "Rainbow Exotic",
+        source: "Rainbow Exotic",
+        probability: 0,
+        obtainable: false,
+        description: "Enhanced Cardinal - All Magical type plants grow faster",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseRange = 45;
+            const baseMultiplier = 2;
+            const range = Math.min(60, baseRange); // Range doesn't scale with weight based on provided data
+            const multiplier = Math.min(6.5, baseMultiplier + (0.1 * kg));
+            
+            // Apply modifiers
+            const rangeMod = baseRange * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const rangeTotal = Math.min(60, range + rangeMod);
+            const multiplierTotal = Math.min(6.5, multiplier + multiplierMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `All Magical type plants within <strong>${rangeTotal.toFixed(0)}</strong> studs grow <strong>${multiplierTotal.toFixed(1)}x</strong> faster${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases growth multiplier by 0.1x (max 6.5x)"
+    },
+
+    rainbowShroomie: {
+        name: "Rainbow Shroomie",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/0/05/RainbowShroomie.png",
+            fallback: "🍄"
+        },
+        type: "fungus",
+        rarity: "Rainbow Exotic",
+        source: "Rainbow Exotic",
+        probability: 0,
+        obtainable: false,
+        description: "Enhanced Shroomie - All nearby plants have increased size bonus for every Fungus type plant",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            const baseRange = 14.75;
+            const baseMultiplier = 0.004;
+            const range = Math.min(60, baseRange + (0.35 * kg));
+            const multiplier = Math.min(0.01, baseMultiplier + (0.001 * kg));
+            
+            // Apply modifiers
+            const rangeMod = baseRange * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const rangeTotal = Math.min(60, range + rangeMod);
+            const multiplierTotal = Math.min(0.01, multiplier + multiplierMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `All nearby plants within <strong>${rangeTotal.toFixed(2)}</strong> studs will have increased <strong>${multiplierTotal.toFixed(3)}x</strong> size bonus for every Fungus type plant planted in your garden! (Max 300)${displayText}.`;
+        },
+        perKgImpact: () => "Each additional kg increases range by 0.35 studs (max 60) and increases size multiplier by 0.001x (max 0.01x)"
+    },
+
+    rainbowPhoenix: {
+        name: "Rainbow Phoenix",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/b/b8/RainbowPhoenix.png",
+            fallback: "🔥"
+        },
+        type: "mythical",
+        rarity: "Rainbow Exotic",
+        source: "Rainbow Exotic",
+        probability: 0,
+        obtainable: false,
+        description: "Enhanced Phoenix - Dual ability: Provides enhanced age bonus to mutated pets and travels between fruits applying Flaming mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // First ability - Pet mutation age bonus (enhanced)
+            const baseChance1 = 5.8;
+            const chance1 = Math.min(13, baseChance1 + (0.1 * kg));
+            
+            // Second ability - Flaming mutation (enhanced)
+            const baseCooldown2 = 900;
+            const baseChance2 = 30;
+            const baseAmount = 6;
+            const cooldown2 = Math.max(200, baseCooldown2 - (4.5 * kg));
+            const chance2 = Math.min(60, baseChance2 + (0.3 * kg));
+            const amount = Math.min(11, baseAmount + (0.2 * kg));
+            
+            // Apply modifiers
+            const chance1Mod = baseChance1 * modifier;
+            const cooldown2Mod = baseCooldown2 * modifier;
+            const chance2Mod = baseChance2 * modifier;
+            const amountMod = baseAmount * modifier;
+            
+            const chance1Total = Math.min(13, chance1 + chance1Mod);
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldown2Mod;
+            const cooldown2Total = Math.max(200, adjustedBaseCooldown2 - (4.5 * kg));
+            const chance2Total = Math.min(60, chance2 + chance2Mod);
+            const amountTotal = Math.min(11, amount + amountMod);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Pets taken from the pet mutation machine have a bonus <strong>2 - ${chance1Total.toFixed(1)}</strong> age to their age value!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, travels between <strong>${amountTotal.toFixed(1)}</strong> random fruit in your garden which get the Flaming mutation! Fruits passed have <strong>${chance2Total.toFixed(1)}%</strong> chance to mutated as well${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases age bonus by 0.1 (max 13), decreases travel cooldown by 4.5s (min 3:20), increases mutation chance by 0.3% (max 60%), and increases fruit amount by 0.2 (max 11)"
     }
 };
 

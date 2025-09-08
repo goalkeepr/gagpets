@@ -102,9 +102,22 @@ export const validatePetKey = (petKey, petAbilities) => {
         };
     }
 
-    const normalizedKey = petKey.trim().toLowerCase();
+    const trimmedKey = petKey.trim();
 
-    if (!petAbilities || !petAbilities[normalizedKey]) {
+    // First try exact case match
+    if (petAbilities && petAbilities[trimmedKey]) {
+        return {
+            isValid: true,
+            error: null,
+            value: trimmedKey
+        };
+    }
+
+    // If exact match fails, try case-insensitive lookup
+    const normalizedKey = trimmedKey.toLowerCase();
+    const actualKey = Object.keys(petAbilities || {}).find(key => key.toLowerCase() === normalizedKey);
+
+    if (!actualKey) {
         return {
             isValid: false,
             error: ERROR_MESSAGES.PET_NOT_FOUND,
@@ -115,7 +128,7 @@ export const validatePetKey = (petKey, petAbilities) => {
     return {
         isValid: true,
         error: null,
-        value: normalizedKey
+        value: actualKey
     };
 };
 
