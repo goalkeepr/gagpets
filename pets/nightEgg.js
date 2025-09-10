@@ -163,7 +163,7 @@ export const NIGHT_EGG_PETS = {
             const baseSeconds = 604.5;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(15, adjustedBaseSeconds - (9 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (6 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             

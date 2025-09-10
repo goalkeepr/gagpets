@@ -52,7 +52,7 @@ export const PARADISE_EGG_PETS = {
             const baseSeconds = 606;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(60, adjustedBaseSeconds - (6 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (6 * kg));
             const range = 20 + (kg / 5);
             const cooldownAdvance = 65 + (0.6 * kg);
             
