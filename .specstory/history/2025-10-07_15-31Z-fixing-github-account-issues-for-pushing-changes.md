@@ -76,3 +76,46 @@ Let me know if you want instructions for forking and pushing, or if you need hel
 
 ---
 
+_**User (2025-10-07 15:36Z)**_
+
+How do I add an account to VS Code?
+
+---
+
+_**Assistant (copilot/claude-sonnet-4)**_
+
+To add a GitHub account to VS Code:
+
+1. Click the "Accounts" icon in the lower left corner of VS Code (the person icon).
+2. Select "Sign in to GitHub" from the menu.
+3. Follow the prompts to log in with your GitHub credentials.
+4. After signing in, VS Code will use this account for Git operations and extensions.
+
+You can check your active account by clicking the "Accounts" icon again. If you need to switch accounts, sign out first, then sign in with the desired account.
+
+Let me know if you need help with SSH keys or GitHub authentication tokens.
+
+---
+
+_**User (2025-10-07 15:37Z)**_
+
+I don't see a Sign In option
+
+---
+
+_**Assistant (copilot/claude-sonnet-4)**_
+
+You are already signed in to VS Code with your GitHub account (`wayne-schillo_smac`). That’s why the "Sign In" option is not shown.
+
+If you want to add another GitHub account or switch accounts:
+1. Click your current GitHub account in the Accounts menu.
+2. Select "Sign Out" for that account.
+3. After signing out, the "Sign In to GitHub" option will appear.
+4. Click it and sign in with the desired GitHub account.
+
+If you want to use a different account for Git operations (push/pull), you may also need to update your Git credentials in your system (Keychain Access for macOS) or use a different SSH key.
+
+Let me know if you want step-by-step instructions for switching accounts or managing Git credentials.
+
+---
+
