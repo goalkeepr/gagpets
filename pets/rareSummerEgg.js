@@ -19,6 +19,7 @@ const rareSummerEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 112.50 (88.50 🌈)";
             
             const baseSeconds = 240;
             const secondsMod = baseSeconds * modifier;
@@ -32,7 +33,7 @@ const rareSummerEggPets = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, stands on one leg for <strong>${Utils.formatTime(duration)}</strong>. All plants and fruits within <strong>${range.toFixed(1)}</strong> studs will grow <strong>${growthMultiplier.toFixed(1)}x</strong> faster!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases stance time by 2 seconds, increases stance duration by 0.5 seconds, increases range by 0.3 studs, and increases growth speed by 0.25x"
+        perKgImpact: () => "Each additional kg decreases stance time by 2 seconds (min 15s), increases stance duration by 0.5 seconds, increases range by 0.3 studs, and increases growth speed by 0.25x"
     },
 
     toucan: {
@@ -81,6 +82,7 @@ const rareSummerEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Experience Time Min: 106.15 (106.15 🌈), Splash Time Min: 44.67 (44.67 🌈)";
             
             const expSeconds = Math.max(30, 720 - (6.5 * kg));
             const exp = 990 + (14 * kg);
@@ -96,7 +98,7 @@ const rareSummerEggPets = {
             
             return `Every <strong>${Utils.formatTime(expSeconds)}</strong>, grants <strong>${Utils.formatNumber(Math.round(expTotal))}</strong> bonus experience${displayText}!\n\nEvery <strong>${Utils.formatTime(splashSeconds)}</strong>, splashes water at a nearby fruit and it has a <strong>${wetChanceTotal.toFixed(2)}%</strong> chance to become Wet!`;
         },
-        perKgImpact: () => "Each additional kg decreases experience time by 8 seconds, increases experience by 15, decreases splash time by 3 seconds, and increases wet chance by 0.2%"
+        perKgImpact: () => "Each additional kg decreases experience time by 8 seconds (min 30s), increases experience by 15, decreases splash time by 3 seconds (min 30s), and increases wet chance by 0.2%"
     },
 
     seal: {
@@ -116,17 +118,18 @@ const rareSummerEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pet Return Max: 25.00 (22.73 🌈)";
 
             const baseReturn = 2.5;
             const returnMod = baseReturn * modifier;
             const adjustedBaseReturn = baseReturn + returnMod;
-            const returnChance = Math.max(0, adjustedBaseReturn + (0.22 * kg));
+            const returnChance = Math.min(8, Math.max(0, adjustedBaseReturn + (0.22 * kg)));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Selling pets have a <strong>${returnChance.toFixed(2)}%</strong> chance to get the pet back as its egg equivalent!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases pet return chance by 0.22%"
+        perKgImpact: () => "Each additional kg increases pet return chance by 0.22% (max 8%)"
     },
 
     orangutan: {
@@ -138,7 +141,7 @@ const rareSummerEggPets = {
         },
         type: "mammal",
         rarity: "Rare",
-        description: "Intelligent ape that uses tools to improve garden efficiency",
+        description: "Intelligent ape that conserves crafting materials through clever tool use",
         source: "Rare Summer Egg",
         probability: 15,
         obtainable: true,
@@ -146,19 +149,18 @@ const rareSummerEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Material Conservation Max: 12.12 (10.30 🌈)";
             
-            const baseSeconds = 600;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(60, adjustedBaseSeconds - (6 * kg));
-            const toolEfficiency = 30 + (kg * 0.5);
-            const intelligenceBonus = 25 + (kg * 0.4);
+            const baseChance = 3;
+            const chanceMod = baseChance * modifier;
+            const adjustedBaseChance = baseChance + chanceMod;
+            const chance = Math.min(7, adjustedBaseChance + (0.33 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, uses tools intelligently! Improves garden efficiency by <strong>${toolEfficiency.toFixed(1)}%</strong> and provides <strong>${intelligenceBonus.toFixed(1)}%</strong> problem-solving bonus${displayText}!`;
+            return `When crafting, each material used in the recipe has a <strong>${chance.toFixed(1)}%</strong> chance to not get consumed${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases tool time by 6 seconds, increases efficiency by 0.5%, and increases intelligence bonus by 0.4%"
+        perKgImpact: () => "Each additional kg increases material conservation chance by 0.33% (max 7%)"
     }
 };
 

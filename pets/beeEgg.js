@@ -19,6 +19,7 @@ export const BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pollination Min: 91.67 (71.67 🌈)";
             
             const baseSeconds = 1800;
             const secondsMod = baseSeconds * modifier;
@@ -48,6 +49,7 @@ export const BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pollination Min: 95.83 (75.67 🌈)";
             
             const baseSeconds = 1210;
             const secondsMod = baseSeconds * modifier;
@@ -77,6 +79,7 @@ export const BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Honey Glazing Min: 90.63 (71.75 🌈)";
             
             const baseSeconds = 1510;
             const secondsMod = baseSeconds * modifier;
@@ -106,6 +109,7 @@ export const BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pollination Min: 85.00 (85.00 🌈)";
             
             const seconds = Math.max(150, 1510 - (16 * kg));
             const flowerChance = 1 + (kg / 10);
@@ -133,6 +137,7 @@ export const BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pollination Min: 72.50 (57.25 🌈), Refresh Min: 79.25 (62.65 🌈)";
             
             const basePollinateSeconds = 1220;
             const pollinateSecondsMod = basePollinateSeconds *  modifier;

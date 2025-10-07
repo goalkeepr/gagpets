@@ -47,6 +47,7 @@
                         <option value="Common Summer Egg">🏖️ Common Summer Egg</option>
                         <option value="Dinosaur Egg">� Dinosaur Egg</option>
                         <option value="Enchanted Egg">✨ Enchanted Egg</option>
+                        <option value="Fall Egg">🍂 Fall Egg</option>
                         <option value="Gourmet Egg">�️ Gourmet Egg</option>
                         <option value="Legendary Egg">🥚 Legendary Egg</option>
                         <option value="Mythical Egg">🥚 Mythical Egg</option>
@@ -60,6 +61,7 @@
                         <option value="Sprout Egg">🌱 Sprout Egg</option>
                         <option value="Uncommon Egg">🥚 Uncommon Egg</option>
                         <option value="Zen Egg">� Zen Egg</option>
+                        <option value="Fall Pet Shop">🍂 Fall Pet Shop</option>
                         <option value="other">🔮 Other</option>
                     </select>
                     <!-- Desktop button version -->
@@ -72,6 +74,7 @@
                         <button type="button" class="filter-btn" data-type="Common Summer Egg"><span class="source-icon-placeholder" data-source="Common Summer Egg"></span>Common Summer</button>
                         <button type="button" class="filter-btn" data-type="Dinosaur Egg"><span class="source-icon-placeholder" data-source="Dinosaur Egg"></span>Dinosaur</button>
                         <button type="button" class="filter-btn" data-type="Enchanted Egg"><span class="source-icon-placeholder" data-source="Enchanted Egg"></span>Enchanted</button>
+                        <button type="button" class="filter-btn" data-type="Fall Egg"><span class="source-icon-placeholder" data-source="Fall Egg"></span>Fall</button>
                         <button type="button" class="filter-btn" data-type="Gourmet Egg"><span class="source-icon-placeholder" data-source="Gourmet Egg"></span>Gourmet</button>
                         <button type="button" class="filter-btn" data-type="Legendary Egg"><span class="source-icon-placeholder" data-source="Legendary Egg"></span>Legendary</button>
                         <button type="button" class="filter-btn" data-type="Mythical Egg"><span class="source-icon-placeholder" data-source="Mythical Egg"></span>Mythical</button>
@@ -85,6 +88,7 @@
                         <button type="button" class="filter-btn" data-type="Sprout Egg"><span class="source-icon-placeholder" data-source="Sprout Egg"></span>Sprout</button>
                         <button type="button" class="filter-btn" data-type="Uncommon Egg"><span class="source-icon-placeholder" data-source="Uncommon Egg"></span>Uncommon</button>
                         <button type="button" class="filter-btn" data-type="Zen Egg"><span class="source-icon-placeholder" data-source="Zen Egg"></span>Zen</button>
+                        <button type="button" class="filter-btn" data-type="Fall Pet Shop"><span class="source-icon-placeholder" data-source="Fall Pet Shop"></span>Fall Pet Shop</button>
                         <button type="button" class="filter-btn" data-type="other"><span class="source-icon-placeholder" data-source="other"></span>Other</button>
                     </div>
                     
@@ -245,6 +249,7 @@
             <div class="button-container">
                 <button type="button" class="calculate-btn" id="calculateBtn">Calculate Pet Abilities</button>
                 <button type="button" class="link-btn" id="createLinkBtn">Create Link</button>
+                <button type="button" class="pet-card-btn" id="petCardBtn">🎴 Pet Card</button>
             </div>
             
             <div id="impactResult" class="result" style="display: none;" role="region" aria-live="polite" aria-label="Per kilogram impact">
@@ -315,6 +320,7 @@
             'Common Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/62/CommonSummerEgg.png',
             'Dinosaur Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/29/Dinosauregg.png',
             'Enchanted Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6b/EnchantedEgg.png',
+            'Fall Egg': 'https://static.wikia.nocookie.net/growagarden/images/5/5e/Fall_Egg.png',
             'Gourmet Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/2a/Gourmet_Egg.png',
             'Legendary Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/63/Legendary_Egg.webp',
             'Mythical Egg': 'https://static.wikia.nocookie.net/growagarden/images/4/4f/MythicalEggBetter.png',
@@ -328,6 +334,7 @@
             'Sprout Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/96/SproutEgg.png',
             'Uncommon Egg': 'https://static.wikia.nocookie.net/growagarden/images/0/0c/Uncommon_Egg.webp',
             'Zen Egg': 'https://static.wikia.nocookie.net/growagarden/images/1/14/Zeneg.png',
+            'Fall Pet Shop': 'https://static.wikia.nocookie.net/growagarden/images/f/f0/FallEventIsland.png',
             'other': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png'
         };
         
@@ -350,6 +357,7 @@
                 'Bug Egg': '🐛',
                 'Dinosaur Egg': '🦕',
                 'Enchanted Egg': '✨',
+                'Fall Egg': '🍂',
                 'Night Egg': '🌙',
                 'other': '🔮'
             };
@@ -847,6 +855,78 @@
             }
         };
 
+        // Pet Card Management
+        const PetCardManager = {
+            /**
+             * Open a new tab with the pet card for the currently selected pet
+             */
+            openPetCard() {
+                const petSelect = DOMManager.getElement('petSelect');
+                const weightInput = DOMManager.getElement('weightInput');
+                const ageInput = DOMManager.getElement('ageInput');
+                const modifierType = DOMManager.getElement('modifierType');
+
+                if (!petSelect?.value) {
+                    this.showError('Please select a pet first!');
+                    return;
+                }
+
+                const pet = petSelect.value;
+                const weight = weightInput?.value || '50';
+                const age = ageInput?.value || '1';
+                const mutation = modifierType?.value || 'none';
+
+                const cardUrl = this.buildCardUrl(pet, weight, age, mutation);
+                
+                try {
+                    const newWindow = window.open(cardUrl, '_blank');
+                    if (!newWindow) {
+                        this.showError('Popup blocked! Please allow popups for this site or copy the URL manually.');
+                        console.log('Pet Card URL:', cardUrl);
+                    }
+                } catch (error) {
+                    console.error('Error opening pet card:', error);
+                    this.showError('Error opening pet card. Please try again.');
+                }
+            },
+
+            /**
+             * Build the URL for the pet card
+             * @param {string} pet - Pet key
+             * @param {string} weight - Pet weight
+             * @param {string} age - Pet age
+             * @param {string} mutation - Pet mutation
+             * @returns {string} Complete URL for the pet card
+             */
+            buildCardUrl(pet, weight, age, mutation) {
+                const params = new URLSearchParams();
+                params.set('pet', pet);
+                params.set('weight', weight);
+                params.set('age', age);
+                if (mutation && mutation !== 'none') {
+                    params.set('mutation', mutation);
+                }
+
+                // Handle both root path (/) and explicit pets.html path
+                let pathname = window.location.pathname;
+                if (pathname === '/' || pathname === '/pets.html') {
+                    pathname = '/petcard';
+                } else {
+                    pathname = pathname.replace('pets.html', 'petcard');
+                }
+                const baseUrl = window.location.origin + pathname;
+                return `${baseUrl}?${params.toString()}`;
+            },
+
+            /**
+             * Show error message to user
+             * @param {string} message - Error message to display
+             */
+            showError(message) {
+                // You could integrate this with an existing notification system
+                alert(message);
+            }
+        };
 
 
         // DOM Management
@@ -884,6 +964,7 @@
                     impactDescription: document.getElementById('impactDescription'),
                     calculateBtn: document.getElementById('calculateBtn'),
                     createLinkBtn: document.getElementById('createLinkBtn'),
+                    petCardBtn: document.getElementById('petCardBtn'),
                     modifierType: document.getElementById('modifierType'),
                     singleModifierInput: document.getElementById('singleModifierInput'),
                     modifier1Type: document.getElementById('modifier1Type'),
@@ -1234,12 +1315,14 @@
                     'Bug Egg',
                     'Dinosaur Egg',
                     'Enchanted Egg',
+                    'Fall Egg',
                     'Gourmet Egg',
                     'Night Egg',
                     'Oasis Egg',
                     'Paradise Egg',
                     'Rainbow Exotic',
-                    'Zen Egg'
+                    'Zen Egg',
+                    'Fall Pet Shop'
                 ];
                 return knownSources.includes(source);
             },
@@ -1765,6 +1848,14 @@
                 if (createLinkBtn) {
                     createLinkBtn.addEventListener('click', () => {
                         URLManager.copyLinkToClipboard();
+                    });
+                }
+
+                // Pet card button
+                const petCardBtn = DOMManager.getElement('petCardBtn');
+                if (petCardBtn) {
+                    petCardBtn.addEventListener('click', () => {
+                        PetCardManager.openPetCard();
                     });
                 }
 

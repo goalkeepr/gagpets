@@ -19,6 +19,7 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Age Bonus Max: 11.00 (9.20 🌈)";
             
             const maxAge = 4.5 + (kg / 2);
             
@@ -29,7 +30,7 @@ export const PARADISE_EGG_PETS = {
             
             return `Pets hatched from eggs have a bonus <strong>1 to ${maxAgeTotal.toFixed(1)}</strong> age to their age value${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases maximum bonus age by 0.5"
+        perKgImpact: () => "Each additional kg increases maximum bonus age by 0.5 (max 10)"
     },
     peacock: {
         name: "Peacock",
@@ -48,6 +49,7 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 98.50 (78.30 🌈)";
             
             const baseSeconds = 606;
             const secondsMod = baseSeconds * modifier;
@@ -60,7 +62,7 @@ export const PARADISE_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, fans its feathers and all active pets within <strong>${range.toFixed(1)}</strong> studs will advance cooldown for their abilities by <strong>${Utils.formatTime(cooldownAdvance)}</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases feather time by 6 seconds, increases range by 0.2 studs, and increases cooldown advance by 0.6 seconds"
+        perKgImpact: () => "Each additional kg decreases feather time by 6 seconds (min 15s), increases range by 0.2 studs, and increases cooldown advance by 0.6 seconds"
     },
     capybara: {
         name: "Capybara",
@@ -79,6 +81,7 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "XP Gain Max: 90.00 (88.00 🌈)";
             
             const studs = 14.5 + (kg / 4);
             const xp = 3 + (0.3 * kg);
@@ -92,7 +95,7 @@ export const PARADISE_EGG_PETS = {
             
             return `All pets within <strong>${studsTotal.toFixed(1)}</strong> studs won't lose hunger and will gain <strong>${xpTotal.toFixed(1)}</strong> XP every second${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases buff range by 0.25 studs and XP gain by 0.3"
+        perKgImpact: () => "Each additional kg increases buff range by 0.25 studs and XP gain by 0.3 (max 30)"
     },
     scarletmacaw: {
         name: "Scarlet Macaw",
@@ -111,6 +114,7 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 94.80 (73.84 🌈)";
             
             const baseSeconds = 524;
             const secondsMod = baseSeconds * modifier;
@@ -122,7 +126,7 @@ export const PARADISE_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, <strong>${mutateChance.toFixed(1)}%</strong> chance to mutate a nearby fruit applying the Verdant mutation!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases mutation time by 5 seconds and increases mutation chance by 0.5%"
+        perKgImpact: () => "Each additional kg decreases mutation time by 5 seconds (min 50s) and increases mutation chance by 0.5%"
     },
     mimicoctopus: {
         name: "Mimic Octopus",
@@ -141,6 +145,7 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 99.75 (79.55 🌈)";
             
             const baseSeconds = 1212;
             const secondsMod = baseSeconds * modifier;
@@ -151,6 +156,6 @@ export const PARADISE_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, mimics and copies an ability from another pet and performs its ability!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases mimicking time by 12 seconds"
+        perKgImpact: () => "Each additional kg decreases mimicking time by 12 seconds (min 15s)"
     }
 };

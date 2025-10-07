@@ -21,6 +21,7 @@ const rareEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 85.00 (67.00 🌈)";
             
             const baseNapInterval = 90;
             const napIntervalMod = baseNapInterval * modifier;
@@ -34,7 +35,7 @@ const rareEggPets = {
             
             return `Every <strong>${Utils.formatTime(napInterval)}</strong>, naps for <strong>${Utils.formatTime(napDuration)}</strong>. New fruit within <strong>${range.toFixed(2)}</strong> studs will be <strong>${sizeMultiplier.toFixed(3)}x</strong> larger!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases nap interval by 1 second, increases nap duration by 0.15 seconds, increases range by 0.15 studs, and increases size multiplier by 0.01x"
+        perKgImpact: () => "Each additional kg decreases nap interval by 1 second (min 5s), increases nap duration by 0.15 seconds, increases range by 0.15 studs, and increases size multiplier by 0.01x"
     },
 
     spotteddeer: {
@@ -54,6 +55,7 @@ const rareEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Berry Preservation Max: 100.00 (100.00 🌈)";
             
             const preserveChance = Math.min(10, 5 + (kg / 20));
             
@@ -61,7 +63,7 @@ const rareEggPets = {
             
             return `<strong>${preserveChance.toFixed(2)}%</strong> chance berry fruit stays after harvest!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases berry preservation chance by 0.05%"
+        perKgImpact: () => "Each additional kg increases berry preservation chance by 0.05% (max 10%)"
     },
 
     pig: {
@@ -69,7 +71,7 @@ const rareEggPets = {
         icon: ICONS.PIG,
         type: "domestic",
         rarity: "Common",
-        description: "Snorts around finding truffles and valuable items",
+        description: "Emits aura that boosts variant chance for new fruits",
         source: "Rare Egg",
         probability: 16.67,
         obtainable: false,
@@ -77,19 +79,22 @@ const rareEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: No Limit (91.00 🌈)";
             
-            const baseSeconds = 200;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(5, adjustedBaseSeconds - (2.5 * kg));
-            const findChance = 6 + (kg * 0.1);
-            const truffleValue = 12 + (kg * 0.2);
+            const baseCooldown = 120;
+            const cooldownMod = baseCooldown * modifier;
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(5, adjustedBaseCooldown - kg);
+            
+            const duration = 15 + (0.15 * kg);
+            const range = 15 + (0.15 * kg);
+            const multiplier = 2 + (0.01 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, snorts for truffles! <strong>${findChance.toFixed(2)}%</strong> chance to find <strong>${truffleValue.toFixed(1)}</strong> value items${displayText}!`;
+            return `Every <strong>${Utils.formatTime(cooldown)}</strong>, emits an aura for <strong>${Utils.formatTime(duration)}</strong> granting <strong>${multiplier.toFixed(2)}x</strong> chance for new fruit to grow as variants within <strong>${range.toFixed(2)}</strong> studs${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases snort time by 2.5 seconds, increases find chance by 0.1%, and increases truffle value by 0.2"
+        perKgImpact: () => "Each additional kg decreases cooldown by 1 second (min 5s), increases duration by 0.15 seconds, increases range by 0.15 studs, and increases variant multiplier by 0.01x"
     },
 
     rooster: {
@@ -121,33 +126,31 @@ const rareEggPets = {
         },
         perKgImpact: () => "Each additional kg increases egg hatch speed by 0.2%"
     },
-
     monkey: {
         name: "Monkey",
-        icon: ICONS.MONKEY,
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/8/85/Monkey_Pet_V2.png",
+            fallback: "🐒"
+        },
         type: "mammal",
-        rarity: "Uncommon",
-        description: "Playful primate that swings around gathering fruits",
+        rarity: "Rare",
         source: "Rare Egg",
-        probability: 8.33,
+        probability: 0,
         obtainable: false,
+        description: "Refunds fruits back to inventory",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
             
-            const baseSeconds = 120;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(12, adjustedBaseSeconds - (2 * kg));
-            const gatherAmount = 6 + (kg * 0.12);
-            const swingBonus = 15 + (kg * 0.2);
+            const refundChance = 2.5 + (kg / 40);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, swings around gathering! Collects <strong>${gatherAmount.toFixed(2)}</strong> fruits with <strong>${swingBonus.toFixed(1)}%</strong> acrobatic bonus${displayText}!`;
+            return `<strong>${refundChance.toFixed(2)}%</strong> chance to refund fruit back to your inventory. Rarer plants have lower chance to refund!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases swing time by 2 seconds, increases gathering by 0.12, and increases acrobatic bonus by 0.2%"
+        perKgImpact: () => "Each additional kg increases fruit refund chance by 0.025%"
     }
 };
 

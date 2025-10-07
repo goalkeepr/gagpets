@@ -21,6 +21,7 @@ export const ENCHANTED_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Multiplier Max: 51.00 (45.20 🌈)";
             
             const baseMultiplier = 1.45;
             const multiplier = Math.min(4, baseMultiplier + (0.05 * kg));
@@ -55,6 +56,7 @@ export const ENCHANTED_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 50.83 (32.33 🌈), Range Max: 60.00 (48.00 🌈)";
             
             const baseCooldown = 222;
             const baseDuration = 15;
@@ -101,6 +103,7 @@ export const ENCHANTED_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Replay Chance Max: no limit (no limit 🌈)";
             
             const baseChance = 15;
             const chance = Math.min(30, baseChance + (0.05 * kg));
@@ -134,6 +137,7 @@ export const ENCHANTED_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: no limit (no limit 🌈)";
             
             const baseCooldown = 220;
             const cooldown = Math.max(60, baseCooldown - (1 * kg));
@@ -167,6 +171,7 @@ export const ENCHANTED_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Range Max: 80.00 (80.00 🌈), Spit Targets Max: 50.00 (50.00 🌈), Screech Cooldown Min: no limit (80.00 🌈), Spit Cooldown Min: no limit (91.43 🌈)";
             
             // First ability - Screech (Silver/Gold)
             const baseCooldown1 = 1000;

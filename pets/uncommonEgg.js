@@ -21,6 +21,7 @@ export const UNCOMMON_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Nap Interval Min: 75.00 (59.00 🌈), Nap Duration Max: 100.00 (100.00 🌈), Range Max: 100.00 (100.00 🌈)";
             
             const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
@@ -34,7 +35,7 @@ export const UNCOMMON_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(napInterval)}</strong>, naps for <strong>${Utils.formatTime(napDuration)}</strong>. New fruit within <strong>${range.toFixed(1)}</strong> studs will be <strong>${sizeMultiplier.toFixed(4)}x</strong> larger!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases nap interval by 1 second, increases nap duration by 0.1 seconds, increases range by 0.1 studs, and increases size multiplier by 0.0025x"
+        perKgImpact: () => "Each additional kg decreases nap interval by 1 second (min 5s), increases nap duration by 0.1 seconds (max 20s), increases range by 0.1 studs (max 20 studs), and increases size multiplier by 0.0025x (max 4x)"
     },
     deer: {
         name: "Deer",
@@ -53,6 +54,7 @@ export const UNCOMMON_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Max Preservation Chance: 30.00 (28.00 🌈)";
             
             const baseChance = 1;
             const chanceMod = baseChance * modifier;
@@ -63,7 +65,7 @@ export const UNCOMMON_EGG_PETS = {
             
             return `<strong>${preserveChance.toFixed(1)}%</strong> chance Berry type fruit stays after harvest!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases berry preservation chance by 0.1%"
+        perKgImpact: () => "Each additional kg increases berry preservation chance by 0.1% (max 4%)"
     },
     blackbunny: {
         name: "Black Bunny",
@@ -82,6 +84,7 @@ export const UNCOMMON_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Min Feeding Time: 40.00 (31.00 🌈)";
             
             const baseSeconds = 45;
             const secondsMod = baseSeconds * modifier;
@@ -96,7 +99,7 @@ export const UNCOMMON_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, eats a carrot for a <strong>${bonusTotal.toFixed(3)}x</strong> value bonus${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases feeding time by 1 second and increases value bonus by 0.015x"
+        perKgImpact: () => "Each additional kg decreases feeding time by 1 second (min 5s) and increases value bonus by 0.015x"
     },
     chicken: {
         name: "Chicken",

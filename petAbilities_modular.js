@@ -8,7 +8,6 @@ import { petMutationOptions } from './data/mutations.js';
 // Import all pet categories
 import { ANTI_BEE_EGG_PETS } from './pets/antiBeeEgg.js';
 import { BEE_EGG_PETS } from './pets/beeEgg.js';
-import { birdPets as BIRD_PETS } from './pets/birds_new.js';
 import { BLOOD_MOON_SHOP_PETS } from './pets/bloodMoonShop.js';
 import { BUG_EGG_PETS } from './pets/bugEgg.js';
 import { CHESTS_EVENTS_OTHER_PETS } from './pets/chestsEventsOther.js';
@@ -16,6 +15,7 @@ import { COMMON_EGG_PETS } from './pets/commonEgg.js';
 import { COMMON_SUMMER_EGG_PETS } from './pets/commonSummerEgg.js';
 import { DINOSAUR_EGG_PETS } from './pets/dinosaurEgg.js';
 import { ENCHANTED_EGG_PETS } from './pets/enchantedEgg.js';
+import { FALL_EGG_PETS } from './pets/fallEgg.js';
 import { GOURMET_EGG_PETS } from './pets/gourmetEgg.js';
 import { LEGENDARY_EGG_PETS } from './pets/legendaryEgg.js';
 import { MYTHICAL_EGG_PETS } from './pets/mythicalEgg.js';
@@ -29,12 +29,12 @@ import { RARE_SUMMER_EGG_PETS } from './pets/rareSummerEgg.js';
 import { SPROUT_EGG_PETS } from './pets/sproutEgg.js';
 import { RAINBOW_EXOTIC_PETS } from './pets/rainbowExotic.js';
 import { ZEN_EGG_PETS } from './pets/zenEgg.js';
+import { FALL_PET_SHOP_PETS } from './pets/fallPetShop.js';
 
 // Combine all pets into a single object
 const petAbilities = {
     ...ANTI_BEE_EGG_PETS,
     ...BEE_EGG_PETS,
-    ...BIRD_PETS,
     ...BLOOD_MOON_SHOP_PETS,
     ...BUG_EGG_PETS,
     ...CHESTS_EVENTS_OTHER_PETS,
@@ -42,6 +42,7 @@ const petAbilities = {
     ...COMMON_SUMMER_EGG_PETS,
     ...DINOSAUR_EGG_PETS,
     ...ENCHANTED_EGG_PETS,
+    ...FALL_EGG_PETS,
     ...GOURMET_EGG_PETS,
     ...LEGENDARY_EGG_PETS,
     ...MYTHICAL_EGG_PETS,
@@ -54,8 +55,9 @@ const petAbilities = {
     ...RARE_SUMMER_EGG_PETS,
     ...SPROUT_EGG_PETS,
     ...RAINBOW_EXOTIC_PETS,
-    ...ZEN_EGG_PETS
-    // Complete migration achieved! All 19 categories integrated with 124+ pets
+    ...ZEN_EGG_PETS,
+    ...FALL_PET_SHOP_PETS
+    // Complete migration achieved! All 25 categories integrated with 151+ pets
 };
 
 // Export everything needed
@@ -66,13 +68,13 @@ export {
     // Export individual categories for selective imports
     ANTI_BEE_EGG_PETS,
     BEE_EGG_PETS,
-    BIRD_PETS,
     BLOOD_MOON_SHOP_PETS,
     BUG_EGG_PETS,
     CHESTS_EVENTS_OTHER_PETS,
     COMMON_EGG_PETS,
     DINOSAUR_EGG_PETS,
     ENCHANTED_EGG_PETS,
+    FALL_EGG_PETS,
     GOURMET_EGG_PETS,
     LEGENDARY_EGG_PETS,
     MYTHICAL_EGG_PETS,
@@ -82,7 +84,8 @@ export {
     RARE_SUMMER_EGG_PETS,
     SPROUT_EGG_PETS,
     RAINBOW_EXOTIC_PETS,
-    UNCOMMON_EGG_PETS
+    UNCOMMON_EGG_PETS,
+    FALL_PET_SHOP_PETS
 };
 
 // For backward compatibility, make functions available globally
@@ -156,8 +159,7 @@ export const getPetStats = () => {
             return acc;
         }, {}),
         categories: {
-            birds: Object.keys(BIRD_PETS).length
-            // Migration in progress - source-based categories only
+            // Migration completed - all 24 categories integrated
         }
     };
 };

@@ -51,6 +51,7 @@ export const MYTHICAL_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 82.68 (65.65 🌈)";
             
             const baseSeconds = 502;
             const secondsMod = baseSeconds * modifier;
@@ -68,7 +69,7 @@ export const MYTHICAL_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, gains additional <strong>${Utils.formatNumber(Math.round(expTotal))}</strong> bonus experience${displayText}!\n\nGrants additional <strong>${jumpTotal.toFixed(1)}%</strong> increase to player jump height!`;
         },
-        perKgImpact: () => "Each additional kg decreases experience time by 5.89 seconds, increases experience by 11, and increases jump height by 0.1%"
+        perKgImpact: () => "Each additional kg decreases experience time by 5.89 seconds (min 15 seconds), increases experience by 11, and increases jump height by 0.1%"
     },
     redfox: {
         name: "Red Fox",
@@ -87,6 +88,7 @@ export const MYTHICAL_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 85.47 (67.77 🌈)";
             
             const baseSeconds = 442.33;
             const secondsMod = baseSeconds * modifier;
@@ -97,7 +99,7 @@ export const MYTHICAL_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(finalSeconds)}</strong>, goes to another player's random crop and tries to get a seed from it.\nRarer seeds have lower chance to succeed${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases stealing time by 5 seconds"
+        perKgImpact: () => "Each additional kg decreases stealing time by 5 seconds (min 15 seconds)"
     },
     greymouse: {
         name: "Grey Mouse",
@@ -116,6 +118,7 @@ export const MYTHICAL_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 71.88 (57.14 🌈)";
             
             const baseSeconds = 603;
             const secondsMod = baseSeconds * modifier;
@@ -133,7 +136,7 @@ export const MYTHICAL_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, gains additional <strong>${Utils.formatNumber(Math.round(expTotal))}</strong> bonus experience${displayText}!\n\nGrants additional <strong>${speedTotal.toFixed(1)}%</strong> increase to player movement speed!`;
         },
-        perKgImpact: () => "Each additional kg decreases experience time by 8.18 seconds, increases experience by 8, and increases movement speed by 0.1%"
+        perKgImpact: () => "Each additional kg decreases experience time by 8.18 seconds (min 15 seconds), increases experience by 8, and increases movement speed by 0.1%"
     },
     squirrel: {
         name: "Squirrel",

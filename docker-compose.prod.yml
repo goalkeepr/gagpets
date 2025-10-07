@@ -6,6 +6,11 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+    # Increase shared memory for Chrome
+    shm_size: 2gb
+    # Security options for Chrome in container
+    security_opt:
+      - seccomp:unconfined
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8029/health"]
       interval: 30s

@@ -21,6 +21,7 @@ export const GOURMET_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 40.00 (31.00 🌈)";
             
             const baseCooldown = 45;
             const cooldownMod = baseCooldown * modifier;
@@ -46,24 +47,23 @@ export const GOURMET_EGG_PETS = {
         source: "Gourmet Egg",
         probability: 38,
         obtainable: true,
-        description: "Flat mole that loves pancakes and provides breakfast bonuses",
+        description: "Digs underground to find treasure including gear and sheckles",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 70.00 (54.00 🌈)";
             
-            const baseSeconds = 420;
+            const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(10, adjustedBaseSeconds - (4.5 * kg));
-            const breakfastBonus = 28 + (kg * 0.45);
-            const fluffiness = 22 + (kg * 0.35);
+            const seconds = Math.max(10, adjustedBaseSeconds - kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, flips pancakes! Provides <strong>${breakfastBonus.toFixed(1)}%</strong> breakfast bonus and <strong>${fluffiness.toFixed(1)}%</strong> fluffy comfort enhancement${displayText}!`;
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, digs down underground to find treasure. Can dig up gear or sheckles${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases flip time by 4.5 seconds, increases breakfast bonus by 0.45%, and increases fluffiness by 0.35%"
+        perKgImpact: () => "Each additional kg decreases digging cooldown by 1 second"
     },
 
     sushibear: {
@@ -74,61 +74,77 @@ export const GOURMET_EGG_PETS = {
         source: "Gourmet Egg",
         probability: 7,
         obtainable: true,
-        description: "Cultured bear that appreciates fine sushi and provides gourmet bonuses",
+        description: "Dual ability: Chills/freezes nearby fruits and feeds sushi to other pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Chill Cooldown Min: 70.00 (54.00 🌈), Sushi Cooldown Min: no limit (no limit 🌈), Hunger Fed Max: no limit (no limit 🌈)";
             
-            const baseSeconds = 600;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(60, adjustedBaseSeconds - (6 * kg));
-            const gourmetBonus = 30 + (kg * 0.5);
-            const sushiCraftsmanship = 25 + (kg * 0.4);
-            const refinement = 20 + (kg * 0.35);
+            // First ability - Chilling/Freezing
+            const baseCooldown1 = 80;
+            const baseChance1 = 15;
+            const cooldown1 = Math.max(10, baseCooldown1 - kg);
+            const chance1 = baseChance1 + (0.15 * kg);
+            
+            // Second ability - Sushi Feeding
+            const baseCooldown2 = 670;
+            const baseAmount2 = 0.01;
+            const cooldown2 = Math.max(60, baseCooldown2 - (3.5 * kg));
+            const amount2 = Math.min(0.5, baseAmount2 + (0.001 * kg));
+            
+            // Apply modifiers
+            const cooldown1Mod = baseCooldown1 * modifier;
+            const chance1Mod = baseChance1 * modifier;
+            const cooldown2Mod = baseCooldown2 * modifier;
+            const amount2Mod = baseAmount2 * modifier;
+            
+            const adjustedBaseCooldown1 = baseCooldown1 - cooldown1Mod;
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldown2Mod;
+            const cooldown1Total = Math.max(10, adjustedBaseCooldown1 - kg);
+            const cooldown2Total = Math.max(60, adjustedBaseCooldown2 - (3.5 * kg));
+            const chance1Total = chance1 + chance1Mod;
+            const amount2Total = Math.min(0.5, amount2 + amount2Mod);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, crafts fine sushi! Provides <strong>${gourmetBonus.toFixed(1)}%</strong> gourmet bonus, <strong>${sushiCraftsmanship.toFixed(1)}%</strong> culinary craftsmanship, and <strong>${refinement.toFixed(1)}%</strong> cultural refinement${displayText}!`;
+            return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(cooldown1Total)}</strong>, <strong>${chance1Total.toFixed(1)}%</strong> chance a nearby fruit becomes Chilled or Frozen!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, flings sushi towards a random pet and feeds it for <strong>${(amount2Total * 100).toFixed(1)}%</strong> of its hunger${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases crafting time by 6 seconds, increases gourmet bonus by 0.5%, craftsmanship by 0.4%, and refinement by 0.35%"
+        perKgImpact: () => "Each additional kg: Ability 1 - decreases cooldown by 1s (min 10s), increases freeze chance by 0.15%. Ability 2 - decreases cooldown by 3.5s (min 60s), increases hunger fed by 0.1% (max 50%)"
     },
 
     spaghettisloth: {
         name: "Spaghetti Sloth",
         icon: ICONS.SPAGHETTISLOTH,
         type: TYPES.SPECIALTY,
-        rarity: RARITIES.EPIC,
+        rarity: RARITIES.MYTHICAL,
         source: "Gourmet Egg",
         probability: 4,
         obtainable: true,
-        description: "Slow-moving sloth that loves pasta and provides relaxation bonuses",
+        description: "Slowly cooks nearby fruits, applying pasta-themed mutations",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 86.00 (63.47 🌈)";
             
-            const baseSeconds = 900;
+            const baseSeconds = 845;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(200, adjustedBaseSeconds - (8 * kg));
-            const relaxation = 35 + (kg * 0.6);
-            const pastaJoy = 25 + (kg * 0.4);
-            const slowness = 40 + (kg * 0.7);
+            const seconds = Math.max(200, adjustedBaseSeconds - (7.5 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, slowly enjoys spaghetti! Provides <strong>${relaxation.toFixed(1)}%</strong> deep relaxation, <strong>${pastaJoy.toFixed(1)}%</strong> culinary joy, and <strong>${slowness.toFixed(1)}%</strong> mindful slowness bonus${displayText}!`;
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, goes to a nearby fruit and does-a-cooking! Applying Pasta, Sauce or Meatball mutation${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases eating time by 8 seconds, increases relaxation by 0.6%, pasta joy by 0.4%, and slowness bonus by 0.7%"
+        perKgImpact: () => "Each additional kg decreases cooking cooldown by 7.5 seconds"
     },
 
     frenchfryferret: {
         name: "French Fry Ferret",
         icon: ICONS.FRENCHFRYFERRET,
         type: TYPES.SPECIALTY,
-        rarity: RARITIES.EPIC,
+        rarity: RARITIES.DIVINE,
         source: "Gourmet Egg",
         probability: 1,
         obtainable: true,
@@ -137,6 +153,7 @@ export const GOURMET_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 67.56 (47.38 🌈)";
             
             const baseSeconds = 3632;
             const secondsMod = baseSeconds * modifier;

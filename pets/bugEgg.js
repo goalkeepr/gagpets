@@ -102,6 +102,7 @@ export const BUG_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Prayer Min: 75.00 (59.00 🌈)";
             
             const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
@@ -134,6 +135,7 @@ export const BUG_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Gold Transformation Min: 80.00 (60.00 🌈)";
             
             const baseSeconds = 300;
             const secondsMod = baseSeconds * modifier;

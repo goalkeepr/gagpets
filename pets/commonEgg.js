@@ -19,6 +19,7 @@ export const COMMON_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 40.00 (31.00 🌈)";
             
             const baseSeconds = 45;
             const secondsMod = baseSeconds * modifier;
@@ -52,6 +53,7 @@ export const COMMON_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 55.00 (43.00 🌈)";
             
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;
@@ -82,6 +84,7 @@ export const COMMON_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 55.00 (43.00 🌈)";
             
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;

@@ -82,6 +82,7 @@ const dinosaurEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 100.75 (80.35 🌈)";
             
             const baseSeconds = 1224;
             const baseTargets = 3;
@@ -117,6 +118,7 @@ const dinosaurEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Bonus Max: no limit (no limit)";
             
             const baseBonus = 5.25;
             const bonus = Math.min(30, baseBonus + (kg / 10));
@@ -149,6 +151,7 @@ const dinosaurEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 105.50 (83.30 🌈)";
             
             const baseSeconds = 666;
             const baseFruits = 3;
@@ -192,10 +195,11 @@ const dinosaurEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Chance Max: 100.00 (80.00 🌈)";
             
             const baseChance = 15;
             const chanceMod = baseChance * modifier;
-            const totalChance = baseChance + chanceMod + (0.15 * kg);
+            const totalChance = Math.min(30, baseChance + chanceMod + (0.15 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             

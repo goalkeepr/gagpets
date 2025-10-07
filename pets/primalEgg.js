@@ -21,6 +21,7 @@ const primalEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 40.00 (30.89 🌈)";
             
             const baseSeconds = 82;
             const secondsMod = baseSeconds * modifier;
@@ -34,7 +35,7 @@ const primalEggPets = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, goes to the cosmetic crate with the highest open time and reduces its open time by <strong>${Utils.formatTime(reduction)}</strong>!\n\nThere is a <strong>${chancePercent.toFixed(2)}%</strong> chance for open time reduction to be multiplied by <strong>${multiplier.toFixed(1)}x</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases action time by 1.8 seconds, increases reduction by 0.65 seconds, increases multiplier chance by 0.25%, and increases multiplier by 0.2x"
+        perKgImpact: () => "Each additional kg decreases action time by 1.8 seconds (min 10s), increases reduction by 0.65 seconds, increases multiplier chance by 0.25%, and increases multiplier by 0.2x"
     },
 
     iguanodon: {
@@ -116,6 +117,7 @@ const primalEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 91.19 (71.05 🌈), Targets Max: 10.00 (10.00 🌈), XP Grant Max: 50.00 (50.00 🌈)";
             
             const baseSeconds = 846;
             const secondsMod = baseSeconds * modifier;
@@ -129,7 +131,7 @@ const primalEggPets = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, opens its frills and spits out venom! The venom spreads to <strong>${targets.toFixed(1)}</strong> other random pets, advancing cooldown by <strong>${Utils.formatTime(cooldownAdvance)}</strong> OR granting <strong>${Utils.formatNumber(Math.round(xpGrant))}</strong> XP!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases venom time by 8.4 seconds, increases targets by 0.2, increases cooldown advance by 0.5 seconds, and increases XP grant by 49"
+        perKgImpact: () => "Each additional kg decreases venom time by 8.4 seconds (min 80s), increases targets by 0.2 (max 5), increases cooldown advance by 0.5 seconds (max 80s), and increases XP grant by 49 (max 2500)"
     },
 
     ankylosaurus: {
@@ -180,6 +182,7 @@ const primalEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 92.00 (71.60 🌈)";
             
             const baseSeconds = 1224;
             const baseFruits = 3;
@@ -195,7 +198,7 @@ const primalEggPets = {
             
             return `Every <strong>${Utils.formatTime(finalSeconds)}</strong>, devours a random mutation from <strong>${fruitsTotal.toFixed(1)}</strong> fruits in your garden each then roars spreading those mutations to 1 random fruit in your garden! Prioritizes applying mutations to a favorited fruit.${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases roaring time by 12 seconds and increases fruits affected by 0.2"
+        perKgImpact: () => "Each additional kg decreases roaring time by 12 seconds (min 120s) and increases fruits affected by 0.2"
     }
 };
 

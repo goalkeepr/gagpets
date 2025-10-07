@@ -50,6 +50,7 @@ const commonSummerEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: no limit (94.00 🌈)";
             
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;
@@ -84,6 +85,7 @@ const commonSummerEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 87.00 (68.10 🌈)";
             
             const baseSeconds = 378;
             const secondsMod = baseSeconds * modifier;

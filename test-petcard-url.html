@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Pet Card URL Generation</title>
+</head>
+<body>
+    <h1>Pet Card URL Test</h1>
+    <p>Current URL: <span id="currentUrl"></span></p>
+    <p>Generated Pet Card URL: <span id="petCardUrl"></span></p>
+    
+    <script>
+        // Copy the buildCardUrl logic from pets.html
+        function buildCardUrl(pet, weight, age, mutation) {
+            const params = new URLSearchParams();
+            params.set('pet', pet || 'testpet');
+            params.set('weight', weight || '50');
+            params.set('age', age || '1');
+            if (mutation && mutation !== 'none') {
+                params.set('mutation', mutation);
+            }
+
+            // Handle both root path (/) and explicit pets.html path
+            let pathname = window.location.pathname;
+            if (pathname === '/' || pathname === '/pets.html') {
+                pathname = '/petcard';
+            } else {
+                pathname = pathname.replace('pets.html', 'petcard');
+            }
+            const baseUrl = window.location.origin + pathname;
+            return `${baseUrl}?${params.toString()}`;
+        }
+        
+        // Test the function
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('petCardUrl').textContent = buildCardUrl('testpet', '75', '10', 'none');
+    </script>
+</body>
+</html>

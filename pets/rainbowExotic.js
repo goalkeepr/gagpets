@@ -19,6 +19,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 34.44 (25.33 🌈)";
             
             const baseCooldown = 41;
             const baseAmount = 160;
@@ -96,6 +97,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Duplication Chance Max: 63.33 (59.33 🌈)";
             
             const baseChance = 12;
             const chance = Math.min(50, baseChance + (0.6 * kg));
@@ -127,6 +129,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 91.09 (71.00 🌈), Targets Max: 45.00 (42.00 🌈), Cooldown Advance Max: 80.00 (64.00 🌈), XP Grant Max: 62.50 (60.00 🌈)";
             
             const baseCooldown = 643;
             const baseNumber = 3;
@@ -173,6 +176,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Theft Protection Max: 57.20 (44.64 🌈)";
             
             const baseChance = 31.4;
             const chance = Math.min(60, baseChance + (0.5 * kg));
@@ -242,6 +246,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 95.00 (71.00 🌈), Refund Chance Max: 50.00 (40.00 🌈), Duration Max: 88.00 (72.00 🌈)";
             
             const baseCooldown = 72;
             const baseChance = 15;
@@ -284,6 +289,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Tranquil Mutation Max: 20.00 (16.00 🌈)";
             
             const baseChance = 8;
             const chance = Math.min(16, baseChance + (0.4 * kg));
@@ -315,6 +321,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Corruption Chance Max: No Limit (100.00 🌈)";
             
             const baseCooldown = 630;
             const baseChance = 25;
@@ -353,6 +360,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 75.00 (59.00 🌈)";
             
             const baseCooldown = 80;
             const baseDuration = 30;
@@ -399,6 +407,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 93.33 (66.67 🌈), XP Multiplier Max: 10.00 (4.00 🌈), Cooldown Boost Max: 8.80 (8.56 🌈), Duration Max: 100.00 (40.00 🌈)";
             
             const baseCooldown = 200;
             const baseMultiplier = 0.3;
@@ -449,6 +458,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Molten Cooldown Min: 111.11 (80.00 🌈), Meteoric Cooldown Min: No Limit (84.71 🌈)";
             
             // First ability - Molten
             const baseCooldown1 = 700;
@@ -499,6 +509,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Berry Preservation Max: 100.00 (80.00 🌈)";
             
             const baseChance = 5;
             const chance = Math.min(10, baseChance + (0.05 * kg));
@@ -531,6 +542,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Rot Mutation Max: 46.67 (37.33 🌈)";
             
             const baseChance = 7;
             const chance = Math.min(14, baseChance + (0.15 * kg));
@@ -563,6 +575,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Advance Max: 66.67 (53.33 🌈)";
             
             const baseCooldown = 615;
             const baseCooldownAmount = 100;
@@ -607,6 +620,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Growth Multiplier Max: 45.00 (41.00 🌈)";
             
             const baseRange = 45;
             const baseMultiplier = 2;
@@ -643,6 +657,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Size Multiplier Max: 6.00 (5.20 🌈)";
             
             const baseRange = 14.75;
             const baseMultiplier = 0.004;
@@ -679,6 +694,7 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Age Bonus Max: 72.00 (60.40 🌈), Mutation Chance Max: 100.00 (80.00 🌈), Fruit Amount Max: 25.00 (19.00 🌈)";
             
             // First ability - Pet mutation age bonus (enhanced)
             const baseChance1 = 5.8;

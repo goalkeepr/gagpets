@@ -75,8 +75,9 @@ export const NIGHT_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 70.00 (54.00 🌈)";
             
-            const baseSeconds = 10;
+            const baseSeconds = 80;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
             const seconds = Math.max(10, adjustedBaseSeconds - (1 * kg));
@@ -130,6 +131,7 @@ export const NIGHT_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 48.00 (37.90 🌈)";
             
             const baseSeconds = 303;
             const secondsMod = baseSeconds * modifier;
@@ -140,7 +142,7 @@ export const NIGHT_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, croaks and a random nearby plant will advance growth by <strong>24 hours</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases croaking time by 6 seconds"
+        perKgImpact: () => "Each additional kg decreases croaking time by 6 seconds (min 15 seconds)"
     },
     frog: {
         name: "Frog",
@@ -159,6 +161,7 @@ export const NIGHT_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 98.25 (78.10 🌈)";
             
             const baseSeconds = 604.5;
             const secondsMod = baseSeconds * modifier;
@@ -169,6 +172,6 @@ export const NIGHT_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, croaks and a random nearby plant will advance growth by <strong>24 hours</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases croaking time by 9 seconds"
+        perKgImpact: () => "Each additional kg decreases croaking time by 6 seconds (min 15 seconds)"
     }
 };

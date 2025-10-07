@@ -18,6 +18,32 @@
     <title>Grow a Garden - Fruit Types</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Fruit type color variables based on provided RGB values */
+        :root {
+            --berry-color: rgb(142, 68, 173);
+            --root-color: rgb(139, 69, 19);
+            --flower-color: rgb(255, 105, 180);
+            --fruit-color: rgb(39, 174, 96);
+            --leafy-color: rgb(46, 204, 113);
+            --sour-color: rgb(241, 196, 15);
+            --sweet-color: rgb(241, 148, 138);
+            --tropical-color: rgb(26, 188, 156);
+            --vegetable-color: rgb(88, 214, 141);
+            --woody-color: rgb(147, 81, 22);
+            --prickly-color: rgb(211, 84, 0);
+            --fungus-color: rgb(165, 105, 189);
+            --spicy-color: rgb(192, 57, 43);
+            --stalky-color: rgb(34, 153, 84);
+            --summer-color: rgb(255, 170, 51);
+            --candy-color: rgb(230, 126, 34);
+            --night-color: rgb(93, 109, 126);
+            --prehistoric-color: rgb(133, 163, 81);
+            --zen-color: rgb(129, 207, 224);
+            --toxic-color: rgb(128, 0, 128);
+            --magical-color: rgb(186, 85, 211);
+            --fall-color: rgb(218, 165, 32); /* Added Fall color since it appears in the data */
+        }
+
         /* Additional styles specific to fruit types page */
         .fruit-type-grid {
             display: grid;
@@ -46,6 +72,139 @@
             border-color: var(--primary-color);
             background: var(--result-bg);
         }
+
+        /* Fruit type specific color classes */
+        .fruit-type-card.berry { border-color: var(--berry-color); }
+        .fruit-type-card.berry .fruit-type-name { color: var(--berry-color); }
+        .fruit-type-card.berry .fruit-count { background: var(--berry-color); }
+        .fruit-type-card.berry:hover { border-color: var(--berry-color); box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3); }
+        .fruit-type-card.berry.selected { border-color: var(--berry-color); background: rgba(142, 68, 173, 0.1); }
+
+        .fruit-type-card.root { border-color: var(--root-color); }
+        .fruit-type-card.root .fruit-type-name { color: var(--root-color); }
+        .fruit-type-card.root .fruit-count { background: var(--root-color); }
+        .fruit-type-card.root:hover { border-color: var(--root-color); box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3); }
+        .fruit-type-card.root.selected { border-color: var(--root-color); background: rgba(139, 69, 19, 0.1); }
+
+        .fruit-type-card.flower { border-color: var(--flower-color); }
+        .fruit-type-card.flower .fruit-type-name { color: var(--flower-color); }
+        .fruit-type-card.flower .fruit-count { background: var(--flower-color); }
+        .fruit-type-card.flower:hover { border-color: var(--flower-color); box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3); }
+        .fruit-type-card.flower.selected { border-color: var(--flower-color); background: rgba(255, 105, 180, 0.1); }
+
+        .fruit-type-card.fruit { border-color: var(--fruit-color); }
+        .fruit-type-card.fruit .fruit-type-name { color: var(--fruit-color); }
+        .fruit-type-card.fruit .fruit-count { background: var(--fruit-color); }
+        .fruit-type-card.fruit:hover { border-color: var(--fruit-color); box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3); }
+        .fruit-type-card.fruit.selected { border-color: var(--fruit-color); background: rgba(39, 174, 96, 0.1); }
+
+        .fruit-type-card.leafy { border-color: var(--leafy-color); }
+        .fruit-type-card.leafy .fruit-type-name { color: var(--leafy-color); }
+        .fruit-type-card.leafy .fruit-count { background: var(--leafy-color); }
+        .fruit-type-card.leafy:hover { border-color: var(--leafy-color); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3); }
+        .fruit-type-card.leafy.selected { border-color: var(--leafy-color); background: rgba(46, 204, 113, 0.1); }
+
+        .fruit-type-card.sour { border-color: var(--sour-color); }
+        .fruit-type-card.sour .fruit-type-name { color: var(--sour-color); }
+        .fruit-type-card.sour .fruit-count { background: var(--sour-color); }
+        .fruit-type-card.sour:hover { border-color: var(--sour-color); box-shadow: 0 8px 20px rgba(241, 196, 15, 0.3); }
+        .fruit-type-card.sour.selected { border-color: var(--sour-color); background: rgba(241, 196, 15, 0.1); }
+
+        .fruit-type-card.sweet { border-color: var(--sweet-color); }
+        .fruit-type-card.sweet .fruit-type-name { color: var(--sweet-color); }
+        .fruit-type-card.sweet .fruit-count { background: var(--sweet-color); }
+        .fruit-type-card.sweet:hover { border-color: var(--sweet-color); box-shadow: 0 8px 20px rgba(241, 148, 138, 0.3); }
+        .fruit-type-card.sweet.selected { border-color: var(--sweet-color); background: rgba(241, 148, 138, 0.1); }
+
+        .fruit-type-card.tropical { border-color: var(--tropical-color); }
+        .fruit-type-card.tropical .fruit-type-name { color: var(--tropical-color); }
+        .fruit-type-card.tropical .fruit-count { background: var(--tropical-color); }
+        .fruit-type-card.tropical:hover { border-color: var(--tropical-color); box-shadow: 0 8px 20px rgba(26, 188, 156, 0.3); }
+        .fruit-type-card.tropical.selected { border-color: var(--tropical-color); background: rgba(26, 188, 156, 0.1); }
+
+        .fruit-type-card.vegetable { border-color: var(--vegetable-color); }
+        .fruit-type-card.vegetable .fruit-type-name { color: var(--vegetable-color); }
+        .fruit-type-card.vegetable .fruit-count { background: var(--vegetable-color); }
+        .fruit-type-card.vegetable:hover { border-color: var(--vegetable-color); box-shadow: 0 8px 20px rgba(88, 214, 141, 0.3); }
+        .fruit-type-card.vegetable.selected { border-color: var(--vegetable-color); background: rgba(88, 214, 141, 0.1); }
+
+        .fruit-type-card.woody { border-color: var(--woody-color); }
+        .fruit-type-card.woody .fruit-type-name { color: var(--woody-color); }
+        .fruit-type-card.woody .fruit-count { background: var(--woody-color); }
+        .fruit-type-card.woody:hover { border-color: var(--woody-color); box-shadow: 0 8px 20px rgba(147, 81, 22, 0.3); }
+        .fruit-type-card.woody.selected { border-color: var(--woody-color); background: rgba(147, 81, 22, 0.1); }
+
+        .fruit-type-card.prickly { border-color: var(--prickly-color); }
+        .fruit-type-card.prickly .fruit-type-name { color: var(--prickly-color); }
+        .fruit-type-card.prickly .fruit-count { background: var(--prickly-color); }
+        .fruit-type-card.prickly:hover { border-color: var(--prickly-color); box-shadow: 0 8px 20px rgba(211, 84, 0, 0.3); }
+        .fruit-type-card.prickly.selected { border-color: var(--prickly-color); background: rgba(211, 84, 0, 0.1); }
+
+        .fruit-type-card.fungus { border-color: var(--fungus-color); }
+        .fruit-type-card.fungus .fruit-type-name { color: var(--fungus-color); }
+        .fruit-type-card.fungus .fruit-count { background: var(--fungus-color); }
+        .fruit-type-card.fungus:hover { border-color: var(--fungus-color); box-shadow: 0 8px 20px rgba(165, 105, 189, 0.3); }
+        .fruit-type-card.fungus.selected { border-color: var(--fungus-color); background: rgba(165, 105, 189, 0.1); }
+
+        .fruit-type-card.spicy { border-color: var(--spicy-color); }
+        .fruit-type-card.spicy .fruit-type-name { color: var(--spicy-color); }
+        .fruit-type-card.spicy .fruit-count { background: var(--spicy-color); }
+        .fruit-type-card.spicy:hover { border-color: var(--spicy-color); box-shadow: 0 8px 20px rgba(192, 57, 43, 0.3); }
+        .fruit-type-card.spicy.selected { border-color: var(--spicy-color); background: rgba(192, 57, 43, 0.1); }
+
+        .fruit-type-card.stalky { border-color: var(--stalky-color); }
+        .fruit-type-card.stalky .fruit-type-name { color: var(--stalky-color); }
+        .fruit-type-card.stalky .fruit-count { background: var(--stalky-color); }
+        .fruit-type-card.stalky:hover { border-color: var(--stalky-color); box-shadow: 0 8px 20px rgba(34, 153, 84, 0.3); }
+        .fruit-type-card.stalky.selected { border-color: var(--stalky-color); background: rgba(34, 153, 84, 0.1); }
+
+        .fruit-type-card.summer { border-color: var(--summer-color); }
+        .fruit-type-card.summer .fruit-type-name { color: var(--summer-color); }
+        .fruit-type-card.summer .fruit-count { background: var(--summer-color); }
+        .fruit-type-card.summer:hover { border-color: var(--summer-color); box-shadow: 0 8px 20px rgba(255, 170, 51, 0.3); }
+        .fruit-type-card.summer.selected { border-color: var(--summer-color); background: rgba(255, 170, 51, 0.1); }
+
+        .fruit-type-card.candy { border-color: var(--candy-color); }
+        .fruit-type-card.candy .fruit-type-name { color: var(--candy-color); }
+        .fruit-type-card.candy .fruit-count { background: var(--candy-color); }
+        .fruit-type-card.candy:hover { border-color: var(--candy-color); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3); }
+        .fruit-type-card.candy.selected { border-color: var(--candy-color); background: rgba(230, 126, 34, 0.1); }
+
+        .fruit-type-card.night { border-color: var(--night-color); }
+        .fruit-type-card.night .fruit-type-name { color: var(--night-color); }
+        .fruit-type-card.night .fruit-count { background: var(--night-color); }
+        .fruit-type-card.night:hover { border-color: var(--night-color); box-shadow: 0 8px 20px rgba(93, 109, 126, 0.3); }
+        .fruit-type-card.night.selected { border-color: var(--night-color); background: rgba(93, 109, 126, 0.1); }
+
+        .fruit-type-card.prehistoric { border-color: var(--prehistoric-color); }
+        .fruit-type-card.prehistoric .fruit-type-name { color: var(--prehistoric-color); }
+        .fruit-type-card.prehistoric .fruit-count { background: var(--prehistoric-color); }
+        .fruit-type-card.prehistoric:hover { border-color: var(--prehistoric-color); box-shadow: 0 8px 20px rgba(133, 163, 81, 0.3); }
+        .fruit-type-card.prehistoric.selected { border-color: var(--prehistoric-color); background: rgba(133, 163, 81, 0.1); }
+
+        .fruit-type-card.zen { border-color: var(--zen-color); }
+        .fruit-type-card.zen .fruit-type-name { color: var(--zen-color); }
+        .fruit-type-card.zen .fruit-count { background: var(--zen-color); }
+        .fruit-type-card.zen:hover { border-color: var(--zen-color); box-shadow: 0 8px 20px rgba(129, 207, 224, 0.3); }
+        .fruit-type-card.zen.selected { border-color: var(--zen-color); background: rgba(129, 207, 224, 0.1); }
+
+        .fruit-type-card.toxic { border-color: var(--toxic-color); }
+        .fruit-type-card.toxic .fruit-type-name { color: var(--toxic-color); }
+        .fruit-type-card.toxic .fruit-count { background: var(--toxic-color); }
+        .fruit-type-card.toxic:hover { border-color: var(--toxic-color); box-shadow: 0 8px 20px rgba(128, 0, 128, 0.3); }
+        .fruit-type-card.toxic.selected { border-color: var(--toxic-color); background: rgba(128, 0, 128, 0.1); }
+
+        .fruit-type-card.magical { border-color: var(--magical-color); }
+        .fruit-type-card.magical .fruit-type-name { color: var(--magical-color); }
+        .fruit-type-card.magical .fruit-count { background: var(--magical-color); }
+        .fruit-type-card.magical:hover { border-color: var(--magical-color); box-shadow: 0 8px 20px rgba(186, 85, 211, 0.3); }
+        .fruit-type-card.magical.selected { border-color: var(--magical-color); background: rgba(186, 85, 211, 0.1); }
+
+        .fruit-type-card.fall { border-color: var(--fall-color); }
+        .fruit-type-card.fall .fruit-type-name { color: var(--fall-color); }
+        .fruit-type-card.fall .fruit-count { background: var(--fall-color); }
+        .fruit-type-card.fall:hover { border-color: var(--fall-color); box-shadow: 0 8px 20px rgba(218, 165, 32, 0.3); }
+        .fruit-type-card.fall.selected { border-color: var(--fall-color); background: rgba(218, 165, 32, 0.1); }
 
         .fruit-type-header {
             display: flex;
@@ -94,6 +253,30 @@
             border-left: 5px solid var(--primary-color);
             display: none;
         }
+
+        /* Dynamic fruit details border colors based on selected type */
+        .fruit-details.berry { border-left-color: var(--berry-color); }
+        .fruit-details.root { border-left-color: var(--root-color); }
+        .fruit-details.flower { border-left-color: var(--flower-color); }
+        .fruit-details.fruit { border-left-color: var(--fruit-color); }
+        .fruit-details.leafy { border-left-color: var(--leafy-color); }
+        .fruit-details.sour { border-left-color: var(--sour-color); }
+        .fruit-details.sweet { border-left-color: var(--sweet-color); }
+        .fruit-details.tropical { border-left-color: var(--tropical-color); }
+        .fruit-details.vegetable { border-left-color: var(--vegetable-color); }
+        .fruit-details.woody { border-left-color: var(--woody-color); }
+        .fruit-details.prickly { border-left-color: var(--prickly-color); }
+        .fruit-details.fungus { border-left-color: var(--fungus-color); }
+        .fruit-details.spicy { border-left-color: var(--spicy-color); }
+        .fruit-details.stalky { border-left-color: var(--stalky-color); }
+        .fruit-details.summer { border-left-color: var(--summer-color); }
+        .fruit-details.candy { border-left-color: var(--candy-color); }
+        .fruit-details.night { border-left-color: var(--night-color); }
+        .fruit-details.prehistoric { border-left-color: var(--prehistoric-color); }
+        .fruit-details.zen { border-left-color: var(--zen-color); }
+        .fruit-details.toxic { border-left-color: var(--toxic-color); }
+        .fruit-details.magical { border-left-color: var(--magical-color); }
+        .fruit-details.fall { border-left-color: var(--fall-color); }
 
         .fruit-details.show {
             display: block;
@@ -273,26 +456,28 @@
         
         // Fruit types data - using the exact data provided by the user
         const fruitTypesData = {
-	Berry: ["Blueberry", "Cranberry", "Grape", "Raspberry", "Strawberry", "Celestiberry", "White Mulberry", "Lingonberry", "Elder Strawberry", "Willowberry"],
-	Root: ["Carrot", "Mutant Carrot", "Chocolate Carrot", "Wild Carrot", "Taro Flower", "Potato", "Mandrake", "Rhubarb", "Onion", "Tall Asparagus", "Horsetail", "Spring Onion"],
-	Candy: ["Blue Lollipop", "Candy Blossom", "Candy Sunflower", "Chocolate Carrot", "Easter Egg", "Red Lollipop", "Sugarglaze"],
-	Flower: ["Candy Blossom", "Candy Sunflower", "Cherry Blossom", "Crocus", "Daffodil", "Lotus", "Orange Tulip", "Pink Tulip", "Nightshade", "Moonflower", "Moon Blossom", "Rose", "Foxglove", "Lilac", "Pink Lily", "Purple Dahlia", "Sunflower", "Lavender", "Honeysuckle", "Manuka Flower", "Ember Lily", "Noble Flower", "Bee Balm", "Succulent", "Parasol Flower", "Rosy Delight", "Lily of the Valley", "Burning Bud", "Rafflesia", "Stonebite", "Liberty Lily", "Firework Flower", "Grand Volcania", "Serenity", "Monoblooma", "Hinomai", "Taro Flower", "Zenflare", "Soft Sunshine", "Dezen", "Artichoke", "Veinpetal", "Cyclamen", "Flare Daisy", "Sakura Bush", "Dandelion", "Peace Lily", "Delphinium", "Bone Blossom", "Tranquil Bloom", "Paradise Petal", "Crown of Thorns", "Calla Lily", "Cyclamen"],
-	Fruit: ["Apple", "Avocado", "Banana", "Blueberry", "Coconut", "Cranberry", "Dragon Fruit", "Durian", "Grape", "Lemon", "Lime", "Mango", "Papaya", "Passionfruit", "Peach", "Pear", "Pineapple", "Raspberry", "Strawberry", "Watermelon", "Starfruit", "Blood Banana", "Moon Melon", "Celestiberry", "Moon Mango", "Nectarine", "Hive Fruit", "Green Apple", "Sugar Apple", "Traveler's Fruit", "Loquat", "Kiwi", "White Mulberry", "Lingonberry", "Maple Apple", "Spiked Mango", "Crown Melon", "Grand Tomato", "Pricklefruit", "Mangosteen", "Canary Melon", "Tomato", "Cantaloupe", "Pumpkin", "Eggplant", "Feijoa", "Prickly Pear", "Guanabana", "Bitter Melon", "Corn", "Violet Corn", "Elder Strawberry", "Willowberry", "Carrot"],
-	Leafy: ["Apple", "Blueberry", "Cranberry", "Eggplant", "Grape", "Mango", "Peach", "Pineapple", "Pumpkin", "Raspberry", "Strawberry", "Tomato", "Watermelon", "Cantaloupe", "Cacao", "Beanstalk", "Coolcool Beanbeanstalk", "Mint", "Moonflower", "Starfruit", "Moonglow", "Moon Blossom", "Blood Banana", "Celestiberry", "Moon Mango", "Rose", "Foxglove", "Lilac", "Pink Lily", "Purple Dahlia", "Sunflower", "Nectarine", "Hive Fruit", "Lumira", "Honeysuckle", "Noble Flower", "Bee Balm", "Green Apple", "Sugar Apple", "Parasol Flower", "Elephant Ears", "Traveler's Fruit", "Rosy Delight", "Cauliflower", "Aloe Vera", "Lily of the Valley", "Pitcher Plant", "Rafflesia", "Firefly Fern", "Giant Pinecone", "Serenity", "Soft Sunshine", "Dragon Sapling", "Maple Apple", "Spiked Mango", "Sakura Bush", "Grand Tomato", "Artichoke", "Twisted Tangle", "Log Pumpkin", "Mandrake", "Cyclamen", "Mangosteen", "Princess Thorn", "Romanesco", "Purple Cabbage", "King Cabbage", "Spirit Lantern", "Glowpod", "Shimmersprout", "Willowberry"],
-	Sour: ["Cranberry", "Lemon", "Lime", "Passionfruit", "Starfruit", "Mangosteen", "Flare Melon", "Mangosteen", "Kiwi"],
-	Sweet: ["Banana", "Blue Lollipop", "Blueberry", "Candy Blossom", "Candy Sunflower", "Chocolate Carrot", "Easter Egg", "Grape", "Mango", "Peach", "Pear", "Pineapple", "Raspberry", "Red Lollipop", "Strawberry", "Watermelon", "Starfruit", "Nectar Thorn", "Sugar Apple", "Moon Melon", "Spiked Mango", "Sugarglaze", "Crown Melon", "Mangosteen", "Canary Melon", "Romanesco"],
-	Tropical: ["Banana", "Coconut", "Dragon Fruit", "Durian", "Mango", "Papaya", "Passionfruit", "Pineapple", "Watermelon", "Parasol Flower", "Cocovine", "Starfruit"],
-	Vegetable: ["Carrot", "Wild Carrot", "Chocolate Carrot", "Corn", "Violet Corn", "Eggplant", "Pepper", "Pumpkin", "Purple Cabbage", "Tomato", "Beanstalk", "Coolcool Beanbeanstalk", "Mint", "Dragon Pepper", "Cauliflower", "Bell Pepper", "Taro Flower", "Artichoke", "Onion", "Jalapeno", "Tall Asparagus", "Grand Tomato", "Log Pumpkin", "Badlands Pepper", "Rhubarb", "King Cabbage", "Bitter Melon", "Mandrake", "Mutant Carrot", "Romanesco", "Snaparino Beanarini"],
-	Woody: ["Apple", "Sugar Apple", "Avocado", "Cacao", "Coconut", "Durian", "Mango", "Papaya", "Peach", "Pear", "Moon Blossom", "Moon Mango", "Nectarine", "Hive Fruit", "Cocovine", "Traveler's Fruit", "Kiwi", "Feijoa", "Giant Pinecone", "Dragon Sapling", "Maple Apple", "Spiked Mango", "Sakura Bush", "Rhubarb", "Duskpuff", "Mangosteen", "Gleamroot", "Amberheart", "Bamboo", "Lucky Bamboo", "Bendboo", "Boneboo", "Glowpod", "Willowberry"],
-	Prickly: ["Cactus", "Dragon Fruit", "Durian", "Pineapple", "Venus Fly Trap", "Celestiberry", "Nectar Thorn", "Prickly Pear", "Aloe Vera", "Horned Dinoshroom", "Spiked Mango", "Twisted Tangle", "Pricklefruit", "Princess Thorn", "Crown of Thorns"],
-	Toxic: ["Foxglove", "Nightshade", "Rafflesia", "Pitcher Plant", "Horned Dinoshroom", "Sinisterdrip", "Cursed Fruit", "Amber Spine"],
+	Berry: ["Blueberry", "Cranberry", "Grape", "Raspberry", "Strawberry", "Celestiberry", "White Mulberry", "Lingonberry", "Elder Strawberry", "Willowberry", "Sunbulb", "Pyracantha", "Blue Raspberry"],
+	Root: ["Carrot", "Mutant Carrot", "Chocolate Carrot", "Wild Carrot", "Taro Flower", "Potato", "Mandrake", "Rhubarb", "Onion", "Tall Asparagus", "Horsetail", "Spring Onion", "Aurora Vine", "Radish", "Turnip", "Mangrove"],
+	Candy: ["Blue Lollipop", "Candy Blossom", "Candy Sunflower", "Chocolate Carrot", "Easter Egg", "Red Lollipop", "Sugarglaze", "Maple Resin"],
+	Flower: ["Candy Blossom", "Candy Sunflower", "Cherry Blossom", "Crocus", "Daffodil", "Lotus", "Orange Tulip", "Pink Tulip", "Nightshade", "Moonflower", "Moon Blossom", "Rose", "Foxglove", "Lilac", "Pink Lily", "Purple Dahlia", "Sunflower", "Lavender", "Suncoil", "Honeysuckle", "Manuka Flower", "Ember Lily", "Noble Flower", "Bee Balm", "Succulent", "Parasol Flower", "Rosy Delight", "Lily of the Valley", "Burning Bud", "Rafflesia", "Stonebite", "Liberty Lily", "Firework Flower", "Grand Volcania", "Serenity", "Monoblooma", "Hinomai", "Taro Flower", "Zenflare", "Soft Sunshine", "Dezen", "Artichoke", "Veinpetal", "Cyclamen", "Flare Daisy", "Sakura Bush", "Dandelion", "Peace Lily", "Delphinium", "Bone Blossom", "Tranquil Bloom", "Paradise Petal", "Crown of Thorns", "Calla Lily", "Cyclamen", "Briar Rose", "Spirit Flower", "Broccoli", "Pyracantha", "Horned Melon", "Urchin Plant", "Untold Bell", "Pixie Faern", "Kniphofia"],
+	Fruit: ["Apple", "Avocado", "Banana", "Blueberry", "Coconut", "Cranberry", "Dragon Fruit", "Durian", "Grape", "Lemon", "Lime", "Mango", "Papaya", "Passionfruit", "Peach", "Pear", "Pineapple", "Raspberry", "Strawberry", "Watermelon", "Starfruit", "Blood Banana", "Moon Melon", "Celestiberry", "Moon Mango", "Nectarine", "Hive Fruit", "Green Apple", "Sugar Apple", "Traveler's Fruit", "Loquat", "Kiwi", "White Mulberry", "Lingonberry", "Maple Apple", "Spiked Mango", "Crown Melon", "Grand Tomato", "Pricklefruit", "Mangosteen", "Canary Melon", "Tomato", "Cantaloupe", "Pumpkin", "Eggplant", "Feijoa", "Prickly Pear", "Guanabana", "Bitter Melon", "Corn", "Violet Corn", "Elder Strawberry", "Willowberry", "Carrot", "Cocomango", "Pixie Faern", "Blue Raspberry", "Ackee", "Pixie Faern", "Carnival Pumpkin", "Meyer Lemon", "Golden Peach", "Mangrove"],
+	Leafy: ["Apple", "Blueberry", "Cranberry", "Eggplant", "Grape", "Mango", "Peach", "Pineapple", "Pumpkin", "Raspberry", "Strawberry", "Tomato", "Watermelon", "Cantaloupe", "Cacao", "Beanstalk", "Coolcool Beanbeanstalk", "Mint", "Moonflower", "Starfruit", "Moonglow", "Moon Blossom", "Blood Banana", "Celestiberry", "Moon Mango", "Rose", "Foxglove", "Lilac", "Pink Lily", "Purple Dahlia", "Sunflower", "Nectarine", "Hive Fruit", "Lumira", "Honeysuckle", "Noble Flower", "Bee Balm", "Green Apple", "Sugar Apple", "Parasol Flower", "Elephant Ears", "Traveler's Fruit", "Rosy Delight", "Cauliflower", "Aloe Vera", "Lily of the Valley", "Pitcher Plant", "Rafflesia", "Firefly Fern", "Giant Pinecone", "Serenity", "Soft Sunshine", "Dragon Sapling", "Maple Apple", "Spiked Mango", "Sakura Bush", "Grand Tomato", "Artichoke", "Twisted Tangle", "Log Pumpkin", "Mandrake", "Cyclamen", "Mangosteen", "Princess Thorn", "Romanesco", "Purple Cabbage", "King Cabbage", "Spirit Lantern", "Glowpod", "Shimmersprout", "Willowberry", "Brussels Sprout", "Cocomango", "Urchin Plant", "Fennel", "Pixie Faern", "Emerald Bud", "Aetherfruit", "Parsley", "Maple Resin"],
+	Sour: ["Cranberry", "Lemon", "Lime", "Passionfruit", "Starfruit", "Mangosteen", "Flare Melon", "Mangosteen", "Kiwi", "Sunbulb", "Cocomango", "Horned Melon", "Meyer Lemon", "Golden Peach"],
+	Sweet: ["Banana", "Blue Lollipop", "Blueberry", "Candy Blossom", "Candy Sunflower", "Chocolate Carrot", "Easter Egg", "Grape", "Mango", "Peach", "Pear", "Pineapple", "Raspberry", "Red Lollipop", "Strawberry", "Watermelon", "Starfruit", "Nectar Thorn", "Sugar Apple", "Moon Melon", "Spiked Mango", "Sugarglaze", "Crown Melon", "Mangosteen", "Canary Melon", "Romanesco", "Cocomango", "Pixie Faern", "Blue Raspberry", "Untold Bell", "Carnival Pumpkin", "Golden Peach"],
+	Tropical: ["Banana", "Coconut", "Dragon Fruit", "Durian", "Mango", "Papaya", "Passionfruit", "Pineapple", "Watermelon", "Parasol Flower", "Cocovine", "Starfruit", "Ackee"],
+	Vegetable: ["Carrot", "Wild Carrot", "Chocolate Carrot", "Corn", "Violet Corn", "Eggplant", "Pepper", "Pumpkin", "Purple Cabbage", "Tomato", "Beanstalk", "Coolcool Beanbeanstalk", "Mint", "Dragon Pepper", "Cauliflower", "Bell Pepper", "Taro Flower", "Artichoke", "Onion", "Jalapeno", "Tall Asparagus", "Grand Tomato", "Log Pumpkin", "Badlands Pepper", "Rhubarb", "King Cabbage", "Bitter Melon", "Mandrake", "Mutant Carrot", "Romanesco", "Snaparino Beanarini", "Untold Bell", "Brussels Sprout", "Potato", "Broccoli", "Fennel", "Emerald Bud", "Radish", "Turnip", "Parsley", "Carnival Pumpkin"],
+	Woody: ["Apple", "Sugar Apple", "Avocado", "Cacao", "Coconut", "Durian", "Mango", "Papaya", "Peach", "Pear", "Moon Blossom", "Moon Mango", "Nectarine", "Hive Fruit", "Cocovine", "Traveler's Fruit", "Kiwi", "Feijoa", "Giant Pinecone", "Dragon Sapling", "Maple Apple", "Spiked Mango", "Sakura Bush", "Rhubarb", "Duskpuff", "Mangosteen", "Gleamroot", "Amberheart", "Bamboo", "Lucky Bamboo", "Bendboo", "Boneboo", "Glowpod", "Willowberry", "Cocomango", "Aurora Vine", "Aetherfruit", "Maple Resin", "Mangrove"],
+	Prickly: ["Cactus", "Dragon Fruit", "Durian", "Pineapple", "Venus Fly Trap", "Celestiberry", "Nectar Thorn", "Prickly Pear", "Aloe Vera", "Horned Dinoshroom", "Spiked Mango", "Twisted Tangle", "Pricklefruit", "Princess Thorn", "Crown of Thorns", "Glowthorn", "Pyracantha", "Horned Melon"],
+	Toxic: ["Foxglove", "Nightshade", "Rafflesia", "Pitcher Plant", "Horned Dinoshroom", "Sinisterdrip", "Cursed Fruit", "Amber Spine", "Glowthorn", "Ackee"],
 	Fungus: ["Mega Mushroom", "Mushroom", "Glowshroom", "Nectarshade", "Horned Dinoshroom", "Sinisterdrip", "Duskpuff"],
-	Night: ["Blood Banana", "Moon Melon", "Nightshade", "Glowshroom", "Mint", "Moonflower", "Starfruit", "Moonglow", "Moon Blossom", "Moon Mango", "Celestiberry", "Aura Flora", "Gleamroot", "Glowpod", "Shimmersprout"],
-	Spicy: ["Cursed Fruit", "Ember Lily", "Pepper", "Dragon Pepper", "Cacao", "Horned Dinoshroom", "Grand Volcania", "Jalapeno", "Badlands Pepper", "Taco Fern"],
-	Stalky: ["Beanstalk", "Coolcool Beanbeanstalk", "Burning Bud", "Bamboo", "Dandelion", "Mushroom", "Bendboo", "Lotus", "Elephant Ears", "Lily of the Valley", "Pitcher Plant", "Stonebite", "Firefly Fern", "Horned Dinoshroom", "Grand Volcania", "Soft Sunshine", "Hinomai", "Sinisterdrip", "Lucky Bamboo", "Sugarglaze", "Tall Asparagus", "Veinpetal", "Pricklefruit", "Spring Onion", "Mutant Carrot", "Poseidon Plant", "Corn", "Violet Corn", "Mega Mushroom", "Glowshroom", "Spectralis", "Spirit Lantern", "Flare Melon", "Snaparino Beanarino"],
+	Night: ["Blood Banana", "Moon Melon", "Nightshade", "Glowshroom", "Mint", "Moonflower", "Starfruit", "Moonglow", "Moon Blossom", "Moon Mango", "Celestiberry", "Aura Flora", "Gleamroot", "Glowpod", "Shimmersprout", "Glowthorn", "Lightshoot"],
+	Spicy: ["Cursed Fruit", "Ember Lily", "Pepper", "Dragon Pepper", "Cacao", "Horned Dinoshroom", "Grand Volcania", "Jalapeno", "Badlands Pepper", "Taco Fern", "Briar Rose", "Radish"],
+	Stalky: ["Beanstalk", "Coolcool Beanbeanstalk", "Burning Bud", "Bamboo", "Dandelion", "Mushroom", "Bendboo", "Lotus", "Elephant Ears", "Lily of the Valley", "Pitcher Plant", "Stonebite", "Firefly Fern", "Horned Dinoshroom", "Grand Volcania", "Soft Sunshine", "Hinomai", "Sinisterdrip", "Lucky Bamboo", "Sugarglaze", "Tall Asparagus", "Veinpetal", "Pricklefruit", "Spring Onion", "Mutant Carrot", "Poseidon Plant", "Corn", "Violet Corn", "Mega Mushroom", "Glowshroom", "Spectralis", "Spirit Lantern", "Flare Melon", "Snaparino Beanarino", "Untold Bell", "Brussels Sprout", "Lightshoot", "Urchin Plant", "Pyracantha", "Urchin Plant", "Kniphofia", "Parsley", "Mangrove"],
 	Summer: ["Carrot", "Strawberry", "Blueberry", "Tomato", "Watermelon", "Rafflesia", "Cauliflower", "Green Apple", "Avocado", "Banana", "Pineapple", "Kiwi", "Bell Pepper", "Prickly Pear", "Loquat", "Feijoa", "Pitcher Plant", "Sugar Apple", "Wild Carrot", "Pear", "Cantaloupe", "Parasol Flower", "Rosy Delight", "Elephant Ears", "Delphinium", "Lily of the Valley", "Traveler's Fruit", "Peace Lily", "Aloe Vera", "Guanabana", "Butternut Squash"],
 	Prehistoric: ["Stonebite", "Paradise Petal", "Horned Dinoshroom", "Boneboo", "Firefly Fern", "Fossilight", "Bone Blossom", "Horsetail", "Lingonberry", "Amber Spine", "Grand Volcania"],
-	Zen: ["Monoblooma", "Serenity", "Taro Flower", "Zen Rocks", "Hinomai", "Maple Apple", "Zenflare", "Soft Sunshine", "Spiked Mango", "Sakura Bush", "Enkaku", "Dezen", "Lucky Bamboo", "Tranquil Bloom"]
+	Zen: ["Monoblooma", "Serenity", "Taro Flower", "Zen Rocks", "Hinomai", "Maple Apple", "Zenflare", "Soft Sunshine", "Spiked Mango", "Sakura Bush", "Enkaku", "Dezen", "Lucky Bamboo", "Tranquil Bloom"],
+	Magical: ["Mandrake", "Soul Fruit", "Cursed Fruit", "Firework Flower", "Fossilight", "Tranquil Bloom", "King Cabbage", "Amberheart", "Golden Egg", "Spirit Flower", "Wispwing", "Aurora Vine", "Emerald Bud", "Aetherfruit", "Untold Bell", "Pixie Faern"],
+	Fall: ["Corn", "Pumpkin", "Turnip", "Parsley", "Meyer Lemon", "Carnival Pumpkin", "Kniphofia", "Golden Peach", "Maple Resin"]
         };
 
         // Application state
@@ -431,7 +616,7 @@
 
             createFruitTypeCard(type, fruits) {
                 const card = document.createElement('div');
-                card.className = 'fruit-type-card';
+                card.className = `fruit-type-card ${type.toLowerCase()}`;
                 card.setAttribute('data-type', type);
                 
                 if (AppState.selectedType === type) {
@@ -488,6 +673,9 @@
                 
                 const fruits = fruitTypesData[type];
                 
+                // Clear previous type classes and add current type class
+                detailsDiv.className = `fruit-details ${type.toLowerCase()}`;
+                
                 titleElement.innerHTML = `${type} Fruits (${fruits.length} total)`;
                 
                 // Clear and populate fruit list
@@ -511,7 +699,10 @@
                 document.querySelectorAll('.fruit-type-card').forEach(card => {
                     card.classList.remove('selected');
                 });
-                document.getElementById('fruitDetails').classList.remove('show');
+                const detailsDiv = document.getElementById('fruitDetails');
+                detailsDiv.classList.remove('show');
+                // Reset details section to default class
+                detailsDiv.className = 'fruit-details';
                 this.updateStats();
             }
 

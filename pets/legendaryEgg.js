@@ -39,23 +39,25 @@ export const LEGENDARY_EGG_PETS = {
         source: "Legendary Egg",
         probability: 42.55,
         obtainable: false,
-        description: "Mystical monkey with silver fur that reflects moonlight for magical bonuses",
+        description: "Refunds fruits back to inventory with higher chance for common plants",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Refund Chance Max: no limit (no limit 🌈)";
             
-            const baseSeconds = 480;
-            const secondsMod = baseSeconds * modifier;
-            const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(1, adjustedBaseSeconds - (5 * kg));
-            const xpMultiplier = 1.15 + (kg / 100);
+            const baseChance = 7.5;
+            const chance = Math.min(20, baseChance + (0.075 * kg));
+            
+            const chanceMod = baseChance * modifier;
+            const chanceTotal = chance + chanceMod;
+            const finalChance = Math.min(20, chanceTotal);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, shines silver light on all pets for 10 seconds, granting them <strong>${xpMultiplier.toFixed(2)}x</strong> XP gain!${displayText}`;
+            return `<strong>${finalChance.toFixed(2)}%</strong> chance to refund fruit back to your inventory. Rarer plants have lower chance to refund${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases shine time by 5 seconds and increases XP multiplier by 0.01x"
+        perKgImpact: () => "Each additional kg increases refund chance by 0.075% (max 20%)"
     },
 
     seaotter: {
@@ -75,6 +77,7 @@ export const LEGENDARY_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 97.92 (77.92 🌈)";
             
             const baseSeconds = 240;
             const secondsMod = baseSeconds * modifier;
@@ -87,7 +90,7 @@ export const LEGENDARY_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, sprays water on all plants within <strong>${range.toFixed(1)}</strong> studs, increasing their growth by <strong>${waterEffect.toFixed(2)}x</strong> for 15 seconds!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases spray time by 2.4 seconds, increases range by 0.1 studs, and increases growth boost by 0.005x"
+        perKgImpact: () => "Each additional kg decreases spray time by 2.4 seconds (min 5s), increases range by 0.1 studs, and increases growth boost by 0.005x"
     },
 
     polarbear: {
@@ -103,6 +106,7 @@ export const LEGENDARY_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 98.33 (78.33 🌈), Freeze Immunity Max: 100.00 (100.00 🌈)";
             
             const baseSeconds = 600;
             const secondsMod = baseSeconds * modifier;
@@ -115,7 +119,7 @@ export const LEGENDARY_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, roars and grants all plants <strong>${coldResistance.toFixed(1)}%</strong> cold resistance and <strong>${freezeImmunity.toFixed(1)}%</strong> freeze immunity for 30 seconds!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases roar time by 6 seconds, increases cold resistance by 0.25%, and increases freeze immunity by 0.5%"
+        perKgImpact: () => "Each additional kg decreases roar time by 6 seconds (min 10s), increases cold resistance by 0.25%, and increases freeze immunity by 0.5% (max 100%)"
     },
 
     turtle: {

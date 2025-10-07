@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View pet ability limits and constraints for Grow a Garden game pets">
+    <meta name="keywords" content="Grow a Garden, pet limits, game tools, pet abilities, constraints">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+    <title>Pet Ability Limits - GAG Pets</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Custom styles specific to pet limits page */
+        
+        /* Override container max-width for wider viewport */
+        .container {
+            max-width: none;
+            width: 95%;
+            margin: 20px auto;
+        }
+        
+        /* Adjust calculator padding for wider layout */
+        .calculator {
+            padding: 30px 40px;
+        }
+        
+        /* Make table container use full width */
+        .table-container {
+            width: 100%;
+            max-height: 75vh;
+        }
+        
+        /* Improve table layout for wider screens */
+        table {
+            min-width: 100%;
+            table-layout: auto;
+        }
+        
+        th, td {
+            padding: 12px 20px;
+        }
+        
+        /* Adjust column widths for better space utilization */
+        th:first-child, td:first-child {
+            width: 20%;
+            min-width: 150px;
+        }
+        
+        th:nth-child(2), td:nth-child(2) {
+            width: 30%;
+            min-width: 200px;
+        }
+        
+        th:nth-child(3), td:nth-child(3) {
+            width: 50%;
+            min-width: 300px;
+        }
+        
+        /* Improve controls layout for wider screens */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+            flex: 0 0 auto;
+            text-align: center;
+        }
+        
+        .form-group label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            display: block;
+            text-align: center;
+        }
+        
+        .search-box {
+            width: 350px;
+            flex-shrink: 0;
+        }
+        
+        .filter-select {
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+        
+        .export-btn {
+            align-self: flex-end;
+            margin-top: 0;
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 1024px) {
+            .controls {
+                gap: 15px;
+            }
+            
+            .search-box {
+                width: 280px;
+            }
+            
+            .filter-select {
+                min-width: 150px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 98%;
+                margin: 10px auto;
+            }
+            
+            .calculator {
+                padding: 20px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .filter-select {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .export-btn {
+                width: 100%;
+                align-self: stretch;
+            }
+            
+            th:first-child, td:first-child {
+                width: 25%;
+                min-width: 120px;
+            }
+            
+            th:nth-child(2), td:nth-child(2) {
+                width: 30%;
+                min-width: 130px;
+            }
+            
+            th:nth-child(3), td:nth-child(3) {
+                width: 45%;
+                min-width: 170px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                margin: 5px auto;
+                border-radius: 0;
+            }
+            
+            .calculator {
+                padding: 15px;
+            }
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 25px;
+            background: var(--result-bg);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            width: 250px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2);
+        }
+        
+        .filter-select {
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background: var(--input-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2);
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .export-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .export-btn:active {
+            transform: translateY(0);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+        
+        .error {
+            color: var(--error-color);
+            background: var(--error-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--error-color);
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 0;
+            background: var(--card-bg);
+        }
+        
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+        
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+        
+        th {
+            background: var(--header-bg);
+            color: white;
+            font-weight: bold;
+            position: -webkit-sticky; /* Safari support */
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Very high z-index to ensure it stays on top */
+            text-shadow: 1px 1px 2px var(--shadow-strong);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow below header when sticky */
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        tr:hover {
+            background: var(--bg-light);
+            transform: translateX(2px);
+        }
+        
+        /* Alternating row banding */
+        tbody tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        [data-theme="dark"] tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        /* Ensure hover effect works over banding */
+        tbody tr:nth-child(even):hover {
+            background: var(--bg-light);
+        }
+        
+        tbody tr:nth-child(odd):hover {
+            background: var(--bg-light);
+        }
+        
+        /* Row selection highlighting */
+        tbody tr.selected {
+            background: #fff9c4 !important; /* Pastel yellow */
+            color: #333 !important; /* Dark text for good contrast */
+            box-shadow: 0 0 0 2px #f4e04d; /* Slightly darker yellow border */
+        }
+        
+        tbody tr.selected td {
+            color: #333 !important; /* Dark text for readability */
+            border-color: rgba(244, 224, 77, 0.3); /* Yellow-tinted borders */
+        }
+        
+        tbody tr.selected .no-limits {
+            color: #666 !important; /* Slightly lighter for "No constraints" text */
+        }
+        
+        tbody tr.selected .rainbow {
+            /* Keep rainbow effect visible on selected rows with yellow background */
+            -webkit-text-fill-color: transparent;
+            background: linear-gradient(45deg, #d32f2f, #f57900, #f9d71c, #27ae60, #3498db, #8e44ad, #9b59b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        /* Make rows clickable */
+        tbody tr {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        tbody tr:active {
+            transform: scale(0.995);
+        }
+        
+        .kg-limits-cell {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.9rem;
+            max-width: 250px;
+            word-wrap: break-word;
+            color: var(--text-color);
+        }
+        
+        .no-limits {
+            color: var(--text-secondary);
+            font-style: italic;
+            opacity: 0.7;
+        }
+        
+        .per-kg-cell {
+            font-size: 0.9rem;
+            max-width: 500px;
+            word-wrap: break-word;
+            color: var(--text-color);
+        }
+        
+        .rainbow {
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .table-container {
+            max-height: 70vh;
+            overflow-y: auto;
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px var(--shadow-light);
+            position: relative; /* Ensure proper stacking context */
+            background: var(--card-bg);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+            }
+            
+            .table-container {
+                max-height: 60vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .kg-limits-cell {
+                max-width: 120px;
+                font-size: 0.75rem;
+            }
+            
+            .per-kg-cell {
+                max-width: 180px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Pet Ability Limits</h1>
+            <p>View constraints and per-kg impacts for all pets</p>
+            <button type="button" id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <span class="toggle-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="navigation-links">
+            <a href="pets.html">🧮 Pet Calculator</a>
+            <a href="fruittypes.html">🍎 Fruit Types</a>
+            <a href="recipes.html">🍳 Recipes</a>
+        </div>
+        
+            <div class="stats" id="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalPets">-</div>
+                    <div class="stat-label">Total Pets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="withConstraints">-</div>
+                    <div class="stat-label">With Constraints</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="withoutConstraints">-</div>
+                    <div class="stat-label">Without Constraints</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div class="form-group">
+                    <label for="searchBox">Search Pets:</label>
+                    <input type="text" id="searchBox" class="search-box" placeholder="Search pets by name, source, or constraints..." aria-describedby="searchBox-help">
+                    <small id="searchBox-help" class="sr-only">Search for pets by name, source, or constraint information</small>
+                </div>
+                <div class="form-group">
+                    <label for="constraintFilter">Filter by Constraints:</label>
+                    <select id="constraintFilter" class="filter-select" aria-label="Filter by constraint type">
+                        <option value="">All Pets</option>
+                        <option value="with">With Constraints</option>
+                        <option value="without">Without Constraints</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sourceFilter">Filter by Source:</label>
+                    <select id="sourceFilter" class="filter-select" aria-label="Filter by pet source">
+                        <option value="">All Sources</option>
+                    </select>
+                </div>
+                <button id="exportBtn" class="export-btn">Export TSV</button>
+            </div>
+            
+            <div id="loading" class="loading">🌱 Loading pet data...</div>
+            <div id="error" class="error" style="display: none;"></div>
+            
+            <div class="table-container" id="tableContainer" style="display: none;">
+                <table id="petTable">
+                    <thead>
+                        <tr>
+                            <th>Pet Name</th>
+                            <th>kg Limit (w/Rainbow 🌈)</th>
+                            <th>Per kg Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody id="petTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Dark mode toggle functionality (copied from pets.html)
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (darkModeToggle) {
+            // Initialize theme from localStorage or default to light
+            const savedTheme = localStorage.getItem('darkMode');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            setTheme(initialTheme);
+
+            // Toggle event listener
+            darkModeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('darkMode')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('darkMode', theme);
+            
+            // Update toggle button icon
+            const toggleIcon = document.querySelector('.dark-mode-toggle .toggle-icon');
+            if (toggleIcon) {
+                toggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        // Pet files list
+        const petFiles = [
+            'antiBeeEgg.js',
+            'beeEgg.js',
+            'bloodMoonShop.js',
+            'bugEgg.js',
+            'chestsEventsOther.js',
+            'commonEgg.js',
+            'commonSummerEgg.js',
+            'dinosaurEgg.js',
+            'enchantedEgg.js',
+            'fallEgg.js',
+            'gourmetEgg.js',
+            'legendaryEgg.js',
+            'mythicalEgg.js',
+            'nightEgg.js',
+            'oasisEgg.js',
+            'paradiseEgg.js',
+            'primalEgg.js',
+            'rainbowExotic.js',
+            'rareEgg.js',
+            'rareSummerEgg.js',
+            'sproutEgg.js',
+            'uncommonEgg.js',
+            'zenEgg.js'
+        ];
+
+        let allPets = [];
+        let filteredPets = [];
+
+        async function loadPetData() {
+            try {
+                const loadingEl = document.getElementById('loading');
+                const errorEl = document.getElementById('error');
+                const tableContainer = document.getElementById('tableContainer');
+                
+                loadingEl.style.display = 'block';
+                errorEl.style.display = 'none';
+                
+                for (const fileName of petFiles) {
+                    try {
+                        loadingEl.textContent = `Loading ${fileName}...`;
+                        
+                        // Import the pet file
+                        const module = await import(`./pets/${fileName}`);
+                        
+                        // Get all exported objects from the module
+                        const exports = Object.keys(module);
+                        
+                        for (const exportName of exports) {
+                            const petCategory = module[exportName];
+                            
+                            if (typeof petCategory === 'object' && petCategory !== null) {
+                                // Process each pet in the category
+                                for (const [petKey, petData] of Object.entries(petCategory)) {
+                                    if (petData && petData.name && petData.calculate && petData.perKgImpact) {
+                                        // Extract kg limits from the calculate function
+                                        const calculateStr = petData.calculate.toString();
+                                        const kgLimitsMatch = calculateStr.match(/const kgLimits = ["']([^"']+)["']/);
+                                        const kgLimits = kgLimitsMatch ? kgLimitsMatch[1] : 'none';
+                                        
+                                        allPets.push({
+                                            name: petData.name,
+                                            source: petData.source || 'Unknown',
+                                            kgLimits: kgLimits,
+                                            perKgImpact: petData.perKgImpact(),
+                                            fileName: fileName
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    } catch (fileError) {
+                        console.warn(`Failed to load ${fileName}:`, fileError);
+                    }
+                }
+                
+                if (allPets.length === 0) {
+                    throw new Error('No pet data found');
+                }
+                
+                // Sort pets by name
+                allPets.sort((a, b) => a.name.localeCompare(b.name));
+                filteredPets = [...allPets];
+                
+                updateStats();
+                populateSourceFilter();
+                renderTable();
+                
+                loadingEl.style.display = 'none';
+                tableContainer.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading pet data:', error);
+                document.getElementById('loading').style.display = 'none';
+                const errorEl = document.getElementById('error');
+                errorEl.textContent = `Error loading pet data: ${error.message}`;
+                errorEl.style.display = 'block';
+            }
+        }
+
+        function updateStats() {
+            const withConstraints = allPets.filter(pet => pet.kgLimits !== 'none').length;
+            const withoutConstraints = allPets.length - withConstraints;
+            
+            document.getElementById('totalPets').textContent = allPets.length;
+            document.getElementById('withConstraints').textContent = withConstraints;
+            document.getElementById('withoutConstraints').textContent = withoutConstraints;
+        }
+
+        function populateSourceFilter() {
+            const sources = [...new Set(allPets.map(pet => pet.source))].sort();
+            const sourceFilter = document.getElementById('sourceFilter');
+            
+            sources.forEach(source => {
+                const option = document.createElement('option');
+                option.value = source;
+                option.textContent = source;
+                sourceFilter.appendChild(option);
+            });
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('petTableBody');
+            tbody.innerHTML = '';
+            
+            filteredPets.forEach((pet, index) => {
+                const row = document.createElement('tr');
+                row.dataset.petIndex = index; // Add data attribute for tracking
+                
+                const nameCell = document.createElement('td');
+                nameCell.textContent = pet.name;
+                
+                const kgLimitsCell = document.createElement('td');
+                kgLimitsCell.className = 'kg-limits-cell';
+                if (pet.kgLimits === 'none') {
+                    kgLimitsCell.textContent = 'No constraints';
+                    kgLimitsCell.classList.add('no-limits');
+                } else {
+                    // Replace commas with line breaks and handle rainbow emojis
+                    const formattedLimits = pet.kgLimits
+                        .replace(/,/g, '<br>')
+                        .replace(/🌈/g, '<span class="rainbow">🌈</span>');
+                    kgLimitsCell.innerHTML = formattedLimits;
+                }
+                
+                const perKgCell = document.createElement('td');
+                perKgCell.className = 'per-kg-cell';
+                // Apply text replacements for cleaner display
+                let perKgText = pet.perKgImpact
+                    .replace(/Each additional kg/g, '+1 kg')
+                    .replace(/ seconds/g, 's');
+                perKgCell.textContent = perKgText;
+                
+                row.appendChild(nameCell);
+                row.appendChild(kgLimitsCell);
+                row.appendChild(perKgCell);
+                
+                // Add click event listener for row selection
+                row.addEventListener('click', function() {
+                    // Remove selection from all other rows
+                    document.querySelectorAll('tbody tr.selected').forEach(tr => {
+                        tr.classList.remove('selected');
+                    });
+                    
+                    // Toggle selection on clicked row
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                    } else {
+                        this.classList.add('selected');
+                        
+                        // Optional: Scroll the row into view if it's partially hidden
+                        this.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'nearest',
+                            inline: 'nearest'
+                        });
+                    }
+                });
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        function filterPets() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const constraintFilter = document.getElementById('constraintFilter').value;
+            const sourceFilter = document.getElementById('sourceFilter').value;
+            
+            filteredPets = allPets.filter(pet => {
+                const matchesSearch = pet.name.toLowerCase().includes(searchTerm) ||
+                                    pet.source.toLowerCase().includes(searchTerm) ||
+                                    pet.kgLimits.toLowerCase().includes(searchTerm) ||
+                                    pet.perKgImpact.toLowerCase().includes(searchTerm);
+                
+                const matchesConstraint = constraintFilter === '' ||
+                                        (constraintFilter === 'with' && pet.kgLimits !== 'none') ||
+                                        (constraintFilter === 'without' && pet.kgLimits === 'none');
+                
+                const matchesSource = sourceFilter === '' || pet.source === sourceFilter;
+                
+                return matchesSearch && matchesConstraint && matchesSource;
+            });
+            
+            renderTable();
+        }
+
+        function exportTSV() {
+            const headers = ['name', 'kgLimits', 'perKgImpact'];
+            const rows = [headers.join('\t')];
+            
+            filteredPets.forEach(pet => {
+                const row = [
+                    pet.name,
+                    pet.kgLimits,
+                    pet.perKgImpact
+                ].join('\t');
+                rows.push(row);
+            });
+            
+            const tsvContent = rows.join('\n');
+            const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pet-data-export.tsv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Event listeners
+        document.getElementById('searchBox').addEventListener('input', filterPets);
+        document.getElementById('constraintFilter').addEventListener('change', filterPets);
+        document.getElementById('sourceFilter').addEventListener('change', filterPets);
+        document.getElementById('exportBtn').addEventListener('click', exportTSV);
+
+        // Initialize
+        loadPetData();
+    </script>
+</body>
+</html>

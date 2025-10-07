@@ -376,6 +376,35 @@ select:focus-visible, input:focus-visible {
     cursor: not-allowed;
 }
 
+.pet-card-btn {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.pet-card-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.3);
+}
+
+.pet-card-btn:active {
+    transform: translateY(0);
+}
+
+.pet-card-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .button-container {
     display: flex;
     flex-wrap: wrap;
@@ -395,13 +424,20 @@ select:focus-visible, input:focus-visible {
     flex: 0 0 auto;
 }
 
+.button-container .pet-card-btn {
+    margin-top: 0;
+    margin-left: 0;
+    flex: 0 0 auto;
+}
+
 @media (max-width: 768px) {
     .button-container {
         flex-direction: column;
     }
     
     .button-container .calculate-btn,
-    .button-container .link-btn {
+    .button-container .link-btn,
+    .button-container .pet-card-btn {
         width: 100%;
         flex: none;
     }

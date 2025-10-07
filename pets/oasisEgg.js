@@ -19,6 +19,7 @@ export const OASIS_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 94.62 (73.85 🌈)";
             
             const baseSeconds = 1350;
             const secondsMod = baseSeconds * modifier;
@@ -29,7 +30,7 @@ export const OASIS_EGG_PETS = {
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, goes to another player's random fruit, has a chance to copy 1 random mutation and apply it to random fruit you own! The higher mutation multiplier the rarer chance to copy!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases mutation copying time by 13 seconds"
+        perKgImpact: () => "Each additional kg decreases mutation copying time by 13 seconds (min 120 seconds)"
     },
     meerkat: {
         name: "Meerkat",
@@ -43,23 +44,25 @@ export const OASIS_EGG_PETS = {
         source: "Oasis Egg",
         probability: 45,
         obtainable: false,
-        description: "Does lookouts that advance other pets' cooldowns",
+        description: "Goes to another pet and does a lookout that advances their cooldown, with a chance to repeat",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 97.50 (77.32 🌈)";
             
-            const baseSeconds = 60;
+            const baseSeconds = 444;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(40, adjustedBaseSeconds - kg);
-            const advance = 15 + (kg / 4);
+            const seconds = Math.max(15, adjustedBaseSeconds - (4.4 * kg));
+            const advance = 20 + (0.5 * kg);
+            const chance = Math.min(100, 15 + (0.25 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, does a lookout and advances all pets' cooldowns by <strong>${Utils.formatTime(advance)}</strong>!${displayText}`;
+            return `Every <strong>${Utils.formatTime(seconds)}</strong> goes to another pet and does a lookout. That pet advances cooldown by <strong>${Utils.formatTime(advance)}</strong>! Has a <strong>${chance.toFixed(2)}%</strong> chance to do it again after each lookout.${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases lookout time by 1 second and increases cooldown advance by 0.25 seconds"
+        perKgImpact: () => "Each additional kg decreases cooldown by 4.4 seconds (min 15 seconds), increases advance amount by 0.5 seconds, and increases repeat chance by 0.25%"
     },
     hyacinthmacaw: {
         name: "Hyacinth Macaw",
@@ -78,18 +81,19 @@ export const OASIS_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 97.50 (77.32 🌈)";
             
-            const baseSeconds = 486;
+            const baseSeconds = 444;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(40, adjustedBaseSeconds - (4 * kg));
-            const mutateChance = 15 + (kg / 20);
+            const seconds = Math.max(15, adjustedBaseSeconds - (4.4 * kg));
+            const mutateChance = Math.min(100, 15 + (kg / 4.4));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, <strong>${mutateChance.toFixed(2)}%</strong> chance to mutate a nearby fruit, applying the Cloudtouched mutation!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases mutation time by 4 seconds and increases mutation chance by 0.05%"
+        perKgImpact: () => "Each additional kg decreases mutation time by 4.4 seconds (min 15 seconds) and increases mutation chance by 0.23%"
     },
     axolotl: {
         name: "Axolotl",
@@ -108,6 +112,7 @@ export const OASIS_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Preservation Max: 35.00 (35.00 🌈)";
             
             const basePreserveChance = 6;
             const preserveChance = Math.min(13, basePreserveChance + (0.20 * kg));
@@ -119,7 +124,7 @@ export const OASIS_EGG_PETS = {
             
             return `<strong>${preserveChanceTotal.toFixed(1)}%</strong> chance Summer type fruit stays after collecting${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases preservation chance by 0.20%"
+        perKgImpact: () => "Each additional kg increases preservation chance by 0.20% (max 13%)"
     },
     sandsnake: {
         name: "Sand Snake",

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test Results</h1>
+    <div id="results">Loading...</div>
+    
+    <script>
+        async function testAPI() {
+            try {
+                console.log('Testing API...');
+                const response = await fetch('/api/pets/bee/ability?weight=75&modifierType=none');
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    document.getElementById('results').innerHTML = `Error: ${response.status} ${response.statusText}`;
+                    return;
+                }
+                
+                const data = await response.json();
+                console.log('API Response:', data);
+                
+                document.getElementById('results').innerHTML = `
+                    <h2>Success!</h2>
+                    <p><strong>Pet:</strong> ${data.petName}</p>
+                    <p><strong>Weight:</strong> ${data.weight}kg</p>
+                    <p><strong>Modifier:</strong> ${data.modifierType}</p>
+                    <p><strong>Ability Text:</strong></p>
+                    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+                        ${data.abilityText}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error testing API:', error);
+                document.getElementById('results').innerHTML = `Error: ${error.message}`;
+            }
+        }
+        
+        testAPI();
+    </script>
+</body>
+</html>

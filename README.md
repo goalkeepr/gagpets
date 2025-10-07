@@ -150,6 +150,30 @@ docker run -p 8029:8029 gagpets
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
+### Screenshot API in Docker
+
+The application includes a screenshot API that requires Chrome for image generation. The Dockerfile automatically installs Chrome and configures Puppeteer.
+
+#### If you encounter Chrome/Puppeteer errors:
+
+**Option 1: Use the main Dockerfile (Puppeteer-managed Chrome)**
+```bash
+docker build -t gagpets .
+```
+
+**Option 2: Use official Chrome installation**
+```bash
+docker build -f Dockerfile.chrome-official -t gagpets .
+```
+
+**Testing the Docker setup:**
+```bash
+# Run the test script (requires Docker to be running)
+./test-docker-puppeteer.sh
+```
+
+For detailed Docker and Puppeteer setup information, see `DOCKER_PUPPETEER_SETUP.md`.
+
 ## 🔍 API Endpoints
 
 ### Web Interface Endpoints
@@ -220,6 +244,21 @@ The application provides a comprehensive REST API for pet ability calculations a
     "abilityText": "Every <strong>5s</strong>, eats a carrot for a <strong>2.250x</strong> value bonus!"
   }
   ```
+
+#### `GET /api/pets/:petKey/screenshot`
+**Generate Pet Card Screenshot**
+- **Parameters:**
+  - `petKey` (path): Pet identifier (e.g., "trex", "griffin", "bunny")
+  - `weight` (query, optional): Pet weight in kg (default: 50)
+  - `age` (query, optional): Pet age (default: 1)
+  - `mutation` (query, optional): Pet mutation type (default: "none")
+  - `width` (query, optional): Image width in pixels (default: 760)
+  - `height` (query, optional): Image height in pixels (default: 1080)
+- **Example:** `GET /api/pets/trex/screenshot?weight=75&mutation=rainbow`
+- **Response:** PNG image data with appropriate headers
+- **Use Cases:** Discord bots, web applications, mobile apps, automated content generation
+
+For complete screenshot API documentation, see `API_SCREENSHOT_DOCS.md`.
 
 ### Monitoring & Debug Endpoints
 

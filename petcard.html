@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pet Trading Card Generator for Grow a Garden">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+    <title>Pet Trading Card - Grow a Garden</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3), transparent 50%),
+                linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            overflow-x: hidden;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            animation: backgroundShift 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pet-card-container {
+            perspective: 1200px;
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.25));
+        }
+
+        .pet-card {
+            width: 380px;
+            min-height: 540px;
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85)),
+                linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 24px;
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.12),
+                0 16px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        border-color 0.5s ease; /* Add border-color transition */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+
+        .pet-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.1) 25%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.1) 75%,
+                transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .pet-card:hover {
+            transform: rotateY(8deg) rotateX(4deg) translateY(-8px);
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.2),
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .pet-card:hover::after {
+            opacity: 1;
+        }
+
+        .card-header {
+            background: transparent;
+            padding: 25px 20px 20px 20px;
+            text-align: center;
+            position: relative;
+            transition: background 0.5s ease; /* Smooth transition */
+            border-radius: 24px 24px 0 0;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 24px 24px 0 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .pet-mutation {
+            background: linear-gradient(135deg, rgba(138,43,226,0.95), rgba(75,0,130,0.9));
+            color: white;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pet-mutation.none {
+            display: none;
+        }
+
+        .pet-mutation.golden {
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffc107);
+            color: #1a1a1a;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .pet-mutation.rainbow {
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: rainbowShimmer 3s ease-in-out infinite;
+        }
+
+        .pet-class {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0;
+            margin-left: 8px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(55, 65, 81, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+            cursor: help;
+        }
+        
+        /* Tooltip styling */
+        .pet-class::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10000; /* Increased z-index to appear above animated elements */
+        }
+        
+        .pet-class::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 2px;
+            z-index: 10000; /* Increased z-index to appear above animated elements */
+        }
+        
+        .pet-class:hover::after,
+        .pet-class:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Class tier colors based on class number */
+        .pet-class.tier-0 { 
+            background: linear-gradient(135deg, #808080, #696969); 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .pet-class.tier-1 { 
+            background: linear-gradient(135deg, #1eff00, #32cd32); 
+            color: #000;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        .pet-class.tier-2 { 
+            background: linear-gradient(135deg, #0070dd, #4169e1); 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .pet-class.tier-3 { 
+            background: linear-gradient(135deg, #a335ee, #8a2be2); 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .pet-class.tier-4 { 
+            background: linear-gradient(135deg, #ff8000, #ff6347); 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .pet-class.tier-5 { 
+            background: linear-gradient(135deg, #e6cc80, #daa520); 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .pet-class.tier-6 { 
+            background: linear-gradient(135deg, #ff69b4, #ff1493); 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .pet-class.tier-7 { 
+            background: linear-gradient(135deg, #cd7f32, #b8860b, #8b4513, #d2691e);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(205, 127, 50, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(205, 127, 50, 0.8);
+            animation: bronzeShimmer 2.5s ease-in-out infinite;
+            position: relative;
+            overflow: visible; /* Changed from hidden to visible for tooltips */
+        }
+        
+        .pet-class.tier-7:hover {
+            animation-play-state: paused;
+        }
+        
+        .pet-class.tier-7:hover::before {
+            opacity: 0;
+        }
+        
+        .pet-class.tier-7::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: bronzeSweep 3.5s linear infinite;
+            pointer-events: none;
+            border-radius: 25px;
+            overflow: hidden;
+            z-index: -1; /* Move behind the text content */
+        }
+        .pet-class.tier-8 { 
+            background: linear-gradient(135deg, #c0c0c0, #a8a8a8, #d3d3d3, #b0b0b0);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(192, 192, 192, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(192, 192, 192, 0.8);
+            animation: silverShimmer 2.2s ease-in-out infinite;
+            position: relative;
+            overflow: visible; /* Changed from hidden to visible for tooltips */
+        }
+        
+        .pet-class.tier-8:hover {
+            animation-play-state: paused;
+        }
+        
+        .pet-class.tier-8:hover::before {
+            opacity: 0;
+        }
+        
+        .pet-class.tier-8::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: silverSweep 3.2s linear infinite;
+            pointer-events: none;
+            border-radius: 25px;
+            overflow: hidden;
+            z-index: -1; /* Move behind the text content */
+        }
+        .pet-class.tier-9 { 
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffc107, #ffb300);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 215, 0, 0.8);
+            animation: goldShimmer 2s ease-in-out infinite;
+            position: relative;
+            overflow: visible; /* Changed from hidden to visible for tooltips */
+        }
+        
+        .pet-class.tier-9:hover {
+            animation-play-state: paused;
+        }
+        
+        .pet-class.tier-9:hover::before {
+            opacity: 0;
+        }
+        
+        .pet-class.tier-9::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: goldSweep 3s linear infinite;
+            pointer-events: none;
+            border-radius: 25px;
+            overflow: hidden;
+            z-index: -1; /* Move behind the text content */
+        }
+        
+        @keyframes goldShimmer {
+            0%, 100% { 
+                filter: brightness(1) saturate(1);
+                box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+            50% { 
+                filter: brightness(1.15) saturate(1.2);
+                box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            }
+        }
+        
+        @keyframes goldSweep {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes bronzeShimmer {
+            0%, 100% { 
+                filter: brightness(1) saturate(1);
+                box-shadow: 0 4px 20px rgba(205, 127, 50, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            }
+            50% { 
+                filter: brightness(1.12) saturate(1.15);
+                box-shadow: 0 6px 25px rgba(205, 127, 50, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+        }
+        
+        @keyframes bronzeSweep {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes silverShimmer {
+            0%, 100% { 
+                filter: brightness(1) saturate(1);
+                box-shadow: 0 4px 20px rgba(192, 192, 192, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            }
+            50% { 
+                filter: brightness(1.1) saturate(1.1);
+                box-shadow: 0 6px 25px rgba(192, 192, 192, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            }
+        }
+        
+        @keyframes silverSweep {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        .pet-class.tier-10-plus { 
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0080);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: rainbowShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbowShimmer {
+            0%, 100% { 
+                filter: brightness(1) saturate(1);
+            }
+            50% { 
+                filter: brightness(1.2) saturate(1.3);
+            }
+        }
+
+        .mutation-section {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        /* Updated pet name styling - v3.0 - Seamless blend */
+        .pet-name {
+            font-size: 32px !important;
+            font-weight: 900;
+            background: linear-gradient(135deg, #1a202c, #4a5568, #2d3748);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            margin: 0;
+            text-align: center;
+            letter-spacing: -0.8px;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .pet-name::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--underline-color, linear-gradient(135deg, #3b82f6, #8b5cf6));
+            border-radius: 2px;
+            box-shadow: var(--underline-shadow, 0 2px 8px rgba(59, 130, 246, 0.4));
+            transition: all 0.5s ease; /* Smooth transition */
+        }
+
+        .source-rarity {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            font-size: 11px;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .source, .rarity {
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .rarity {
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .source {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a202c;
+            text-shadow: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .source-icon {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .source-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .source.rainbow, .rarity.rainbow {
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) !important;
+            color: white !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            animation: rainbowShimmer 3s ease-in-out infinite;
+        }
+
+        .rarity.common { 
+            background: linear-gradient(135deg, #808080, #696969);
+            box-shadow: 0 4px 15px rgba(128, 128, 128, 0.3);
+        }
+        .rarity.uncommon { 
+            background: linear-gradient(135deg, #1eff00, #32cd32); 
+            color: #000; 
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(30, 255, 0, 0.3);
+        }
+        .rarity.rare { 
+            background: linear-gradient(135deg, #0070dd, #4169e1);
+            box-shadow: 0 4px 15px rgba(0, 112, 221, 0.3);
+        }
+        .rarity.epic { 
+            background: linear-gradient(135deg, #a335ee, #8a2be2);
+            box-shadow: 0 4px 15px rgba(163, 53, 238, 0.3);
+        }
+        .rarity.legendary { 
+            background: linear-gradient(135deg, #ff8000, #ff6347);
+            box-shadow: 0 4px 15px rgba(255, 128, 0, 0.3);
+        }
+        .rarity.mythical { 
+            background: linear-gradient(135deg, #e6cc80, #daa520); 
+            color: #000; 
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(230, 204, 128, 0.3);
+        }
+        .rarity.divine { 
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .pet-image-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: 
+                radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%),
+                linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05));
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            gap: 15px;
+        }
+
+        .pet-content-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .pet-image-container {
+            flex: 0 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 160px;
+        }
+
+        .pet-image-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            animation: floatingOrbs 8s ease-in-out infinite;
+        }
+
+        @keyframes floatingOrbs {
+            0%, 100% { 
+                background: 
+                    radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            }
+            50% { 
+                background: 
+                    radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
+            }
+        }
+
+        .pet-image {
+            max-width: 140px;
+            max-height: 140px;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.15),
+                0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pet-card:hover .pet-image {
+            transform: scale(1.05) rotateY(5deg);
+        }
+
+        .pet-emoji {
+            font-size: 100px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+        }
+
+        .pet-card:hover .pet-emoji {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .pet-stats {
+            padding: 0px 24px 24px 24px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .stat-pair {
+            text-align: center;
+            padding: 10px 8px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 3px 15px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-pair::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .stat-pair:hover::before {
+            left: 100%;
+        }
+
+        .stat-pair:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        .stat-pair .label {
+            font-weight: 600;
+            color: #64748b;
+            display: block;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-pair .value {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        /* Dynamic font sizing for weight values */
+        .stat-pair .value.weight-value {
+            font-size: 14px;
+        }
+
+        .stat-pair .value.weight-value.large {
+            font-size: 12px;
+        }
+
+        .stat-pair .value.weight-value.xlarge {
+            font-size: 10px;
+        }
+
+        .stat-pair .value.weight-value.xxlarge {
+            font-size: 9px;
+        }
+
+        .abilities-section {
+            margin-top: 3px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .abilities-tabs {
+            display: flex;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 2px;
+        }
+
+        .ability-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ability-tab:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .ability-tab.active {
+            background: linear-gradient(135deg, rgba(100, 116, 139, 0.15), rgba(148, 163, 184, 0.12));
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        .tab-label {
+            display: block;
+            font-weight: 600;
+            color: #334155;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .tab-sublabel {
+            display: block;
+            font-weight: 400;
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .ability-tab.active .tab-label {
+            color: #1e293b;
+            font-weight: 700;
+        }
+
+        .ability-tab.active .tab-sublabel {
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .ability-content {
+            position: relative;
+            min-height: 60px;
+        }
+
+        .ability-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #475569;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .ability-text:not(.active) {
+            display: none;
+        }
+
+        .ability-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .loading-state p {
+            font-size: 18px;
+            margin: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 60px;
+            color: #dc2626;
+            background: rgba(254, 242, 242, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            margin: 20px;
+            border: 1px solid rgba(248, 113, 113, 0.2);
+        }
+
+        .error-state h3 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 400px) {
+            .pet-card {
+                width: 340px;
+                min-height: 500px;
+            }
+            
+            .pet-image-section {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .pet-content-row {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            
+            .pet-image-container {
+                min-width: auto;
+            }
+            
+            .pet-image, .pet-emoji {
+                transform: scale(0.85);
+            }
+
+            .pet-name {
+                font-size: 26px;
+                letter-spacing: -0.4px;
+            }
+
+            .stats-grid {
+                gap: 10px;
+                max-width: none;
+                width: 100%;
+            }
+
+            .stat-pair {
+                padding: 8px;
+                font-size: 11px;
+            }
+
+            .stat-pair .value {
+                font-size: 13px;
+            }
+
+            .stat-pair .value.weight-value.large {
+                font-size: 11px;
+            }
+
+            .stat-pair .value.weight-value.xlarge {
+                font-size: 10px;
+            }
+
+            .stat-pair .value.weight-value.xxlarge {
+                font-size: 9px;
+            }
+
+            .source-icon {
+                width: 14px;
+                height: 14px;
+            }
+
+            .source {
+                gap: 4px;
+            }
+        }
+
+        /* Enhanced floating animation for elements */
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% { 
+                transform: translateY(-8px) rotate(1deg);
+            }
+            66% { 
+                transform: translateY(-4px) rotate(-1deg);
+            }
+        }
+
+        .pet-image, .pet-emoji {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Screenshot-friendly visual enhancements */
+        .pet-card {
+            position: relative;
+            overflow: hidden;
+            /* Ensure backgrounds are always visible */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        /* Make sure gradients work in screenshots */
+        .card-header,
+        .pet-name {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        /* Ensure glassmorphism effects are preserved */
+        .stat-pair,
+        .ability-text {
+            /* Fallback colors in case backdrop-filter fails */
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Additional glassmorphism enhancements */
+        .pet-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pet-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.03) 25%,
+                rgba(255, 255, 255, 0.08) 50%,
+                rgba(255, 255, 255, 0.03) 75%,
+                transparent 100%);
+            animation: rotateGlow 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateGlow {
+            0% { 
+                transform: rotate(0deg);
+                opacity: 0;
+            }
+            50% { 
+                opacity: 1;
+            }
+            100% { 
+                transform: rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Download button styling - Floating bottom right */
+        .download-section {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 32px rgba(102, 126, 234, 0.4),
+                0 4px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 100px;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 
+                0 16px 48px rgba(102, 126, 234, 0.5),
+                0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .download-btn:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+        
+        .download-icon {
+            font-size: 18px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .download-text {
+            font-size: 12px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+        }
+        
+        /* Loading state for download */
+        .download-btn.downloading {
+            pointer-events: none;
+            background: linear-gradient(135deg, #64748b, #475569);
+            animation: downloadPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes downloadPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Success state */
+        .download-btn.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .download-btn.success .download-icon::before {
+            content: '✅';
+        }
+        
+        @media (max-width: 400px) {
+            .download-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .download-icon {
+                font-size: 16px;
+            }
+            
+            .download-text {
+                font-size: 11px;
+            }
+
+            .download-section {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pet-card-container">
+        <div class="pet-card" id="capture-area">
+            <div id="loadingState" class="loading-state">
+                <p>🔄 Generating Pet Card...</p>
+            </div>
+            
+            <div id="errorState" class="error-state" style="display: none;">
+                <h3>❌ Error Loading Pet Card</h3>
+                <p id="errorMessage"></p>
+                <p><small>Please check the URL parameters and try again.</small></p>
+            </div>
+            
+            <div id="petCardContent" style="display: none;">
+                <div class="card-header">
+                    <h2 class="pet-name" id="petName">Pet Name</h2>
+                </div>
+                
+                <div class="pet-image-section">
+                    <div class="pet-content-row">
+                        <div class="pet-image-container">
+                            <img class="pet-image" id="petImage" style="display: none;" alt="Pet Image">
+                            <span class="pet-emoji" id="petEmoji">🐾</span>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-pair">
+                                <span class="label">Age</span>
+                                <span class="value" id="currentAge">Unknown</span>
+                            </div>
+                            <div class="stat-pair">
+                                <span class="label">Weight</span>
+                                <span class="value" id="currentWeight">Unknown</span>
+                            </div>
+                            <div class="stat-pair">
+                                <span class="label">Hatch</span>
+                                <span class="value" id="hatchWeight">Unknown</span>
+                            </div>
+                            <div class="stat-pair">
+                                <span class="label">Age 100</span>
+                                <span class="value" id="maxWeight">Unknown</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mutation-section">
+                        <span class="pet-mutation" id="petMutation">None</span>
+                        <span class="pet-class" id="petClass">Class 0</span>
+                    </div>
+                    
+                    <div class="source-rarity">
+                        <span class="source">
+                            <img class="source-icon" id="sourceIcon" src="" alt="" style="display: none;">
+                            <span class="source-text" id="petSource">Unknown</span>
+                        </span>
+                        <span class="rarity" id="petRarity">Unknown</span>
+                    </div>
+                </div>
+                
+                <div class="pet-stats">
+                    <div class="abilities-section">
+                        <div class="abilities-tabs">
+                            <button class="ability-tab active" data-tab="current">
+                                <span class="tab-label">Current</span>
+                                <span class="tab-sublabel" id="currentTabAge">Age 41</span>
+                            </button>
+                            <button class="ability-tab" data-tab="max" id="maxAbilityTab" style="display: none;">
+                                <span class="tab-label">Age 100</span>
+                                <span class="tab-sublabel">Maximum</span>
+                            </button>
+                        </div>
+                        
+                        <div class="ability-content">
+                            <div class="ability-text active" id="currentAbilities">Loading abilities...</div>
+                            <div class="ability-text" id="maxAbilities" style="display: none;">Loading max abilities...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download button for screenshots -->
+    <div class="download-section" id="downloadSection" style="display: none;">
+        <button class="download-btn" id="download-btn">
+            <span class="download-icon">📷 </span>
+            <span class="download-text">SAVE</span>
+        </button>
+    </div>
+
+    <!-- html2canvas library -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
+    <!-- Use API calls instead of ES6 modules -->
+    <script>
+        // Source type icon mapping
+        const SOURCE_ICONS = {
+            'Anti Bee Egg': 'https://static.wikia.nocookie.net/growagarden/images/e/e2/AntiBeeEgg.png',
+            'Bee Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/8d/BeeEgg.png',
+            'Bug Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/86/Bugeggimage.png',
+            'Common Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/95/CommonEgg.png',
+            'Common Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/62/CommonSummerEgg.png',
+            'Dinosaur Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/29/Dinosauregg.png',
+            'Enchanted Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6b/EnchantedEgg.png',
+            'Gourmet Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/2a/Gourmet_Egg.png',
+            'Legendary Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/63/Legendary_Egg.webp',
+            'Mythical Egg': 'https://static.wikia.nocookie.net/growagarden/images/4/4f/MythicalEggBetter.png',
+            'Night Egg': 'https://static.wikia.nocookie.net/growagarden/images/7/71/Night_Egg.png',
+            'Oasis Egg': 'https://static.wikia.nocookie.net/growagarden/images/7/73/OasisEgg.png',
+            'Paradise Egg': 'https://static.wikia.nocookie.net/growagarden/images/b/ba/ParadiseSummerEgg.png',
+            'Primal Egg': 'https://static.wikia.nocookie.net/growagarden/images/8/8f/PrimalEgg.png',
+            'Rainbow Exotic': 'https://static.wikia.nocookie.net/growagarden/images/2/25/Images-GrowGarden-Vector_20250426011605.png',
+            'Rare Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/23/RareEgg.png',
+            'Rare Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6c/RareSummerEgg.png',
+            'Sprout Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/96/SproutEgg.png',
+            'Uncommon Egg': 'https://static.wikia.nocookie.net/growagarden/images/0/0c/Uncommon_Egg.webp',
+            'Zen Egg': 'https://static.wikia.nocookie.net/growagarden/images/1/14/Zeneg.png',
+            'other': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png'
+        };
+
+        // Pet Card JavaScript using API calls
+        class PetCardGenerator {
+            constructor() {
+                this.urlParams = new URLSearchParams(window.location.search);
+                this.loadingState = document.getElementById('loadingState');
+                this.errorState = document.getElementById('errorState');
+                this.petCardContent = document.getElementById('petCardContent');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.downloadSection = document.getElementById('downloadSection');
+                this.downloadBtn = document.getElementById('download-btn');
+                
+                // Initialize tab functionality
+                this.initTabSwitching();
+                // Initialize download functionality
+                this.initDownloadFunctionality();
+            }
+
+            initTabSwitching() {
+                // Add event listeners for tab switching
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.ability-tab')) {
+                        const tab = e.target.closest('.ability-tab');
+                        const tabType = tab.dataset.tab;
+                        this.switchAbilityTab(tabType);
+                    }
+                });
+            }
+
+            initDownloadFunctionality() {
+                // Add event listener for download button
+                if (this.downloadBtn) {
+                    this.downloadBtn.addEventListener('click', () => {
+                        this.downloadPetCard();
+                    });
+                }
+            }
+
+            async downloadPetCard() {
+                const captureArea = document.getElementById('capture-area');
+                const downloadBtn = this.downloadBtn;
+                
+                if (!captureArea || !downloadBtn) return;
+                
+                // Update button to loading state
+                downloadBtn.classList.add('downloading');
+                downloadBtn.querySelector('.download-text').textContent = 'SAVING...';
+                downloadBtn.querySelector('.download-icon').textContent = '⏳';
+                
+                try {
+                    // Get pet name for filename
+                    const petName = document.getElementById('petName').textContent || 'Pet';
+                    const weight = this.urlParams.get('weight') || '50';
+                    const age = this.urlParams.get('age') || '1';
+                    
+                    // Generate filename
+                    const filename = `${petName.replace(/\s+/g, '_')}_Age${age}_${weight}kg_Pet_Card.png`;
+                    
+                    // Wait a moment for any animations/color extractions to complete and fonts to load
+                    await new Promise(resolve => setTimeout(resolve, 800)); // Increased wait time for font loading
+                    
+                    // Capture the pet card with html2canvas
+                    const canvas = await html2canvas(captureArea, {
+                        backgroundColor: '#ffffff',
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false, // Disable logging for cleaner output
+                        width: captureArea.offsetWidth,
+                        height: captureArea.offsetHeight,
+                        scrollX: 0,
+                        scrollY: 0,
+                        ignoreElements: function(element) {
+                            // Skip download section and problematic pseudo-elements
+                            return element.classList && (
+                                element.classList.contains('download-section') ||
+                                element.classList.contains('download-btn')
+                            );
+                        },
+                        onclone: function(clonedDoc, element) {
+                            // Get current styles from the live DOM
+                            const originalCard = document.getElementById('capture-area');
+                            const originalHeader = originalCard.querySelector('.card-header');
+                            const originalName = originalCard.querySelector('.pet-name');
+                            
+                            // Ensure Google Fonts are loaded in cloned document
+                            const fontLink = clonedDoc.createElement('link');
+                            fontLink.rel = 'stylesheet';
+                            fontLink.href = 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap';
+                            clonedDoc.head.appendChild(fontLink);
+                            
+                            // Add comprehensive styles for screenshot
+                            const style = clonedDoc.createElement('style');
+                            style.textContent = `
+                                /* Import Outfit font as fallback */
+                                @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+                                
+                                /* Apply font family to all elements */
+                                * {
+                                    font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+                                }
+                                
+                                /* Disable animations */
+                                *, *::before, *::after { 
+                                    animation: none !important; 
+                                    transition: none !important;
+                                }
+                                
+                                /* Hide inactive tab buttons in screenshot */
+                                .ability-tab:not(.active) {
+                                    display: none !important;
+                                }
+                                
+                                /* Make the active tab take full width */
+                                .abilities-tabs {
+                                    justify-content: center !important;
+                                }
+                                
+                                .ability-tab.active {
+                                    flex: none !important;
+                                    min-width: 200px !important;
+                                    text-align: center !important;
+                                }
+                                
+                                /* Preserve card styling */
+                                .pet-card {
+                                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85)) !important;
+                                    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                                    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08) !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                }
+                                
+                                /* Header with extracted colors or fallback */
+                                .card-header {
+                                    background: ${originalHeader ? window.getComputedStyle(originalHeader).background || 'linear-gradient(135deg, rgba(139, 195, 74, 0.95) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(139, 195, 74, 0.9) 100%)' : 'linear-gradient(135deg, rgba(139, 195, 74, 0.95) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(139, 195, 74, 0.9) 100%)'} !important;
+                                }
+                                
+                                /* Pet name with proper Outfit font */
+                                .pet-name {
+                                    background: none !important;
+                                    color: #1a202c !important;
+                                    -webkit-text-fill-color: #1a202c !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 900 !important;
+                                    font-size: 32px !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+                                    letter-spacing: -0.8px !important;
+                                    text-transform: uppercase !important;
+                                    line-height: 1 !important;
+                                }
+                                
+                                /* All other text elements */
+                                .source, .rarity, .stat-pair, .ability-text, .abilities-tabs {
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                }
+                                
+                                .stat-pair .label {
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 600 !important;
+                                }
+                                
+                                .stat-pair .value {
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 700 !important;
+                                }
+                                
+                                .tab-label {
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 600 !important;
+                                }
+                                
+                                /* Glassmorphism effects */
+                                .pet-image-section {
+                                    background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%) !important;
+                                }
+                                
+                                .stat-pair {
+                                    background: rgba(255, 255, 255, 0.9) !important;
+                                    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+                                    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08) !important;
+                                }
+                                
+                                .ability-text {
+                                    background: rgba(255, 255, 255, 0.9) !important;
+                                    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                }
+                                
+                                /* Rainbow effects */
+                                .pet-mutation.rainbow {
+                                    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0080) !important;
+                                    color: white !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 600 !important;
+                                }
+                                
+                                .pet-class {
+                                    background: linear-gradient(135deg, #374151, #1f2937) !important;
+                                    color: white !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 600 !important;
+                                    padding: 6px 16px !important;
+                                    border-radius: 25px !important;
+                                    font-size: 12px !important;
+                                    text-transform: uppercase !important;
+                                    letter-spacing: 0.5px !important;
+                                    box-shadow: 0 4px 15px rgba(55, 65, 81, 0.3) !important;
+                                    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-0 {
+                                    background: linear-gradient(135deg, #808080, #696969) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-1 {
+                                    background: linear-gradient(135deg, #1eff00, #32cd32) !important;
+                                    color: #000 !important;
+                                    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+                                }
+                                
+                                .pet-class.tier-2 {
+                                    background: linear-gradient(135deg, #0070dd, #4169e1) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-3 {
+                                    background: linear-gradient(135deg, #a335ee, #8a2be2) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-4 {
+                                    background: linear-gradient(135deg, #ff8000, #ff6347) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-5 {
+                                    background: linear-gradient(135deg, #e6cc80, #daa520) !important;
+                                    color: #000 !important;
+                                    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+                                }
+                                
+                                .pet-class.tier-6 {
+                                    background: linear-gradient(135deg, #ff69b4, #ff1493) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-7 {
+                                    background: linear-gradient(135deg, #cd7f32, #b8860b) !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-8 {
+                                    background: linear-gradient(135deg, #c0c0c0, #a8a8a8) !important;
+                                    color: #1a1a1a !important;
+                                    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+                                }
+                                
+                                .pet-class.tier-9 {
+                                    background: linear-gradient(135deg, #ffd700, #ffed4e, #ffc107, #ffb300) !important;
+                                    color: #1a1a1a !important;
+                                    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+                                    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+                                    border: 1px solid rgba(255, 215, 0, 0.8) !important;
+                                }
+                                
+                                .pet-class.tier-10-plus {
+                                    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0080) !important;
+                                    color: white !important;
+                                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+                                    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3) !important;
+                                    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                                }
+                                
+                                .mutation-section {
+                                    display: flex !important;
+                                    justify-content: center !important;
+                                    align-items: center !important;
+                                    flex-wrap: wrap !important;
+                                    gap: 8px !important;
+                                }
+                                
+                                .source.rainbow, .rarity.rainbow {
+                                    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0080) !important;
+                                    color: white !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                }
+                                
+                                /* Ensure rarity colors show */
+                                .rarity.divine {
+                                    background: linear-gradient(135deg, #ff69b4, #ff1493) !important;
+                                    color: white !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 700 !important;
+                                }
+                            `;
+                            clonedDoc.head.appendChild(style);
+                        }
+                    });
+                    
+                    console.log('Canvas generated:', canvas.width, 'x', canvas.height);
+                    
+                    // Check if canvas is blank or too small
+                    if (canvas.width === 0 || canvas.height === 0 || canvas.width < 100) {
+                        console.warn('Primary capture failed, trying fallback approach...');
+                        
+                        // Fallback: Simpler capture without complex styling
+                        const fallbackCanvas = await html2canvas(captureArea, {
+                            backgroundColor: '#f0f0f0',
+                            scale: 1.5,
+                            useCORS: false,
+                            allowTaint: false,
+                            logging: false,
+                            onclone: function(clonedDoc) {
+                                // Add Google Fonts to fallback too
+                                const fontLink = clonedDoc.createElement('link');
+                                fontLink.rel = 'stylesheet';
+                                fontLink.href = 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap';
+                                clonedDoc.head.appendChild(fontLink);
+                                
+                                // Very basic styling for fallback
+                                const style = clonedDoc.createElement('style');
+                                style.textContent = `
+                                    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+                                    * { 
+                                        animation: none !important; 
+                                        transition: none !important; 
+                                        font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    }
+                                    .pet-name { 
+                                        color: #1a202c !important; 
+                                        background: none !important; 
+                                        font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                        font-weight: 900 !important;
+                                        font-size: 32px !important;
+                                    }
+                                    .card-header { 
+                                        background: linear-gradient(135deg, #8bc34a, #ffffff) !important; 
+                                    }
+                                `;
+                                clonedDoc.head.appendChild(style);
+                            }
+                        });
+                        
+                        if (fallbackCanvas.width > 0 && fallbackCanvas.height > 0) {
+                            canvas = fallbackCanvas;
+                            console.log('Fallback successful:', canvas.width, 'x', canvas.height);
+                        } else {
+                            throw new Error('Both capture methods failed');
+                        }
+                    }
+                    
+                    // Create download link
+                    const link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png');
+                    link.download = filename;
+                    
+                    // Trigger download
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Update button to success state
+                    downloadBtn.classList.remove('downloading');
+                    downloadBtn.classList.add('success');
+                    downloadBtn.querySelector('.download-text').textContent = 'SAVED!';
+                    downloadBtn.querySelector('.download-icon').textContent = '✅';
+                    
+                    // Reset button after 2 seconds
+                    setTimeout(() => {
+                        downloadBtn.classList.remove('success');
+                        downloadBtn.querySelector('.download-text').textContent = 'SAVE';
+                        downloadBtn.querySelector('.download-icon').textContent = '📷 ';
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('Screenshot failed:', error);
+                    
+                    // Update button to error state
+                    downloadBtn.classList.remove('downloading');
+                    downloadBtn.querySelector('.download-text').textContent = 'FAILED';
+                    downloadBtn.querySelector('.download-icon').textContent = '❌';
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        downloadBtn.querySelector('.download-text').textContent = 'SAVE';
+                        downloadBtn.querySelector('.download-icon').textContent = '📷 ';
+                    }, 3000);
+                }
+            }
+
+            switchAbilityTab(tabType) {
+                // Update tab states
+                const tabs = document.querySelectorAll('.ability-tab');
+                const contents = document.querySelectorAll('.ability-text');
+                
+                tabs.forEach(tab => {
+                    if (tab.dataset.tab === tabType) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                // Show/hide content
+                contents.forEach(content => {
+                    if ((tabType === 'current' && content.id === 'currentAbilities') ||
+                        (tabType === 'max' && content.id === 'maxAbilities')) {
+                        content.style.display = 'block';
+                        content.classList.add('active');
+                    } else {
+                        content.style.display = 'none';
+                        content.classList.remove('active');
+                    }
+                });
+            }
+
+            async init() {
+                try {
+                    await this.generateCard();
+                } catch (error) {
+                    this.showError('Failed to load pet data: ' + error.message);
+                }
+            }
+
+            async generateCard() {
+                const petKey = this.urlParams.get('pet');
+                const weight = parseFloat(this.urlParams.get('weight')) || 50;
+                const age = parseFloat(this.urlParams.get('age')) || 1;
+                const mutation = this.urlParams.get('mutation') || 'none';
+
+                if (!petKey) {
+                    this.showError('No pet specified. Please provide a pet parameter in the URL.');
+                    return;
+                }
+
+                // Make pet key case insensitive by converting to lowercase
+                const normalizedPetKey = petKey.toLowerCase();
+
+                try {
+                    // Fetch pet data from API
+                    const petResponse = await fetch(`/api/pets/${normalizedPetKey}`);
+                    if (!petResponse.ok) {
+                        throw new Error(`Pet not found: ${petKey}`);
+                    }
+                    const pet = await petResponse.json();
+
+                    // Fetch ability data from API
+                    const abilityResponse = await fetch(`/api/pets/${normalizedPetKey}/ability?weight=${weight}&modifierType=${mutation}`);
+                    if (!abilityResponse.ok) {
+                        throw new Error('Failed to calculate abilities');
+                    }
+                    const abilityData = await abilityResponse.json();
+
+                    // Fetch max abilities if age is not 100
+                    let maxAbilityData = null;
+                    if (age < 100) {
+                        const maxAbilityResponse = await fetch(`/api/pets/${normalizedPetKey}/ability?weight=${this.calculateMaxWeight(weight, age)}&modifierType=${mutation}`);
+                        if (maxAbilityResponse.ok) {
+                            maxAbilityData = await maxAbilityResponse.json();
+                        }
+                    }
+
+                    await this.populateCard(pet, weight, age, mutation, abilityData.abilityText, maxAbilityData?.abilityText);
+                    this.showCard();
+                } catch (error) {
+                    this.showError('Error generating pet card: ' + error.message);
+                }
+            }
+
+            async populateCard(pet, weight, age, mutation, abilityText, maxAbilityText) {
+                // Set basic pet information
+                document.getElementById('petName').textContent = pet.name;
+                const sourceElement = document.getElementById('petSource');
+                const sourceText = pet.source || 'Unknown';
+                sourceElement.textContent = sourceText;
+                
+                // Set source icon
+                const sourceIconElement = document.getElementById('sourceIcon');
+                const sourceIconUrl = SOURCE_ICONS[sourceText] || SOURCE_ICONS['other'];
+                if (sourceIconUrl) {
+                    sourceIconElement.src = sourceIconUrl;
+                    sourceIconElement.alt = `${sourceText} icon`;
+                    sourceIconElement.style.display = 'block';
+                    sourceIconElement.onerror = () => {
+                        sourceIconElement.style.display = 'none';
+                    };
+                } else {
+                    sourceIconElement.style.display = 'none';
+                }
+                
+                // Apply rainbow styling to source if it contains 'Rainbow'
+                const sourceContainer = sourceElement.parentElement.parentElement;
+                const hasRainbowSource = (pet.source || '').toLowerCase().includes('rainbow');
+                sourceContainer.className = hasRainbowSource ? 'source rainbow' : 'source';
+                
+                // Set rarity with appropriate styling
+                const rarityElement = document.getElementById('petRarity');
+                rarityElement.textContent = pet.rarity || 'Unknown';
+                const rarityClass = (pet.rarity || 'unknown').toLowerCase();
+                const hasRainbowRarity = (pet.rarity || '').toLowerCase().includes('rainbow');
+                rarityElement.className = hasRainbowRarity ? 'rarity rainbow' : 'rarity ' + rarityClass;
+                
+                // Set mutation (hide if none)
+                const mutationElement = document.getElementById('petMutation');
+                if (mutation && mutation !== 'none') {
+                    mutationElement.textContent = mutation.charAt(0).toUpperCase() + mutation.slice(1);
+                    mutationElement.className = `pet-mutation ${mutation.toLowerCase()}`;
+                    mutationElement.style.display = 'inline-block';
+                } else {
+                    mutationElement.className = 'pet-mutation none';
+                    mutationElement.style.display = 'none';
+                }
+
+                // Calculate and set pet class based on Age 100 weight
+                const maxWeightForClass = this.calculateMaxWeight(weight, age);
+                const petClass = Math.floor(maxWeightForClass / 10);
+                const petClassElement = document.getElementById('petClass');
+                petClassElement.textContent = `Class ${petClass}`;
+                
+                // Apply tier-based styling
+                let tierClass = '';
+                if (petClass >= 10) {
+                    tierClass = 'tier-10-plus';
+                } else {
+                    tierClass = `tier-${petClass}`;
+                }
+                petClassElement.className = `pet-class ${tierClass}`;
+                
+                // Set tooltip with weight range
+                const tooltipText = this.getClassTooltip(petClass);
+                petClassElement.setAttribute('data-tooltip', tooltipText);
+
+                // Set pet image or emoji and extract colors
+                if (pet.icon && pet.icon.url) {
+                    const imgElement = document.getElementById('petImage');
+                    imgElement.src = pet.icon.url;
+                    imgElement.style.display = 'block';
+                    imgElement.onerror = () => {
+                        imgElement.style.display = 'none';
+                        document.getElementById('petEmoji').textContent = pet.icon?.fallback || '🐾';
+                        document.getElementById('petEmoji').style.display = 'block';
+                    };
+                    document.getElementById('petEmoji').style.display = 'none';
+
+                    // Extract predominant color from the image
+                    try {
+                        const colors = await ColorExtractor.extractPredominantColor(pet.icon.url);
+                        this.applyColorTheme(colors);
+                    } catch (error) {
+                        console.log('Color extraction failed, using default colors:', error);
+                        // Keep default gold theme
+                    }
+                } else {
+                    document.getElementById('petImage').style.display = 'none';
+                    document.getElementById('petEmoji').textContent = pet.icon?.fallback || '🐾';
+                    document.getElementById('petEmoji').style.display = 'block';
+                }
+
+            // Set weight and age information
+            document.getElementById('currentAge').textContent = `${age}`;
+            document.getElementById('currentWeight').textContent = this.formatWeight(weight);
+            
+            // Calculate hatch weight and max weight using the correct GAG formula
+            const hatchWeight = this.calculateHatchWeight(weight, age);
+            const maxWeight = this.calculateMaxWeight(weight, age);
+            
+            document.getElementById('hatchWeight').textContent = this.formatWeight(hatchWeight);
+            document.getElementById('maxWeight').textContent = this.formatWeight(maxWeight);
+
+            // Apply dynamic font sizing to weight values
+            this.applyWeightFontSizing('currentWeight', this.formatWeight(weight));
+            this.applyWeightFontSizing('hatchWeight', this.formatWeight(hatchWeight));
+            this.applyWeightFontSizing('maxWeight', this.formatWeight(maxWeight));                // Set abilities (convert \n to <br> for proper line breaks)
+                document.getElementById('currentAbilities').innerHTML = abilityText.replace(/\n/g, '<br>');
+                
+                // Update the current tab sublabel with actual age
+                document.getElementById('currentTabAge').textContent = `Age ${age}`;
+                
+                // Set max abilities if available and age is not 100
+                const maxAbilityTab = document.getElementById('maxAbilityTab');
+                if (maxAbilityText && age < 100) {
+                    document.getElementById('maxAbilities').innerHTML = maxAbilityText.replace(/\n/g, '<br>');
+                    maxAbilityTab.style.display = 'block';
+                } else {
+                    maxAbilityTab.style.display = 'none';
+                }
+            }
+
+            applyColorTheme(colors) {
+                const cardHeader = document.querySelector('.card-header');
+                const petName = document.querySelector('.pet-name');
+                const petCard = document.querySelector('.pet-card');
+                
+                // Apply header background in a screenshot-friendly way
+                const headerGradient = `linear-gradient(135deg, ${colors.primaryAlpha} 0%, rgba(255, 255, 255, 0.95) 50%, ${colors.light} 100%)`;
+                cardHeader.style.background = headerGradient;
+                cardHeader.style.backgroundImage = headerGradient;
+                
+                // Apply text gradient in a compatible way
+                const textGradient = colors.textColors.gradient;
+                petName.style.background = textGradient;
+                petName.style.backgroundImage = textGradient;
+                petName.style.webkitBackgroundClip = 'text';
+                petName.style.backgroundClip = 'text';
+                petName.style.webkitTextFillColor = 'transparent';
+                petName.style.color = 'transparent';
+                
+                // Store colors in data attributes for screenshot capture
+                petCard.setAttribute('data-header-gradient', headerGradient);
+                petCard.setAttribute('data-name-gradient', textGradient);
+                
+                // Apply border accent
+                petCard.style.borderColor = colors.primaryAlpha;
+                
+                console.log('Applied color theme - Header:', headerGradient);
+                console.log('Applied color theme - Text:', textGradient);
+            }
+
+            showCard() {
+                this.loadingState.style.display = 'none';
+                this.errorState.style.display = 'none';
+                this.petCardContent.style.display = 'block';
+                this.downloadSection.style.display = 'flex';
+                
+                // Set page title
+                const petName = document.getElementById('petName').textContent;
+                document.title = `${petName} Pet Card - Grow a Garden`;
+            }
+
+            showError(message) {
+                this.loadingState.style.display = 'none';
+                this.petCardContent.style.display = 'none';
+                this.downloadSection.style.display = 'none';
+                this.errorMessage.textContent = message;
+                this.errorState.style.display = 'block';
+            }
+
+            /**
+             * Calculate hatch weight (age 1) based on current weight and age
+             * Uses the correct GAG formula: [Current Weight] / ([Current Age + 10]) * ([Future Age + 10])
+             * @param {number} currentWeight - Current weight of the pet
+             * @param {number} currentAge - Current age of the pet
+             * @returns {number} Estimated hatch weight (age 1)
+             */
+            calculateHatchWeight(currentWeight, currentAge) {
+                if (currentAge <= 1) return currentWeight;
+                
+                // Formula: [Current Weight] / ([Current Age + 10]) * ([Future Age + 10])
+                // For hatch weight, Future Age = 1
+                const hatchWeight = currentWeight / (currentAge + 10) * (1 + 10);
+                return Math.max(1, hatchWeight);
+            }
+
+            /**
+             * Calculate maximum weight at age 100
+             * Uses the correct GAG formula: [Current Weight] / ([Current Age + 10]) * ([Future Age + 10])
+             * @param {number} currentWeight - Current weight of the pet
+             * @param {number} currentAge - Current age of the pet
+             * @returns {number} Estimated weight at age 100
+             */
+            calculateMaxWeight(currentWeight, currentAge) {
+                // Formula: [Current Weight] / ([Current Age + 10]) * ([Future Age + 10])
+                // For max weight, Future Age = 100
+                const maxWeight = currentWeight / (currentAge + 10) * (100 + 10);
+                return maxWeight;
+            }
+
+            /**
+             * Format weight values for display with appropriate precision
+             * @param {number} weight - Weight value to format
+             * @returns {string} Formatted weight string
+             */
+            formatWeight(weight) {
+                if (weight >= 1000) {
+                    // For weights >= 1000kg, show 1 decimal place
+                    return `${weight.toFixed(1)}kg`;
+                } else if (weight >= 100) {
+                    // For weights >= 100kg, show 1 decimal place  
+                    return `${weight.toFixed(1)}kg`;
+                } else {
+                    // For weights < 100kg, show 2 decimal places
+                    return `${weight.toFixed(2)}kg`;
+                }
+            }
+
+            /**
+             * Generate tooltip text for pet class showing weight range
+             * @param {number} petClass - The pet class number
+             * @returns {string} Tooltip text describing the weight range
+             */
+            getClassTooltip(petClass) {
+                if (petClass >= 10) {
+                    return `Age 100 weight of ${petClass * 10}.00kg+`;
+                } else if (petClass === 0) {
+                    return 'Age 100 weight of 0.00-9.99kg';
+                } else {
+                    const minWeight = petClass * 10;
+                    const maxWeight = (petClass * 10) + 9.99;
+                    return `Age 100 weight of ${minWeight}.00-${maxWeight.toFixed(2)}kg`;
+                }
+            }
+
+            /**
+             * Apply dynamic font sizing based on text length
+             * @param {string} elementId - ID of the element to style
+             * @param {string} text - Text content to measure
+             */
+            applyWeightFontSizing(elementId, text) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+
+                // Remove existing weight classes
+                element.classList.remove('weight-value', 'large', 'xlarge', 'xxlarge');
+                element.classList.add('weight-value');
+
+                // Apply size class based on text length
+                const textLength = text.length;
+                if (textLength > 10) {
+                    element.classList.add('xxlarge');
+                } else if (textLength > 8) {
+                    element.classList.add('xlarge');
+                } else if (textLength > 6) {
+                    element.classList.add('large');
+                }
+            }
+        }
+
+        // Color extraction utility
+        class ColorExtractor {
+            static async extractPredominantColor(imageUrl) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    
+                    img.onload = () => {
+                        try {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            
+                            ctx.drawImage(img, 0, 0);
+                            
+                            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                            const colors = this.analyzeColors(imageData.data);
+                            
+                            resolve(colors);
+                        } catch (error) {
+                            reject(error);
+                        }
+                    };
+                    
+                    img.onerror = () => reject(new Error('Failed to load image'));
+                    img.src = imageUrl;
+                });
+            }
+            
+            static calculateLuminance(r, g, b) {
+                // Convert RGB to relative luminance using WCAG formula
+                const [rs, gs, bs] = [r, g, b].map(c => {
+                    c = c / 255;
+                    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+                });
+                return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+            }
+            
+            static getContrastColor(r, g, b) {
+                const luminance = this.calculateLuminance(r, g, b);
+                
+                console.log(`Background RGB: ${r}, ${g}, ${b} | Luminance: ${luminance.toFixed(3)}`);
+                
+                // More aggressive contrast thresholds
+                if (luminance > 0.6) {
+                    // Very light background - use very dark text
+                    return {
+                        primary: '#000000',
+                        gradient: 'linear-gradient(135deg, #000000, #1a1a1a, #000000)',
+                        textShadow: 'drop-shadow(0 2px 4px rgba(255, 255, 255, 0.8))',
+                        underlineColor: 'linear-gradient(135deg, #1a202c, #2d3748)',
+                        type: 'dark-on-light'
+                    };
+                } else if (luminance > 0.3) {
+                    // Medium-light background - use dark text
+                    return {
+                        primary: '#1a202c',
+                        gradient: 'linear-gradient(135deg, #1a202c, #2d3748, #1a202c)',
+                        textShadow: 'drop-shadow(0 2px 4px rgba(255, 255, 255, 0.6))',
+                        underlineColor: 'linear-gradient(135deg, #3b82f6, #1e40af)',
+                        type: 'dark-on-medium'
+                    };
+                } else {
+                    // Dark background - use bright white text
+                    return {
+                        primary: '#ffffff',
+                        gradient: 'linear-gradient(135deg, #ffffff, #f7fafc, #ffffff)',
+                        textShadow: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9))',
+                        underlineColor: 'linear-gradient(135deg, #60a5fa, #3b82f6)',
+                        type: 'light-on-dark'
+                    };
+                }
+            }
+            
+            static analyzeColors(data) {
+                const colorMap = new Map();
+                
+                // Sample more pixels for better accuracy
+                for (let i = 0; i < data.length; i += 12) { // Reduced from 16 to 12 for more sampling
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    const a = data[i + 3];
+                    
+                    // Skip transparent pixels, but be less strict about dark/light exclusion
+                    if (a < 128) continue;
+                    
+                    // Less aggressive filtering - only skip pure white/black
+                    if ((r + g + b) < 30 || (r + g + b) > 735) continue;
+                    
+                    // Group similar colors (slightly more precision)
+                    const key = `${Math.floor(r/15)*15},${Math.floor(g/15)*15},${Math.floor(b/15)*15}`;
+                    colorMap.set(key, (colorMap.get(key) || 0) + 1);
+                }
+                
+                // Find most frequent color
+                let maxCount = 0;
+                let predominantColor = '139,69,19'; // Default brown (matching your griffin)
+                
+                for (const [color, count] of colorMap.entries()) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        predominantColor = color;
+                    }
+                }
+                
+                const [r, g, b] = predominantColor.split(',').map(Number);
+                console.log(`Predominant color: RGB(${r}, ${g}, ${b})`);
+                
+                // Calculate contrasting text colors
+                const textColors = this.getContrastColor(r, g, b);
+                
+                return {
+                    primary: `rgb(${r}, ${g}, ${b})`,
+                    primaryAlpha: `rgba(${r}, ${g}, ${b}, 0.95)`,
+                    light: `rgba(${r}, ${g}, ${b}, 0.9)`,
+                    dark: `rgba(${Math.max(0, r-30)}, ${Math.max(0, g-30)}, ${Math.max(0, b-30)}, 0.95)`,
+                    gradient: `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.95) 0%, rgba(${Math.max(0, r-20)}, ${Math.max(0, g-20)}, ${Math.max(0, b-20)}, 0.9) 50%, rgba(${Math.max(0, r-40)}, ${Math.max(0, g-40)}, ${Math.max(0, b-40)}, 0.95) 100%)`,
+                    // Add text color properties
+                    textColors: textColors
+                };
+            }
+        }
+
+        // Initialize the pet card generator when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const generator = new PetCardGenerator();
+            generator.init();
+        });
+    </script>
+</body>
+</html>

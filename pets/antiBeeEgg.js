@@ -19,6 +19,7 @@ export const ANTI_BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pollination Min: 96.67 (80.56 🌈), Sting Min: 90.33 (75.28 🌈)";
             
             const basePollinateSeconds = 1800;
             const pollinateSecondsMod = basePollinateSeconds * modifier;
@@ -54,16 +55,17 @@ export const ANTI_BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Pollination Min: 85.00 (66.13 🌈), Sting Min: 50.67 (30.53 🌈)";
             
             const basePollinateSeconds = 1510;
             const pollinateSecondsMod = basePollinateSeconds * modifier;
             const adjustedBasePollinateSeconds = basePollinateSeconds - pollinateSecondsMod;
-            const pollinateSeconds = Math.max(150, adjustedBasePollinateSeconds - (16 * kg));
+            const pollinateSeconds = Math.max(60, adjustedBasePollinateSeconds - (16 * kg));
             
             const baseStingSeconds = 302;
             const stingSecondsMod = baseStingSeconds * modifier;
-            const adjustedBaseStingSeconds = baseStingSeconds + stingSecondsMod;
-            const stingSeconds = Math.max(150, adjustedBaseStingSeconds - (3 * kg));
+            const adjustedBaseStingSeconds = baseStingSeconds - stingSecondsMod;
+            const stingSeconds = Math.max(60, adjustedBaseStingSeconds - (3 * kg));
             const cooldownAdvance = 80 + (0.8 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
@@ -89,11 +91,12 @@ export const ANTI_BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Singing Min: 106.86 (85.06 🌈)";
             
             const baseSeconds = 763;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(70, adjustedBaseSeconds - (7 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (7 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -118,11 +121,12 @@ export const ANTI_BEE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Transformation Min: 99.61 (79.52 🌈)";
             
-            const baseSeconds = 1807.4;
+            const baseSeconds = 1808;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(180, adjustedBaseSeconds - (18 * kg));
+            const seconds = Math.max(15, adjustedBaseSeconds - (18 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
@@ -142,23 +146,23 @@ export const ANTI_BEE_EGG_PETS = {
         source: "Anti Bee Egg",
         probability: 0.25,
         obtainable: true,
-        description: "Pollinates fruits and boosts nearby plant growth",
+        description: "Makes nearby fruits become Disco",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 74.25 (59.15 🌈)";
             
-            const baseSeconds = 1610;
+            const baseSeconds = 906;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
-            const seconds = Math.max(60, adjustedBaseSeconds - (16 * kg));
-            const growthMultiplier = 1.55 + (kg * 0.01);
-            const range = 10 + (kg / 10);
+            const seconds = Math.max(15, adjustedBaseSeconds - (12 * kg));
+            const chance = 14 + (1 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(seconds)}</strong>, flies to a nearby fruit and pollinates it, applying Pollinated mutation!\n\nNearby plants within <strong>${range.toFixed(1)}</strong> studs grow <strong>${growthMultiplier.toFixed(2)}x</strong> faster!${displayText}`;
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, <strong>${chance.toFixed(2)}%</strong> chance a nearby fruit becomes Disco!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases pollination time by 16 seconds, increases growth multiplier by 0.01x, and increases range by 0.1 studs"
+        perKgImpact: () => "Each additional kg decreases cooldown by 12 seconds and increases chance by 1%"
     }
 };

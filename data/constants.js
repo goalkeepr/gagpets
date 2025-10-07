@@ -4,10 +4,10 @@ export const RARITIES = {
     COMMON: 'Common',
     UNCOMMON: 'Uncommon',
     RARE: 'Rare',
-    EPIC: 'Epic',
     LEGENDARY: 'Legendary',
     MYTHICAL: 'Mythical',
-    DIVINE: 'Divine'
+    DIVINE: 'Divine',
+    PRISMATIC: 'Prismatic',
 };
 
 export const TYPES = {

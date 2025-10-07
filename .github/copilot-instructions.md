@@ -1,7 +1,7 @@
 # GitHub Copilot Instructions for GAG Pets Project
 
 ## Project Overview
-This is a **web-based pet ability calculator** for the game "Grow a Garden". It's a full-stack Node.js application that provides an interactive interface for calculating pet abilities, comparing different weights, and managing pet data. The project serves 142+ pets across 23 different egg categories with a modular, scalable architecture.
+This is a **web-based pet ability calculator** for the game "Grow a Garden". It's a full-stack Node.js application that provides an interactive interface for calculating pet abilities, comparing different weights, and managing pet data. The project serves 156+ pets across 24+ different egg categories with a modular, scalable architecture.
 
 ## Technology Stack
 - **Backend**: Node.js with Express.js server
@@ -20,9 +20,9 @@ This is a **web-based pet ability calculator** for the game "Grow a Garden". It'
 - **Frontend**: HTML interfaces (`pets.html`, `recipes.html`, `fruittypes.html`)
 
 ### Key Directories
-- `/pets/` - **CRITICAL**: 23 pet category files (e.g., `beeEgg.js`, `legendaryEgg.js`)
+- `/pets/` - **CRITICAL**: 24+ pet category files (e.g., `beeEgg.js`, `legendaryEgg.js`, `fallEgg.js`)
   - Each file exports a specific pet category with complete pet definitions
-  - Contains 142+ pets with abilities, calculations, and metadata
+  - Contains 156+ pets with abilities, calculations, and metadata
   - This is the primary data source for all pet functionality
 - `/utils/` - Utility functions for calculations, modifiers, and pet migration
 - `/data/` - Constants, icons, and mutation definitions
@@ -141,6 +141,203 @@ docker-compose -f docker-compose.prod.yml up  # Production mode
 4. **Add to combined export** using object spread
 5. **Update frontend filter** in HTML files if needed
 
+## Adding a New Pet Source/Category (Complete Guide)
+
+Based on the Fall Egg implementation, here's the complete process for adding an entirely new pet source to the site:
+
+### Step 1: Create the Pet Category File
+Create `/pets/newSourceEgg.js` following this structure:
+
+```javascript
+import { getModifierDetails } from '../utils/modifiers.js';
+import * as Utils from '../utils/calculations.js';
+
+export const NEW_SOURCE_PETS = {
+    petkey: {
+        name: "Pet Name",
+        icon: { type: "image", url: "/path/to/icon.png", fallback: "🐾" },
+        type: "mammal", // Use appropriate type from TYPES constants
+        rarity: "Common", // Use appropriate rarity from RARITIES constants
+        source: "New Source", // This becomes the filter category name
+        probability: 65,
+        obtainable: true,
+        description: "Pet description",
+        calculate: (kg, modifierType = "none") => {
+            // Implement calculation logic with modifier support
+            const modifierDetails = getModifierDetails(modifierType);
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            // Your calculation logic here
+            const baseValue = Math.floor(kg * 2);
+            const finalValue = Math.round(baseValue * modifierDetails.multiplier);
+            
+            return `Does something every ${Utils.formatTime(finalValue * 60)}!`;
+        },
+        perKgImpact: () => "Each kg reduces time by 2 minutes"
+    }
+    // Add more pets as needed
+};
+```
+
+### Step 2: Integrate into Main Module System
+Update `petAbilities_modular.js`:
+
+```javascript
+// Add import at top with other imports
+import { NEW_SOURCE_PETS } from './pets/newSourceEgg.js';
+
+// Add to the petAbilities object spread
+export const petAbilities = {
+    ...BEE_EGG_PETS,
+    ...LEGENDARY_EGG_PETS,
+    // ... other categories
+    ...NEW_SOURCE_PETS
+};
+
+// Add to selective imports object
+export {
+    BEE_EGG_PETS,
+    LEGENDARY_EGG_PETS,
+    // ... other exports
+    NEW_SOURCE_PETS
+};
+```
+
+### Step 3: Update Frontend Interface
+Update `pets.html` to include the new source in filtering options:
+
+**For Mobile Dropdown** (around line 150-180):
+```html
+<select id="mobile-source-filter" class="mobile-filter">
+    <option value="">All Sources</option>
+    <option value="Bee Egg">Bee Egg</option>
+    <!-- ... other options -->
+    <option value="New Source">New Source</option>
+</select>
+```
+
+**For Desktop Filter Buttons** (around line 200-250):
+```html
+<div class="filter-container">
+    <button class="filter-btn" data-filter="">All</button>
+    <button class="filter-btn" data-filter="Bee Egg">Bee Egg</button>
+    <!-- ... other buttons -->
+    <button class="filter-btn" data-filter="New Source">New Source</button>
+</div>
+```
+
+**Add Source to Known Sources Array** (in JavaScript section):
+```javascript
+const knownSources = [
+    'Bee Egg', 'Legendary Egg', 'Mythical Egg',
+    // ... other sources
+    'New Source'
+];
+```
+
+**Update Source Icons Mapping** (if you want custom icons):
+```javascript
+const SOURCE_ICONS = {
+    'Bee Egg': '🐝',
+    'Legendary Egg': '🌟',
+    // ... other mappings
+    'New Source': '🍂' // Choose appropriate emoji
+};
+```
+
+### Step 4: Testing and Validation
+1. **Test Module Loading**: 
+   ```bash
+   node -e "import('./petAbilities_modular.js').then(module => { 
+       console.log('New Source pets:', Object.keys(module.NEW_SOURCE_PETS)); 
+       console.log('Total pets:', Object.keys(module.petAbilities).length); 
+   }).catch(console.error)"
+   ```
+
+2. **Test Pet Functionality**:
+   ```bash
+   node -e "import('./petAbilities_modular.js').then(module => { 
+       const pet = module.petAbilities.petkey; 
+       console.log('Pet name:', pet.name); 
+       console.log('Pet abilities:', pet.calculate(50, 'none')); 
+   }).catch(console.error)"
+   ```
+
+3. **Start Development Server**: `npm start`
+4. **Verify Frontend**: Visit `http://localhost:8029` and test filtering
+5. **Check Debug Endpoint**: Visit `/debug-modules` to verify loading
+
+### Step 5: Advanced Features
+
+**For Dual Abilities** (like Lobster Thermidor pattern):
+```javascript
+calculate: (kg, modifierType = "none") => {
+    const modifierDetails = getModifierDetails(modifierType);
+    if (!Utils.isValidWeight(kg)) return "Invalid weight";
+    
+    // First ability calculation
+    const ability1Time = Math.max(300, Math.floor(3600 - (kg * 45)));
+    const finalTime1 = Math.round(ability1Time * modifierDetails.multiplier);
+    
+    // Second ability calculation  
+    const ability2Time = Math.max(60, Math.floor(900 - (kg * 12)));
+    const finalTime2 = Math.round(ability2Time * modifierDetails.multiplier);
+    
+    return `<span style="color: #4CAF50;"><strong>Dual Ability:</strong></span><br>` +
+           `Every <span style="color: #2196F3; font-weight: bold;">${Utils.formatTime(finalTime1)}</span> does first thing<br>` +
+           `Every <span style="color: #FF9800; font-weight: bold;">${Utils.formatTime(finalTime2)}</span> does second thing!`;
+}
+```
+
+**For Complex Calculations with Min/Max Constraints**:
+```javascript
+calculate: (kg, modifierType = "none") => {
+    const modifierDetails = getModifierDetails(modifierType);
+    if (!Utils.isValidWeight(kg)) return "Invalid weight";
+    
+    // Base calculation with scaling
+    const baseValue = 1800 - (kg * 30); // Starts at 30 minutes, reduces by 30s per kg
+    const constrainedValue = Math.max(300, Math.min(1800, baseValue)); // Min 5min, Max 30min
+    const finalValue = Math.round(constrainedValue * modifierDetails.multiplier);
+    
+    return `Does something every <span style="color: #2196F3; font-weight: bold;">${Utils.formatTime(finalValue)}</span>!`;
+}
+```
+
+### Step 6: Troubleshooting Common Issues
+
+**Module Import Errors**:
+- Ensure all import paths are correct relative to the file location
+- Check that export names match exactly (case-sensitive)
+- Verify the category constant is properly exported
+
+**Frontend Filter Not Working**:
+- Confirm source name matches exactly between pet data and HTML
+- Check that both mobile dropdown and desktop buttons are updated
+- Verify source is added to knownSources array
+
+**Pet Not Appearing**:
+- Test module loading with node -e commands
+- Check browser console for JavaScript errors
+- Verify petAbilities_modular.js includes the new import and spread
+
+**Calculation Issues**:
+- Always include modifierType parameter with default "none"
+- Use Utils.isValidWeight() for input validation
+- Include getModifierDetails() for mutation support
+- Return HTML-formatted strings for proper display
+
+### File Checklist for New Pet Source
+- [ ] `/pets/newSourceEgg.js` - Created with proper exports
+- [ ] `petAbilities_modular.js` - Import added and spread into petAbilities
+- [ ] `pets.html` - Mobile dropdown option added
+- [ ] `pets.html` - Desktop filter button added  
+- [ ] `pets.html` - Source added to knownSources array
+- [ ] `pets.html` - Icon mapping added (optional)
+- [ ] Module loading tested with node commands
+- [ ] Frontend filtering tested in browser
+- [ ] Pet calculations tested and working
+
 ### Modifying Calculation Logic
 1. **Use shared utilities** from `/utils/calculations.js` for consistency
 2. **Follow modifier pattern**: Always include `modifierType` parameter
@@ -162,7 +359,7 @@ docker-compose -f docker-compose.prod.yml up  # Production mode
 - `server.js` - Express server with API endpoints
 
 ### Data Files (Primary working area)
-- `/pets/*.js` - All pet category definitions (23 files)
+- `/pets/*.js` - All pet category definitions (24+ files)
 - `/utils/calculations.js` - Shared calculation utilities
 - `/utils/modifiers.js` - Pet modifier/mutation system
 - `/data/constants.js` - Rarity and type definitions
@@ -185,7 +382,7 @@ docker-compose -f docker-compose.prod.yml up  # Production mode
 - **Server health**: `curl http://localhost:8029/health`
 - **Pet data status**: `curl http://localhost:8029/debug-modules`
 - **Module loading**: Check browser console for global_bridge.js logs
-- **Pet count verification**: Currently 142+ pets across 23 categories
+- **Pet count verification**: Currently 156+ pets across 24+ categories
 
 ## Questions to Consider
 When working on pet-related features:

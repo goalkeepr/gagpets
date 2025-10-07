@@ -1,0 +1,65 @@
+name	kgLimits	perKgImpact
+Wasp	Pollination Min: 96.67 (80.56 🌈), Sting Min: 90.33 (75.28 🌈)	Each additional kg decreases pollination time by 18 seconds, decreases sting time by 6 seconds, and increases cooldown advance by 0.6 seconds
+Tarantula Hawk	Pollination Min: 85.00 (70.83 🌈), Sting Min: 50.67 (42.22 🌈)	Each additional kg decreases pollination time by 16 seconds, decreases sting time by 3 seconds, and increases cooldown advance by 0.8 seconds
+Moth	Singing Min: 99.00 (82.50 🌈)	Each additional kg decreases singing time by 7 seconds
+Butterfly	Transformation Min: 90.41 (75.34 🌈)	Each additional kg decreases transformation time by 18 seconds
+Disco Bee	Cooldown Min: 74.25 (61.88 🌈)	Each additional kg decreases cooldown by 12 seconds and increases chance by 1%
+Bee	Pollination Min: 91.67 (71.67 🌈)	Each additional kg decreases pollination time by 18 seconds
+Honey Bee	Pollination Min: 95.83 (75.67 🌈)	Each additional kg decreases pollination time by 12 seconds
+Bear Bee	Honey Glazing Min: 90.63 (71.75 🌈)	Each additional kg decreases honey glazing time by 16 seconds
+Petal Bee	Pollination Min: 85.00 (85.00 🌈)	Each additional kg decreases pollination time by 16 seconds and increases flower preservation chance by 0.1%
+Queen Bee	Pollination Min: 72.50 (57.25 🌈), Refresh Min: 79.25 (62.65 🌈)	Each additional kg decreases pollination time by 16 seconds and refresh time by 16 seconds
+Snail	none	Each additional kg adds 0.05% chance to drop seeds
+Giant Ant	none	Each additional kg increases duplication chance by 0.1%
+Caterpillar	none	Each additional kg increases leafy plant growth speed by 0.15x
+Praying Mantis	Prayer Min: 75.00 (59.00 🌈)	Each additional kg decreases prayer time by 1 second, increases prayer duration by 0.1 seconds, increases variant multiplier by 0.005x, and increases range by 0.1 studs
+Dragonfly	Gold Transformation Min: 80.00 (60.00 🌈)	Each additional kg decreases gold transformation time by 3 seconds
+Golden Bee	Pollination Min: 85.00 (66.13 🌈)	Each additional kg decreases pollination time by 16 seconds and increases gold harvest chance by 0.1%
+Pack Bee	Pollination Min: 85.00 (85.00 🌈)	Each additional kg decreases pollination time by 16 seconds and increases backpack size by 1
+Hamster	Cooldown Min: No Limit (90.27 🌈)	Each additional kg decreases cooldown by 1.5 seconds, increases crafting boost by 0.3%, and increases duration by 0.5 seconds
+Moon Cat	Nap Interval Min: 55.00 (41.00 🌈)	Each additional kg decreases nap interval by 1 second, increases nap duration by 0.2 seconds, increases range by 0.1 studs, increases size multiplier by 0.01x, and increases night preservation chance by 0.05%
+Panda	Feeding Min: 120.00 (84.00 🌈)	Each additional kg decreases feeding time by 1 second and increases value bonus by 0.015x
+Chicken Zombie	Zombify Min: 88.06 (70.28 🌈)	Each additional kg decreases zombify time by 18 seconds, increases zombify chance by 0.2%, and increases egg hatch speed by 0.1%
+Mochi Mouse	Experience Min: 73.50 (58.43 🌈)	Each additional kg increases Food type pets' XP bonus by 0.15 XP/s, decreases experience cooldown by 8s (min 15s), and increases bonus experience by 8
+Koi	Recovery Max: 22.73 (20.00 🌈)	Each additional kg increases egg recovery chance by 0.22%
+Football	none	Each additional kg increases watering can chance by 0.33%
+Maneki-neko	none	Each additional kg decreases wave time by 0.6 seconds, increases refund chance by 0.15%, and increases effect duration by 0.25 seconds
+Kodama	Tranquil Max: 18.18 (18.18 🌈)	Each additional kg increases Tranquil mutation chance by 0.33%
+Corrupted Kodama	Corrupt Max: 18.18 (18.18 🌈)	Each additional kg increases Corrupt mutation chance by 0.33%
+Raiju	Targets Max: 33.33 (33.33 🌈), Shocked Max: 100.00 (100.00 🌈)	Each additional kg decreases lightning time by 2.6 seconds, increases targets by 0.15, and increases Shocked chance by 0.15%
+Corrupted Kitsune	none	Each additional kg decreases cursed energy time by 3.6 seconds and increases Corrupt Chakra chance by 0.2%
+Bald Eagle	none	Each additional kg increases multiplier by 0.18x
+Cooked Owl	Cooking Min: 62.17 (48.73 🌈)	Each additional kg decreases cooking time by 12 seconds, increases cooking chance by 0.25%, and increases all pets' XP bonus by 0.03 XP/s
+Kiwi	Action Min: 50.00 (38.00 🌈)	Each additional kg decreases action time by 1 second and increases hatch time reduction by 0.25 seconds
+Owl	none	Each additional kg increases all pets' XP bonus by 0.04 XP/s
+Blood Kiwi	Action Min: 50.00 (38.00 🌈)	Each additional kg decreases action time by 1 second, increases hatch time reduction by 0.45 seconds, and increases hatch speed by 0.2%
+Blood Hedgehog	none	Each additional kg increases size range by 0.2 studs, size bonus by 0.02x, variant range by 0.2 studs, and variant bonus by 0.011x
+Blood Owl	none	Each additional kg increases all pets' XP bonus by 0.08 XP/s
+Spriggan	Cooldown Min: No Limit (77.33 🌈), Chance Max: 100.00 (80.00 🌈), Range Max: 100.00 (80.00 🌈)	Each additional kg decreases cooldown by 6 seconds (min 10:00), increases Bloom chance by 0.15% (max 30%), and increases range by 0.3 studs (max 60)
+Bacon Pig	Aura Min: No Limit (91.00 🌈)	Each additional kg decreases cooldown by 1 second (min 5s), increases duration by 0.15 seconds, increases range by 0.15 studs, and increases variant multiplier by 0.01x
+Hotdog Daschund	Cooldown Min: 106.67 (74.67 🌈), Multiplier Max: 20.00 (16.00 🌈)	Each additional kg decreases cooldown by 1.5s (min 1:20), increases XP multiplier by 1% (max 40%), increases cooldown boost by 0.05 (max 0.5), increases duration by 0.15s (max 45s), and increases radius by 0.08 studs (max 16)
+Lobster Thermidor	Molten Min: No Limit (93.33 🌈), Meteoric Min: No Limit (110.59 🌈)	Each additional kg decreases Molten cooldown by 4.5s (min 5:00), decreases Meteoric cooldown by 8.5s (min 8:20), and increases both chances by 0.1%
+Peach Wasp	Sting Min: 86.29 (51.89 🌈), Amount Max: 100.00 (80.00 🌈)	Each additional kg decreases Plasma cooldown by 6.6s (min 3:20), decreases sting cooldown by 3.5s (min 5:00), and increases cooldown advance by 0.6s (max 120s)
+Apple Gazelle	Warped Max: 40.00 (32.00 🌈)	Each additional kg increases apple duplication chance by 0.025% (max 7%) and increases Warped mutation chance by 0.05% (max 4%)
+Lemon Lion	Citrus Min: No Limit (112.00 🌈), Amount Max: 66.67 (46.67 🌈)	Each additional kg decreases Brainrot cooldown by 3.5s (max 5:00), decreases citrus cooldown by 2.5s (min 3:20), and increases experience bonus by 15 (max 2500)
+Green Bean	Cooldown Min: 103.33 (63.33 🌈), Multiplier Max: 50.00 (40.00 🌈)	Each additional kg decreases cooldown by 9s (min 14:30) and increases size multiplier by 0.1x (max 10x)
+Elk	none	Each additional kg increases berry preservation chance by 0.025% (max 5%)
+Mandrake	none	Each additional kg increases Rot mutation chance by 0.05% (max 7%)
+Griffin	none	Each additional kg decreases cooldown by 2s (min 5:00), increases cooldown advance by 1s (max 125s), and increases Cyclonic chance by 0.15% (max 30%)
+Gnome	Chance Max: 80.00 (72.00 🌈)	Each additional kg decreases cooldown by 1.5s (min 3:20), increases base chance by 0.025% (max 3%), and increases cosmetic bonus by 0.025% (max 3%)
+Cardinal	Multiplier Max: 50.00 (44.00 🌈)	Each additional kg increases growth multiplier by 0.05x (max 4x)
+Shroomie	Range Max: 101.00 (89.20 🌈), Multiplier Max: 6.00 (5.20 🌈)	Each additional kg increases range by 0.25 studs (max 40) and increases size multiplier by 0.001x (max 0.01x)
+Phoenix	Age Max: 42.00 (32.40 🌈), Cooldown Min: No Limit (86.15 🌈), Chance Max: 100.00 (80.00 🌈), Amount Max: 40.00 (32.00 🌈)	Each additional kg increases age bonus by 0.1 (max 9), decreases travel cooldown by 6.5s (min 6:40), increases mutation chance by 0.2% (max 40%), and increases fruit amount by 0.1 (max 8)
+Wisp	XP Bonus Max: 58.60 (57.32 🌈)	Each additional kg increases XP bonus by 0.1 XP/s (max 6.5 XP/s)
+Drake	Cooking Speed Max: 10.00 (8.00 🌈)	Each additional kg increases cooking speed boost by 1% (max 20%)
+Luminous Sprite	none	Each additional kg decreases cooldown by 3.5 seconds (min 2:00)
+Giant Robin	Player Size Max: 100.00 (80.00 🌈)	Each additional kg increases player size decrease by 0.2% (max 40%)
+Giant Badger	Cooldown Min: 36.67 (26.67 🌈), Duration Max: 100.00 (80.00 🌈), Range Max: 80.00 (64.00 🌈)	Each additional kg decreases cooldown by 3s (min 80s), increases duration by 0.1s (max 20s), increases range by 0.25 studs (max 40), and increases chance by 0.1% (max 20%)
+Giant Grizzly Bear	none	Each additional kg decreases Fall cooldown by 2s (min 30s), increases Fall chance by 0.2% (max 45%), and increases player size by 0.2% (max 32%)
+Giant Barn Owl	Weight Max: 11.00 (9.20 🌈), XP Max: 23.33 (21.33 🌈)	Each additional kg increases shop pet weight bonus by 0.04 KG (max 0.8 KG) and increases Fall type pets' XP bonus by 0.12 XP/s (max 4 XP/s)
+Giant Swan	Befriend Min: 108.89 (73.78 🌈), Grace Min: 24.29 (15.71 🌈)	Each additional kg decreases befriend cooldown by 4.5s (min 5:00) and decreases grace cooldown by 3.5s (min 1:05)
+Red Squirrel	Cooldown Reduction Max: 40.00 (33.00 🌈)	Each additional kg increases cooldown reduction by 0.4 seconds (max 30s)
+Chipmunk	Harvest Tool Max: 24.00 (19.20 🌈)	Each additional kg increases harvest tool preservation chance by 0.25% (max 12%)
+Marmot	Cooldown Min: No Limit (89.14 🌈)	Each additional kg decreases burrow cooldown by 3.5s (min 2:00) and increases re-burrow chance by 0.05% (max 30%)
+Sugar Glider	Glide Min: 106.67 (53.33 🌈)	Each additional kg decreases glide cooldown by 4.5s (min 12:00)
+Space Squirrel	Cooldown Min: No Limit (72.00 🌈), Voidtouched Max: 33.33 (23.33 🌈)	Each additional kg decreases cooldown by 4.5s (min 9:00) and increases Voidtouched chance by 0.3% (max 25%)

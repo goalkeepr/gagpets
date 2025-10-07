@@ -122,6 +122,7 @@ const sproutEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Advance Amount Max: 80.00 (64.00 🌈)";
             
             const baseCooldown = 400;
             const baseAmount = 40;
@@ -138,7 +139,7 @@ const sproutEggPets = {
             
             return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong> goes to the mutation machine and tinkers with it and advances its time by <strong>${amountTotal.toFixed(1)}s</strong>${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases cooldown by 1 second (min 3:20) and increases advance amount by 0.5s (max 80s)"
+        perKgImpact: () => "Each additional kg decreases cooldown by 1 second (min 3:20), and increases advance amount by 0.5s (max 80s)"
     },
 
     goldenGoose: {

@@ -69,6 +69,16 @@ app.get('/fruittypes', (req, res) => {
     res.sendFile(path.join(__dirname, 'fruittypes.html'));
 });
 
+// Route for pet card page
+app.get('/petcard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'petcard.html'));
+});
+
+// Route for pet limits page
+app.get('/petlimits', (req, res) => {
+    res.sendFile(path.join(__dirname, 'petlimits.html'));
+});
+
 // Health check route for production monitoring
 app.get('/health', (req, res) => {
     res.json({
@@ -108,12 +118,25 @@ app.get('/api', (req, res) => {
                     weight: 'number - Pet weight used for calculation',
                     abilityText: 'string - HTML-formatted ability description'
                 }
+            },
+            'GET /api/pets/:petKey/screenshot': {
+                description: 'Returns a PNG screenshot of the pet card',
+                parameters: {
+                    petKey: 'string - Pet identifier (path parameter)',
+                    weight: 'number - Pet weight in kg (query parameter, default: 50)',
+                    age: 'number - Pet age (query parameter, default: 1)',
+                    mutation: 'string - Pet mutation type (query parameter, default: none)',
+                    width: 'number - Image width in pixels (query parameter, default: 760)',
+                    height: 'number - Image height in pixels (query parameter, default: 1080)'
+                },
+                response: 'binary - PNG image data'
             }
         },
         examples: {
             'List all pets': 'GET /api/pets',
             'Get bunny ability at 50kg': 'GET /api/pets/bunny/ability?weight=50',
-            'Get legendary pet ability': 'GET /api/pets/tarantulahawk/ability?weight=75'
+            'Get legendary pet ability': 'GET /api/pets/tarantulahawk/ability?weight=75',
+            'Get pet card screenshot': 'GET /api/pets/trex/screenshot?weight=10&age=5&mutation=rainbow'
         }
     });
 });
@@ -144,20 +167,58 @@ app.get('/api/pets', async (req, res) => {
     }
 });
 
+// GET /api/pets/:petKey - Returns detailed pet information for pet card
+app.get('/api/pets/:petKey', async (req, res) => {
+    try {
+        const { petAbilities } = await import('./petAbilities_modular.js');
+        const { validatePetKey } = await import('./utils/validation.js');
+        const inputPetKey = req.params.petKey;
+
+        // Validate and normalize pet key (handles case insensitivity)
+        const petKeyValidation = validatePetKey(inputPetKey, petAbilities);
+        if (!petKeyValidation.isValid) {
+            return res.status(404).json({
+                error: 'Pet not found',
+                message: `Pet '${inputPetKey}' not found`
+            });
+        }
+
+        const petKey = petKeyValidation.value;
+        const pet = petAbilities[petKey];
+        
+        res.json({
+            key: petKey,
+            name: pet.name,
+            icon: pet.icon,
+            type: pet.type,
+            rarity: pet.rarity,
+            source: pet.source,
+            description: pet.description,
+            obtainable: pet.obtainable,
+            probability: pet.probability
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: ERROR_MESSAGES.MODULE_LOAD_FAILED,
+            message: error.message
+        });
+    }
+});
+
 // GET /api/pets/:petKey/ability - Returns pet ability text for given weight
 app.get('/api/pets/:petKey/ability', async (req, res) => {
     try {
         const { petAbilities, getPetMutationDescription } = await import('./petAbilities_modular.js');
-        const { petKey } = req.params;
+        const inputPetKey = req.params.petKey;
         
         // Extract parameters with case-insensitive support
         const weight = getCaseInsensitiveParam(req.query, 'weight');
         const modifierType = getCaseInsensitiveParam(req.query, 'modifierType', 'none');
 
-        // Validate all inputs using centralized validation
+        // Validate all inputs using centralized validation (this handles case-insensitive pet key)
         const validation = validatePetCalculationInputs({
             weight,
-            petKey,
+            petKey: inputPetKey,
             modifierType
         }, petAbilities);
 
@@ -200,7 +261,7 @@ app.get('/api/pets/:petKey/ability', async (req, res) => {
         if (validatedModifier !== 'none' && validatedModifier !== 'golden' && validatedModifier !== 'rainbow') {
             const mutationDescription = getPetMutationDescription(validatedModifier, validatedWeight);
             if (mutationDescription) {
-                combinedAbilityText = `${abilityText}\n\n<strong>Additional Pet Mutation:</strong>\n${mutationDescription}`;
+                combinedAbilityText = `${abilityText}\n\n${mutationDescription}`;
             }
         }
 
@@ -220,6 +281,157 @@ app.get('/api/pets/:petKey/ability', async (req, res) => {
             error: ERROR_MESSAGES.CALCULATION_FAILED,
             message: error.message
         });
+    }
+});
+
+// GET /api/pets/:petKey/screenshot - Returns PNG screenshot of pet card
+app.get('/api/pets/:petKey/screenshot', async (req, res) => {
+    let browser;
+    try {
+        const { validatePetKey } = await import('./utils/validation.js');
+        const { petAbilities } = await import('./petAbilities_modular.js');
+        const inputPetKey = req.params.petKey;
+
+        // Validate pet key
+        const petKeyValidation = validatePetKey(inputPetKey, petAbilities);
+        if (!petKeyValidation.isValid) {
+            return res.status(404).json({
+                error: 'Pet not found',
+                message: `Pet '${inputPetKey}' not found`
+            });
+        }
+
+        const petKey = petKeyValidation.value;
+
+        // Extract and validate parameters
+        const weight = parseFloat(getCaseInsensitiveParam(req.query, 'weight', '50'));
+        const age = parseFloat(getCaseInsensitiveParam(req.query, 'age', '1'));
+        const mutation = getCaseInsensitiveParam(req.query, 'mutation', 'none');
+        const imageWidth = parseInt(getCaseInsensitiveParam(req.query, 'width', '760'));
+        const imageHeight = parseInt(getCaseInsensitiveParam(req.query, 'height', '1080'));
+
+        // Validate numeric parameters
+        if (isNaN(weight) || weight <= 0) {
+            return res.status(400).json({
+                error: 'Invalid weight',
+                message: 'Weight must be a positive number'
+            });
+        }
+
+        if (isNaN(age) || age <= 0) {
+            return res.status(400).json({
+                error: 'Invalid age',
+                message: 'Age must be a positive number'
+            });
+        }
+
+        if (isNaN(imageWidth) || imageWidth < 100 || imageWidth > 2000) {
+            return res.status(400).json({
+                error: 'Invalid width',
+                message: 'Width must be between 100 and 2000 pixels'
+            });
+        }
+
+        if (isNaN(imageHeight) || imageHeight < 100 || imageHeight > 3000) {
+            return res.status(400).json({
+                error: 'Invalid height',
+                message: 'Height must be between 100 and 3000 pixels'
+            });
+        }
+
+        // Import Puppeteer
+        const puppeteer = await import('puppeteer');
+
+        // Launch headless browser
+        browser = await puppeteer.default.launch({
+            headless: 'new',
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--no-first-run',
+                '--no-zygote',
+                '--single-process',
+                '--disable-gpu'
+            ]
+        });
+
+        const page = await browser.newPage();
+
+        // Set viewport
+        await page.setViewport({
+            width: imageWidth,
+            height: imageHeight,
+            deviceScaleFactor: 2
+        });
+
+        // Build the pet card URL
+        const baseUrl = `http://localhost:${PORT}`;
+        const petCardUrl = `${baseUrl}/petcard?pet=${encodeURIComponent(petKey)}&weight=${weight}&age=${age}&mutation=${encodeURIComponent(mutation)}`;
+
+        console.log(`Generating screenshot for: ${petCardUrl}`);
+
+        // Navigate to pet card page
+        await page.goto(petCardUrl, {
+            waitUntil: 'networkidle0',
+            timeout: 30000
+        });
+
+        // Wait for the pet card to load completely
+        await page.waitForSelector('#petCardContent', { visible: true, timeout: 30000 });
+
+        // Wait a bit more for any dynamic content (color extraction, etc.)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Hide the download button for screenshot
+        await page.evaluate(() => {
+            const downloadSection = document.getElementById('downloadSection');
+            if (downloadSection) {
+                downloadSection.style.display = 'none';
+            }
+        });
+
+        // Take screenshot of the pet card element
+        const petCardElement = await page.$('#capture-area');
+        if (!petCardElement) {
+            throw new Error('Pet card element not found');
+        }
+
+        const screenshot = await petCardElement.screenshot({
+            type: 'png',
+            omitBackground: false
+        });
+
+        // Set appropriate headers
+        const petName = petAbilities[petKey].name.replace(/\\s+/g, '_');
+        const filename = `${petName}_Age${age}_${weight}kg_Pet_Card.png`;
+
+        res.setHeader('Content-Type', 'image/png');
+        res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+        res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+
+        // Send the screenshot
+        res.send(screenshot);
+
+    } catch (error) {
+        console.error('Screenshot generation failed:', error);
+        
+        if (!res.headersSent) {
+            res.status(500).json({
+                error: 'Screenshot generation failed',
+                message: error.message
+            });
+        }
+    } finally {
+        // Always close the browser
+        if (browser) {
+            try {
+                await browser.close();
+            } catch (closeError) {
+                console.error('Error closing browser:', closeError);
+            }
+        }
     }
 });
 
