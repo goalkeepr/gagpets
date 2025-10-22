@@ -11,6 +11,12 @@ import { MODIFIER_CONFIG } from '../config/constants.js';
  */
 export const getModifierDetails = (modifierType) => {
     switch (modifierType) {
+    case 'spectral':
+        return {
+            value: MODIFIER_CONFIG.SPECTRAL_MODIFIER,
+            text: '[+Spectral]',
+            style: 'color: rgba(2, 151, 193, 0.8);'
+        };
     case 'golden':
         return {
             value: MODIFIER_CONFIG.GOLDEN_MULTIPLIER,
@@ -22,6 +28,12 @@ export const getModifierDetails = (modifierType) => {
             value: MODIFIER_CONFIG.RAINBOW_MULTIPLIER,
             text: '[+Rainbow]',
             style: 'background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'
+        };
+    case 'nightmare':
+        return {
+            value: MODIFIER_CONFIG.NIGHTMARE_MULTIPLIER,
+            text: '[+Nightmare]',
+            style: 'background: linear-gradient(45deg, #1a0033, #4a0080, #1a0033); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'
         };
     case 'shocked':
         return { value: 0, text: '[+Shocked]', style: 'color: rgb(255, 255, 100);' };
@@ -39,6 +51,12 @@ export const getModifierDetails = (modifierType) => {
         return { value: 0, text: '[+Tranquil]', style: 'color: rgb(247, 245, 184);' };
     case 'corrupted':
         return { value: 0, text: '[+Corrupted]', style: 'color: rgb(247, 184, 184);' };
+    case 'glimmering':
+        return { value: 0, text: '[+Glimmering]', style: 'color: rgb(255, 215, 0);' };
+    case 'luminous':
+        return { value: 0, text: '[+Luminous]', style: 'color: rgb(85, 170, 255);' };
+    case 'nutty':
+        return { value: 0, text: '[+Nutty]', style: 'color: rgb(161, 117, 29);' };
     default:
         return { value: 0, text: '', style: '' };
     }
@@ -58,19 +76,20 @@ export const getPetMutationDescription = async (modifierType, kg = 50) => {
     try {
         const { petMutationOptions } = await import('../data/mutations.js');
 
-        const mutationMap = {
-            'shocked': 'Shocked Pet Mutation',
-            'frozen': 'Frozen Pet Mutation',
-            'windy': 'Windy Pet Mutation',
-            'ironskin': 'IronSkin Pet Mutation',
-            'radiant': 'Radiant Pet Mutation',
-            'ascended': 'Ascended Pet Mutation',
-            'tranquil': 'Tranquil Pet Mutation',
-            'corrupted': 'Corrupted Pet Mutation',
-            'glimmering': 'Glimmering Pet Mutation'
-        };
-
-        const mutationKey = mutationMap[modifierType];
+    const mutationMap = {
+        'shocked': 'Shocked Pet Mutation',
+        'frozen': 'Frozen Pet Mutation',
+        'windy': 'Windy Pet Mutation',
+        'ironskin': 'IronSkin Pet Mutation',
+        'radiant': 'Radiant Pet Mutation',
+        'ascended': 'Ascended Pet Mutation',
+        'tranquil': 'Tranquil Pet Mutation',
+        'corrupted': 'Corrupted Pet Mutation',
+        'glimmering': 'Glimmering Pet Mutation',
+        'luminous': 'Luminous Pet Mutation',
+        'nutty': 'Nutty Pet Mutation',
+        'spectral': 'Spectral Pet Mutation'
+    };        const mutationKey = mutationMap[modifierType];
         if (!mutationKey || !petMutationOptions[mutationKey]) {
             return '';
         }

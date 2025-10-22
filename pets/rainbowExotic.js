@@ -725,6 +725,236 @@ const rainbowExoticPets = {
             return `<strong>Dual Ability:</strong><br>Pets taken from the pet mutation machine have a bonus <strong>2 - ${chance1Total.toFixed(1)}</strong> age to their age value!<br>Every <strong>${Utils.formatTime(cooldown2Total)}</strong>, travels between <strong>${amountTotal.toFixed(1)}</strong> random fruit in your garden which get the Flaming mutation! Fruits passed have <strong>${chance2Total.toFixed(1)}%</strong> chance to mutated as well${displayText}!`;
         },
         perKgImpact: () => "Each additional kg increases age bonus by 0.1 (max 13), decreases travel cooldown by 4.5s (min 3:20), increases mutation chance by 0.3% (max 60%), and increases fruit amount by 0.2 (max 11)"
+    },
+
+    ghostlyBat: {
+        name: "Ghostly Bat",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/a/ad/Bat.png",
+            fallback: "🦇"
+        },
+        type: "mammal",
+        rarity: "Uncommon",
+        source: "Rainbow Exotic",
+        probability: 45,
+        obtainable: true,
+        description: "Grants Spooky plants variant chance bonus in range",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Multiplier Max: 44.00 (39.20 🌈), Range Max: No Limit (No Limit 🌈)";
+            
+            const baseMultiplier = 1.2;
+            const baseRange = 50;
+            
+            const multiplierMod = baseMultiplier * modifier;
+            const rangeMod = baseRange * modifier;
+            
+            const adjustedBaseMultiplier = baseMultiplier + multiplierMod;
+            const multiplier = Math.min(3.4, adjustedBaseMultiplier + (0.05 * kg));
+            
+            const adjustedBaseRange = baseRange + rangeMod;
+            const range = Math.min(100, adjustedBaseRange + (0.25 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Grants Spooky plants within <strong>${range.toFixed(1)}</strong> studs a <strong>${multiplier.toFixed(2)}x</strong> variant chance bonus${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases multiplier by 0.05x (max 3.4x) and increases range by 0.25 studs (max 100)"
+    },
+
+    ghostlyBoneDog: {
+        name: "Ghostly Bone Dog",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/0/07/Bone_Dog.png",
+            fallback: "🦴"
+        },
+        type: "mammal",
+        rarity: "Rare",
+        source: "Rainbow Exotic",
+        probability: 25,
+        obtainable: true,
+        description: "Digs up random seeds periodically",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Cooldown Min: 35.00 (27.00 🌈), Chance Max: no limit (no limit 🌈)";
+            
+            const baseCooldown = 40;
+            const baseChance = 30;
+            
+            const cooldownMod = baseCooldown * modifier;
+            const chanceMod = baseChance * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(5, adjustedBaseCooldown - (1 * kg));
+            
+            const adjustedBaseChance = baseChance + chanceMod;
+            const chance = adjustedBaseChance + (0.05 * kg);
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldown)}</strong>, <strong>${chance.toFixed(2)}%</strong> chance to dig up a random seed${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 1s (min 5s) and increases chance by 0.05%"
+    },
+
+    ghostlySpider: {
+        name: "Ghostly Spider",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/8/84/Spider.png",
+            fallback: "🕷️"
+        },
+        type: "insect",
+        rarity: "Legendary",
+        source: "Rainbow Exotic",
+        probability: 18,
+        obtainable: true,
+        description: "Weaves webs that boost pet cooldowns and plant growth",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Cooldown Min: 51.43 (34.00 🌈), Range Max: 0.00 (0.00 🌈), Duration Max: No Limit (No Limit 🌈), AmountPet Max: 50.00 (10.00 🌈), AmountPlant Max: No Limit (No Limit 🌈)";
+            
+            const baseCooldown = 244;
+            const baseRange = 40;
+            const baseDuration = 20;
+            const baseAmountPet = 2;
+            const baseAmountPlant = 30;
+            
+            const cooldownMod = baseCooldown * modifier;
+            const rangeMod = baseRange * modifier;
+            const durationMod = baseDuration * modifier;
+            const amountPetMod = baseAmountPet * modifier;
+            const amountPlantMod = baseAmountPlant * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(100, adjustedBaseCooldown - (2.8 * kg));
+            
+            const adjustedBaseRange = baseRange + rangeMod;
+            const range = Math.min(40, adjustedBaseRange + (0.18 * kg));
+            
+            const adjustedBaseDuration = baseDuration + durationMod;
+            const duration = Math.min(40, adjustedBaseDuration + (0.1 * kg));
+            
+            const adjustedBaseAmountPet = baseAmountPet + amountPetMod;
+            const amountPet = Math.min(2.5, adjustedBaseAmountPet + (0.01 * kg));
+            
+            const adjustedBaseAmountPlant = baseAmountPlant + amountPlantMod;
+            const amountPlant = Math.min(60, adjustedBaseAmountPlant + (0.15 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldown)}</strong>, weaves a <strong>${range.toFixed(1)}</strong> stud web that lasts for <strong>${Utils.formatTime(duration)}</strong>. Pets on the web advance cooldown an extra <strong>${amountPet.toFixed(2)}s</strong> every second & plants grow an additional <strong>${amountPlant.toFixed(1)}s</strong> every second${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 2.8s (min 100s), increases range by 0.18 studs (max 40), increases duration by 0.1s (max 40s), increases pet cooldown advance by 0.01s/s (max 2.5s/s), and increases plant growth by 0.15s/s (max 60s/s)"
+    },
+
+    ghostlyBlackCat: {
+        name: "Ghostly Black Cat",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/f/fb/Blackcat.png",
+            fallback: "🐈‍⬛"
+        },
+        type: "mammal",
+        rarity: "Mythical",
+        source: "Rainbow Exotic",
+        probability: 8.5,
+        obtainable: true,
+        description: "Naps near Witch's Cauldron to enlarge nearby fruits",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Cooldown Min: 20.50 (9.40 🌈), Range Max: No Limit (No Limit 🌈), Duration Max: No Limit (No Limit 🌈), Multiplier Max: 15.00 (11.00 🌈)";
+            
+            const baseCooldown = 111;
+            const baseRange = 20;
+            const baseDuration = 29.5;
+            const baseMultiplier = 2;
+            
+            const cooldownMod = baseCooldown * modifier;
+            const rangeMod = baseRange * modifier;
+            const durationMod = baseDuration * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(70, adjustedBaseCooldown - (2 * kg));
+            
+            const adjustedBaseRange = baseRange + rangeMod;
+            const range = Math.min(40, adjustedBaseRange + (0.1 * kg));
+            
+            const adjustedBaseDuration = baseDuration + durationMod;
+            const duration = Math.min(60, adjustedBaseDuration + (0.15 * kg));
+            
+            const adjustedBaseMultiplier = baseMultiplier + multiplierMod;
+            const multiplier = Math.min(3.5, adjustedBaseMultiplier + (0.1 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldown)}</strong>, goes to a Witch's Cauldron cosmetic and naps near it for <strong>${Utils.formatTime(duration)}</strong>. New fruit within <strong>${range.toFixed(1)}</strong> studs will be <strong>${multiplier.toFixed(2)}x</strong> larger${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 2s (min 70s), increases range by 0.1 studs (max 40), increases duration by 0.15s (max 60s), and increases multiplier by 0.1x (max 3.5x)"
+    },
+
+    ghostlyHeadlessHorseman: {
+        name: "Ghostly Headless Horseman",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/3/3d/Headless_Horseman.png",
+            fallback: "🐴"
+        },
+        type: "undead",
+        rarity: "Prismatic",
+        source: "Rainbow Exotic",
+        probability: 0.5,
+        obtainable: true,
+        description: "Haunts pets and bestows chaotic mutations",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Cooldown Min: 60.17 (39.80 🌈), Level Min: 21.00 (8.80 🌈), Chance Max: 60.00 (48.00 🌈)";
+            
+            const baseCooldown = 1222; // in seconds (20.37 minutes)
+            const baseLevel = 30.5;
+            const baseChance = 12;
+            
+            const cooldownMod = baseCooldown * modifier;
+            const levelMod = baseLevel * modifier;
+            const chanceMod = baseChance * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(500, adjustedBaseCooldown - (12 * kg));
+            
+            const adjustedBaseLevel = baseLevel - levelMod;
+            const level = Math.max(20, adjustedBaseLevel - (0.5 * kg));
+            
+            const adjustedBaseChance = baseChance + chanceMod;
+            const chance = Math.min(24, adjustedBaseChance + (0.2 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <font color='#FFD700'><strong>${Utils.formatTime(cooldown)}</strong></font>, haunts a random level <font color='#FFD700'><strong>${level.toFixed(1)}</strong></font> pet without a mutation, resetting it to <font color='#FF5555'>level 1</font> and bestowing one of four chaotic mutations:\n\n<font color='#8C2DAF'>Dreadbound</font>, <font color='#FF5528'>Soulflame</font>, or <font color='#5AC8FF'>Spectral</font> — with a rare <font color='#FF0064'><strong>${chance.toFixed(1)}%</strong></font> chance for <font color='#FF0064'>Nightmare</font>${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 12s (min 500s), decreases target level by 0.5 (min 20), and increases Nightmare chance by 0.2% (max 24%)"
     }
 };
 

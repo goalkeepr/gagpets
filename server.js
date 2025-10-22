@@ -79,6 +79,16 @@ app.get('/petlimits', (req, res) => {
     res.sendFile(path.join(__dirname, 'petlimits.html'));
 });
 
+// Route for pet tracker page
+app.get('/pettracker', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pettracker.html'));
+});
+
+// Alias route for pet tracker
+app.get('/tracker', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pettracker.html'));
+});
+
 // Health check route for production monitoring
 app.get('/health', (req, res) => {
     res.json({

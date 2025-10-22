@@ -7,6 +7,8 @@ const getModifierDetails = (modifierType) => {
         return { value: 0.1, text: '[+Golden]', style: 'color: gold;' };
     case 'rainbow':
         return { value: 0.2, text: '[+Rainbow]', style: 'background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent;' };
+     case 'nightmare':
+        return { value: 0.22, text: '[+Nightmare]', style: 'background: linear-gradient(45deg, #1a0033, #4a0080, #1a0033); -webkit-background-clip: text; -webkit-text-fill-color: transparent;' };
     case 'shocked':
         return { value: 0, text: '[+Shocked]', style: 'color: rgb(255, 255, 100);' };
     case 'frozen':

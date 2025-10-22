@@ -177,6 +177,15 @@
             animation: rainbowShimmer 3s ease-in-out infinite;
         }
 
+        .pet-mutation.nightmare {
+            background: linear-gradient(45deg, #1a0033, #4a0080, #1a0033);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 20px rgba(74, 0, 128, 0.5);
+            border: 1px solid rgba(138, 43, 226, 0.4);
+            animation: nightmareShimmer 3s ease-in-out infinite;
+        }
+
         .pet-class {
             background: linear-gradient(135deg, #374151, #1f2937);
             color: white;
@@ -434,6 +443,24 @@
             }
             50% { 
                 filter: brightness(1.2) saturate(1.3);
+            }
+        }
+
+        @keyframes nightmareShimmer {
+            0%, 100% { 
+                filter: brightness(0.9) hue-rotate(0deg);
+            }
+            50% { 
+                filter: brightness(1.1) hue-rotate(10deg);
+            }
+        }
+
+        @keyframes nightmareShimmer {
+            0%, 100% { 
+                filter: brightness(0.9) hue-rotate(0deg);
+            }
+            50% { 
+                filter: brightness(1.1) hue-rotate(10deg);
             }
         }
 
@@ -1474,6 +1501,14 @@
                                 /* Rainbow effects */
                                 .pet-mutation.rainbow {
                                     background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0080) !important;
+                                    color: white !important;
+                                    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+                                    font-weight: 600 !important;
+                                }
+                                
+                                /* Nightmare effects */
+                                .pet-mutation.nightmare {
+                                    background: linear-gradient(45deg, #1a0033, #4a0080, #1a0033) !important;
                                     color: white !important;
                                     font-family: 'Outfit', 'Segoe UI', sans-serif !important;
                                     font-weight: 600 !important;

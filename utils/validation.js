@@ -139,8 +139,9 @@ export const validatePetKey = (petKey, petAbilities) => {
  */
 export const validateModifierType = (modifierType) => {
     const validModifiers = [
-        'none', 'golden', 'rainbow', 'shocked', 'frozen', 'windy',
-        'ironskin', 'radiant', 'ascended', 'tranquil', 'corrupted'
+        'none', 'spectral', 'golden', 'rainbow', 'nightmare', 'shocked', 'frozen', 'windy',
+        'ironskin', 'radiant', 'ascended', 'tranquil', 'corrupted', 'glimmering', 
+        'luminous', 'nutty'
     ];
 
     if (!modifierType) {

@@ -29,6 +29,7 @@
         </div>
         
         <div class="navigation-links">
+            <a href="pettracker.html">📋 Pet Tracker</a>
             <a href="fruittypes.html">🍎 Fruit Types</a>
             <a href="recipes.html">🍳 Recipes</a>
         </div>
@@ -36,8 +37,10 @@
         <div class="calculator">
             <form id="petForm">
                 <div class="form-group">
+                    <!-- HIDDEN: Filter by Source Type section - Too many sources, hiding for now -->
+                    <!-- Can be re-enabled later if needed -->
+                    <!--
                     <label>Filter by Source Type:</label>
-                    <!-- Mobile dropdown version -->
                     <select id="typeFilterSelect" class="mobile-filter-dropdown">
                         <option value="all">All Sources</option>
                         <option value="Anti Bee Egg">🐝 Anti Bee Egg</option>
@@ -58,13 +61,16 @@
                         <option value="Rainbow Exotic">🌈 Rainbow Exotic</option>
                         <option value="Rare Egg">🥚 Rare Egg</option>
                         <option value="Rare Summer Egg">🏖️ Rare Summer Egg</option>
+                        <option value="Spooky Egg">👻 Spooky Egg</option>
                         <option value="Sprout Egg">🌱 Sprout Egg</option>
                         <option value="Uncommon Egg">🥚 Uncommon Egg</option>
                         <option value="Zen Egg">� Zen Egg</option>
                         <option value="Fall Pet Shop">🍂 Fall Pet Shop</option>
+                        <option value="Season Pass">🎫 Season Pass</option>
+                        <option value="Chubby Chipmunk Event">🐿️ Chubby Chipmunk Event</option>
                         <option value="other">🔮 Other</option>
                     </select>
-                    <!-- Desktop button version -->
+
                     <div id="typeFilters" class="type-filters desktop-filter-buttons">
                         <button type="button" class="filter-btn active" data-type="all">All</button>
                         <button type="button" class="filter-btn" data-type="Anti Bee Egg"><span class="source-icon-placeholder" data-source="Anti Bee Egg"></span>Anti Bee</button>
@@ -76,6 +82,7 @@
                         <button type="button" class="filter-btn" data-type="Enchanted Egg"><span class="source-icon-placeholder" data-source="Enchanted Egg"></span>Enchanted</button>
                         <button type="button" class="filter-btn" data-type="Fall Egg"><span class="source-icon-placeholder" data-source="Fall Egg"></span>Fall</button>
                         <button type="button" class="filter-btn" data-type="Gourmet Egg"><span class="source-icon-placeholder" data-source="Gourmet Egg"></span>Gourmet</button>
+                        <button type="button" class="filter-btn" data-type="Jungle Egg"><span class="source-icon-placeholder" data-source="Jungle Egg"></span>Jungle</button>
                         <button type="button" class="filter-btn" data-type="Legendary Egg"><span class="source-icon-placeholder" data-source="Legendary Egg"></span>Legendary</button>
                         <button type="button" class="filter-btn" data-type="Mythical Egg"><span class="source-icon-placeholder" data-source="Mythical Egg"></span>Mythical</button>
                         <button type="button" class="filter-btn" data-type="Night Egg"><span class="source-icon-placeholder" data-source="Night Egg"></span>Night</button>
@@ -85,14 +92,18 @@
                         <button type="button" class="filter-btn" data-type="Rainbow Exotic"><span class="source-icon-placeholder" data-source="Rainbow Exotic"></span>Rainbow Exotic</button>
                         <button type="button" class="filter-btn" data-type="Rare Egg"><span class="source-icon-placeholder" data-source="Rare Egg"></span>Rare</button>
                         <button type="button" class="filter-btn" data-type="Rare Summer Egg"><span class="source-icon-placeholder" data-source="Rare Summer Egg"></span>Rare Summer</button>
+                        <button type="button" class="filter-btn" data-type="Spooky Egg"><span class="source-icon-placeholder" data-source="Spooky Egg"></span>Spooky</button>
                         <button type="button" class="filter-btn" data-type="Sprout Egg"><span class="source-icon-placeholder" data-source="Sprout Egg"></span>Sprout</button>
                         <button type="button" class="filter-btn" data-type="Uncommon Egg"><span class="source-icon-placeholder" data-source="Uncommon Egg"></span>Uncommon</button>
                         <button type="button" class="filter-btn" data-type="Zen Egg"><span class="source-icon-placeholder" data-source="Zen Egg"></span>Zen</button>
                         <button type="button" class="filter-btn" data-type="Fall Pet Shop"><span class="source-icon-placeholder" data-source="Fall Pet Shop"></span>Fall Pet Shop</button>
+                        <button type="button" class="filter-btn" data-type="Season Pass"><span class="source-icon-placeholder" data-source="Season Pass"></span>Season Pass</button>
+                        <button type="button" class="filter-btn" data-type="Chubby Chipmunk Event"><span class="source-icon-placeholder" data-source="Chubby Chipmunk Event"></span>Chubby Chipmunk</button>
                         <button type="button" class="filter-btn" data-type="other"><span class="source-icon-placeholder" data-source="other"></span>Other</button>
                     </div>
+                    -->
                     
-                    <label style="margin-top: 15px;">Filter by Rarity:</label>
+                    <label>Filter by Rarity:</label>
                     <!-- Mobile dropdown version -->
                     <select id="rarityFilterSelect" class="mobile-filter-dropdown">
                         <option value="all">All Rarities</option>
@@ -167,8 +178,10 @@
                     <label for="modifierType">Pet Mutation:</label>
                     <select id="modifierType" aria-label="Select pet mutation">
                                 <option value="none">None</option>
+                                <option value="spectral">Spectral (8% boost to passive base)</option>
                                 <option value="golden">Golden (10% boost to passive base)</option>
                                 <option value="rainbow">Rainbow (20% boost to passive base)</option>
+                                <option value="nightmare">Nightmare (22% boost to passive base)</option>
                                 <option value="shocked">Shocked (applies lightning)</option>
                                 <option value="frozen">Frozen (applies freeze)</option>
                                 <option value="windy">Windy (applies windstruck)</option>
@@ -178,6 +191,8 @@
                                 <option value="tranquil">Tranquil (applies tranquil)</option>
                                 <option value="corrupted">Corrupted (applies corrupted)</option>
                                 <option value="glimmering">Glimmering (applies Glimmering)</option>
+                                <option value="luminous">Luminous (applies Luminous)</option>
+                                <option value="nutty">Nutty (double activation or level loss)</option>
                     </select>
                 </div>
                 
@@ -211,8 +226,10 @@
                             <label for="modifier1Type">Pet 1 Mutation:</label>
                             <select id="modifier1Type" aria-label="Select first pet modifier">
                                 <option value="none">None</option>
+                                <option value="spectral">Spectral (8% boost to passive base)</option>
                                 <option value="golden">Golden (10% boost to passive base)</option>
                                 <option value="rainbow">Rainbow (20% boost to passive base)</option>
+                                <option value="nightmare">Nightmare (22% boost to passive base)</option>
                                 <option value="shocked">Shocked (applies lightning)</option>
                                 <option value="frozen">Frozen (applies freeze)</option>
                                 <option value="windy">Windy (applies windstruck)</option>
@@ -222,14 +239,18 @@
                                 <option value="tranquil">Tranquil (applies tranquil)</option>
                                 <option value="corrupted">Corrupted (applies corrupted)</option>
                                 <option value="glimmering">Glimmering (applies Glimmering)</option>
+                                <option value="luminous">Luminous (applies Luminous)</option>
+                                <option value="nutty">Nutty (double activation or level loss)</option>
                             </select>
                         </div>
                         <div style="flex: 1;">
                             <label for="modifier2Type">Pet 2 Mutation:</label>
                             <select id="modifier2Type" aria-label="Select second pet modifier">
                                 <option value="none">None</option>
+                                <option value="spectral">Spectral (8% boost to passive base)</option>
                                 <option value="golden">Golden (10% boost to passive base)</option>
                                 <option value="rainbow">Rainbow (20% boost to passive base)</option>
+                                <option value="nightmare">Nightmare (22% boost to passive base)</option>
                                 <option value="shocked">Shocked (applies lightning)</option>
                                 <option value="frozen">Frozen (applies freeze)</option>
                                 <option value="windy">Windy (applies windstruck)</option>
@@ -239,6 +260,8 @@
                                 <option value="tranquil">Tranquil (applies tranquil)</option>
                                 <option value="corrupted">Corrupted (applies corrupted)</option>
                                 <option value="glimmering">Glimmering (applies Glimmering)</option>
+                                <option value="luminous">Luminous (applies Luminous)</option>
+                                <option value="nutty">Nutty (double activation or level loss)</option>
                             </select>
                         </div>
                     </div>
@@ -280,7 +303,7 @@
 
     <button type="button" class="fab" id="fabCalculateBtn" aria-label="Calculate Pet Abilities">🌱</button>
 
-    <script type="module" src="global_bridge.js?v=202508141"></script>
+    <script type="module" src="global_bridge.js?v=202510111"></script>
     <script>
         // Direct mutation function implementation for immediate availability
         window.getPetMutationDescription = function(modifierType, kg = 50) {
@@ -295,7 +318,10 @@
                     "ascended": "Ascended Pet Mutation",
                     "tranquil": "Tranquil Pet Mutation",
                     "corrupted": "Corrupted Pet Mutation",
-                    "glimmering": "Glimmering Pet Mutation"
+                    "glimmering": "Glimmering Pet Mutation",
+                    "luminous": "Luminous Pet Mutation",
+                    "nutty": "Nutty Pet Mutation",
+                    "spectral": "Spectral Pet Mutation"
                 };
                 
                 const mutationKey = mutationMap[modifierType];
@@ -322,6 +348,7 @@
             'Enchanted Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6b/EnchantedEgg.png',
             'Fall Egg': 'https://static.wikia.nocookie.net/growagarden/images/5/5e/Fall_Egg.png',
             'Gourmet Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/2a/Gourmet_Egg.png',
+            'Jungle Egg': 'https://static.wikia.nocookie.net/growagarden/images/a/a6/Jungle_Egg.png',
             'Legendary Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/63/Legendary_Egg.webp',
             'Mythical Egg': 'https://static.wikia.nocookie.net/growagarden/images/4/4f/MythicalEggBetter.png',
             'Night Egg': 'https://static.wikia.nocookie.net/growagarden/images/7/71/Night_Egg.png',
@@ -331,10 +358,13 @@
             'Rainbow Exotic': 'https://static.wikia.nocookie.net/growagarden/images/2/25/Images-GrowGarden-Vector_20250426011605.png',
             'Rare Egg': 'https://static.wikia.nocookie.net/growagarden/images/2/23/RareEgg.png',
             'Rare Summer Egg': 'https://static.wikia.nocookie.net/growagarden/images/6/6c/RareSummerEgg.png',
+            'Spooky Egg': 'https://static.wikia.nocookie.net/growagarden/images/c/c5/Spooky_Egg.png',
             'Sprout Egg': 'https://static.wikia.nocookie.net/growagarden/images/9/96/SproutEgg.png',
             'Uncommon Egg': 'https://static.wikia.nocookie.net/growagarden/images/0/0c/Uncommon_Egg.webp',
             'Zen Egg': 'https://static.wikia.nocookie.net/growagarden/images/1/14/Zeneg.png',
             'Fall Pet Shop': 'https://static.wikia.nocookie.net/growagarden/images/f/f0/FallEventIsland.png',
+            'Season Pass': 'https://static.wikia.nocookie.net/growagarden/images/1/11/Season_Pass_Icon.png',
+            'Chubby Chipmunk Event': 'https://static.wikia.nocookie.net/growagarden/images/5/52/ChubbyChipmunkPet.png',
             'other': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png'
         };
         
@@ -358,7 +388,12 @@
                 'Dinosaur Egg': '🦕',
                 'Enchanted Egg': '✨',
                 'Fall Egg': '🍂',
+                'Jungle Egg': '🌴',
                 'Night Egg': '🌙',
+                'Season Pass': '🎫',
+                'Chubby Chipmunk Event': '🐿️',
+                'Spooky Egg': '👻',
+                'Rainbow Exotic': '🌈',
                 'other': '🔮'
             };
             return emojiMap[sourceType] || '❓';
@@ -1317,12 +1352,16 @@
                     'Enchanted Egg',
                     'Fall Egg',
                     'Gourmet Egg',
+                    'Jungle Egg',
                     'Night Egg',
                     'Oasis Egg',
                     'Paradise Egg',
                     'Rainbow Exotic',
+                    'Spooky Egg',
                     'Zen Egg',
-                    'Fall Pet Shop'
+                    'Fall Pet Shop',
+                    'Season Pass',
+                    'Chubby Chipmunk Event'
                 ];
                 return knownSources.includes(source);
             },

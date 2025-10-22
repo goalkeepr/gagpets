@@ -55,14 +55,20 @@ export const PARADISE_EGG_PETS = {
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
             const seconds = Math.max(15, adjustedBaseSeconds - (6 * kg));
-            const range = 20 + (kg / 5);
-            const cooldownAdvance = 65 + (0.6 * kg);
+            
+            const baseRange = 20;
+            const rangeMod = baseRange * modifier;
+            const range = baseRange + rangeMod + (kg / 5);
+            
+            const baseCooldownAdvance = 65;
+            const cooldownAdvanceMod = baseCooldownAdvance * modifier;
+            const cooldownAdvance = baseCooldownAdvance + cooldownAdvanceMod + (0.6 * kg);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, fans its feathers and all active pets within <strong>${range.toFixed(1)}</strong> studs will advance cooldown for their abilities by <strong>${Utils.formatTime(cooldownAdvance)}</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases feather time by 6 seconds (min 15s), increases range by 0.2 studs, and increases cooldown advance by 0.6 seconds"
+        perKgImpact: () => "Each additional kg decreases feather time by 6 seconds (min 15s), increases range by 0.2 studs, and increases cooldown advance by 0.6 seconds."
     },
     capybara: {
         name: "Capybara",

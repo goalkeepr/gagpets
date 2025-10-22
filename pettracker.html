@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCYNBT0YWW"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NCYNBT0YWW');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your pet inventory for Grow a Garden game">
+    <meta name="keywords" content="Grow a Garden, pet tracker, pet inventory, game tools">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+    <title>Grow a Garden - Pet Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for pet tracker */
+        
+        /* Remove border from navigation links */
+        .navigation-links {
+            border-bottom: none;
+        }
+        
+        /* Override container max-width for wider viewport */
+        .container {
+            max-width: none;
+            width: 95%;
+            margin: 20px auto;
+        }
+        
+        .tracker-controls {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Quick Add Row Styles */
+        #quickAddRow {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+            border-bottom: 2px solid #667eea;
+        }
+        
+        [data-theme="dark"] #quickAddRow {
+            background: linear-gradient(135deg, #3a4a5a 0%, #2d3d4d 100%);
+            border-bottom: 2px solid #8b9aee;
+        }
+        
+        #quickAddRow td {
+            padding: 10px 8px;
+            vertical-align: middle;
+        }
+        
+        #quickAddRow input,
+        #quickAddRow select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+            box-sizing: border-box;
+        }
+        
+        [data-theme="dark"] #quickAddRow input,
+        [data-theme="dark"] #quickAddRow select {
+            background-color: #2d2d2d;
+            border-color: #8b9aee;
+            color: #e0e0e0;
+        }
+        
+        #quickAddRow input:focus,
+        #quickAddRow select:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+        
+        .quick-add-btn {
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .quick-add-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+        
+        .quick-add-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .quick-add-label {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        [data-theme="dark"] .quick-add-label {
+            color: #8b9aee;
+        }
+
+        .tracker-controls button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tracker-controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .tracker-controls select,
+        .tracker-controls input[type="text"] {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .tracker-controls select {
+            min-width: auto;
+            width: auto;
+        }
+        
+        .tracker-controls input[type="text"] {
+            width: 200px;
+        }
+
+        .pet-table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .pet-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 1400px;
+        }
+
+        .pet-table th {
+            background: #667eea;
+            color: white;
+            padding: 14px 10px;
+            text-align: left;
+            font-weight: 600;
+            user-select: none;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 13px;
+            white-space: nowrap;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pet-table th.sortable {
+            cursor: pointer;
+        }
+        
+        /* Center specific columns */
+        .pet-table th:nth-child(2),  /* Icon */
+        .pet-table th:nth-child(4),  /* Age */
+        .pet-table th:nth-child(5),  /* Weight */
+        .pet-table th:nth-child(6),  /* Weight at 100 */
+        .pet-table th:nth-child(7),  /* Size Class */
+        .pet-table th:nth-child(9) { /* Pet Rank */
+            text-align: center;
+        }
+        
+        .pet-table td:nth-child(5),  /* Weight */
+        .pet-table td:nth-child(6),  /* Weight at 100 */
+        .pet-table td:nth-child(7),  /* Size Class */
+        .pet-table td:nth-child(9) { /* Pet Rank */
+            text-align: center;
+        }
+
+        .pet-table th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        .pet-table th:last-child {
+            border-top-right-radius: 12px;
+            border-right: none;
+        }
+
+        .pet-table th.sortable:hover {
+            background: #5568d3;
+        }
+
+        .pet-table th.sortable::after {
+            content: ' ⇅';
+            opacity: 0.5;
+            font-size: 11px;
+        }
+
+        .pet-table th.sorted-asc::after {
+            content: ' ↑';
+            opacity: 1;
+        }
+
+        .pet-table th.sorted-desc::after {
+            content: ' ↓';
+            opacity: 1;
+        }
+
+        .pet-table td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .pet-table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .pet-table tbody tr:hover {
+            background-color: #f8f9ff;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .pet-table tr.loaned {
+            background-color: #fff8e1;
+        }
+
+        .pet-table tr.loaned:hover {
+            background-color: #ffecb3;
+        }
+
+        .pet-icon-cell {
+            text-align: center;
+            font-size: 24px;
+            width: 50px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-start;
+        }
+
+        .action-buttons button {
+            padding: 6px 12px;
+            font-size: 11px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .action-buttons button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+            color: white;
+        }
+
+        /* Column widths for better layout */
+        .pet-table th:nth-child(1), .pet-table td:nth-child(1) { min-width: 140px; } /* Account */
+        .pet-table th:nth-child(2), .pet-table td:nth-child(2) { min-width: 70px; } /* Icon */
+        .pet-table th:nth-child(3), .pet-table td:nth-child(3) { min-width: 180px; } /* Pet Type */
+        .pet-table th:nth-child(4), .pet-table td:nth-child(4) { min-width: 80px; } /* Age */
+        .pet-table th:nth-child(5), .pet-table td:nth-child(5) { min-width: 110px; } /* Weight */
+        .pet-table th:nth-child(6), .pet-table td:nth-child(6) { min-width: 120px; } /* Weight at 100 */
+        .pet-table th:nth-child(7), .pet-table td:nth-child(7) { min-width: 90px; } /* Size Class */
+        .pet-table th:nth-child(8), .pet-table td:nth-child(8) { min-width: 140px; } /* Mutation */
+        .pet-table th:nth-child(9), .pet-table td:nth-child(9) { min-width: 90px; } /* Rank */
+        .pet-table th:nth-child(10), .pet-table td:nth-child(10) { min-width: 140px; } /* Loaned To */
+        .pet-table th:nth-child(11), .pet-table td:nth-child(11) { min-width: 150px; } /* Actions */
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #667eea;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        .form-row label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-row input,
+        .form-row select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .modal-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .modal-actions button:hover {
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 72px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .empty-state div:last-child {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .pet-icon-cell {
+            font-size: 20px;
+        }
+
+        .pet-name-cell {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .pet-name-cell a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border-bottom: 1px dotted #667eea;
+        }
+        
+        .pet-name-cell a:hover {
+            color: #764ba2;
+            text-decoration: none;
+            border-bottom: 2px solid #764ba2;
+        }
+
+        .weight-highlight {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        /* Dark mode support */
+        [data-theme="dark"] .pet-table-container,
+        [data-theme="dark"] .modal-content,
+        [data-theme="dark"] .stat-card {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .pet-table td {
+            border-bottom-color: #444;
+        }
+
+        [data-theme="dark"] .pet-table tr:hover {
+            background-color: #3a3a3a;
+        }
+
+        [data-theme="dark"] .form-row input,
+        [data-theme="dark"] .form-row select,
+        [data-theme="dark"] .tracker-controls select,
+        [data-theme="dark"] .tracker-controls input[type="text"] {
+            background-color: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .modal-header h2 {
+            color: #8b9aee;
+        }
+
+        [data-theme="dark"] .stat-label {
+            color: #aaa;
+        }
+        
+        [data-theme="dark"] .pet-name-cell {
+            color: #e0e0e0;
+        }
+        
+        [data-theme="dark"] .pet-name-cell a {
+            color: #8b9aee;
+            border-bottom-color: #8b9aee;
+        }
+        
+        [data-theme="dark"] .pet-name-cell a:hover {
+            color: #a8b5f5;
+            border-bottom-color: #a8b5f5;
+        }
+        
+        [data-theme="dark"] .pet-table-container {
+            background-color: #2d2d2d;
+        }
+        
+        [data-theme="dark"] .pet-table {
+            background-color: #2d2d2d;
+        }
+        
+        [data-theme="dark"] .empty-state div:last-child {
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 98%;
+                margin: 10px auto;
+            }
+            
+            .tracker-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tracker-controls button,
+            .tracker-controls select,
+            .tracker-controls input[type="text"] {
+                width: 100%;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .pet-table-container {
+                max-height: 60vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                margin: 5px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Grow a Garden</h1>
+            <p>Pet Inventory Tracker</p>
+            <button type="button" id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <span class="toggle-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="navigation-links">
+            <a href="/pets">🐾 Pet Calculator</a>
+            <a href="/fruittypes">🍎 Fruit Types</a>
+            <a href="/recipes">🍳 Recipes</a>
+            <a href="/petlimits">📊 Pet Limits</a>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="stats-container" id="statsContainer">
+            <div class="stat-card">
+                <div class="stat-value" id="totalPets">0</div>
+                <div class="stat-label">Total Pets</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="totalAccounts">0</div>
+                <div class="stat-label">Accounts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="loanedPets">0</div>
+                <div class="stat-label">Loaned Out</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="tracker-controls">
+            <button id="addPetBtn">➕ Add Pet</button>
+            <button id="exportBtn">📥 Export Data</button>
+            <button id="importBtn">📤 Import Data</button>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+            
+            <select id="accountFilter">
+                <option value="">All Accounts</option>
+            </select>
+            
+            <input type="text" id="searchFilter" placeholder="🔍 Search pets...">
+        </div>
+
+        <!-- Pet Table -->
+        <div class="pet-table-container">
+            <table class="pet-table" id="petTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-sort="account">Account</th>
+                        <th>Icon</th>
+                        <th class="sortable" data-sort="petName">Pet Type</th>
+                        <th class="sortable" data-sort="age">Age</th>
+                        <th class="sortable" data-sort="currentWeight">Weight</th>
+                        <th class="sortable" data-sort="weightAt100">Weight at 100</th>
+                        <th class="sortable" data-sort="sizeClass">Size Class</th>
+                        <th class="sortable" data-sort="mutation">Mutation</th>
+                        <th class="sortable" data-sort="rank">Pet Rank</th>
+                        <th class="sortable" data-sort="loanedTo">Loaned To</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="petTableBody">
+                    <!-- Quick Add Row -->
+                    <tr id="quickAddRow" style="display: table-row;">
+                        <td>
+                            <input type="text" id="quickAddAccount" placeholder="Account" value="Main">
+                        </td>
+                        <td class="pet-icon-cell" id="quickAddIcon">🐾</td>
+                        <td>
+                            <input type="text" 
+                                   id="quickAddPetType" 
+                                   list="quickAddPetTypeList" 
+                                   placeholder="Start typing to search pets..."
+                                   autocomplete="off"
+                                   style="width: 100%;">
+                            <datalist id="quickAddPetTypeList">
+                            </datalist>
+                        </td>
+                        <td>
+                            <input type="number" id="quickAddAge" placeholder="Age" min="1" max="100" value="1" style="width: 70px;">
+                        </td>
+                        <td>
+                            <input type="number" id="quickAddWeight" placeholder="Weight" min="0.88" max="114.40" step="0.01" value="1.60" style="width: 90px;">
+                        </td>
+                        <td class="weight-highlight" id="quickAddWeightAt100">-</td>
+                        <td id="quickAddSizeClass">-</td>
+                        <td>
+                            <select id="quickAddMutation" style="width: 100%;">
+                                <option value="none">None</option>
+                                <option value="golden">✨ Golden</option>
+                                <option value="rainbow">🌈 Rainbow</option>
+                                <option value="nightmare">🌙 Nightmare</option>
+                                <option value="aromatic">🌺 Aromatic</option>
+                                <option value="ascended">🌟 Ascended</option>
+                                <option value="corrupted">🖤 Corrupted</option>
+                                <option value="fried">🍳 Fried</option>
+                                <option value="frozen">❄️ Frozen</option>
+                                <option value="giantbean">🫘 GiantBean</option>
+                                <option value="glimmering">✨ Glimmering</option>
+                                <option value="ironskin">🛡️ IronSkin</option>
+                                <option value="luminous">💡 Luminous</option>
+                                <option value="mega">🔷 Mega</option>
+                                <option value="nutty">🥜 Nutty</option>
+                                <option value="radiant">☀️ Radiant</option>
+                                <option value="shocked">⚡ Shocked</option>
+                                <option value="tiny">🔸 Tiny</option>
+                                <option value="tranquil">☮️ Tranquil</option>
+                                <option value="windy">💨 Windy</option>
+                            </select>
+                        </td>
+                        <td>-</td>
+                        <td>
+                            <input type="text" id="quickAddLoaned" placeholder="Loaned to...">
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="quick-add-btn" id="quickAddSaveBtn">💾 Save</button>
+                                <button class="quick-add-btn" id="quickAddCancelBtn" style="background: linear-gradient(135deg, #f44336 0%, #da190b 100%);">✖ Cancel</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="11" class="empty-state">
+                            <div class="empty-state-icon">🐾</div>
+                            <div>No pets tracked yet. Click "Add Pet" to get started!</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add/Edit Pet Modal -->
+    <div id="petModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Pet</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="petForm">
+                <div class="form-row">
+                    <label for="petAccount">Account Name *</label>
+                    <input type="text" id="petAccount" required placeholder="e.g., Main Account" value="Main">
+                </div>
+                <div class="form-row">
+                    <label for="petType">Pet Type *</label>
+                    <input type="text" 
+                           id="petType" 
+                           list="petTypeList" 
+                           required 
+                           placeholder="Start typing to search pets..."
+                           autocomplete="off">
+                    <datalist id="petTypeList">
+                    </datalist>
+                </div>
+                <div class="form-row">
+                    <label for="petAge">Age *</label>
+                    <input type="number" id="petAge" required min="1" max="100" value="1" placeholder="1">
+                </div>
+                <div class="form-row">
+                    <label for="petWeight">Current Weight (kg) *</label>
+                    <input type="number" id="petWeight" required min="0.88" max="114.40" step="0.01" value="1.60" placeholder="1.60">
+                </div>
+                <div class="form-row">
+                    <label for="petMutation">Mutation</label>
+                    <select id="petMutation">
+                        <option value="none">None</option>
+                        <option value="golden">Golden</option>
+                        <option value="rainbow">Rainbow</option>
+                        <option value="nightmare">Nightmare</option>
+                        <option value="aromatic">Aromatic</option>
+                        <option value="ascended">Ascended</option>
+                        <option value="corrupted">Corrupted</option>
+                        <option value="fried">Fried</option>
+                        <option value="frozen">Frozen</option>
+                        <option value="giantbean">GiantBean</option>
+                        <option value="glimmering">Glimmering</option>
+                        <option value="ironskin">IronSkin</option>
+                        <option value="luminous">Luminous</option>
+                        <option value="mega">Mega</option>
+                        <option value="nutty">Nutty</option>
+                        <option value="radiant">Radiant</option>
+                        <option value="shocked">Shocked</option>
+                        <option value="tiny">Tiny</option>
+                        <option value="tranquil">Tranquil</option>
+                        <option value="windy">Windy</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="petLoanedTo">Loaned To (optional)</label>
+                    <input type="text" id="petLoanedTo" placeholder="Player name or leave empty">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-primary" id="saveBtn">Save Pet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Load pet data -->
+    <script type="module" src="global_bridge.js"></script>
+    
+    <script type="module">
+        // Pet Tracker Application
+        import * as Utils from './utils/calculations.js';
+
+        // Helper function to render pet icons
+        function renderIcon(icon) {
+            // If icon is a string (emoji), return as-is
+            if (typeof icon === 'string') {
+                return icon;
+            }
+            
+            // If icon is an object with type and url
+            if (icon && typeof icon === 'object' && icon.type === 'image' && icon.url) {
+                const fallback = icon.fallback || '❓';
+                return `<img src="${icon.url}" alt="pet icon" style="width: 20px; height: 20px; object-fit: contain;" onerror="this.style.display='none'; this.nextSibling.style.display='inline';" /><span style="display:none;">${fallback}</span>`;
+            }
+            
+            // Fallback for invalid icon data
+            return '❓';
+        }
+
+        // Data Management
+        const DataManager = {
+            storageKey: 'gagPets_petInventory',
+            
+            /**
+             * Load all pet inventory data from localStorage
+             */
+            loadData() {
+                try {
+                    const data = localStorage.getItem(this.storageKey);
+                    return data ? JSON.parse(data) : [];
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                    return [];
+                }
+            },
+            
+            /**
+             * Save pet inventory data to localStorage
+             */
+            saveData(data) {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(data));
+                    return true;
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                    alert('Error saving data. Your storage may be full.');
+                    return false;
+                }
+            },
+            
+            /**
+             * Add a new pet to the inventory
+             */
+            addPet(petData) {
+                const pets = this.loadData();
+                const newPet = {
+                    id: this.generateId(),
+                    timestamp: Date.now(),
+                    ...petData
+                };
+                pets.push(newPet);
+                this.saveData(pets);
+                return newPet;
+            },
+            
+            /**
+             * Update an existing pet in the inventory
+             */
+            updatePet(id, petData) {
+                const pets = this.loadData();
+                const index = pets.findIndex(p => p.id === id);
+                if (index !== -1) {
+                    pets[index] = {
+                        ...pets[index],
+                        ...petData,
+                        id: id, // Preserve original ID
+                        timestamp: Date.now()
+                    };
+                    this.saveData(pets);
+                    return pets[index];
+                }
+                return null;
+            },
+            
+            /**
+             * Delete a pet from the inventory
+             */
+            deletePet(id) {
+                const pets = this.loadData();
+                const filtered = pets.filter(p => p.id !== id);
+                this.saveData(filtered);
+                return filtered;
+            },
+            
+            /**
+             * Generate a unique ID for a pet
+             */
+            generateId() {
+                return `pet_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            },
+            
+            /**
+             * Export data as JSON
+             */
+            exportData() {
+                const data = this.loadData();
+                const dataStr = JSON.stringify(data, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `gagpets-inventory-${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+            },
+            
+            /**
+             * Import data from JSON file
+             */
+            importData(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            if (Array.isArray(data)) {
+                                if (confirm(`This will replace your current inventory with ${data.length} pets. Continue?`)) {
+                                    // Ensure each pet has an id and timestamp
+                                    const processedData = data.map(pet => {
+                                        // Generate new ID if missing
+                                        if (!pet.id) {
+                                            pet.id = this.generateId();
+                                        }
+                                        // Add timestamp if missing
+                                        if (!pet.timestamp) {
+                                            pet.timestamp = Date.now();
+                                        }
+                                        return pet;
+                                    });
+                                    
+                                    this.saveData(processedData);
+                                    resolve(processedData);
+                                } else {
+                                    reject('Import cancelled by user');
+                                }
+                            } else {
+                                reject('Invalid data format');
+                            }
+                        } catch (error) {
+                            reject('Error parsing JSON file');
+                        }
+                    };
+                    reader.onerror = () => reject('Error reading file');
+                    reader.readAsText(file);
+                });
+            }
+        };
+
+        // Calculation Engine
+        const Calculator = {
+            /**
+             * Calculate weight at age 100 based on current age and weight
+             * Formula: maxWeight = currentWeight / (currentAge + 10) * (100 + 10)
+             * This accounts for the pet growth curve mechanics in Grow a Garden
+             */
+            calculateWeightAt100(currentAge, currentWeight) {
+                if (!currentAge || !currentWeight) return 0;
+                const age = parseFloat(currentAge);
+                const weight = parseFloat(currentWeight);
+                
+                if (age >= 100) {
+                    return weight; // Already at or past age 100
+                }
+                
+                // Growth curve formula
+                const weightAt100 = weight / (age + 10) * (100 + 10);
+                
+                return Math.round(weightAt100 * 100) / 100; // Round to 2 decimals
+            },
+            
+            /**
+             * Calculate current weight based on age and weight at 100
+             * Formula: currentWeight = weightAt100 / 110 * (currentAge + 10)
+             */
+            calculateWeightFromAge100(currentAge, weightAt100) {
+                if (!currentAge || !weightAt100) return 0;
+                const age = parseFloat(currentAge);
+                const weight100 = parseFloat(weightAt100);
+                
+                // Reverse the growth curve formula
+                const currentWeight = weight100 / 110 * (age + 10);
+                
+                return Math.round(currentWeight * 100) / 100; // Round to 2 decimals
+            },
+            
+            /**
+             * Calculate size class based on weight at 100
+             * Size class = floor(weightAt100 / 10)
+             */
+            calculateSizeClass(weightAt100) {
+                return Math.floor(weightAt100 / 10);
+            },
+            
+            /**
+             * Calculate pet rank by type
+             * Ranks pets by weight at 100 within the same pet type (ascending order)
+             */
+            calculatePetRanks(pets) {
+                // Group pets by type
+                const petsByType = {};
+                pets.forEach(pet => {
+                    if (!petsByType[pet.petKey]) {
+                        petsByType[pet.petKey] = [];
+                    }
+                    petsByType[pet.petKey].push(pet);
+                });
+                
+                // Sort each group by weightAt100 and assign ranks
+                Object.keys(petsByType).forEach(petType => {
+                    const typePets = petsByType[petType];
+                    typePets.sort((a, b) => a.weightAt100 - b.weightAt100);
+                    typePets.forEach((pet, index) => {
+                        pet.rank = index + 1;
+                    });
+                });
+                
+                return pets;
+            }
+        };
+
+        // UI Manager
+        const UI = {
+            currentSort: { column: 'timestamp', direction: 'desc' }, // Default: newest first
+            currentFilters: { account: '', search: '' },
+            editingPetId: null,
+            editingPetKey: null, // Track the petKey when editing
+            lastEnteredAccount: null,
+            lastEnteredPetType: null,
+            
+            /**
+             * Initialize the UI
+             */
+            init() {
+                this.setupEventListeners();
+                this.populatePetDropdown();
+                this.loadAndRenderTable();
+                this.setupDarkMode();
+                
+                // Set default Quick Add account value
+                if (!document.getElementById('quickAddAccount').value) {
+                    document.getElementById('quickAddAccount').value = this.lastEnteredAccount || 'Main';
+                }
+            },
+            
+            /**
+             * Setup all event listeners
+             */
+            setupEventListeners() {
+                // Quick Add Save button
+                document.getElementById('quickAddSaveBtn').addEventListener('click', () => {
+                    this.saveQuickAdd();
+                });
+                
+                // Quick Add Cancel button
+                document.getElementById('quickAddCancelBtn').addEventListener('click', () => {
+                    this.hideQuickAdd();
+                });
+                
+                // Quick Add - Update icon and calculations when pet type changes
+                document.getElementById('quickAddPetType').addEventListener('input', (e) => {
+                    this.updateQuickAddIcon();
+                    this.updateQuickAddCalculations();
+                });
+                
+                // Quick Add - Update calculations when age or weight changes
+                document.getElementById('quickAddAge').addEventListener('input', () => {
+                    this.updateQuickAddCalculations();
+                });
+                
+                document.getElementById('quickAddWeight').addEventListener('input', () => {
+                    this.updateQuickAddCalculations();
+                });
+                
+                // Add pet button
+                document.getElementById('addPetBtn').addEventListener('click', () => {
+                    this.showModal();
+                });
+                
+                // Export button
+                document.getElementById('exportBtn').addEventListener('click', () => {
+                    DataManager.exportData();
+                });
+                
+                // Import button
+                document.getElementById('importBtn').addEventListener('click', () => {
+                    document.getElementById('importFile').click();
+                });
+                
+                // Import file handler
+                document.getElementById('importFile').addEventListener('change', async (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        try {
+                            await DataManager.importData(file);
+                            this.loadAndRenderTable();
+                            alert('Data imported successfully!');
+                        } catch (error) {
+                            alert('Error importing data: ' + error);
+                        }
+                        e.target.value = ''; // Reset file input
+                    }
+                });
+                
+                // Modal close buttons
+                document.getElementById('closeModal').addEventListener('click', () => {
+                    this.hideModal();
+                });
+                
+                document.getElementById('cancelBtn').addEventListener('click', () => {
+                    this.hideModal();
+                });
+                
+                // Click outside modal to close
+                document.getElementById('petModal').addEventListener('click', (e) => {
+                    if (e.target.id === 'petModal') {
+                        this.hideModal();
+                    }
+                });
+                
+                // Form submission
+                document.getElementById('petForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.savePet();
+                });
+                
+                // Filter handlers
+                document.getElementById('accountFilter').addEventListener('change', (e) => {
+                    this.currentFilters.account = e.target.value;
+                    this.renderTable();
+                });
+                
+                document.getElementById('searchFilter').addEventListener('input', (e) => {
+                    this.currentFilters.search = e.target.value.toLowerCase();
+                    this.renderTable();
+                });
+                
+                // Sort handlers
+                document.querySelectorAll('.sortable').forEach(th => {
+                    th.addEventListener('click', () => {
+                        const sortColumn = th.dataset.sort;
+                        this.sortTable(sortColumn);
+                    });
+                });
+                
+                // Double-click to clear input fields
+                document.getElementById('petAccount').addEventListener('dblclick', (e) => {
+                    e.target.value = '';
+                    e.target.focus();
+                });
+                
+                document.getElementById('petType').addEventListener('dblclick', (e) => {
+                    e.target.value = '';
+                    e.target.focus();
+                });
+                
+                // Double-click to clear Quick Add fields
+                document.getElementById('quickAddAccount').addEventListener('dblclick', (e) => {
+                    e.target.value = '';
+                    e.target.focus();
+                });
+                
+                document.getElementById('quickAddPetType').addEventListener('dblclick', (e) => {
+                    e.target.value = '';
+                    e.target.focus();
+                });
+            },
+            
+            /**
+             * Populate the pet dropdown in the modal
+             */
+            populatePetDropdown() {
+                const datalist = document.getElementById('petTypeList');
+                const pets = window.petAbilities || {};
+                
+                // Clear existing options
+                datalist.innerHTML = '';
+                
+                // Sort pets by name
+                const sortedPets = Object.entries(pets).sort((a, b) => {
+                    return (a[1].name || '').localeCompare(b[1].name || '');
+                });
+                
+                // Add pet options
+                sortedPets.forEach(([key, pet]) => {
+                    const option = document.createElement('option');
+                    option.value = pet.name;
+                    option.dataset.petKey = key;
+                    const icon = typeof pet.icon === 'string' ? pet.icon : (pet.icon?.fallback || '🐾');
+                    option.textContent = `${icon} ${pet.name}`;
+                    datalist.appendChild(option);
+                });
+                
+                // Also populate Quick Add dropdown
+                this.populateQuickAddDropdown();
+            },
+            
+            /**
+             * Populate the Quick Add pet dropdown
+             */
+            populateQuickAddDropdown() {
+                const datalist = document.getElementById('quickAddPetTypeList');
+                const pets = window.petAbilities || {};
+                
+                // Clear existing options
+                datalist.innerHTML = '';
+                
+                // Sort pets by name
+                const sortedPets = Object.entries(pets).sort((a, b) => {
+                    return (a[1].name || '').localeCompare(b[1].name || '');
+                });
+                
+                // Add pet options
+                sortedPets.forEach(([key, pet]) => {
+                    const option = document.createElement('option');
+                    option.value = pet.name;
+                    option.dataset.petKey = key;
+                    const icon = typeof pet.icon === 'string' ? pet.icon : (pet.icon?.fallback || '🐾');
+                    option.textContent = `${icon} ${pet.name}`;
+                    datalist.appendChild(option);
+                });
+            },
+            
+            /**
+             * Toggle Quick Add row visibility
+             */
+            toggleQuickAdd() {
+                const quickAddRow = document.getElementById('quickAddRow');
+                const isVisible = quickAddRow.style.display !== 'none';
+                
+                if (isVisible) {
+                    this.hideQuickAdd();
+                } else {
+                    this.showQuickAdd();
+                }
+            },
+            
+            /**
+             * Show Quick Add row
+             */
+            showQuickAdd() {
+                const quickAddRow = document.getElementById('quickAddRow');
+                quickAddRow.style.display = 'table-row';
+            },
+            
+            /**
+             * Hide Quick Add row
+             */
+            hideQuickAdd() {
+                const quickAddRow = document.getElementById('quickAddRow');
+                quickAddRow.style.display = 'none';
+                
+                // Reset form
+                this.resetQuickAddForm();
+            },
+            
+            /**
+             * Reset Quick Add form
+             */
+            resetQuickAddForm() {
+                document.getElementById('quickAddPetType').value = '';
+                document.getElementById('quickAddAge').value = '1';
+                document.getElementById('quickAddWeight').value = '1.60';
+                document.getElementById('quickAddMutation').value = 'none';
+                document.getElementById('quickAddLoaned').value = '';
+                document.getElementById('quickAddIcon').innerHTML = '🐾';
+                document.getElementById('quickAddWeightAt100').textContent = '-';
+                document.getElementById('quickAddSizeClass').textContent = '-';
+            },
+            
+            /**
+             * Update Quick Add icon based on selected pet
+             */
+            updateQuickAddIcon() {
+                const petKey = document.getElementById('quickAddPetType').value;
+                const iconCell = document.getElementById('quickAddIcon');
+                
+                if (petKey) {
+                    const pets = window.petAbilities || {};
+                    const pet = pets[petKey];
+                    if (pet) {
+                        iconCell.innerHTML = renderIcon(pet.icon);
+                    } else {
+                        iconCell.innerHTML = '🐾';
+                    }
+                } else {
+                    iconCell.innerHTML = '🐾';
+                }
+            },
+            
+            /**
+             * Update Quick Add calculations (Weight at 100 and Size Class)
+             */
+            updateQuickAddCalculations() {
+                const age = parseFloat(document.getElementById('quickAddAge').value);
+                const weight = parseFloat(document.getElementById('quickAddWeight').value);
+                
+                if (age && weight) {
+                    const weightAt100 = Calculator.calculateWeightAt100(age, weight);
+                    const sizeClass = Calculator.calculateSizeClass(weightAt100);
+                    
+                    document.getElementById('quickAddWeightAt100').textContent = `${weightAt100.toFixed(2)} kg`;
+                    document.getElementById('quickAddSizeClass').textContent = sizeClass;
+                } else {
+                    document.getElementById('quickAddWeightAt100').textContent = '-';
+                    document.getElementById('quickAddSizeClass').textContent = '-';
+                }
+            },
+            
+            /**
+             * Save Quick Add pet
+             */
+            saveQuickAdd() {
+                const account = document.getElementById('quickAddAccount').value.trim();
+                const petNameInput = document.getElementById('quickAddPetType').value.trim();
+                const age = parseFloat(document.getElementById('quickAddAge').value);
+                const currentWeight = parseFloat(document.getElementById('quickAddWeight').value);
+                const mutation = document.getElementById('quickAddMutation').value;
+                const loanedTo = document.getElementById('quickAddLoaned').value.trim();
+                
+                // Validate inputs
+                if (!account) {
+                    alert('Please enter an account name');
+                    document.getElementById('quickAddAccount').focus();
+                    return;
+                }
+                
+                if (!petNameInput) {
+                    alert('Please select a pet type');
+                    document.getElementById('quickAddPetType').focus();
+                    return;
+                }
+                
+                if (!age || age < 1 || age > 100) {
+                    alert('Please enter a valid age (1-100)');
+                    document.getElementById('quickAddAge').focus();
+                    return;
+                }
+                
+                if (!currentWeight || currentWeight < 0.88 || currentWeight > 114.40) {
+                    alert('Please enter a valid weight (0.88-114.40 kg)');
+                    document.getElementById('quickAddWeight').focus();
+                    return;
+                }
+                
+                // Look up pet key from name
+                const pets = window.petAbilities || {};
+                let petKey = null;
+                let petName = null;
+                
+                // First try exact match by name
+                for (const [key, pet] of Object.entries(pets)) {
+                    if (pet.name === petNameInput) {
+                        petKey = key;
+                        petName = pet.name;
+                        break;
+                    }
+                }
+                
+                // If no exact match, try case-insensitive match
+                if (!petKey) {
+                    const lowerInput = petNameInput.toLowerCase();
+                    for (const [key, pet] of Object.entries(pets)) {
+                        if (pet.name.toLowerCase() === lowerInput) {
+                            petKey = key;
+                            petName = pet.name;
+                            break;
+                        }
+                    }
+                }
+                
+                if (!petKey) {
+                    alert('Invalid pet type. Please select a pet from the list.');
+                    document.getElementById('quickAddPetType').focus();
+                    return;
+                }
+                
+                // Calculate derived fields
+                const weightAt100 = Calculator.calculateWeightAt100(age, currentWeight);
+                const sizeClass = Calculator.calculateSizeClass(weightAt100);
+                
+                const petData = {
+                    account,
+                    petKey,
+                    petName,
+                    age,
+                    currentWeight,
+                    mutation,
+                    loanedTo,
+                    weightAt100,
+                    sizeClass
+                };
+                
+                console.log('Quick adding pet:', petData);
+                
+                // Store last entered values for next time
+                this.lastEnteredAccount = account;
+                this.lastEnteredPetType = petName;
+                
+                // Add new pet
+                DataManager.addPet(petData);
+                
+                // Reset form but keep account
+                const savedAccount = document.getElementById('quickAddAccount').value;
+                this.resetQuickAddForm();
+                document.getElementById('quickAddAccount').value = savedAccount;
+                
+                // Reload table
+                this.loadAndRenderTable();
+                
+                // Focus back on pet type for quick next entry
+                document.getElementById('quickAddPetType').focus();
+            },
+            
+            /**
+             * Show the add/edit modal
+             */
+            showModal(petData = null) {
+                const modal = document.getElementById('petModal');
+                const title = document.getElementById('modalTitle');
+                const form = document.getElementById('petForm');
+                
+                // Reset form
+                form.reset();
+                
+                if (petData) {
+                    // Edit mode
+                    title.textContent = 'Edit Pet';
+                    this.editingPetId = petData.id;
+                    this.editingPetKey = petData.petKey; // Store the petKey for editing
+                    document.getElementById('petAccount').value = petData.account || '';
+                    
+                    // Set pet type by name
+                    document.getElementById('petType').value = petData.petName || '';
+                    
+                    document.getElementById('petAge').value = petData.age || 1;
+                    document.getElementById('petWeight').value = petData.currentWeight || 50;
+                    document.getElementById('petMutation').value = petData.mutation || 'none';
+                    document.getElementById('petLoanedTo').value = petData.loanedTo || '';
+                } else {
+                    // Add mode - use last entered values as defaults
+                    title.textContent = 'Add New Pet';
+                    this.editingPetId = null;
+                    this.editingPetKey = null; // Clear the petKey
+                    
+                    // Populate with last entered values if available
+                    if (this.lastEnteredAccount) {
+                        document.getElementById('petAccount').value = this.lastEnteredAccount;
+                    } else {
+                        document.getElementById('petAccount').value = 'Main';
+                    }
+                    
+                    if (this.lastEnteredPetType) {
+                        document.getElementById('petType').value = this.lastEnteredPetType;
+                    }
+                }
+                
+                modal.classList.add('show');
+            },
+            
+            /**
+             * Hide the modal
+             */
+            hideModal() {
+                const modal = document.getElementById('petModal');
+                modal.classList.remove('show');
+                this.editingPetId = null;
+                this.editingPetKey = null; // Clear the petKey
+            },
+            
+            /**
+             * Save pet data from the form
+             */
+            savePet() {
+                const account = document.getElementById('petAccount').value.trim();
+                const petNameInput = document.getElementById('petType').value.trim();
+                const age = parseFloat(document.getElementById('petAge').value);
+                const currentWeight = parseFloat(document.getElementById('petWeight').value);
+                const mutation = document.getElementById('petMutation').value;
+                const loanedTo = document.getElementById('petLoanedTo').value.trim();
+                
+                // Validate inputs
+                if (!account || !petNameInput || !age || !currentWeight) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                // When editing, preserve the original petKey if available
+                let petKey = this.editingPetKey || null;
+                let petName = null;
+                
+                // Only look up the pet key if we don't have it (new pet or changed pet type)
+                if (!petKey) {
+                    const pets = window.petAbilities || {};
+                    
+                    // First try exact match by name
+                    for (const [key, pet] of Object.entries(pets)) {
+                        if (pet.name === petNameInput) {
+                            petKey = key;
+                            petName = pet.name;
+                            break;
+                        }
+                    }
+                    
+                    // If no exact match, try case-insensitive match
+                    if (!petKey) {
+                        const lowerInput = petNameInput.toLowerCase();
+                        for (const [key, pet] of Object.entries(pets)) {
+                            if (pet.name.toLowerCase() === lowerInput) {
+                                petKey = key;
+                                petName = pet.name;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (!petKey) {
+                        alert('Invalid pet type. Please select a pet from the list.');
+                        return;
+                    }
+                } else {
+                    // Get the pet name from the petKey
+                    const pets = window.petAbilities || {};
+                    petName = pets[petKey]?.name || petNameInput;
+                }
+                
+                // Calculate derived fields
+                const weightAt100 = Calculator.calculateWeightAt100(age, currentWeight);
+                const sizeClass = Calculator.calculateSizeClass(weightAt100);
+                
+                const petData = {
+                    account,
+                    petKey,
+                    petName,
+                    age,
+                    currentWeight,
+                    mutation,
+                    loanedTo,
+                    weightAt100,
+                    sizeClass
+                };
+                
+                console.log('Saving pet:', petData);
+                
+                // Store last entered values for next time (only when adding new pets)
+                if (!this.editingPetId) {
+                    this.lastEnteredAccount = account;
+                    this.lastEnteredPetType = petName;
+                }
+                
+                if (this.editingPetId) {
+                    // Update existing pet
+                    DataManager.updatePet(this.editingPetId, petData);
+                } else {
+                    // Add new pet
+                    DataManager.addPet(petData);
+                }
+                
+                this.hideModal();
+                this.loadAndRenderTable();
+            },
+            
+            /**
+             * Load data and render the table
+             */
+            loadAndRenderTable() {
+                let pets = DataManager.loadData();
+                
+                // Calculate ranks
+                pets = Calculator.calculatePetRanks(pets);
+                
+                // Update account filter dropdown
+                this.updateAccountFilter(pets);
+                
+                // Update statistics
+                this.updateStatistics(pets);
+                
+                // Render table
+                this.renderTable(pets);
+            },
+            
+            /**
+             * Update the account filter dropdown
+             */
+            updateAccountFilter(pets) {
+                const select = document.getElementById('accountFilter');
+                const currentValue = select.value;
+                
+                // Get unique accounts
+                const accounts = [...new Set(pets.map(p => p.account))].sort();
+                
+                // Clear existing options except first
+                while (select.children.length > 1) {
+                    select.removeChild(select.lastChild);
+                }
+                
+                // Add account options
+                accounts.forEach(account => {
+                    const option = document.createElement('option');
+                    option.value = account;
+                    option.textContent = account;
+                    select.appendChild(option);
+                });
+                
+                // Restore previous selection if still valid
+                if (accounts.includes(currentValue)) {
+                    select.value = currentValue;
+                }
+            },
+            
+            /**
+             * Update statistics cards
+             */
+            updateStatistics(pets) {
+                const totalPets = pets.length;
+                const accounts = new Set(pets.map(p => p.account)).size;
+                const loaned = pets.filter(p => p.loanedTo).length;
+                
+                document.getElementById('totalPets').textContent = totalPets;
+                document.getElementById('totalAccounts').textContent = accounts;
+                document.getElementById('loanedPets').textContent = loaned;
+            },
+            
+            /**
+             * Render the pet table
+             */
+            renderTable(petsData = null) {
+                let pets = petsData || DataManager.loadData();
+                
+                // Recalculate ranks if needed
+                if (!petsData) {
+                    pets = Calculator.calculatePetRanks(pets);
+                }
+                
+                // Apply filters
+                pets = this.applyFilters(pets);
+                
+                // Apply sorting
+                pets = this.applySorting(pets);
+                
+                const tbody = document.getElementById('petTableBody');
+                
+                // Preserve the Quick Add row
+                const quickAddRow = document.getElementById('quickAddRow');
+                const quickAddRowDisplay = quickAddRow ? quickAddRow.style.display : 'none';
+                
+                // Remove Quick Add row temporarily
+                if (quickAddRow && quickAddRow.parentNode) {
+                    quickAddRow.parentNode.removeChild(quickAddRow);
+                }
+                
+                // Clear all other rows
+                tbody.innerHTML = '';
+                
+                // Re-add Quick Add row at the beginning
+                if (quickAddRow) {
+                    tbody.appendChild(quickAddRow);
+                    quickAddRow.style.display = quickAddRowDisplay;
+                }
+                
+                if (pets.length === 0) {
+                    const emptyRow = document.createElement('tr');
+                    emptyRow.innerHTML = `
+                        <td colspan="11" class="empty-state">
+                            <div class="empty-state-icon">🔍</div>
+                            <div>No pets found matching your filters.</div>
+                        </td>
+                    `;
+                    tbody.appendChild(emptyRow);
+                    return;
+                }
+                
+                pets.forEach(pet => {
+                    const row = document.createElement('tr');
+                    if (pet.loanedTo) {
+                        row.classList.add('loaned');
+                    }
+                    
+                    // Get pet icon
+                    const petData = (window.petAbilities || {})[pet.petKey];
+                    const icon = petData ? renderIcon(petData.icon) : '🐾';
+                    
+                    // Get mutation display
+                    const mutationDisplay = this.getMutationDisplay(pet.mutation);
+                    
+                    // Build pet card URL
+                    let petCardUrl = `/petcard?pet=${encodeURIComponent(pet.petKey)}&weight=${pet.currentWeight}&age=${pet.age}`;
+                    if (pet.mutation && pet.mutation !== 'none') {
+                        petCardUrl += `&mutation=${encodeURIComponent(pet.mutation)}`;
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${pet.account}</td>
+                        <td class="pet-icon-cell">${icon}</td>
+                        <td class="pet-name-cell"><a href="${petCardUrl}" target="_blank" title="Click to view pet card">${pet.petName}</a></td>
+                        <td style="text-align: center; cursor: pointer;" class="editable-age" data-id="${pet.id}" data-age="${pet.age}" title="Double-click to edit">${pet.age}</td>
+                        <td>${pet.currentWeight.toFixed(2)} kg</td>
+                        <td class="weight-highlight">${pet.weightAt100.toFixed(2)} kg</td>
+                        <td>${pet.sizeClass}</td>
+                        <td style="cursor: pointer;" class="editable-mutation" data-id="${pet.id}" data-mutation="${pet.mutation || 'none'}" title="Double-click to edit">${mutationDisplay}</td>
+                        <td>${pet.rank ? `<span class="rank-badge">#${pet.rank}</span>` : '-'}</td>
+                        <td style="cursor: pointer;" class="editable-loaned" data-id="${pet.id}" data-loaned="${pet.loanedTo || ''}" title="Double-click to edit">${pet.loanedTo || '-'}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-edit" data-id="${pet.id}">Edit</button>
+                                <button class="btn-delete" data-id="${pet.id}">Delete</button>
+                            </div>
+                        </td>
+                    `;
+                    
+                    tbody.appendChild(row);
+                });
+                
+                // Add event listeners to action buttons
+                this.attachActionListeners();
+            },
+            
+            /**
+             * Get display text for mutation
+             */
+            getMutationDisplay(mutation) {
+                const mutationMap = {
+                    'none': 'None',
+                    'golden': '✨ Golden',
+                    'rainbow': '🌈 Rainbow',
+                    'nightmare': '🌙 Nightmare',
+                    'aromatic': '🌺 Aromatic',
+                    'ascended': '🌟 Ascended',
+                    'corrupted': '🖤 Corrupted',
+                    'fried': '🍳 Fried',
+                    'frozen': '❄️ Frozen',
+                    'giantbean': '🫘 GiantBean',
+                    'glimmering': '✨ Glimmering',
+                    'ironskin': '🛡️ IronSkin',
+                    'luminous': '💡 Luminous',
+                    'mega': '🔷 Mega',
+                    'nutty': '🥜 Nutty',
+                    'radiant': '☀️ Radiant',
+                    'shocked': '⚡ Shocked',
+                    'tiny': '🔸 Tiny',
+                    'tranquil': '☮️ Tranquil',
+                    'windy': '💨 Windy'
+                };
+                return mutationMap[mutation] || mutation;
+            },
+            
+            /**
+             * Apply filters to pets data
+             */
+            applyFilters(pets) {
+                return pets.filter(pet => {
+                    // Account filter
+                    if (this.currentFilters.account && pet.account !== this.currentFilters.account) {
+                        return false;
+                    }
+                    
+                    // Search filter
+                    if (this.currentFilters.search) {
+                        const searchTerm = this.currentFilters.search;
+                        const searchableText = `${pet.account} ${pet.petName} ${pet.loanedTo}`.toLowerCase();
+                        if (!searchableText.includes(searchTerm)) {
+                            return false;
+                        }
+                    }
+                    
+                    return true;
+                });
+            },
+            
+            /**
+             * Apply sorting to pets data
+             */
+            applySorting(pets) {
+                if (!this.currentSort.column) {
+                    return pets;
+                }
+                
+                const column = this.currentSort.column;
+                const direction = this.currentSort.direction;
+                
+                return pets.sort((a, b) => {
+                    let aVal = a[column];
+                    let bVal = b[column];
+                    
+                    // Handle empty values
+                    if (!aVal && aVal !== 0) aVal = '';
+                    if (!bVal && bVal !== 0) bVal = '';
+                    
+                    // Compare values
+                    let comparison = 0;
+                    if (typeof aVal === 'number' && typeof bVal === 'number') {
+                        comparison = aVal - bVal;
+                    } else {
+                        comparison = String(aVal).localeCompare(String(bVal));
+                    }
+                    
+                    return direction === 'asc' ? comparison : -comparison;
+                });
+            },
+            
+            /**
+             * Sort table by column
+             */
+            sortTable(column) {
+                // Update sort state
+                if (this.currentSort.column === column) {
+                    // Toggle direction
+                    this.currentSort.direction = this.currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    this.currentSort.column = column;
+                    this.currentSort.direction = 'asc';
+                }
+                
+                // Update header classes
+                document.querySelectorAll('.sortable').forEach(th => {
+                    th.classList.remove('sorted-asc', 'sorted-desc');
+                });
+                
+                const header = document.querySelector(`[data-sort="${column}"]`);
+                if (header) {
+                    header.classList.add(`sorted-${this.currentSort.direction}`);
+                }
+                
+                // Re-render table
+                this.renderTable();
+            },
+            
+            /**
+             * Attach event listeners to action buttons
+             */
+            attachActionListeners() {
+                // Edit buttons
+                document.querySelectorAll('.btn-edit').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.dataset.id;
+                        const pets = DataManager.loadData();
+                        const pet = pets.find(p => p.id === id);
+                        if (pet) {
+                            this.showModal(pet);
+                        }
+                    });
+                });
+                
+                // Delete buttons
+                document.querySelectorAll('.btn-delete').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.dataset.id;
+                        if (confirm('Are you sure you want to delete this pet?')) {
+                            DataManager.deletePet(id);
+                            this.loadAndRenderTable();
+                        }
+                    });
+                });
+                
+                // Editable age cells
+                document.querySelectorAll('.editable-age').forEach(cell => {
+                    cell.addEventListener('dblclick', (e) => {
+                        this.makeAgeEditable(cell);
+                    });
+                });
+                
+                // Editable mutation cells
+                document.querySelectorAll('.editable-mutation').forEach(cell => {
+                    cell.addEventListener('dblclick', (e) => {
+                        this.makeMutationEditable(cell);
+                    });
+                });
+                
+                // Editable loaned to cells
+                document.querySelectorAll('.editable-loaned').forEach(cell => {
+                    cell.addEventListener('dblclick', (e) => {
+                        this.makeLoanedEditable(cell);
+                    });
+                });
+            },
+            
+            /**
+             * Make an age cell editable
+             */
+            makeAgeEditable(cell) {
+                const petId = cell.dataset.id;
+                const currentAge = parseFloat(cell.dataset.age);
+                
+                // Create input element
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.min = '1';
+                input.max = '100';
+                input.step = '1';
+                input.value = currentAge;
+                input.style.width = '60px';
+                input.style.textAlign = 'center';
+                input.style.padding = '4px';
+                input.style.border = '2px solid #667eea';
+                input.style.borderRadius = '4px';
+                
+                // Replace cell content with input
+                cell.textContent = '';
+                cell.appendChild(input);
+                input.focus();
+                input.select();
+                
+                // Save on Enter or blur
+                const saveAge = () => {
+                    const newAge = parseFloat(input.value);
+                    
+                    // Validate age
+                    if (isNaN(newAge) || newAge < 1 || newAge > 100) {
+                        alert('Please enter a valid age between 1 and 100');
+                        cell.textContent = currentAge;
+                        return;
+                    }
+                    
+                    // Get pet data
+                    const pets = DataManager.loadData();
+                    const pet = pets.find(p => p.id === petId);
+                    
+                    if (pet) {
+                        // Calculate new current weight based on new age and weight at 100
+                        const newWeight = Calculator.calculateWeightFromAge100(newAge, pet.weightAt100);
+                        
+                        // Update pet data
+                        const updatedPet = {
+                            ...pet,
+                            age: newAge,
+                            currentWeight: newWeight
+                        };
+                        
+                        DataManager.updatePet(petId, updatedPet);
+                        this.loadAndRenderTable();
+                    }
+                };
+                
+                // Handle Enter key
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        saveAge();
+                    } else if (e.key === 'Escape') {
+                        cell.textContent = currentAge;
+                    }
+                });
+                
+                // Handle blur (clicking away)
+                input.addEventListener('blur', saveAge);
+            },
+            
+            /**
+             * Make a mutation cell editable
+             */
+            makeMutationEditable(cell) {
+                const petId = cell.dataset.id;
+                const currentMutation = cell.dataset.mutation || 'none';
+                
+                // Create select element
+                const select = document.createElement('select');
+                select.style.width = '130px';
+                select.style.padding = '4px';
+                select.style.border = '2px solid #667eea';
+                select.style.borderRadius = '4px';
+                select.style.fontSize = '14px';
+                
+                // Add mutation options
+                const mutations = [
+                    { value: 'none', label: 'None' },
+                    { value: 'golden', label: '✨ Golden' },
+                    { value: 'rainbow', label: '🌈 Rainbow' },
+                    { value: 'nightmare', label: '🌙 Nightmare' },
+                    { value: 'aromatic', label: '🌺 Aromatic' },
+                    { value: 'ascended', label: '🌟 Ascended' },
+                    { value: 'corrupted', label: '🖤 Corrupted' },
+                    { value: 'fried', label: '🍳 Fried' },
+                    { value: 'frozen', label: '❄️ Frozen' },
+                    { value: 'giantbean', label: '🫘 GiantBean' },
+                    { value: 'glimmering', label: '✨ Glimmering' },
+                    { value: 'ironskin', label: '🛡️ IronSkin' },
+                    { value: 'luminous', label: '💡 Luminous' },
+                    { value: 'mega', label: '🔷 Mega' },
+                    { value: 'nutty', label: '🥜 Nutty' },
+                    { value: 'radiant', label: '☀️ Radiant' },
+                    { value: 'shocked', label: '⚡ Shocked' },
+                    { value: 'tiny', label: '🔸 Tiny' },
+                    { value: 'tranquil', label: '☮️ Tranquil' },
+                    { value: 'windy', label: '💨 Windy' }
+                ];
+                
+                mutations.forEach(mut => {
+                    const option = document.createElement('option');
+                    option.value = mut.value;
+                    option.textContent = mut.label;
+                    if (mut.value === currentMutation) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                // Replace cell content with select
+                const originalContent = cell.innerHTML;
+                cell.textContent = '';
+                cell.appendChild(select);
+                select.focus();
+                
+                // Save on change or blur
+                const saveMutation = () => {
+                    const newMutation = select.value;
+                    
+                    // Get pet data
+                    const pets = DataManager.loadData();
+                    const pet = pets.find(p => p.id === petId);
+                    
+                    if (pet) {
+                        // Update pet data
+                        const updatedPet = {
+                            ...pet,
+                            mutation: newMutation
+                        };
+                        
+                        DataManager.updatePet(petId, updatedPet);
+                        this.loadAndRenderTable();
+                    }
+                };
+                
+                // Handle change
+                select.addEventListener('change', saveMutation);
+                
+                // Handle Enter key
+                select.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        saveMutation();
+                    } else if (e.key === 'Escape') {
+                        cell.innerHTML = originalContent;
+                    }
+                });
+                
+                // Handle blur (clicking away)
+                select.addEventListener('blur', saveMutation);
+            },
+            
+            /**
+             * Make a loaned to cell editable
+             */
+            makeLoanedEditable(cell) {
+                const petId = cell.dataset.id;
+                const currentLoaned = cell.dataset.loaned || '';
+                
+                // Create input element
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = currentLoaned;
+                input.placeholder = 'Player name';
+                input.style.width = '120px';
+                input.style.padding = '4px';
+                input.style.border = '2px solid #667eea';
+                input.style.borderRadius = '4px';
+                
+                // Replace cell content with input
+                cell.textContent = '';
+                cell.appendChild(input);
+                input.focus();
+                input.select();
+                
+                // Save on Enter or blur
+                const saveLoaned = () => {
+                    const newLoaned = input.value.trim();
+                    
+                    // Get pet data
+                    const pets = DataManager.loadData();
+                    const pet = pets.find(p => p.id === petId);
+                    
+                    if (pet) {
+                        // Update pet data
+                        const updatedPet = {
+                            ...pet,
+                            loanedTo: newLoaned
+                        };
+                        
+                        DataManager.updatePet(petId, updatedPet);
+                        this.loadAndRenderTable();
+                    }
+                };
+                
+                // Handle Enter key
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        saveLoaned();
+                    } else if (e.key === 'Escape') {
+                        cell.textContent = currentLoaned || '-';
+                    }
+                });
+                
+                // Handle blur (clicking away)
+                input.addEventListener('blur', saveLoaned);
+            },
+            
+            /**
+             * Setup dark mode toggle
+             */
+            setupDarkMode() {
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                if (darkModeToggle) {
+                    // Initialize theme from localStorage or default to light
+                    const savedTheme = localStorage.getItem('darkMode');
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+                    
+                    this.setTheme(initialTheme);
+
+                    // Toggle event listener
+                    darkModeToggle.addEventListener('click', () => {
+                        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                        this.setTheme(newTheme);
+                    });
+
+                    // Listen for system theme changes
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                        if (!localStorage.getItem('darkMode')) {
+                            this.setTheme(e.matches ? 'dark' : 'light');
+                        }
+                    });
+                }
+            },
+            
+            /**
+             * Set the theme
+             * @param {string} theme - 'light' or 'dark'
+             */
+            setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('darkMode', theme);
+                
+                // Update toggle button icon
+                const toggleIcon = document.querySelector('.dark-mode-toggle .toggle-icon');
+                if (toggleIcon) {
+                    toggleIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+                }
+            }
+        };
+
+        // Initialize the application when DOM is ready and pet data is loaded
+        function initApp() {
+            if (window.petAbilities && Object.keys(window.petAbilities).length > 0) {
+                UI.init();
+            } else {
+                // Retry after a short delay if pet data isn't loaded yet
+                setTimeout(initApp, 100);
+            }
+        }
+
+        // Start the app
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+    </script>
+</body>
+</html>

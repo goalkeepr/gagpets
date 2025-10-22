@@ -17,6 +17,7 @@ import { DINOSAUR_EGG_PETS } from './pets/dinosaurEgg.js';
 import { ENCHANTED_EGG_PETS } from './pets/enchantedEgg.js';
 import { FALL_EGG_PETS } from './pets/fallEgg.js';
 import { GOURMET_EGG_PETS } from './pets/gourmetEgg.js';
+import { JUNGLE_EGG_PETS } from './pets/jungleEgg.js';
 import { LEGENDARY_EGG_PETS } from './pets/legendaryEgg.js';
 import { MYTHICAL_EGG_PETS } from './pets/mythicalEgg.js';
 import { NIGHT_EGG_PETS } from './pets/nightEgg.js';
@@ -29,7 +30,10 @@ import { RARE_SUMMER_EGG_PETS } from './pets/rareSummerEgg.js';
 import { SPROUT_EGG_PETS } from './pets/sproutEgg.js';
 import { RAINBOW_EXOTIC_PETS } from './pets/rainbowExotic.js';
 import { ZEN_EGG_PETS } from './pets/zenEgg.js';
+import { SPOOKY_EGG_PETS } from './pets/spookyEgg.js';
 import { FALL_PET_SHOP_PETS } from './pets/fallPetShop.js';
+import { SEASON_PASS_PETS } from './pets/seasonPass.js';
+import { CHUBBY_CHIPMUNK_PETS } from './pets/chubbyChipmunk.js';
 
 // Combine all pets into a single object
 const petAbilities = {
@@ -44,6 +48,7 @@ const petAbilities = {
     ...ENCHANTED_EGG_PETS,
     ...FALL_EGG_PETS,
     ...GOURMET_EGG_PETS,
+    ...JUNGLE_EGG_PETS,
     ...LEGENDARY_EGG_PETS,
     ...MYTHICAL_EGG_PETS,
     ...NIGHT_EGG_PETS,
@@ -56,8 +61,11 @@ const petAbilities = {
     ...SPROUT_EGG_PETS,
     ...RAINBOW_EXOTIC_PETS,
     ...ZEN_EGG_PETS,
-    ...FALL_PET_SHOP_PETS
-    // Complete migration achieved! All 25 categories integrated with 151+ pets
+    ...FALL_PET_SHOP_PETS,
+    ...SEASON_PASS_PETS,
+    ...CHUBBY_CHIPMUNK_PETS,
+    ...SPOOKY_EGG_PETS
+    // Complete migration achieved! All 29 categories integrated with 195+ pets
 };
 
 // Export everything needed
@@ -76,6 +84,7 @@ export {
     ENCHANTED_EGG_PETS,
     FALL_EGG_PETS,
     GOURMET_EGG_PETS,
+    JUNGLE_EGG_PETS,
     LEGENDARY_EGG_PETS,
     MYTHICAL_EGG_PETS,
     NIGHT_EGG_PETS,
@@ -85,7 +94,10 @@ export {
     SPROUT_EGG_PETS,
     RAINBOW_EXOTIC_PETS,
     UNCOMMON_EGG_PETS,
-    FALL_PET_SHOP_PETS
+    FALL_PET_SHOP_PETS,
+    SEASON_PASS_PETS,
+    CHUBBY_CHIPMUNK_PETS,
+    SPOOKY_EGG_PETS
 };
 
 // For backward compatibility, make functions available globally
@@ -111,7 +123,10 @@ export const getPetMutationDescription = (modifierType, kg = 50) => {
         'ascended': 'Ascended Pet Mutation',
         'tranquil': 'Tranquil Pet Mutation',
         'corrupted': 'Corrupted Pet Mutation',
-        'glimmering': 'Glimmering Pet Mutation'
+        'glimmering': 'Glimmering Pet Mutation',
+        'luminous': 'Luminous Pet Mutation',
+        'nutty': 'Nutty Pet Mutation',
+        'spectral': 'Spectral Pet Mutation'
     };
 
     const mutationKey = mutationMap[modifierType];

@@ -1616,293 +1616,282 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         perKgImpact: () => "Each additional kg decreases befriend cooldown by 4.5s (min 5:00) and decreases grace cooldown by 3.5s (min 1:05)"
     },
 
-    redsquirrel: {
-        name: "Red Squirrel",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/6/61/RedSquirrel.png",
-            fallback: "🐿️"
-        },
-        type: "mammal",
-        rarity: "Rare",
-        source: "Fall Pet Shop",
-        probability: 0,
-        obtainable: true,
-        description: "Reduces cooldown for Fall type pets when they finish their abilities",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Cooldown Reduction Max: 40.00 (33.00 🌈)";
-            
-            const baseChance = 14;
-            const chance = Math.min(30, baseChance + (0.4 * kg));
-            
-            // Apply modifiers
-            const chanceMod = baseChance * modifier;
-            const chanceTotal = Math.min(30, chance + chanceMod);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `When Fall type pets finish their abilities, they start their cooldown with <strong>${chanceTotal.toFixed(1)}</strong> seconds less${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg increases cooldown reduction by 0.4 seconds (max 30s)"
-    },
-
-    chipmunk: {
-        name: "Chipmunk",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/9/9e/Chipmunk.png",
-            fallback: "🐿️"
-        },
-        type: "mammal",
-        rarity: "Rare",
-        source: "Fall Pet Shop",
-        probability: 0,
-        obtainable: true,
-        description: "Chance to not consume harvest tool uses",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Harvest Tool Max: 24.00 (19.20 🌈)";
-            
-            const baseChance = 6;
-            const chance = Math.min(12, baseChance + (0.25 * kg));
-            
-            // Apply modifiers
-            const chanceMod = baseChance * modifier;
-            const chanceTotal = Math.min(12, chance + chanceMod);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `<strong>${chanceTotal.toFixed(2)}%</strong> chance to not consume a use when using a Harvest Tool${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg increases harvest tool preservation chance by 0.25% (max 12%)"
-    },
-
-    marmot: {
-        name: "Marmot",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/2/2b/Marmot.png",
-            fallback: "🐹"
-        },
-        type: "mammal",
-        rarity: "Legendary",
-        source: "Fall Pet Shop",
-        probability: 0,
-        obtainable: true,
-        description: "Burrows underground and hides in mounds for Fall rewards",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Cooldown Min: No Limit (89.14 🌈)";
-            
-            const baseCooldown = 540;
-            const baseChance = 15;
-            const cooldown = Math.max(120, baseCooldown - (3.5 * kg));
-            const chance = Math.min(30, baseChance + (0.05 * kg));
-            
-            // Apply modifiers
-            const cooldownMod = baseCooldown * modifier;
-            const chanceMod = baseChance * modifier;
-            
-            const adjustedBaseCooldown = baseCooldown - cooldownMod;
-            const cooldownTotal = Math.max(120, adjustedBaseCooldown - (3.5 * kg));
-            const chanceTotal = Math.min(30, chance + chanceMod);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, burrows down in the ground and hides in a random mound! Finding the Marmot will grant a Fall related reward! Has a <strong>${chanceTotal.toFixed(2)}%</strong> chance to burrow again${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases burrow cooldown by 3.5s (min 2:00) and increases re-burrow chance by 0.05% (max 30%)"
-    },
-
-    sugarglider: {
-        name: "Sugar Glider",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/9/94/SugarGlider.png",
-            fallback: "🐿️"
-        },
-        type: "mammal",
-        rarity: "Mythical",
-        source: "Fall Pet Shop",
-        probability: 0,
-        obtainable: true,
-        description: "Glides between fruits to copy and transfer mutations",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Glide Min: 106.67 (53.33 🌈)";
-            
-            const baseCooldown = 1200;
-            const cooldown = Math.max(720, baseCooldown - (4.5 * kg));
-            
-            // Apply modifiers
-            const cooldownMod = baseCooldown * modifier;
-            const adjustedBaseCooldown = baseCooldown - cooldownMod;
-            const cooldownTotal = Math.max(720, adjustedBaseCooldown - (4.5 * kg));
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, glides from 3 different fruits. Copies 1 mutation from each fruit and applies it to the next${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases glide cooldown by 4.5s (min 12:00)"
-    },
-
-    spacesquirrel: {
-        name: "Space Squirrel",
-        icon: {
-            type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/8/89/SpaceSquirrel.png",
-            fallback: "🐿️"
-        },
-        type: "mammal",
-        rarity: "Divine",
-        source: "Fall Pet Shop",
-        probability: 0,
-        obtainable: true,
-        description: "Applies Voidtouched mutations from space",
-        calculate: (kg, modifierType = "none") => {
-            if (!Utils.isValidWeight(kg)) return "Invalid weight";
-            
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Cooldown Min: No Limit (72.00 🌈), Voidtouched Max: 33.33 (23.33 🌈)";
-            
-            const baseCooldown = 1080;
-            const baseChance = 15;
-            const cooldown = Math.max(540, baseCooldown - (4.5 * kg));
-            const chance = Math.min(25, baseChance + (0.3 * kg));
-            
-            // Apply modifiers
-            const cooldownMod = baseCooldown * modifier;
-            const chanceMod = baseChance * modifier;
-            
-            const adjustedBaseCooldown = baseCooldown - cooldownMod;
-            const cooldownTotal = Math.max(540, adjustedBaseCooldown - (4.5 * kg));
-            const chanceTotal = Math.min(25, chance + chanceMod);
-            
-            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
-            
-            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, has <strong>${chanceTotal.toFixed(1)}%</strong> chance to apply the Voidtouched mutation${displayText}!`;
-        },
-        perKgImpact: () => "Each additional kg decreases cooldown by 4.5s (min 9:00) and increases Voidtouched chance by 0.3% (max 25%)"
-    },
-
-    fortunesquirrel: {
-        name: "Fortune Squirrel",
+    rainbowfortunesquirrel: {
+        name: "Rainbow Fortune Squirrel",
         icon: {
             type: "image",
             url: "https://static.wikia.nocookie.net/growagarden/images/2/28/FortuneSquirrel.png",
-            fallback: "🐿️"
+            fallback: "🌈"
+        },
+        type: "mammal",
+        rarity: "Legendary",
+        source: "Rainbow Exotic",
+        probability: 34.5,
+        obtainable: true,
+        description: "Applies Jackpot mutation to fruits with enhanced rainbow power",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: No Limit (97.33 🌈)";
+            
+            const baseSeconds = 220;
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(30, adjustedBaseSeconds - (1.5 * kg));
+            
+            const baseChance = 30;
+            const chanceMod = baseChance * modifier;
+            const adjustedBaseChance = baseChance + chanceMod;
+            const chance = Math.min(60, adjustedBaseChance + (0.3 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, has <strong>${chance.toFixed(2)}%</strong> chance to apply the Jackpot mutation!${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 1.5 seconds and increases chance by 0.3% (max 60%)"
+    },
+
+    rainbowfarmerchipmunk: {
+        name: "Rainbow Farmer Chipmunk",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/0/04/Farmer_Chipmunk.png",
+            fallback: "🌈"
         },
         type: "mammal",
         rarity: "Rare",
-        source: "Unreleased",
-        probability: 0,
-        obtainable: false,
-        description: "Applies Jackpot mutations with chance-based activation",
+        source: "Rainbow Exotic",
+        probability: 28,
+        obtainable: true,
+        description: "Makes Nut type plants grow faster with enhanced rainbow power",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Cooldown Min: 144.00 (144.00 🌈), Chance Max: 100.00 (100.00 🌈)";
             
-            const baseCooldown = 420;
-            const baseChance = 17;
-            const cooldown = Math.max(60, baseCooldown - (2.5 * kg));
-            const chance = Math.min(34, baseChance + (0.17 * kg));
-            
-            // Apply modifiers
-            const cooldownMod = baseCooldown * modifier;
-            const chanceMod = baseChance * modifier;
-            
-            const adjustedBaseCooldown = baseCooldown - cooldownMod;
-            const cooldownTotal = Math.max(60, adjustedBaseCooldown - (2.5 * kg));
-            const chanceTotal = Math.min(34, chance + chanceMod);
+            const range = 45;
+            const baseMultiplier = 2.5;
+            const multiplierMod = baseMultiplier * modifier;
+            const adjustedBaseMultiplier = baseMultiplier + multiplierMod;
+            const multiplier = Math.min(6, adjustedBaseMultiplier + (0.05 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, has <strong>${chanceTotal.toFixed(2)}%</strong> chance to apply the Jackpot mutation${displayText}!`;
+            return `All Nut type plants within <strong>${range} studs</strong> grow <strong>${multiplier.toFixed(2)}x faster</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases cooldown by 2.5s (min 60s) and increases Jackpot chance by 0.17% (max 34%)"
+        perKgImpact: () => "Each additional kg increases growth multiplier by 0.05x (max 6x)"
     },
 
-    silverdragonfly: {
-        name: "Silver Dragonfly",
+    rainbowidolchipmunk: {
+        name: "Rainbow Idol Chipmunk",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/2/28/SilverDragonfly.png",
-            fallback: "✨"
+            url: "https://static.wikia.nocookie.net/growagarden/images/9/99/IdolChipmunk.png",
+            fallback: "🌈"
         },
-        type: "insect",
+        type: "mammal",
         rarity: "Legendary",
-        source: "Unreleased",
-        probability: 0,
-        obtainable: false,
-        description: "Turns random fruits silver",
+        source: "Rainbow Exotic",
+        probability: 15,
+        obtainable: true,
+        description: "Performs enhanced songs to restore hunger to all pets",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Cooldown Min: 98.50 (98.50 🌈)";
+            const kgLimits = "Cooldown Min: No Limit (90.29 🌈)";
             
-            const baseCooldown = 484;
-            const cooldown = Math.max(90, baseCooldown - (4 * kg));
+            const baseSeconds = 520;
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(100, adjustedBaseSeconds - (3.5 * kg));
             
-            // Apply modifiers
-            const cooldownMod = baseCooldown * modifier;
-            const adjustedBaseCooldown = baseCooldown - cooldownMod;
-            const cooldownTotal = Math.max(90, adjustedBaseCooldown - (4 * kg));
+            const baseDuration = 16;
+            const durationMod = baseDuration * modifier;
+            const adjustedBaseDuration = baseDuration + durationMod;
+            const duration = Math.min(32, adjustedBaseDuration + (0.6 * kg));
+            
+            const baseAmount = 0.02;
+            const amountMod = baseAmount * modifier;
+            const adjustedBaseAmount = baseAmount + amountMod;
+            const amount = Math.min(0.04, adjustedBaseAmount + (0.008 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, turns one random fruit silver${displayText}!`;
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, performs a song for <strong>${duration.toFixed(1)}s</strong> and all other pets in your garden restore <strong>${(amount * 100).toFixed(2)}%</strong> hunger per second!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases cooldown by 4s (min 90s)"
+        perKgImpact: () => "Each additional kg decreases cooldown by 3.5 seconds, increases duration by 0.6s (max 32s), and increases hunger restore by 0.8% per second (max 4%)"
     },
 
-    firefly: {
-        name: "Firefly",
+    rainbowchinchilla: {
+        name: "Rainbow Chinchilla",
         icon: {
             type: "image",
-            url: "https://static.wikia.nocookie.net/growagarden/images/c/cd/Again.png",
-            fallback: "🔥"
+            url: "https://static.wikia.nocookie.net/growagarden/images/e/e8/Chinchilla.png",
+            fallback: "🌈"
         },
-        type: "insect",
-        rarity: "Mythical",
-        source: "Unreleased",
-        probability: 0,
-        obtainable: false,
-        description: "Applies Shocked mutations with chance activation",
+        type: "mammal",
+        rarity: "Divine",
+        source: "Rainbow Exotic",
+        probability: 7,
+        obtainable: true,
+        description: "Makes other pets perform abilities multiple times with enhanced rainbow power",
         calculate: (kg, modifierType = "none") => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
-            const kgLimits = "Cooldown Min: 87.00 (87.00 🌈), Chance Max: 97.50 (97.50 🌈)";
+            const kgLimits = "Cooldown Min: No Limit (76.00 🌈)";
             
-            const baseCooldown = 545;
-            const baseChance = 10.25;
-            const cooldown = Math.max(110, baseCooldown - (5 * kg));
-            const chance = Math.min(20, baseChance + (0.1 * kg));
+            const baseSeconds = 1820;
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(1000, adjustedBaseSeconds - (6 * kg));
             
-            // Apply modifiers
-            const cooldownMod = baseCooldown * modifier;
-            const chanceMod = baseChance * modifier;
-            
-            const adjustedBaseCooldown = baseCooldown - cooldownMod;
-            const cooldownTotal = Math.max(110, adjustedBaseCooldown - (5 * kg));
-            const chanceTotal = Math.min(20, chance + chanceMod);
+            const baseAmount = 4;
+            const amountMod = baseAmount * modifier;
+            const adjustedBaseAmount = baseAmount + amountMod;
+            const amount = Math.min(8, adjustedBaseAmount + (0.04 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, <strong>${chanceTotal.toFixed(2)}%</strong> chance a nearby fruit becomes Shocked${displayText}!`;
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, goes to another pet, rolls around in dust and makes that pet perform its ability <strong>${amount.toFixed(2)}</strong> times in a row!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases cooldown by 5s (min 110s) and increases Shocked chance by 0.1% (max 20%)"
-    }    
+        perKgImpact: () => "Each additional kg decreases cooldown by 6 seconds and increases ability count by 0.04 (max 8)"
+    },
+    pumpkinrat: {
+        name: "Pumpkin Rat",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/3/35/Pumpkinrat.png",
+            fallback: "🎃"
+        },
+        type: "mammal",
+        rarity: "Common",
+        source: "Creepy Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Converts pumpkins into Jack-O-Lantern cosmetics",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 86.19 (71.82 🌈)";
+            
+            const baseSeconds = 422 * 60; // Convert minutes to seconds
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(60 * 60, adjustedBaseSeconds - (4.2 * 60 * kg)); // Min in seconds
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, converts a pumpkin into a random Jack-O-Lantern cosmetic! Collect all 5 variants!${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 4.2 minutes (min 60 minutes)"
+    },
+    ghostbear: {
+        name: "Ghost Bear",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/e/e9/GhostBearPet.png",
+            fallback: "👻"
+        },
+        type: "undead",
+        rarity: "Rare",
+        source: "Creepy Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Scares nearby fruits to apply Spooky mutation",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: No Limit (No Limit 🌈)";
+            
+            const baseSeconds = 1111;
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(120, adjustedBaseSeconds - (8 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `BOO! Every <strong>${Utils.formatTime(seconds)}</strong>, goes to a nearby fruit and scares it! Applies the Spooky mutation!${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 8 seconds (min 120 seconds)"
+    },
+    wolf: {
+        name: "Wolf",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/c/c8/Wolf.png",
+            fallback: "🐺"
+        },
+        type: "mammal",
+        rarity: "Legendary",
+        source: "Creepy Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Howls to apply Moonlit mutation and transform player into werewolf",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 62.00 (51.67 🌈), Range Max: 100.00 (80.00 🌈), Chance Max: 100.00 (80.00 🌈), Duration Max: No Limit (No Limit 🌈), MovementSpeed Max: 99.00 (79.20 🌈), JumpHeight Max: 99.50 (79.60 🌈)";
+            
+            const baseSeconds = 244;
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(120, adjustedBaseSeconds - (2 * kg));
+            
+            const baseRange = 20;
+            const range = Math.min(40, baseRange + (0.2 * kg));
+            
+            const baseChance = 15;
+            const chance = Math.min(30, baseChance + (0.15 * kg));
+            
+            const baseDuration = 35;
+            const duration = Math.min(70, baseDuration + (0.3 * kg));
+            
+            const baseMovementSpeed = 40.4;
+            const movementSpeed = Math.min(80, baseMovementSpeed + (0.4 * kg));
+            
+            const baseJumpHeight = 80.4;
+            const jumpHeight = Math.min(160, baseJumpHeight + (0.8 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, howls: Fruits in <strong>${range.toFixed(1)}</strong> studs have a <strong>${chance.toFixed(2)}%</strong> chance to get Moonlit mutation and turns you into a Werewolf for <strong>${duration.toFixed(1)}s</strong>! Granting bonus <strong>${movementSpeed.toFixed(1)}%</strong> movement speed & <strong>${jumpHeight.toFixed(1)}%</strong> jump height!${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 2 seconds (min 120), increases range by 0.2 studs (max 40), increases chance by 0.15% (max 30%), increases duration by 0.3s (max 70s), increases movement speed by 0.4% (max 80%), and increases jump height by 0.8% (max 160%)"
+    },
+    reaper: {
+        name: "Reaper",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/6/6a/Reaper.png",
+            fallback: "💀"
+        },
+        type: "undead",
+        rarity: "Divine",
+        source: "Creepy Shop",
+        probability: 0,
+        obtainable: true,
+        description: "Sacrifices fruits to boost random pet's passive or XP",
+        calculate: (kg, modifierType = "none") => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const kgLimits = "Cooldown Min: 92.31 (76.92 🌈)";
+            
+            const baseSeconds = 1320; // Convert minutes to seconds
+            const secondsMod = baseSeconds * modifier;
+            const adjustedBaseSeconds = baseSeconds - secondsMod;
+            const seconds = Math.max(720, adjustedBaseSeconds - (6.5 * kg)); // Min in seconds
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(seconds)}</strong>, sacrifices 4 fruits in your garden to apply a medium treat or medium toy to a random pet in your garden!${displayText}`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 6.5 seconds (min 720 seconds)"
+    }
 };

@@ -36,8 +36,10 @@ export const TIME_CONSTANTS = {
  * Modifier configuration
  */
 export const MODIFIER_CONFIG = {
+    SPECTRAL_MODIFIER: 0.08,
     GOLDEN_MULTIPLIER: 0.1,
     RAINBOW_MULTIPLIER: 0.2,
+    NIGHTMARE_MULTIPLIER: 0.22,
     MIN_CALCULATION_TIME: 1
 };
 

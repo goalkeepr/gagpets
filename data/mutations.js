@@ -200,5 +200,51 @@ export const petMutationOptions = {
             return `<font color="rgb(255, 215, 0)">GLIMMERING: Every <strong>${Utils.formatTime(cooldown)}</strong>, a nearby fruit begins to glimmer, applying the Glimmering mutation with <strong>${chance.toFixed(2)}%</strong> success rate!</font>${displayText}`;
         },
         perKgImpact: () => 'Each additional kg decreases glimmering cooldown by 3 seconds and increases success rate by 0.03%'
+    },
+    'Luminous Pet Mutation': {
+        calculate: (kg, modifierType = 'none') => {
+            if (!Utils.isValidWeight(kg)) {
+                return 'Invalid weight';
+            }
+
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+
+            const baseCooldown = 2000;
+            const cooldownMod = baseCooldown * modifier;
+            const adjustedCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(1000, adjustedCooldown - (4 * kg));
+
+            const baseChance = 20;
+            const chanceBonus = 0.03 * kg;
+            const chance = Math.min(30, baseChance + chanceBonus);
+
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : '';
+
+            return `<font color="rgb(85, 170, 255)">LUMINOUS: Every <strong>${Utils.formatTime(cooldown)}</strong>, a nearby fruit is imbued with fairy power, with a <strong>${chance.toFixed(2)}%</strong> chance to apply the Luminous mutation!</font>${displayText}`;
+        },
+        perKgImpact: () => 'Each additional kg decreases cooldown by 4 seconds and increases success rate by 0.03%'
+    },
+    'Nutty Pet Mutation': {
+        calculate: (kg, modifierType = 'none') => {
+            if (!Utils.isValidWeight(kg)) {
+                return 'Invalid weight';
+            }
+
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+
+            const baseCooldown = 1200;
+            const cooldownMod = baseCooldown * modifier;
+            const adjustedCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(120, adjustedCooldown - (12 * kg));
+
+            const baseChance = 20;
+            const chanceBonus = 0.1 * kg;
+            const chance = Math.min(40, baseChance + chanceBonus);
+
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : '';
+
+            return `<font color="rgb(161, 117, 29)">NUTTY: Every <strong>${Utils.formatTime(cooldown)}</strong>, the pet's next ability use has a <strong>${chance.toFixed(2)}%</strong> chance to activate twice. Otherwise, this pet loses a level.</font>${displayText}`;
+        },
+        perKgImpact: () => 'Each additional kg decreases cooldown by 12 seconds and increases double activation chance by 0.1%'
     }
 };
