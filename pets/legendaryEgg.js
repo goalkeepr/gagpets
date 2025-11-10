@@ -16,10 +16,10 @@ export const LEGENDARY_EGG_PETS = {
         probability: 42.55,
         obtainable: false,
         description: "Provides growth bonuses to nearby plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 10 + (kg / 10);
             const growthMultiplier = 1.25 + (kg / 80);
@@ -40,10 +40,10 @@ export const LEGENDARY_EGG_PETS = {
         probability: 42.55,
         obtainable: false,
         description: "Refunds fruits back to inventory with higher chance for common plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Refund Chance Max: no limit (no limit 🌈)";
             
             const baseChance = 7.5;
@@ -73,10 +73,10 @@ export const LEGENDARY_EGG_PETS = {
         probability: 10.64,
         obtainable: false,
         description: "Sprays water on nearby plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 97.92 (77.92 🌈)";
             
             const baseSeconds = 240;
@@ -102,10 +102,10 @@ export const LEGENDARY_EGG_PETS = {
         probability: 2.13,
         obtainable: false,
         description: "Arctic bear that provides ice and cold resistance bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 98.33 (78.33 🌈), Freeze Immunity Max: 100.00 (100.00 🌈)";
             
             const baseSeconds = 600;
@@ -135,10 +135,10 @@ export const LEGENDARY_EGG_PETS = {
         probability: 2.13,
         obtainable: false,
         description: "Extends sprinkler duration",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const duration = 20 + (kg / 5);
             

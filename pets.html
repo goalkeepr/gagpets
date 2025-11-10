@@ -68,6 +68,12 @@
                         <option value="Fall Pet Shop">🍂 Fall Pet Shop</option>
                         <option value="Season Pass">🎫 Season Pass</option>
                         <option value="Chubby Chipmunk Event">🐿️ Chubby Chipmunk Event</option>
+                        <option value="Grave Digging">🪦 Grave Digging</option>
+                        <option value="Creepy Critters Shop">🦇 Creepy Critters Shop</option>
+                        <option value="Spooky Chest">🎃 Spooky Chest</option>
+                        <option value="Exotic Spooky Chest">👻 Exotic Spooky Chest</option>
+                        <option value="Lich Crystal">💀 Lich Crystal</option>
+                        <option value="Admin Abuse">🔨 Admin Abuse</option>
                         <option value="other">🔮 Other</option>
                     </select>
 
@@ -99,6 +105,12 @@
                         <button type="button" class="filter-btn" data-type="Fall Pet Shop"><span class="source-icon-placeholder" data-source="Fall Pet Shop"></span>Fall Pet Shop</button>
                         <button type="button" class="filter-btn" data-type="Season Pass"><span class="source-icon-placeholder" data-source="Season Pass"></span>Season Pass</button>
                         <button type="button" class="filter-btn" data-type="Chubby Chipmunk Event"><span class="source-icon-placeholder" data-source="Chubby Chipmunk Event"></span>Chubby Chipmunk</button>
+                        <button type="button" class="filter-btn" data-type="Grave Digging"><span class="source-icon-placeholder" data-source="Grave Digging"></span>Grave Digging</button>
+                        <button type="button" class="filter-btn" data-type="Creepy Critters Shop"><span class="source-icon-placeholder" data-source="Creepy Critters Shop"></span>Creepy Critters</button>
+                        <button type="button" class="filter-btn" data-type="Spooky Chest"><span class="source-icon-placeholder" data-source="Spooky Chest"></span>Spooky Chest</button>
+                        <button type="button" class="filter-btn" data-type="Exotic Spooky Chest"><span class="source-icon-placeholder" data-source="Exotic Spooky Chest"></span>Exotic Spooky</button>
+                        <button type="button" class="filter-btn" data-type="Lich Crystal"><span class="source-icon-placeholder" data-source="Lich Crystal"></span>Lich Crystal</button>
+                        <button type="button" class="filter-btn" data-type="Admin Abuse"><span class="source-icon-placeholder" data-source="Admin Abuse"></span>Admin Abuse</button>
                         <button type="button" class="filter-btn" data-type="other"><span class="source-icon-placeholder" data-source="other"></span>Other</button>
                     </div>
                     -->
@@ -194,6 +206,23 @@
                                 <option value="luminous">Luminous (applies Luminous)</option>
                                 <option value="nutty">Nutty (double activation or level loss)</option>
                     </select>
+                    <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 5px 10px; border: 1px solid #ddd; border-radius: 5px; white-space: nowrap;">
+                            <input type="checkbox" id="smallToy" style="margin-right: 5px;">
+                            <img src="https://static.wikia.nocookie.net/growagarden/images/2/26/SmallToy.png" alt="Small Toy" style="width: 20px; height: 20px; margin-right: 5px;" onerror="this.style.display='none';">
+                            Small Toy
+                        </label>
+                        <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 5px 10px; border: 1px solid #ddd; border-radius: 5px; white-space: nowrap;">
+                            <input type="checkbox" id="mediumToy" style="margin-right: 5px;">
+                            <img src="https://static.wikia.nocookie.net/growagarden/images/c/c1/MediumToy.png" alt="Medium Toy" style="width: 20px; height: 20px; margin-right: 5px;" onerror="this.style.display='none';">
+                            Medium Toy
+                        </label>
+                        <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 5px 10px; border: 1px solid #ddd; border-radius: 5px; white-space: nowrap;">
+                            <input type="checkbox" id="grandmaster" style="margin-right: 5px;">
+                            <img src="https://static.wikia.nocookie.net/growagarden/images/a/ad/GrandmasterSprinkler.png" alt="Grandmaster" style="width: 20px; height: 20px; margin-right: 5px;" onerror="this.style.display='none';">
+                            Grandmaster
+                        </label>
+                    </div>
                 </div>
                 
                 <div id="compareWeightInputs" class="form-group" style="display: none;">
@@ -263,6 +292,42 @@
                                 <option value="luminous">Luminous (applies Luminous)</option>
                                 <option value="nutty">Nutty (double activation or level loss)</option>
                             </select>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <div style="flex: 1; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                            <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="checkbox" id="smallToy1" style="margin-right: 5px;">
+                                <img src="https://static.wikia.nocookie.net/growagarden/images/2/26/SmallToy.png" alt="Small Toy" style="width: 18px; height: 18px; margin-right: 4px;" onerror="this.style.display='none';">
+                                <span style="white-space: nowrap;">Small</span>
+                            </label>
+                            <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="checkbox" id="mediumToy1" style="margin-right: 5px;">
+                                <img src="https://static.wikia.nocookie.net/growagarden/images/c/c1/MediumToy.png" alt="Medium Toy" style="width: 18px; height: 18px; margin-right: 4px;" onerror="this.style.display='none';">
+                                <span style="white-space: nowrap;">Medium</span>
+                            </label>
+                            <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="checkbox" id="grandmaster1" style="margin-right: 5px;">
+                                <img src="https://static.wikia.nocookie.net/growagarden/images/a/ad/GrandmasterSprinkler.png" alt="Grandmaster" style="width: 18px; height: 18px; margin-right: 4px;" onerror="this.style.display='none';">
+                                <span style="white-space: nowrap;">GM</span>
+                            </label>
+                        </div>
+                        <div style="flex: 1; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                            <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="checkbox" id="smallToy2" style="margin-right: 5px;">
+                                <img src="https://static.wikia.nocookie.net/growagarden/images/2/26/SmallToy.png" alt="Small Toy" style="width: 18px; height: 18px; margin-right: 4px;" onerror="this.style.display='none';">
+                                <span style="white-space: nowrap;">Small</span>
+                            </label>
+                            <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="checkbox" id="mediumToy2" style="margin-right: 5px;">
+                                <img src="https://static.wikia.nocookie.net/growagarden/images/c/c1/MediumToy.png" alt="Medium Toy" style="width: 18px; height: 18px; margin-right: 4px;" onerror="this.style.display='none';">
+                                <span style="white-space: nowrap;">Medium</span>
+                            </label>
+                            <label style="font-size: 0.9em; font-weight: normal; display: flex; align-items: center; cursor: pointer; padding: 4px 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <input type="checkbox" id="grandmaster2" style="margin-right: 5px;">
+                                <img src="https://static.wikia.nocookie.net/growagarden/images/a/ad/GrandmasterSprinkler.png" alt="Grandmaster" style="width: 18px; height: 18px; margin-right: 4px;" onerror="this.style.display='none';">
+                                <span style="white-space: nowrap;">GM</span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -365,6 +430,12 @@
             'Fall Pet Shop': 'https://static.wikia.nocookie.net/growagarden/images/f/f0/FallEventIsland.png',
             'Season Pass': 'https://static.wikia.nocookie.net/growagarden/images/1/11/Season_Pass_Icon.png',
             'Chubby Chipmunk Event': 'https://static.wikia.nocookie.net/growagarden/images/5/52/ChubbyChipmunkPet.png',
+            'Grave Digging': 'https://static.wikia.nocookie.net/growagarden/images/8/85/Gravestone.png',
+            'Creepy Critters Shop': 'https://static.wikia.nocookie.net/growagarden/images/3/35/CreepyCrittersShop.png',
+            'Spooky Chest': 'https://static.wikia.nocookie.net/growagarden/images/a/a6/Spookychest.png',
+            'Exotic Spooky Chest': 'https://static.wikia.nocookie.net/growagarden/images/5/51/ExoticSpookyChest.png',
+            'Lich Crystal': 'https://static.wikia.nocookie.net/growagarden/images/4/47/LichCrystal.png',
+            'Admin Abuse': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png',
             'other': 'https://static.wikia.nocookie.net/growagarden/images/9/90/KitsuneChest.png'
         };
         
@@ -394,6 +465,12 @@
                 'Chubby Chipmunk Event': '🐿️',
                 'Spooky Egg': '👻',
                 'Rainbow Exotic': '🌈',
+                'Grave Digging': '🪦',
+                'Creepy Critters Shop': '🦇',
+                'Spooky Chest': '🎃',
+                'Exotic Spooky Chest': '👻',
+                'Lich Crystal': '💀',
+                'Admin Abuse': '🔨',
                 'other': '🔮'
             };
             return emojiMap[sourceType] || '❓';
@@ -1003,7 +1080,16 @@
                     modifierType: document.getElementById('modifierType'),
                     singleModifierInput: document.getElementById('singleModifierInput'),
                     modifier1Type: document.getElementById('modifier1Type'),
-                    modifier2Type: document.getElementById('modifier2Type')
+                    modifier2Type: document.getElementById('modifier2Type'),
+                    smallToy: document.getElementById('smallToy'),
+                    mediumToy: document.getElementById('mediumToy'),
+                    grandmaster: document.getElementById('grandmaster'),
+                    smallToy1: document.getElementById('smallToy1'),
+                    mediumToy1: document.getElementById('mediumToy1'),
+                    grandmaster1: document.getElementById('grandmaster1'),
+                    smallToy2: document.getElementById('smallToy2'),
+                    mediumToy2: document.getElementById('mediumToy2'),
+                    grandmaster2: document.getElementById('grandmaster2')
                 };
                 
                 // Validate all elements exist
@@ -1361,7 +1447,15 @@
                     'Zen Egg',
                     'Fall Pet Shop',
                     'Season Pass',
-                    'Chubby Chipmunk Event'
+                    'Safari Egg',
+                    'Exotic Safari Egg',
+                    'Chubby Chipmunk Event',
+                    'Grave Digging',
+                    'Creepy Critters Shop',
+                    'Spooky Chest',
+                    'Exotic Spooky Chest',
+                    'Lich Crystal',
+                    'Admin Abuse'
                 ];
                 return knownSources.includes(source);
             },
@@ -1407,6 +1501,23 @@
                     firstOption.textContent = `-- Select a Pet (${count} found) --`;
                 }
             }
+        };
+
+        // Helper function to calculate combined modifier value
+        const getCombinedModifier = (modifierType, smallToyChecked = false, mediumToyChecked = false) => {
+            // Get base modifier value from mutations.js
+            let baseModifier = 0;
+            if (modifierType && modifierType !== 'none' && typeof window.getModifierDetails === 'function') {
+                const modifierDetails = window.getModifierDetails(modifierType);
+                baseModifier = modifierDetails?.value || 0;
+            }
+            
+            // Add toy bonuses
+            let toyBonus = 0;
+            if (smallToyChecked) toyBonus += 0.1;
+            if (mediumToyChecked) toyBonus += 0.2;
+            
+            return baseModifier + toyBonus;
         };
 
         // Calculator functionality
@@ -1461,11 +1572,27 @@
             handleSingleMode(pet) {
                 const weightInput = DOMManager.getElement('weightInput');
                 const modifierType = DOMManager.getElement('modifierType');
-                const weight = parseFloat(weightInput?.value || '');
+                const smallToy = DOMManager.getElement('smallToy');
+                const mediumToy = DOMManager.getElement('mediumToy');
+                const grandmaster = DOMManager.getElement('grandmaster');
+                let weight = parseFloat(weightInput?.value || '');
                 const modifier = modifierType?.value || 'none';
                 
+                // Add 4kg if grandmaster is checked
+                if (grandmaster?.checked) {
+                    weight += 4;
+                }
+                
                 if (Utils.isValidWeight(weight)) {
-                    const result = pet.calculate(weight, modifier);
+                    // Calculate combined modifier value
+                    const combinedModifier = getCombinedModifier(
+                        modifier,
+                        smallToy?.checked || false,
+                        mediumToy?.checked || false
+                    );
+                    
+                    // Pass combined modifier value as third parameter
+                    const result = pet.calculate(weight, modifier, combinedModifier);
                     this.showSingleResult(pet, weight, result);
                 }
             },
@@ -1479,14 +1606,41 @@
                 const weight2Input = DOMManager.getElement('weight2Input');
                 const modifier1Type = DOMManager.getElement('modifier1Type');
                 const modifier2Type = DOMManager.getElement('modifier2Type');
-                const weight1 = parseFloat(weight1Input?.value || '');
-                const weight2 = parseFloat(weight2Input?.value || '');
+                const smallToy1 = DOMManager.getElement('smallToy1');
+                const mediumToy1 = DOMManager.getElement('mediumToy1');
+                const grandmaster1 = DOMManager.getElement('grandmaster1');
+                const smallToy2 = DOMManager.getElement('smallToy2');
+                const mediumToy2 = DOMManager.getElement('mediumToy2');
+                const grandmaster2 = DOMManager.getElement('grandmaster2');
+                let weight1 = parseFloat(weight1Input?.value || '');
+                let weight2 = parseFloat(weight2Input?.value || '');
                 const modifier1 = modifier1Type?.value || 'none';
                 const modifier2 = modifier2Type?.value || 'none';
                 
+                // Add 4kg if grandmaster is checked for each pet
+                if (grandmaster1?.checked) {
+                    weight1 += 4;
+                }
+                if (grandmaster2?.checked) {
+                    weight2 += 4;
+                }
+                
                 if (Utils.isValidWeight(weight1) && Utils.isValidWeight(weight2)) {
-                    const result1 = pet.calculate(weight1, modifier1);
-                    const result2 = pet.calculate(weight2, modifier2);
+                    // Calculate combined modifier values
+                    const combinedModifier1 = getCombinedModifier(
+                        modifier1,
+                        smallToy1?.checked || false,
+                        mediumToy1?.checked || false
+                    );
+                    const combinedModifier2 = getCombinedModifier(
+                        modifier2,
+                        smallToy2?.checked || false,
+                        mediumToy2?.checked || false
+                    );
+                    
+                    // Pass combined modifier values as third parameter
+                    const result1 = pet.calculate(weight1, modifier1, combinedModifier1);
+                    const result2 = pet.calculate(weight2, modifier2, combinedModifier2);
                     this.showCompareResult(pet, weight1, weight2, result1, result2, modifier1, modifier2);
                 }
             },
@@ -1758,6 +1912,17 @@
                 DOMManager.getElement('modifierType')?.addEventListener('change', debouncedCalculate);
                 DOMManager.getElement('modifier1Type')?.addEventListener('change', debouncedCalculate);
                 DOMManager.getElement('modifier2Type')?.addEventListener('change', debouncedCalculate);
+                
+                // Toy checkbox event listeners
+                DOMManager.getElement('smallToy')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('mediumToy')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('grandmaster')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('smallToy1')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('mediumToy1')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('grandmaster1')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('smallToy2')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('mediumToy2')?.addEventListener('change', debouncedCalculate);
+                DOMManager.getElement('grandmaster2')?.addEventListener('change', debouncedCalculate);
 
                 // Age input handling
                 DOMManager.getElement('age1Input')?.addEventListener('input', () => {
@@ -2016,5 +2181,17 @@
             }, 200);
         });
     </script>
+
+    <footer style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; margin-top: 40px; border-radius: 15px 15px 0 0;">
+        <div style="font-size: 1.1rem; font-weight: bold; display: flex; justify-content: center; align-items: center; gap: 15px;">
+            Contact Me:
+            <a href="https://reddit.com/u/AsleepOnTheTrain" target="_blank" rel="noopener noreferrer" style="display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/images/reddit.png" alt="Reddit" style="height: 32px;" onerror="this.style.display='none';">
+            </a>
+            <a href="https://discord.com/users/326327352592302085" target="_blank" rel="noopener noreferrer" style="display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="/images/discord.png" alt="Discord" style="height: 32px;" onerror="this.style.display='none';">
+            </a>
+        </div>
+    </footer>
 </body>
 </html>

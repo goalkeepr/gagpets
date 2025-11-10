@@ -17,10 +17,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Chance to not consume harvest tool uses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Harvest Tool Max: 24.00 (19.20 🌈)";
             
             const baseChance = 6;
@@ -50,10 +50,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Reduces cooldown for Fall type pets when they finish their abilities",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Reduction Max: 40.00 (33.00 🌈)";
             
             const baseChance = 14;
@@ -83,10 +83,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Burrows underground and hides in mounds for Fall rewards",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 120.00 (89.14 🌈), Chance Max: 300.00 (240.00 🌈)";
             
             const baseCooldown = 540;
@@ -122,10 +122,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Glides between fruits to copy and transfer mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Glide Min: 106.67 (53.33 🌈)";
             
             const baseCooldown = 1200;
@@ -156,10 +156,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Applies Voidtouched mutations from space",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 120.00 (72.00 🌈), Voidtouched Max: 33.33 (23.33 🌈)";
             
             const baseCooldown = 1080;
@@ -195,10 +195,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Gains additional XP for every other Salmon in garden",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "XP Bonus Max: 100.00 (80.00 🌈)";
             
             const baseChance = 4;
@@ -228,10 +228,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Pecks at Woody type plants to grant duplication chance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 120.00 (72.00 🌈), Chance Max: 150.00 (120.00 🌈)";
             
             const baseCooldown = 120;
@@ -271,10 +271,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Flies south for winter rewards",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Reward Chance Max: 101.00 (81.20 🌈)";
             
             const baseChance = 14.85;
@@ -304,10 +304,10 @@ export const FALL_PET_SHOP_PETS = {
         probability: 0,
         obtainable: true,
         description: "Restocks shop items",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 62.69 (41.19 🌈)";
             
             const baseCooldown = 720;

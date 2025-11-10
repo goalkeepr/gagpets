@@ -15,10 +15,10 @@ export const CHUBBY_CHIPMUNK_PETS = {
         probability: 100,
         obtainable: true,
         description: "Eats fruits to gain weight and spawns acorns",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 56.67 (40.67 🌈)";
             
             const baseSeconds = 120;
@@ -50,10 +50,10 @@ export const CHUBBY_CHIPMUNK_PETS = {
         probability: 34.5,
         obtainable: true,
         description: "Makes Nut type plants grow faster",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 30;
             const baseMultiplier = 1.5;
@@ -80,10 +80,10 @@ export const CHUBBY_CHIPMUNK_PETS = {
         probability: 14.5,
         obtainable: true,
         description: "Performs songs to restore hunger to all pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (107.43 🌈)";
             
             const baseSeconds = 720;
@@ -120,10 +120,10 @@ export const CHUBBY_CHIPMUNK_PETS = {
         probability: 1,
         obtainable: true,
         description: "Makes other pets perform abilities multiple times",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (76.67 🌈)";
             
             const baseSeconds = 2400;
@@ -155,10 +155,10 @@ export const CHUBBY_CHIPMUNK_PETS = {
         probability: 0,
         obtainable: true,
         description: "Converts fruits into Fissure Berry seeds",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 80.00 (60.00 🌈)";
             
             const baseSeconds = 300;
@@ -185,10 +185,10 @@ export const CHUBBY_CHIPMUNK_PETS = {
         probability: 0,
         obtainable: true,
         description: "Applies Jackpot mutation to fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (110.40 🌈)";
             
             const baseSeconds = 420;

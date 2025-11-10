@@ -15,10 +15,10 @@ const rareSummerEggPets = {
         source: "Rare Summer Egg",
         probability: 30,
         obtainable: true,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 112.50 (88.50 🌈)";
             
             const baseSeconds = 240;
@@ -49,10 +49,10 @@ const rareSummerEggPets = {
         source: "Rare Summer Egg",
         probability: 25,
         obtainable: true,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 25 + (kg / 4);
             const sizeBonus = 1.2 + (kg / 20);
@@ -78,10 +78,10 @@ const rareSummerEggPets = {
         source: "Rare Summer Egg",
         probability: 20,
         obtainable: true,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Experience Time Min: 106.15 (106.15 🌈), Splash Time Min: 44.67 (44.67 🌈)";
             
             const expSeconds = Math.max(30, 720 - (6.5 * kg));
@@ -114,10 +114,10 @@ const rareSummerEggPets = {
         source: "Rare Summer Egg",
         probability: 10,
         obtainable: true,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Pet Return Max: 25.00 (22.73 🌈)";
 
             const baseReturn = 2.5;
@@ -145,10 +145,10 @@ const rareSummerEggPets = {
         source: "Rare Summer Egg",
         probability: 15,
         obtainable: true,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Material Conservation Max: 12.12 (10.30 🌈)";
             
             const baseChance = 3;

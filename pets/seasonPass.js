@@ -15,10 +15,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Makes Berry type plants grow faster",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 30;
             const baseMultiplier = 1.5;
@@ -45,10 +45,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Turns random fruits Silver",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 98.50 (74.30 🌈)";
             
             const baseSeconds = 484;
@@ -75,10 +75,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Shocks nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 87.00 (65.20 🌈)";
             
             const baseSeconds = 545;
@@ -109,10 +109,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Transfers mutations when selling Azure fruits and applies Azure mutation to fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (93.14 🌈)";
             
             const baseTransferChance = 6;
@@ -148,10 +148,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Makes Berry type plants grow faster with rainbow power",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 45;
             const baseMultiplier = 2.5;
@@ -178,10 +178,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Turns random fruits Silver faster than normal",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 99.50 (75.10 🌈)";
             
             const baseSeconds = 244;
@@ -208,10 +208,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Shocks nearby fruits with greater power",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 75.00 (52.50 🌈)";
             
             const baseSeconds = 225;
@@ -242,10 +242,10 @@ export const SEASON_PASS_PETS = {
         probability: 0,
         obtainable: true,
         description: "Enhanced mutation transfer and Azure application with rainbow power",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 60.00 (42.00 🌈)";
             
             const baseTransferChance = 12;

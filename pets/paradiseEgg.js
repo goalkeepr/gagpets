@@ -15,10 +15,10 @@ export const PARADISE_EGG_PETS = {
         probability: 40,
         obtainable: true,
         description: "Provides age bonuses to hatched pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Age Bonus Max: 11.00 (9.20 🌈)";
             
             const maxAge = 4.5 + (kg / 2);
@@ -45,10 +45,10 @@ export const PARADISE_EGG_PETS = {
         probability: 30,
         obtainable: true,
         description: "Fans feathers to advance nearby pets' cooldowns",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 98.50 (78.30 🌈)";
             
             const baseSeconds = 606;
@@ -83,10 +83,10 @@ export const PARADISE_EGG_PETS = {
         probability: 21,
         obtainable: true,
         description: "Provides area buffs to nearby pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "XP Gain Max: 90.00 (88.00 🌈)";
             
             const studs = 14.5 + (kg / 4);
@@ -116,10 +116,10 @@ export const PARADISE_EGG_PETS = {
         probability: 8,
         obtainable: true,
         description: "Applies Verdant mutations to nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 94.80 (73.84 🌈)";
             
             const baseSeconds = 524;
@@ -147,10 +147,10 @@ export const PARADISE_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Mimics and copies abilities from other pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 99.75 (79.55 🌈)";
             
             const baseSeconds = 1212;

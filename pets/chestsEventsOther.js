@@ -17,10 +17,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 50,
         obtainable: false,
         description: "Pollinates fruits and provides gold harvest chance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Pollination Min: 85.00 (66.13 🌈)";
             
             const baseSeconds = 1510;
@@ -48,10 +48,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 50,
         obtainable: true,
         description: "Pollinates fruits and increases backpack size",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Pollination Min: 85.00 (85.00 🌈)";
             
             const seconds = Math.max(150, 1510 - (16 * kg));
@@ -76,10 +76,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Runs in hamster wheel to boost crafting speed",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (90.27 🌈)";
             
             const baseSeconds = 188;
@@ -108,10 +108,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Naps to provide size bonuses and preserves Night type fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Nap Interval Min: 55.00 (41.00 🌈)";
             
             const baseNapInterval = 70;
@@ -142,10 +142,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Eats bamboo for value bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Feeding Min: 120.00 (84.00 🌈)";
             
             const baseSeconds = 180;
@@ -176,10 +176,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Zombifies fruits and increases egg hatch speed",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Zombify Min: 88.06 (70.28 🌈)";
             
             const baseSeconds = 1600;
@@ -211,10 +211,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Dual ability: Provides XP bonuses to Food type pets and gains additional experience",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Experience Min: 73.50 (58.43 🌈)";
             
             // First ability - XP bonus to Food type pets (passive)
@@ -257,10 +257,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Provides chance to recover eggs when hatching",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Recovery Max: 22.73 (20.00 🌈)";
             
             const baseRecoveryChance = 3;
@@ -287,10 +287,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Touchdown: Occasionally runs to the Gear Shop or Seed Shop (whichever is farther) and does a touchdown which awards you with sheckles or a Watering Can",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const wateringCanChance = 20 + (kg / 3);
             
@@ -313,10 +313,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 34.50,
         obtainable: false,
         description: "Fortune Cat: Occasionally does a wave of good luck and grants increased chance to get your fruit back after selling it",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseSeconds = 143;
             const secondsMod = baseSeconds * modifier;
@@ -344,10 +344,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Tree Spirit: Collecting Zen type fruits have a chance to mutate with Tranquil.",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Tranquil Max: 18.18 (18.18 🌈)";
             
             const chance = Math.min(12, 6 + (0.33 * kg));
@@ -371,10 +371,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 4.35,
         obtainable: false,
         description: "Corrupted Tree Spirit: Collecting Zen type fruits have a chance to mutate with Corrupt.",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Corrupt Max: 18.18 (18.18 🌈)";
             
             const chance = Math.min(12, 6 + (0.33 * kg));
@@ -398,10 +398,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Lightning Beast: Occasionally devours a fruit with Shocked for bonus value, spits a chain lightning that mutates fruit with Static or Shocked if its a Thunderstorm",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Targets Max: 33.33 (33.33 🌈), Shocked Max: 100.00 (100.00 🌈)";
             
             const baseSeconds = 622;
@@ -430,10 +430,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Nine-Tailed Curse: Occasionally, Removes 9 mutations from 9 different fruit. Applies Corrupted Chakra with a very rare chance for Corrupted Foxfire Chakra to 1 random fruit.",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseSeconds = 1260;
             const secondsMod = baseSeconds * modifier;
@@ -460,10 +460,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Takes flight and advances egg hatch times with chance for multiplied effect",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseInterval = 704;
             const baseIntervalMod = baseInterval * modifier;
@@ -491,10 +491,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Cooks fruits and provides XP bonuses to all pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooking Min: 62.17 (48.73 🌈)";
             
             const baseSeconds = 806;
@@ -523,10 +523,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Reduces egg hatch times",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Action Min: 50.00 (38.00 🌈)";
             
             const baseSeconds = 60;
@@ -557,10 +557,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Provides XP bonuses to all active pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const xpBonus = 0.2 + (kg / 25);
             
@@ -583,10 +583,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Dual ability: Reduces egg hatch times and increases egg hatch speed",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Action Min: 50.00 (38.00 🌈)";
             
             // First ability - Hatch time reduction
@@ -625,10 +625,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Provides size and variant bonuses to prickly plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseSizeRange = 30;
             const baseSizeBonus = 2;
@@ -669,10 +669,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Provides XP bonuses to all active pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseXpBonus = 0.5;
             const xpBonus = baseXpBonus + (0.08 * kg);
@@ -700,10 +700,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Spreads roots to apply Bloom mutation to nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (77.33 🌈), Chance Max: 100.00 (80.00 🌈), Range Max: 100.00 (80.00 🌈)";
             
             const baseCooldown = 1330;
@@ -741,10 +741,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 34.5,
         obtainable: true,
         description: "Emits aura that boosts variant chance for new fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Aura Min: No Limit (91.00 🌈)";
             
             const baseCooldown = 120;
@@ -788,10 +788,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 14.5,
         obtainable: true,
         description: "Drops mustard/ketchup puddles that boost pet performance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 106.67 (74.67 🌈), Multiplier Max: 20.00 (16.00 🌈)";
             
             const baseCooldown = 240;
@@ -839,10 +839,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 1,
         obtainable: true,
         description: "Dual ability: Applies both Molten and Meteoric mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Molten Min: No Limit (93.33 🌈), Meteoric Min: No Limit (110.59 🌈)";
             
             // First ability - Molten
@@ -890,10 +890,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Dual ability: Applies Plasma mutations and advances pet cooldowns",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Sting Min: 86.29 (51.89 🌈), Amount Max: 100.00 (80.00 🌈)";
             
             // First ability - Plasma mutation
@@ -937,10 +937,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Dual ability: Duplicates apple fruits and applies Warped mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Apple Duplication Max: No Limit (88.00 🌈), Warped Max: 40.00 (32.00 🌈)";
             
             // First ability - Apple duplication
@@ -977,10 +977,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Dual ability: Applies Brainrot mutations and grants citrus experience bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Citrus Min: No Limit (112.00 🌈), Amount Max: 66.67 (46.67 🌈)";
             
             // First ability - Brainrot mutation
@@ -1024,10 +1024,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: false,
         description: "Sacrifices Beanstalk fruits to grow random plants with size bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 103.33 (63.33 🌈), Multiplier Max: 50.00 (40.00 🌈)";
             
             const baseCooldown = 1800;
@@ -1062,10 +1062,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 34.5,
         obtainable: true,
         description: "Berry fruits have a chance to stay after collecting",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 2.5;
             const chance = Math.min(5, baseChance + (0.025 * kg));
@@ -1094,10 +1094,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 14.5,
         obtainable: true,
         description: "Harvesting Mandrake crops applies Rot mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 3.5;
             const chance = Math.min(7, baseChance + (0.05 * kg));
@@ -1126,10 +1126,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 1,
         obtainable: true,
         description: "Releases cyclones that advance pet cooldowns and apply Cyclonic mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 935;
             const baseCooldownAmount = 65;
@@ -1168,10 +1168,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Applies Gnomed mutations with bonus chance for Gnome cosmetics",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Chance Max: 80.00 (72.00 🌈)";
             
             const baseCooldown = 600;
@@ -1210,10 +1210,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 34.5,
         obtainable: true,
         description: "All Magical type plants grow faster",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Multiplier Max: 50.00 (44.00 🌈)";
             
             const baseRange = 30;
@@ -1246,10 +1246,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 14.5,
         obtainable: true,
         description: "All nearby plants have increased size bonus for every Fungus type plant planted",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Range Max: 101.00 (89.20 🌈), Multiplier Max: 6.00 (5.20 🌈)";
             
             const baseRange = 14.75;
@@ -1282,10 +1282,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 1,
         obtainable: true,
         description: "Dual ability: Provides age bonus to mutated pets and travels between fruits applying Flaming mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Age Max: 42.00 (32.40 🌈), Cooldown Min: No Limit (86.15 🌈), Chance Max: 100.00 (80.00 🌈), Amount Max: 40.00 (32.00 🌈)";
             
             // First ability - Pet mutation age bonus
@@ -1331,10 +1331,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Grants all other pets additional XP as long as you have a Wisp Well",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "XP Bonus Max: 58.60 (57.32 🌈)";
             
             const baseAmount = 0.64;
@@ -1363,10 +1363,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Goes to active Cooking Kit and boosts cooking speed",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooking Speed Max: 10.00 (8.00 🌈)";
             
             const baseAmount = 0.1;
@@ -1395,10 +1395,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Flies to nearby fruit and applies Luminous mutation",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 920;
             const cooldown = Math.max(120, baseCooldown - (3.5 * kg));
@@ -1427,10 +1427,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 55,
         obtainable: true,
         description: "Provides decreased player size bonus",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Player Size Max: 100.00 (80.00 🌈)";
             
             const baseChance = 20;
@@ -1458,10 +1458,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 32.5,
         obtainable: true,
         description: "Digs around to displace ground and apply Cracked mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 36.67 (26.67 🌈), Duration Max: 100.00 (80.00 🌈), Range Max: 80.00 (64.00 🌈)";
             
             const baseCooldown = 150;
@@ -1500,10 +1500,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 10,
         obtainable: true,
         description: "Dual ability: Applies Fall mutations and increases player size",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // First ability - Fall mutation
             const baseCooldown1 = 140;
@@ -1545,10 +1545,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 1.5,
         obtainable: true,
         description: "Dual ability: Provides bonus weight to shop pets and XP to Fall type pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Weight Max: 11.00 (9.20 🌈), XP Max: 23.33 (21.33 🌈)";
             
             // First ability - Bonus weight to shop pets (passive)
@@ -1586,10 +1586,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 1,
         obtainable: true,
         description: "Dual ability: Befriends other players' pets and applies Graceful mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Befriend Min: 108.89 (73.78 🌈), Grace Min: 24.29 (15.71 🌈)";
             
             // First ability - Befriend other players' pets
@@ -1629,10 +1629,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 34.5,
         obtainable: true,
         description: "Applies Jackpot mutation to fruits with enhanced rainbow power",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (97.33 🌈)";
             
             const baseSeconds = 220;
@@ -1665,10 +1665,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 28,
         obtainable: true,
         description: "Makes Nut type plants grow faster with enhanced rainbow power",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 45;
             const baseMultiplier = 2.5;
@@ -1696,10 +1696,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 15,
         obtainable: true,
         description: "Performs enhanced songs to restore hunger to all pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (90.29 🌈)";
             
             const baseSeconds = 520;
@@ -1737,10 +1737,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 7,
         obtainable: true,
         description: "Makes other pets perform abilities multiple times with enhanced rainbow power",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (76.00 🌈)";
             
             const baseSeconds = 1820;
@@ -1772,10 +1772,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Converts pumpkins into Jack-O-Lantern cosmetics",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 86.19 (71.82 🌈)";
             
             const baseSeconds = 422 * 60; // Convert minutes to seconds
@@ -1802,10 +1802,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Scares nearby fruits to apply Spooky mutation",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (No Limit 🌈)";
             
             const baseSeconds = 1111;
@@ -1832,10 +1832,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Howls to apply Moonlit mutation and transform player into werewolf",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 62.00 (51.67 🌈), Range Max: 100.00 (80.00 🌈), Chance Max: 100.00 (80.00 🌈), Duration Max: No Limit (No Limit 🌈), MovementSpeed Max: 99.00 (79.20 🌈), JumpHeight Max: 99.50 (79.60 🌈)";
             
             const baseSeconds = 244;
@@ -1877,10 +1877,10 @@ export const CHESTS_EVENTS_OTHER_PETS = {
         probability: 0,
         obtainable: true,
         description: "Sacrifices fruits to boost random pet's passive or XP",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 92.31 (76.92 🌈)";
             
             const baseSeconds = 1320; // Convert minutes to seconds

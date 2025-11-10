@@ -4,12 +4,12 @@ import Utils from '../utils/calculations.js';
 
 export const petMutationOptions = {
     'Shocked Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 60;
             const cooldownMod = baseCooldown * modifier;
@@ -27,12 +27,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases cooldown by 0.6 seconds and increases lightning chance by 0.02%'
     },
     'Frozen Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 300;
             const cooldownMod = baseCooldown * modifier;
@@ -50,12 +50,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases cooldown by 3 seconds and increases freeze chance by 0.03%'
     },
     'Windy Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 300;
             const cooldownMod = baseCooldown * modifier;
@@ -73,12 +73,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases cooldown by 3 seconds and increases windstruck chance by 0.03%'
     },
     'IronSkin Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseChance = 35;
             const chanceBonus = 0.2 * kg;
@@ -91,12 +91,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg increases protection chance by 0.2%'
     },
     'Radiant Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 1800;
             const cooldownMod = baseCooldown * modifier;
@@ -110,12 +110,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases sunshine cooldown by 9 seconds'
     },
     'Ascended Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 21621;
             const cooldownMod = baseCooldown * modifier;
@@ -133,12 +133,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases ascension cooldown by 21 seconds and increases success rate by 0.03%'
     },
     'Tranquil Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 1500;
             const cooldownMod = baseCooldown * modifier;
@@ -156,12 +156,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases tranquility cooldown by 3 seconds and increases success rate by 0.03%'
     },
     'Corrupted Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 1500;
             const cooldownMod = baseCooldown * modifier;
@@ -179,12 +179,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases tranquility cooldown by 3 seconds and increases success rate by 0.03%'
     },
     'Glimmering Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 1500;
             const cooldownMod = baseCooldown * modifier;
@@ -202,12 +202,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases glimmering cooldown by 3 seconds and increases success rate by 0.03%'
     },
     'Luminous Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 2000;
             const cooldownMod = baseCooldown * modifier;
@@ -225,12 +225,12 @@ export const petMutationOptions = {
         perKgImpact: () => 'Each additional kg decreases cooldown by 4 seconds and increases success rate by 0.03%'
     },
     'Nutty Pet Mutation': {
-        calculate: (kg, modifierType = 'none') => {
+        calculate: (kg, modifierType = 'none', customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) {
                 return 'Invalid weight';
             }
 
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
 
             const baseCooldown = 1200;
             const cooldownMod = baseCooldown * modifier;

@@ -15,10 +15,10 @@ export const OASIS_EGG_PETS = {
         probability: 0.50,
         obtainable: false,
         description: "Copies mutations from other players' fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 94.62 (73.85 🌈)";
             
             const baseSeconds = 1350;
@@ -45,10 +45,10 @@ export const OASIS_EGG_PETS = {
         probability: 45,
         obtainable: false,
         description: "Goes to another pet and does a lookout that advances their cooldown, with a chance to repeat",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 97.50 (77.32 🌈)";
             
             const baseSeconds = 444;
@@ -77,10 +77,10 @@ export const OASIS_EGG_PETS = {
         probability: 5,
         obtainable: false,
         description: "Applies Cloudtouched mutations to nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 97.50 (77.32 🌈)";
             
             const baseSeconds = 444;
@@ -108,10 +108,10 @@ export const OASIS_EGG_PETS = {
         probability: 15,
         obtainable: false,
         description: "Preserves Summer type fruits after collecting",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Preservation Max: 35.00 (35.00 🌈)";
             
             const basePreserveChance = 6;
@@ -139,10 +139,10 @@ export const OASIS_EGG_PETS = {
         probability: 34.5,
         obtainable: false,        
         description: "Duplicates purchased items from seed/gear shop",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const duplicateChance = 1 + (kg / 4);
             

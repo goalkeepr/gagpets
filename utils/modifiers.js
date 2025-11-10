@@ -4,12 +4,35 @@ import { MODIFIER_CONFIG } from '../config/constants.js';
 /**
  * Get modifier details for pet calculations
  * @param {string} modifierType - Type of modifier (golden, rainbow, shocked, etc.)
+ * @param {number} [customModifierValue] - Optional custom modifier value to override the default (e.g., with toy bonuses)
  * @returns {Object} Object containing modifier value, display text, and CSS styling
  * @returns {number} returns.value - Numeric modifier value (0-1)
  * @returns {string} returns.text - Display text for the modifier
  * @returns {string} returns.style - CSS styling for the modifier display
  */
-export const getModifierDetails = (modifierType) => {
+export const getModifierDetails = (modifierType, customModifierValue = null) => {
+    // If a custom modifier value is provided, use it instead of calculating from type
+    if (customModifierValue !== null && typeof customModifierValue === 'number') {
+        // Still get the text and style from the modifier type
+        const baseDetails = getBaseModifierDetails(modifierType);
+        return {
+            value: customModifierValue,
+            text: baseDetails.text,
+            style: baseDetails.style
+        };
+    }
+    
+    // Otherwise, use the standard logic
+    const details = getBaseModifierDetails(modifierType);
+    return details;
+};
+
+/**
+ * Get base modifier details without custom value override
+ * @param {string} modifierType - Type of modifier
+ * @returns {Object} Modifier details
+ */
+const getBaseModifierDetails = (modifierType) => {
     switch (modifierType) {
     case 'spectral':
         return {

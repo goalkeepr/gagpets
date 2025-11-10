@@ -15,10 +15,10 @@ export const ANTI_BEE_EGG_PETS = {
         probability: 55,
         obtainable: true,
         description: "Pollinates fruits and stings pets to advance cooldowns",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Pollination Min: 96.67 (80.56 🌈), Sting Min: 90.33 (75.28 🌈)";
             
             const basePollinateSeconds = 1800;
@@ -51,10 +51,10 @@ export const ANTI_BEE_EGG_PETS = {
         probability: 30,
         obtainable: true,
         description: "Pollinates fruits and stings pets to advance cooldowns",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Pollination Min: 85.00 (66.13 🌈), Sting Min: 50.67 (30.53 🌈)";
             
             const basePollinateSeconds = 1510;
@@ -87,10 +87,10 @@ export const ANTI_BEE_EGG_PETS = {
         probability: 13.75,
         obtainable: true,
         description: "Sings to restore pet hunger",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Singing Min: 106.86 (85.06 🌈)";
             
             const baseSeconds = 763;
@@ -117,10 +117,10 @@ export const ANTI_BEE_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Transforms heavily mutated fruits into rainbow fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Transformation Min: 99.61 (79.52 🌈)";
             
             const baseSeconds = 1808;
@@ -147,10 +147,10 @@ export const ANTI_BEE_EGG_PETS = {
         probability: 0.25,
         obtainable: true,
         description: "Makes nearby fruits become Disco",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 74.25 (59.15 🌈)";
             
             const baseSeconds = 906;

@@ -15,10 +15,10 @@ export const SPOOKY_EGG_PETS = {
         probability: 45,
         obtainable: true,
         description: "Grants Spooky plants variant chance bonus in range",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Multiplier Max: 18.00 (15.60 🌈), Range Max: 112.00 (86.40 🌈)";
@@ -55,10 +55,10 @@ export const SPOOKY_EGG_PETS = {
         probability: 25,
         obtainable: true,
         description: "Digs up random seeds periodically",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 75.00 (59.00 🌈), Chance Max: no limit (no limit 🌈)";
@@ -95,10 +95,10 @@ export const SPOOKY_EGG_PETS = {
         probability: 18,
         obtainable: true,
         description: "Weaves webs that boost pet cooldowns and plant growth",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 60.00 (39.67 🌈), Range Max: 100.00 (80.00 🌈), Duration Max: 100.00 (80.00 🌈), AmountPet Max: 50.00 (30.00 🌈), AmountPlant Max: 100.00 (80.00 🌈)";
@@ -150,10 +150,10 @@ export const SPOOKY_EGG_PETS = {
         probability: 8.5,
         obtainable: true,
         description: "Naps near Witch's Cauldron to enlarge nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 62.00 (37.60 🌈), Range Max: 100.00 (80.00 🌈), Duration Max: 90.00 (80.00 🌈), Multiplier Max: 100.00 (80.00 🌈)";
@@ -200,10 +200,10 @@ export const SPOOKY_EGG_PETS = {
         probability: 0.5,
         obtainable: true,
         description: "Haunts pets and bestows chaotic mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 60.17 (39.67 🌈), Level Min: 41.00 (33.00 🌈), Chance Max: 60.00 (60.00 🌈)";

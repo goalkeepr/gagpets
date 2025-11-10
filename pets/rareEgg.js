@@ -17,10 +17,10 @@ const rareEggPets = {
         source: "Rare Egg",
         probability: 33.33,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 85.00 (67.00 🌈)";
             
             const baseNapInterval = 90;
@@ -51,10 +51,10 @@ const rareEggPets = {
         source: "Rare Egg",
         probability: 25,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Berry Preservation Max: 100.00 (100.00 🌈)";
             
             const preserveChance = Math.min(10, 5 + (kg / 20));
@@ -75,10 +75,10 @@ const rareEggPets = {
         source: "Rare Egg",
         probability: 16.67,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: No Limit (91.00 🌈)";
             
             const baseCooldown = 120;
@@ -110,10 +110,10 @@ const rareEggPets = {
         source: "Rare Egg",
         probability: 16.67,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const speed = 20 + (kg / 5);
             
@@ -139,10 +139,10 @@ const rareEggPets = {
         probability: 0,
         obtainable: false,
         description: "Refunds fruits back to inventory",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const refundChance = 2.5 + (kg / 40);
             

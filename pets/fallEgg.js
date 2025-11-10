@@ -15,10 +15,10 @@ export const FALL_EGG_PETS = {
         probability: 55,
         obtainable: true,
         description: "Provides decreased player size bonus",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Player Size Max: 100.00 (80.00 🌈)";
@@ -48,10 +48,10 @@ export const FALL_EGG_PETS = {
         probability: 32.5,
         obtainable: true,
         description: "Digs around to displace ground and apply Cracked mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 77.33 (56.53 🌈), Duration Max: 100.00 (80.00 🌈), Range Max: 80.00 (64.00 🌈), Chance Max: 100.00 (80.00 🌈)";
@@ -92,10 +92,10 @@ export const FALL_EGG_PETS = {
         probability: 10,
         obtainable: true,
         description: "Dual ability: Applies Fall mutations and increases player size",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Fall Cooldown Min: 105.00 (81.00 🌈), Fall Chance Max: no limit (no limit 🌈), Player Size Max: 80.00 (64.00 🌈)";
@@ -140,10 +140,10 @@ export const FALL_EGG_PETS = {
         probability: 1.5,
         obtainable: true,
         description: "Dual ability: Provides bonus weight to shop pets and XP to Fall type pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Shop Pet Weight Limit: 11.00 (9.20 🌈), XP Bonus Limit: 23.33 (21.33 🌈)";
@@ -183,10 +183,10 @@ export const FALL_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Dual ability: Befriends other players' pets and applies Graceful mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Befriend Cooldown Min: 100.00 (60.00 🌈), Grace Cooldown Min: no limit (84.00 🌈)";

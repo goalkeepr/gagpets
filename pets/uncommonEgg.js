@@ -17,10 +17,10 @@ export const UNCOMMON_EGG_PETS = {
         source: "Uncommon Egg",
         probability: 25,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Nap Interval Min: 75.00 (59.00 🌈), Nap Duration Max: 100.00 (100.00 🌈), Range Max: 100.00 (100.00 🌈)";
             
             const baseSeconds = 80;
@@ -50,10 +50,10 @@ export const UNCOMMON_EGG_PETS = {
         source: "Uncommon Egg",
         probability: 25,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Max Preservation Chance: 30.00 (28.00 🌈)";
             
             const baseChance = 1;
@@ -80,10 +80,10 @@ export const UNCOMMON_EGG_PETS = {
         source: "Uncommon Egg",
         probability: 25,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Min Feeding Time: 40.00 (31.00 🌈)";
             
             const baseSeconds = 45;
@@ -110,10 +110,10 @@ export const UNCOMMON_EGG_PETS = {
         probability: 25,
         obtainable: false,
         description: "Increases egg hatch speed",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const hatchSpeed = 10 + (kg / 10);
             

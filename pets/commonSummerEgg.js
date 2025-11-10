@@ -15,10 +15,10 @@ const commonSummerEggPets = {
         probability: 25,
         obtainable: true,
         description: "Increases seed drop chances for shoveling plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 3;
             const chance = baseChance + (0.3 * kg);
@@ -46,10 +46,10 @@ const commonSummerEggPets = {
         probability: 50,
         obtainable: true,
         description: "Gains experience to grow older",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: no limit (94.00 🌈)";
             
             const baseSeconds = 60;
@@ -81,10 +81,10 @@ const commonSummerEggPets = {
         probability: 25,
         obtainable: true,
         description: "Steals money from other players",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 87.00 (68.10 🌈)";
             
             const baseSeconds = 378;

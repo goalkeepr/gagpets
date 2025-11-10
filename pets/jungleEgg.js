@@ -15,10 +15,10 @@ export const JUNGLE_EGG_PETS = {
         probability: 40,
         obtainable: true,
         description: "Advances the growth of a random plant by 15 minutes",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 87.78 (61.67 🌈)";
             
             const baseSeconds = 188;
@@ -45,10 +45,10 @@ export const JUNGLE_EGG_PETS = {
         probability: 30,
         obtainable: true,
         description: "Converts a random single-harvest plant into its seed equivalent",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 75.00 (50.00 🌈)";
             
             const baseSeconds = 60;
@@ -75,10 +75,10 @@ export const JUNGLE_EGG_PETS = {
         probability: 24,
         obtainable: true,
         description: "Melts frozen fruits back to Chilled or Wet",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 62.50 (37.50 🌈)";
             
             const baseSeconds = 80;
@@ -105,10 +105,10 @@ export const JUNGLE_EGG_PETS = {
         probability: 15,
         obtainable: true,
         description: "Grabs a random fruit and sells it for you",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 87.50 (62.50 🌈)";
             
             const baseSeconds = 120;
@@ -136,10 +136,10 @@ export const JUNGLE_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Roars and replaces random mutations with different mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 61.67 (36.53 🌈), Mutation Max: 10.00";
             
             const baseSeconds = 362;

@@ -17,10 +17,10 @@ export const ENCHANTED_EGG_PETS = {
         probability: 50,
         obtainable: true,
         description: "All flower type plants grow faster",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Multiplier Max: 51.00 (45.20 🌈)";
             
             const baseMultiplier = 1.45;
@@ -52,10 +52,10 @@ export const ENCHANTED_EGG_PETS = {
         probability: 29,
         obtainable: true,
         description: "Spreads pixie dust to advance plant growth and make players levitate",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 50.83 (32.33 🌈), Range Max: 60.00 (48.00 🌈)";
             
             const baseCooldown = 222;
@@ -99,10 +99,10 @@ export const ENCHANTED_EGG_PETS = {
         probability: 15,
         obtainable: true,
         description: "Playfully invites you to chase it for random rewards",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Replay Chance Max: no limit (no limit 🌈)";
             
             const baseChance = 15;
@@ -133,10 +133,10 @@ export const ENCHANTED_EGG_PETS = {
         probability: 5,
         obtainable: true,
         description: "Flies to nearby fruits and applies Glimmering mutation",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: no limit (no limit 🌈)";
             
             const baseCooldown = 220;
@@ -167,10 +167,10 @@ export const ENCHANTED_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Dual ability: Screeches to turn fruits Silver/Gold and spits to apply Toxic mutations while advancing eggs/pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Range Max: 80.00 (80.00 🌈), Spit Targets Max: 50.00 (50.00 🌈), Screech Cooldown Min: no limit (80.00 🌈), Spit Cooldown Min: no limit (91.43 🌈)";
             
             // First ability - Screech (Silver/Gold)

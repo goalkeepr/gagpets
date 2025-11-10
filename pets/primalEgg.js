@@ -17,10 +17,10 @@ const primalEggPets = {
         source: "Primal Egg",
         probability: 35,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 40.00 (30.89 🌈)";
             
             const baseSeconds = 82;
@@ -51,10 +51,10 @@ const primalEggPets = {
         source: "Primal Egg",
         probability: 32.50,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseXpBonus = 0.6;
             const xpBonus = baseXpBonus + (0.06 * kg);
@@ -82,10 +82,10 @@ const primalEggPets = {
         source: "Primal Egg",
         probability: 28,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 6;
             const chance = baseChance + (0.3 * kg);
@@ -113,10 +113,10 @@ const primalEggPets = {
         source: "Primal Egg",
         probability: 3,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 91.19 (71.05 🌈), Targets Max: 10.00 (10.00 🌈), XP Grant Max: 50.00 (50.00 🌈)";
             
             const baseSeconds = 846;
@@ -147,10 +147,10 @@ const primalEggPets = {
         source: "Primal Egg",
         probability: 1,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseProtectionChance = 15.7;
             const protectionChance = baseProtectionChance + (kg / 4);
@@ -178,10 +178,10 @@ const primalEggPets = {
         source: "Primal Egg",
         probability: 0.50,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 92.00 (71.60 🌈)";
             
             const baseSeconds = 1224;

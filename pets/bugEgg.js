@@ -15,10 +15,10 @@ export const BUG_EGG_PETS = {
         probability: 40,
         obtainable: true,
         description: "Increases seed drop chances",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const chance = 5 + (kg / 20);
             
@@ -44,10 +44,10 @@ export const BUG_EGG_PETS = {
         probability: 30,
         obtainable: true,
         description: "Duplicates harvested fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 5 + (kg / 10);
             const chanceMod = 5 * modifier;
@@ -72,10 +72,10 @@ export const BUG_EGG_PETS = {
         probability: 25,
         obtainable: true,
         description: "Accelerates growth of leafy plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const growthMultiplier = 1.45 + (kg * 0.15);
             
@@ -98,10 +98,10 @@ export const BUG_EGG_PETS = {
         probability: 4,
         obtainable: true,
         description: "Prays to grant variant chance bonuses to nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Prayer Min: 75.00 (59.00 🌈)";
             
             const baseSeconds = 80;
@@ -131,10 +131,10 @@ export const BUG_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Turns fruits into gold",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Gold Transformation Min: 80.00 (60.00 🌈)";
             
             const baseSeconds = 300;

@@ -17,10 +17,10 @@ export const GOURMET_EGG_PETS = {
         probability: 50,
         obtainable: true,
         description: "Eats carrots for enhanced value bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 40.00 (31.00 🌈)";
             
             const baseCooldown = 45;
@@ -48,10 +48,10 @@ export const GOURMET_EGG_PETS = {
         probability: 38,
         obtainable: true,
         description: "Digs underground to find treasure including gear and sheckles",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 70.00 (54.00 🌈)";
             
             const baseSeconds = 80;
@@ -75,10 +75,10 @@ export const GOURMET_EGG_PETS = {
         probability: 7,
         obtainable: true,
         description: "Dual ability: Chills/freezes nearby fruits and feeds sushi to other pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Chill Cooldown Min: 70.00 (54.00 🌈), Sushi Cooldown Min: no limit (no limit 🌈), Hunger Fed Max: no limit (no limit 🌈)";
             
             // First ability - Chilling/Freezing
@@ -122,10 +122,10 @@ export const GOURMET_EGG_PETS = {
         probability: 4,
         obtainable: true,
         description: "Slowly cooks nearby fruits, applying pasta-themed mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 86.00 (63.47 🌈)";
             
             const baseSeconds = 845;
@@ -149,10 +149,10 @@ export const GOURMET_EGG_PETS = {
         probability: 1,
         obtainable: true,
         description: "Increases pet levels",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 67.56 (47.38 🌈)";
             
             const baseSeconds = 3632;

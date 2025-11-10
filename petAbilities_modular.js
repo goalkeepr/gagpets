@@ -34,6 +34,8 @@ import { SPOOKY_EGG_PETS } from './pets/spookyEgg.js';
 import { FALL_PET_SHOP_PETS } from './pets/fallPetShop.js';
 import { SEASON_PASS_PETS } from './pets/seasonPass.js';
 import { CHUBBY_CHIPMUNK_PETS } from './pets/chubbyChipmunk.js';
+import { HALLOWEEN_PETS } from './pets/halloween.js';
+import { SAFARI_PETS } from './pets/safari.js';
 
 // Combine all pets into a single object
 const petAbilities = {
@@ -64,8 +66,10 @@ const petAbilities = {
     ...FALL_PET_SHOP_PETS,
     ...SEASON_PASS_PETS,
     ...CHUBBY_CHIPMUNK_PETS,
-    ...SPOOKY_EGG_PETS
-    // Complete migration achieved! All 29 categories integrated with 195+ pets
+    ...SPOOKY_EGG_PETS,
+    ...HALLOWEEN_PETS,
+    ...SAFARI_PETS
+    // Complete migration achieved! All 31 categories integrated with 200+ pets
 };
 
 // Export everything needed
@@ -97,7 +101,9 @@ export {
     FALL_PET_SHOP_PETS,
     SEASON_PASS_PETS,
     CHUBBY_CHIPMUNK_PETS,
-    SPOOKY_EGG_PETS
+    SPOOKY_EGG_PETS,
+    HALLOWEEN_PETS,
+    SAFARI_PETS
 };
 
 // For backward compatibility, make functions available globally

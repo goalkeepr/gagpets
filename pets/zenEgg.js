@@ -13,10 +13,10 @@ const zenEggPets = {
         source: "Zen Egg",
         probability: 40,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Min Digging Cooldown: 55.00 (43.00 🌈)";
             
             const baseSeconds = 60;
@@ -48,7 +48,7 @@ const zenEggPets = {
         probability: 0,
         obtainable: false,
         description: "Just takes up space in your inventory. Does nothing.",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             return "This pet does nothing.";
         },
         perKgImpact: () => "Does nothing regardless of weight"
@@ -62,10 +62,10 @@ const zenEggPets = {
         source: "Zen Egg",
         probability: 20.82,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Min Mischief Time: 55.00 (40.00 🌈)";
             
             const baseSeconds = 300;
@@ -91,10 +91,10 @@ const zenEggPets = {
         source: "Zen Egg",
         probability: 4.60,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 627;
             const cooldownMod = baseCooldown * modifier;
@@ -125,10 +125,10 @@ const zenEggPets = {
         source: "Zen Egg",
         probability: 3.50,
         obtainable: false,
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Min Spray Time: 107.00 (82.60 🌈)";
             
             const baseSeconds = 488;
@@ -154,10 +154,10 @@ const zenEggPets = {
         probability: 0.08,
         obtainable: false,
         description: "Steals crops from other players with chakra mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseSeconds = 1344.5;
             const secondsMod = baseSeconds * modifier;

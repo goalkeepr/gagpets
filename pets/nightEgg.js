@@ -15,10 +15,10 @@ export const NIGHT_EGG_PETS = {
         probability: 0.12,
         obtainable: false,
         description: "Steals and duplicates crops from other plots",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseSeconds = 904;
             const secondsMod = baseSeconds * modifier;
@@ -44,10 +44,10 @@ export const NIGHT_EGG_PETS = {
         probability: 47,
         obtainable: false,
         description: "Provides size bonuses to prickly plants",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const range = 2.5 + (kg / 4);
             const bonus = 0.20 + (kg / 50);
@@ -71,10 +71,10 @@ export const NIGHT_EGG_PETS = {
         probability: 23.50,
         obtainable: false,
         description: "Digs underground to find treasure",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 70.00 (54.00 🌈)";
             
             const baseSeconds = 80;
@@ -101,10 +101,10 @@ export const NIGHT_EGG_PETS = {
         probability: 3.53,
         obtainable: false,
         description: "Provides XP bonuses to all active pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const xpBonus = 0.2 + (kg / 25);
             
@@ -127,10 +127,10 @@ export const NIGHT_EGG_PETS = {
         probability: 8.23,
         obtainable: false,
         description: "Croaks to advance plant growth by 24 hours",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 48.00 (37.90 🌈)";
             
             const baseSeconds = 303;
@@ -157,10 +157,10 @@ export const NIGHT_EGG_PETS = {
         probability: 17.63,
         obtainable: false,
         description: "Croaks to advance plant growth by 24 hours",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 98.25 (78.10 🌈)";
             
             const baseSeconds = 604.5;

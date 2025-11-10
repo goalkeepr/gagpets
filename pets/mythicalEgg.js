@@ -15,10 +15,10 @@ export const MYTHICAL_EGG_PETS = {
         probability: 8.5,
         obtainable: true,
         description: "Duplicates harvested fruits with fruit-type bonus",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 5 + (kg / 10);
             const fruitBonus = 5 + (kg / 10);
@@ -47,10 +47,10 @@ export const MYTHICAL_EGG_PETS = {
         probability: 27,
         obtainable: true,
         description: "Provides experience and jump height bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 82.68 (65.65 🌈)";
             
             const baseSeconds = 502;
@@ -84,10 +84,10 @@ export const MYTHICAL_EGG_PETS = {
         probability: 1.5,
         obtainable: true,
         description: "Steals seeds from other players' crops",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 85.47 (67.77 🌈)";
             
             const baseSeconds = 442.33;
@@ -114,10 +114,10 @@ export const MYTHICAL_EGG_PETS = {
         probability: 36,
         obtainable: true,
         description: "Provides experience and movement speed bonuses",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 71.88 (57.14 🌈)";
             
             const baseSeconds = 603;
@@ -151,10 +151,10 @@ export const MYTHICAL_EGG_PETS = {
         probability: 27,
         obtainable: true,
         description: "Chance to not consume a use when using the Reclaimer",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 10;
             const chancePerKg = 0.3;

@@ -15,10 +15,10 @@ const dinosaurEggPets = {
         probability: 35,
         obtainable: false,
         description: "Provides amber mutations and movement speed",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 2 + (kg / 5);
             const baseSpeed = 14 + (kg / 4);
@@ -45,10 +45,10 @@ const dinosaurEggPets = {
         probability: 28,
         obtainable: false,
         description: "Duplicates harvested fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 8 + (0.15 * kg);
             const extraChance = 5 + (kg / 10);
@@ -78,10 +78,10 @@ const dinosaurEggPets = {
         probability: 0.5,
         obtainable: false,
         description: "Devours and spreads mutations throughout the garden",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 100.75 (80.35 🌈)";
             
             const baseSeconds = 1224;
@@ -114,10 +114,10 @@ const dinosaurEggPets = {
         probability: 1,
         obtainable: false,
         description: "Increases size and weight of pets hatched from eggs",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Bonus Max: no limit (no limit)";
             
             const baseBonus = 5.25;
@@ -147,10 +147,10 @@ const dinosaurEggPets = {
         probability: 3,
         obtainable: false,
         description: "Flaps wings to send ripples causing fruit to get Windstruck with chance for Twisted",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 105.50 (83.30 🌈)";
             
             const baseSeconds = 666;
@@ -191,10 +191,10 @@ const dinosaurEggPets = {
         probability: 32.5,
         obtainable: false,
         description: "Rams into plans to advance their growth",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Chance Max: 100.00 (80.00 🌈)";
             
             const baseChance = 15;

@@ -15,10 +15,10 @@ const sproutEggPets = {
         probability: 50,
         obtainable: true,
         description: "All plants within range grow faster",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseRange = 10;
             const baseMultiplier = 1.25;
@@ -50,10 +50,10 @@ const sproutEggPets = {
         probability: 31,
         obtainable: true,
         description: "Thumps feet to apply Sandy mutation to nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 100;
             const baseChance = 15;
@@ -86,10 +86,10 @@ const sproutEggPets = {
         probability: 12,
         obtainable: true,
         description: "Swaps mutations between random fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 552;
             const cooldown = Math.min(300, baseCooldown - kg);
@@ -118,10 +118,10 @@ const sproutEggPets = {
         probability: 6,
         obtainable: true,
         description: "Advances mutation machine time",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Advance Amount Max: 80.00 (64.00 🌈)";
             
             const baseCooldown = 400;
@@ -155,10 +155,10 @@ const sproutEggPets = {
         probability: 1,
         obtainable: true,
         description: "Lays Golden Egg plants with Fortune mutation",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 788;
             const cooldown = Math.max(300, baseCooldown - (1.5 * kg));

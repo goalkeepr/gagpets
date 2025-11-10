@@ -15,10 +15,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Reduces cosmetic crate open times with chance for multiplied effect",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 34.44 (25.33 🌈)";
             
             const baseCooldown = 41;
@@ -62,10 +62,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Provides XP bonus to all active Dinosaur type pets",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseChance = 1.2;
             const chance = baseChance + (0.12 * kg);
@@ -93,10 +93,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Provides chance to duplicate crafted items",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Duplication Chance Max: 63.33 (59.33 🌈)";
             
             const baseChance = 12;
@@ -125,10 +125,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Spits venom to advance pet cooldowns or grant XP",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 91.09 (71.00 🌈), Targets Max: 45.00 (42.00 🌈), Cooldown Advance Max: 80.00 (64.00 🌈), XP Grant Max: 62.50 (60.00 🌈)";
             
             const baseCooldown = 643;
@@ -172,10 +172,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Protects against fruit theft",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Theft Protection Max: 57.20 (44.64 🌈)";
             
             const baseChance = 31.4;
@@ -204,10 +204,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Devours and spreads mutations with favorited fruit priority",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             const baseCooldown = 912;
             const baseAmount = 6;
@@ -242,10 +242,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced fortune cat with improved fruit refund chances",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 95.00 (71.00 🌈), Refund Chance Max: 50.00 (40.00 🌈), Duration Max: 88.00 (72.00 🌈)";
             
             const baseCooldown = 72;
@@ -285,10 +285,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced tree spirit with improved Tranquil mutation chance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Tranquil Mutation Max: 20.00 (16.00 🌈)";
             
             const baseChance = 8;
@@ -317,10 +317,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced nine-tailed curse with improved corruption chance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Corruption Chance Max: No Limit (100.00 🌈)";
             
             const baseCooldown = 630;
@@ -356,10 +356,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced aura that boosts variant chance for new fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 75.00 (59.00 🌈)";
             
             const baseCooldown = 80;
@@ -403,10 +403,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Drops mustard/ketchup puddles that boost pet performance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Min: 93.33 (66.67 🌈), XP Multiplier Max: 10.00 (4.00 🌈), Cooldown Boost Max: 8.80 (8.56 🌈), Duration Max: 100.00 (40.00 🌈)";
             
             const baseCooldown = 200;
@@ -454,10 +454,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Dual ability: Applies both Molten and Meteoric mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Molten Cooldown Min: 111.11 (80.00 🌈), Meteoric Cooldown Min: No Limit (84.71 🌈)";
             
             // First ability - Molten
@@ -505,10 +505,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced berry fruit preservation with improved chances",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Berry Preservation Max: 100.00 (80.00 🌈)";
             
             const baseChance = 5;
@@ -538,10 +538,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced Mandrake with improved Rot mutation chance",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Rot Mutation Max: 46.67 (37.33 🌈)";
             
             const baseChance = 7;
@@ -571,10 +571,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced Griffin that releases multiple cyclones",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Cooldown Advance Max: 66.67 (53.33 🌈)";
             
             const baseCooldown = 615;
@@ -616,10 +616,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced Cardinal - All Magical type plants grow faster",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Growth Multiplier Max: 45.00 (41.00 🌈)";
             
             const baseRange = 45;
@@ -653,10 +653,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced Shroomie - All nearby plants have increased size bonus for every Fungus type plant",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Size Multiplier Max: 6.00 (5.20 🌈)";
             
             const baseRange = 14.75;
@@ -690,10 +690,10 @@ const rainbowExoticPets = {
         probability: 0,
         obtainable: false,
         description: "Enhanced Phoenix - Dual ability: Provides enhanced age bonus to mutated pets and travels between fruits applying Flaming mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             const kgLimits = "Age Bonus Max: 72.00 (60.40 🌈), Mutation Chance Max: 100.00 (80.00 🌈), Fruit Amount Max: 25.00 (19.00 🌈)";
             
             // First ability - Pet mutation age bonus (enhanced)
@@ -740,10 +740,10 @@ const rainbowExoticPets = {
         probability: 45,
         obtainable: true,
         description: "Grants Spooky plants variant chance bonus in range",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Multiplier Max: 44.00 (39.20 🌈), Range Max: No Limit (No Limit 🌈)";
@@ -780,10 +780,10 @@ const rainbowExoticPets = {
         probability: 25,
         obtainable: true,
         description: "Digs up random seeds periodically",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 35.00 (27.00 🌈), Chance Max: no limit (no limit 🌈)";
@@ -820,10 +820,10 @@ const rainbowExoticPets = {
         probability: 18,
         obtainable: true,
         description: "Weaves webs that boost pet cooldowns and plant growth",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 51.43 (34.00 🌈), Range Max: 0.00 (0.00 🌈), Duration Max: No Limit (No Limit 🌈), AmountPet Max: 50.00 (10.00 🌈), AmountPlant Max: No Limit (No Limit 🌈)";
@@ -875,10 +875,10 @@ const rainbowExoticPets = {
         probability: 8.5,
         obtainable: true,
         description: "Naps near Witch's Cauldron to enlarge nearby fruits",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 20.50 (9.40 🌈), Range Max: No Limit (No Limit 🌈), Duration Max: No Limit (No Limit 🌈), Multiplier Max: 15.00 (11.00 🌈)";
@@ -925,10 +925,10 @@ const rainbowExoticPets = {
         probability: 0.5,
         obtainable: true,
         description: "Haunts pets and bestows chaotic mutations",
-        calculate: (kg, modifierType = "none") => {
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
-            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType);
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
             // KG limits to reach maximum values - format: "base (rainbow)"
             const kgLimits = "Cooldown Min: 60.17 (39.80 🌈), Level Min: 21.00 (8.80 🌈), Chance Max: 60.00 (48.00 🌈)";
