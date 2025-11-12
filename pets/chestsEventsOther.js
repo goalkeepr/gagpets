@@ -470,11 +470,12 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseIntervalTotal = baseInterval - baseIntervalMod;
             const baseAdvance = 70.4;
             const baseChancePercent = 70.4;
-            const baseMultiplier = 1.8;
+            const baseMultiplier = 1.8
+            const totalMultiplier = (baseMultiplier + (baseMultiplier * modifier)) + (kg * 0.18);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `Every <strong>${baseIntervalTotal} seconds</strong>, takes flight and spreads its wings. All eggs advance their hatch time by <strong>${baseAdvance} seconds</strong>!\n\nThere's a <strong>${baseChancePercent}%</strong> chance for the time advance to be multiplied by <strong>${baseMultiplier.toFixed(2)}x</strong>!`;
+            return `Every <strong>${baseIntervalTotal} seconds</strong>, takes flight and spreads its wings. All eggs advance their hatch time by <strong>${baseAdvance} seconds</strong>!\n\nThere's a <strong>${baseChancePercent}%</strong> chance for the time advance to be multiplied by <strong>${totalMultiplier.toFixed(2)}x</strong>!`;
         },
         perKgImpact: () => "Each additional kg increases multiplier by 0.18x"
     },
