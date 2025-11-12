@@ -636,5 +636,251 @@ export const SAFARI_PETS = {
             return `Every <strong>${Utils.formatTime(cooldown)}</strong>, blesses an age <strong>${Math.floor(age)}</strong> pet, resetting its age back to 1, increasing its base weight by 0.1 KG if its base weight is less than <strong>${max.toFixed(2)} KG</strong>! Cannot bless other Elephants. Cannot be mimicked or refreshed${displayText}!`;
         },
         perKgImpact: () => "Each additional kg decreases cooldown by 9s (min 450s), decreases age requirement by 0.25 (min 1), and increases weight cap by 0.05 KG (max 5.5 KG)"
+    },
+
+    gecko: {
+        name: "Gecko",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/1/16/Gecko.png",
+            fallback: "🦎"
+        },
+        type: "reptile",
+        rarity: "Common",
+        source: "Safari Shop",
+        probability: 50,
+        obtainable: true,
+        description: "Increases variant chance for Safari type plants",
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Multiplier Max: 16.00 (12.80 🌈), Range Max: (99.20 🌈)";
+            
+            const baseMultiplier = 0.6;
+            const baseRange = 29;
+            
+            const multiplierMod = baseMultiplier * modifier;
+            const rangeMod = baseRange * modifier;
+            
+            const multiplier = Math.min(1.4, baseMultiplier + multiplierMod + (0.05 * kg));
+            const range = Math.min(60, baseRange + rangeMod + (0.25 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Safari type plants within <strong>${range.toFixed(1)}</strong> studs have <strong>${multiplier.toFixed(2)}x</strong> increased variant chance${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases multiplier by 0.05x (max 1.4x) and increases range by 0.25 studs (max 60)"
+    },
+
+    hyena: {
+        name: "Hyena",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/9/95/Hyena.png",
+            fallback: "🐺"
+        },
+        type: "mammal",
+        rarity: "Uncommon",
+        source: "Safari Shop",
+        probability: 40,
+        obtainable: true,
+        description: "Gains bonus XP per Hyena in garden",
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "XP Bonus Max: 100.00 (80.00 🌈)";
+            
+            const baseAmount = 4;
+            const amountMod = baseAmount * modifier;
+            const amount = Math.min(8, baseAmount + amountMod + (0.04 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Gains an additional <strong>${amount.toFixed(2)} XP/s</strong> for every Hyena in your garden! Requires another non-Hyena pet equipped to activate this effect${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases XP bonus by 0.04 XP/s per Hyena (max 8 XP/s)"
+    },
+
+    capebuffalo: {
+        name: "Cape Buffalo",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/a/a8/Cape_Buffalo.png",
+            fallback: "🐃"
+        },
+        type: "mammal",
+        rarity: "Rare",
+        source: "Safari Shop",
+        probability: 30,
+        obtainable: true,
+        description: "Dual ability: General fruit duplication and Safari fruit bonus",
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "General Dupe Max: 66.67 (53.33 🌈), Safari Dupe Max: 100.00 (90.00 🌈)";
+            
+            const baseChance = 10;
+            const baseSafariChance = 5;
+            
+            const chanceMod = baseChance * modifier;
+            const safariChanceMod = baseSafariChance * modifier;
+            
+            const chance = Math.min(20, baseChance + chanceMod + (0.15 * kg));
+            const safariChance = Math.min(15, baseSafariChance + safariChanceMod + (0.1 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br><strong>${chance.toFixed(2)}%</strong> chance harvested fruit duplicates! Rarer crops have lower chance to duplicate.<br><strong>${safariChance.toFixed(2)}%</strong> extra chance for Safari type fruit to duplicate${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg increases general duplication by 0.15% (max 20%) and Safari duplication by 0.1% (max 15%)"
+    },
+
+    hippo: {
+        name: "Hippo",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/f/f3/Hippo.png",
+            fallback: "🦛"
+        },
+        type: "mammal",
+        rarity: "Legendary",
+        source: "Safari Shop",
+        probability: 10,
+        obtainable: true,
+        description: "Dual ability: Eats Watermelons and applies Monsoon mutation",
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Watermelon Cooldown Min: (100.00 🌈), Seed Chance Max: 100.00 (80.00 🌈), Monsoon Cooldown Min: 80.82 (64.65 🌈)";
+            
+            // Watermelon eating ability
+            const baseCooldown1 = 200;
+            const baseMultiplier = 2;
+            const baseChance = 30;
+            
+            const cooldownMod1 = baseCooldown1 * modifier;
+            const multiplierMod = baseMultiplier * modifier;
+            const chanceMod = baseChance * modifier;
+            
+            const adjustedBaseCooldown1 = baseCooldown1 - cooldownMod1;
+            const cooldown1 = Math.max(60, adjustedBaseCooldown1 - (1 * kg));
+            const multiplier = Math.min(8, baseMultiplier + multiplierMod + (0.02 * kg));
+            const chance = Math.min(60, baseChance + chanceMod + (0.3 * kg));
+            
+            // Monsoon mutation ability
+            const baseCooldown2 = 1111;
+            const cooldownMod2 = baseCooldown2 * modifier;
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldownMod2;
+            const cooldown2 = Math.max(222, adjustedBaseCooldown2 - (11 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(cooldown1)}</strong>, eats a Watermelon for <strong>${multiplier.toFixed(2)}x</strong> value bonus and has a <strong>${chance.toFixed(2)}%</strong> chance to recover the Watermelon seed!<br>Every <strong>${Utils.formatTime(cooldown2)}</strong>, goes to a nearby fruit and applies Monsoon mutation${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases watermelon cooldown by 1s (min 60s), increases multiplier by 0.02x (max 8x), increases seed recovery by 0.3% (max 60%), and decreases monsoon cooldown by 11s (min 222s)"
+    },
+
+    crocodile: {
+        name: "Crocodile",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/d/d6/Crocodile.png",
+            fallback: "🐊"
+        },
+        type: "reptile",
+        rarity: "Mythical",
+        source: "Safari Shop",
+        probability: 5,
+        obtainable: true,
+        description: "Death rolls on plants/pets to boost growth and XP",
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Cooldown Min: 90.91 (54.55 🌈)";
+            
+            const baseCooldown = 1200;
+            const baseDuration = 30;
+            const basePlantAmount = 45;
+            const baseXPAmount = 35;
+            
+            const cooldownMod = baseCooldown * modifier;
+            const durationMod = baseDuration * modifier;
+            const plantMod = basePlantAmount * modifier;
+            const xpMod = baseXPAmount * modifier;
+            
+            const adjustedBaseCooldown = baseCooldown - cooldownMod;
+            const cooldown = Math.max(600, adjustedBaseCooldown - (6.6 * kg));
+            const duration = Math.min(50, baseDuration + durationMod + (0.1 * kg));
+            const plantAmount = Math.min(90, basePlantAmount + plantMod + (0.1 * kg));
+            const xpAmount = Math.min(65, baseXPAmount + xpMod + (0.1 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `Every <strong>${Utils.formatTime(cooldown)}</strong>, bites on to a random Plant or Pet for <strong>${duration.toFixed(1)}s</strong> and performs a roll. Plants grow an additional <strong>${plantAmount.toFixed(1)}s/s</strong> and Pets get additional <strong>${xpAmount.toFixed(1)} XP/s</strong>${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown by 6.6s (min 600s), increases duration by 0.1s (max 50s), increases plant growth by 0.1s/s (max 90s/s), and increases pet XP by 0.1 XP/s (max 65 XP/s)"
+    },
+
+    lion: {
+        name: "Lion",
+        icon: {
+            type: "image",
+            url: "https://static.wikia.nocookie.net/growagarden/images/4/47/Lion.png",
+            fallback: "🦁"
+        },
+        type: "mammal",
+        rarity: "Divine",
+        source: "Safari Shop",
+        probability: 1,
+        obtainable: true,
+        description: "Dual ability: Roars to advance pet cooldowns and apply Safari mutations",
+        calculate: (kg, modifierType = "none", customModifierValue = null) => {
+            if (!Utils.isValidWeight(kg)) return "Invalid weight";
+            
+            const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            
+            // KG limits to reach maximum values - format: "base (rainbow)"
+            const kgLimits = "Cooldown Advancement Cooldown Min: (88.00 🌈), Total Advancement Max: 100.00 (80.00 🌈), Per Pet Max Max: 100.00 (80.00 🌈), Safari Mutation Cooldown Min: 71.43 (51.43 🌈)";
+            
+            // Cooldown advancement ability
+            const baseCooldown1 = 800;
+            const baseAmount = 400;
+            const baseMaxAmount = 60;
+            
+            const cooldownMod1 = baseCooldown1 * modifier;
+            const amountMod = baseAmount * modifier;
+            const maxAmountMod = baseMaxAmount * modifier;
+            
+            const adjustedBaseCooldown1 = baseCooldown1 - cooldownMod1;
+            const cooldown1 = Math.max(200, adjustedBaseCooldown1 - (5 * kg));
+            const amount = Math.min(800, baseAmount + amountMod + (4 * kg));
+            const maxAmount = Math.min(120, baseMaxAmount + maxAmountMod + (0.6 * kg));
+            
+            // Safari mutation ability
+            const baseCooldown2 = 1400;
+            const cooldownMod2 = baseCooldown2 * modifier;
+            const adjustedBaseCooldown2 = baseCooldown2 - cooldownMod2;
+            const cooldown2 = Math.max(400, adjustedBaseCooldown2 - (14 * kg));
+            
+            const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
+            
+            return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(cooldown1)}</strong>, roars, calls pets in your garden to move toward it. <strong>${amount.toFixed(0)}s</strong> total cooldown advancement is shared across each pet (max <strong>${maxAmount.toFixed(1)}s</strong> per pet).<br>Every <strong>${Utils.formatTime(cooldown2)}</strong>, roars and mutates fruit up to the number of Safari type pets you have in your garden with a random Safari Mutation${displayText}!`;
+        },
+        perKgImpact: () => "Each additional kg decreases cooldown advancement cooldown by 5s (min 200s), increases total advancement by 4s (max 800s), increases per-pet max by 0.6s (max 120s), and decreases safari mutation cooldown by 14s (min 400s)"
     }
 };
