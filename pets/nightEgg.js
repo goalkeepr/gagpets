@@ -49,14 +49,20 @@ export const NIGHT_EGG_PETS = {
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
-            const range = 2.5 + (kg / 4);
-            const bonus = 0.20 + (kg / 50);
+            const baseRange = 2.5;
+            const baseBonus = 0.20;
+            
+            const rangeMod = baseRange * modifier;
+            const bonusMod = baseBonus * modifier;
+            
+            const range = Math.min(65, (baseRange + rangeMod) + (kg / 4));
+            const bonus = (baseBonus + bonusMod) + (kg / 50);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Grants all prickly plants within <strong>${range.toFixed(1)}</strong> studs a <strong>${bonus.toFixed(2)}x</strong> size bonus!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases range by 0.25 studs and increases size bonus by 0.02x"
+        perKgImpact: () => "Each additional kg increases range by 0.25 studs (max 65) and increases size bonus by 0.02x"
     },
     mole: {
         name: "Mole",

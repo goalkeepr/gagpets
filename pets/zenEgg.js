@@ -129,20 +129,26 @@ const zenEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
-            const kgLimits = "Min Spray Time: 107.00 (82.60 🌈)";
+            const kgLimits = "Min Spray Time: 107.00 (82.60 🌈), Range Max: 100.00 (80.00 🌈)";
             
             const baseSeconds = 488;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
             const seconds = Math.max(60, adjustedBaseSeconds - (4 * kg));
-            const range = 25 + (kg / 4);
-            const bloodlitChance = 10 + (kg / 10);
+            
+            const baseRange = 25;
+            const rangeMod = baseRange * modifier;
+            const range = Math.min(50, (baseRange + rangeMod) + (kg / 4));
+            
+            const baseBloodlitChance = 10;
+            const bloodlitChanceMod = baseBloodlitChance * modifier;
+            const bloodlitChance = Math.min(30, (baseBloodlitChance + bloodlitChanceMod) + (kg / 10));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, sprays water on all fruits within <strong>${range.toFixed(1)}</strong> studs, applying Wet mutation. Has a <strong>${bloodlitChance.toFixed(1)}%</strong> to replace Wet mutations already on fruit with Bloodlit mutation!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases spray time by 4 seconds (min 60s), increases range by 0.25 studs, and increases bloodlit replacement chance by 0.1%"
+        perKgImpact: () => "Each additional kg decreases spray time by 4 seconds (min 60s), increases range by 0.25 studs (max 50), and increases bloodlit replacement chance by 0.1% (max 30%)"
     },
 
     kitsune: {

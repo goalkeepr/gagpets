@@ -310,14 +310,14 @@ export const SAFARI_PETS = {
             
             const adjustedBaseCooldown = baseCooldown - cooldownMod;
             const cooldown = Math.max(400, adjustedBaseCooldown - (13 * kg));
-            const age = Math.max(1, baseAge + ageMod - (0.25 * kg));
+            const age = Math.max(50, baseAge - ageMod - (0.25 * kg));
             const max = Math.min(3.5, baseMax + maxMod + (0.05 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(cooldown)}</strong>, blesses an age <strong>${Math.floor(age)}</strong> pet, resetting its age back to 1, increasing its base weight by 0.1 KG if its base weight is less than <strong>${max.toFixed(2)} KG</strong>! Cannot bless other Elephants. Cannot be mimicked or refreshed${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases cooldown by 13s (min 400s), decreases age requirement by 0.25 (min 1), and increases weight cap by 0.05 KG (max 3.5 KG)"
+        perKgImpact: () => "Each additional kg decreases cooldown by 13s (min 400s), decreases age requirement by 0.25 (min 50), and increases weight cap by 0.05 KG (max 3.5 KG)"
     },
 
     giantarmadillo: {

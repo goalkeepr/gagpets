@@ -43,21 +43,28 @@ export const BUG_EGG_PETS = {
         source: "Bug Egg",
         probability: 30,
         obtainable: true,
-        description: "Duplicates harvested fruits",
+        description: "Dual ability: Duplicates harvested fruits with bonus for Candy types",
         calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            const kgLimits = "Candy Bonus Max: 100.00 (93.33 🌈)";
             
-            const baseChance = 5 + (kg / 10);
-            const chanceMod = 5 * modifier;
-            const totalChance = baseChance + chanceMod;
+            // First ability - General fruit duplication
+            const baseChance1 = 10;
+            const chance1Mod = baseChance1 * modifier;
+            const chance1Total = Math.min(30, (baseChance1 + chance1Mod) + (0.1 * kg));
+            
+            // Second ability - Candy type bonus
+            const baseChance2 = 5;
+            const chance2Mod = baseChance2 * modifier;
+            const chance2Total = Math.min(20, (baseChance2 + chance2Mod) + (0.15 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `<strong>${totalChance.toFixed(1)}%</strong> chance harvested fruit duplicate!<br>Rarer crops have lower chance to duplicate${displayText}.`;
+            return `<strong>Dual Ability:</strong><br><strong>${chance1Total.toFixed(1)}%</strong> chance harvested fruit duplicate! Rarer crops have lower chance to duplicate.<br><strong>${chance2Total.toFixed(1)}%</strong> extra chance for Candy type fruit to duplicate${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases duplication chance by 0.1%"
+        perKgImpact: () => "Each additional kg increases duplicate chance by 0.1% (max 30%) and Candy bonus by 0.15% (max 20%)"
     },
     caterpillar: {
         name: "Caterpillar",

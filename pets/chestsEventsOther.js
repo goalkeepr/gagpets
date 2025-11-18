@@ -190,13 +190,13 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const hatchSpeed = 10 + (kg / 10);
             
             const hatchSpeedMod = 10 * modifier;
-            const hatchSpeedTotal = hatchSpeed + hatchSpeedMod;
+            const hatchSpeedTotal = Math.min(35, hatchSpeed + hatchSpeedMod);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, <strong>${zombifyChance.toFixed(1)}%</strong> chance a nearby fruit becomes Zombified!\n\nIncreases egg hatch speed by <strong>${hatchSpeedTotal.toFixed(1)}%</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases zombify time by 18 seconds, increases zombify chance by 0.2%, and increases egg hatch speed by 0.1%"
+        perKgImpact: () => "Each additional kg decreases zombify time by 18 seconds, increases zombify chance by 0.2%, and increases egg hatch speed by 0.1% (max 35%)"
     },
     mochimouse: {
         name: "Mochi Mouse",
@@ -528,22 +528,22 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
-            const kgLimits = "Action Min: 50.00 (38.00 🌈)";
+            const kgLimits = "Action Min: 50.00 (38.00 🌈), Reduction Max: 140.00 (120.00 🌈)";
             
             const baseSeconds = 60;
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
             const seconds = Math.max(10, adjustedBaseSeconds - kg);
-            const reduction = 25 + (kg / 4);
             
-            const reductionMod = 25 * modifier;
-            const reductionTotal = reduction + reductionMod;
+            const baseReduction = 25;
+            const reductionMod = baseReduction * modifier;
+            const reductionTotal = Math.min(60, (baseReduction + reductionMod) + (kg / 4));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, goes to the egg with the highest hatch time and reduces its hatch time by <strong>${Utils.formatTime(reductionTotal)}</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases action time by 1 second and increases hatch time reduction by 0.25 seconds"
+        perKgImpact: () => "Each additional kg decreases action time by 1 second (min 10s) and increases hatch time reduction by 0.25 seconds (max 60s)"
     },
     owl: {
         name: "Owl",
@@ -595,23 +595,21 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const secondsMod = baseSeconds * modifier;
             const adjustedBaseSeconds = baseSeconds - secondsMod;
             const seconds = Math.max(10, adjustedBaseSeconds - kg);
-            const reduction = 45 + (0.45 * kg);
             
-            const reductionMod = 45 * modifier;
-            const reductionTotal = reduction + reductionMod;
+            const baseReduction = 45;
+            const reductionMod = baseReduction * modifier;
+            const reductionTotal = Math.min(100, (baseReduction + reductionMod) + (0.45 * kg));
             
             // Second ability - Hatch speed multiplier
             const baseMultiplier = 20;
-            const multiplier = baseMultiplier + (0.2 * kg);
-            
             const multiplierMod = baseMultiplier * modifier;
-            const multiplierTotal = multiplier + multiplierMod;
+            const multiplierTotal = Math.min(65, (baseMultiplier + multiplierMod) + (0.2 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `<strong>Dual Ability:</strong><br>Every <strong>${Utils.formatTime(seconds)}</strong>, goes to the egg with the highest hatch time, and reduces its hatch time by <strong>${reductionTotal.toFixed(2)}</strong> seconds!<br>Increases egg hatch speed by <strong>${multiplierTotal.toFixed(1)}%</strong>${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg decreases action time by 1 second, increases hatch time reduction by 0.45 seconds, and increases hatch speed by 0.2%"
+        perKgImpact: () => "Each additional kg decreases action time by 1 second, increases hatch time reduction by 0.45 seconds (max 100), and increases hatch speed by 0.2% (max 65)"
     },
     bloodhedgehog: {
         name: "Blood Hedgehog",
@@ -636,26 +634,21 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             const baseVariantRange = 22;
             const baseVariantBonus = 1.15;
             
-            const sizeRange = baseSizeRange + (kg / 5);
-            const sizeBonus = baseSizeBonus + (kg / 50);
-            const variantRange = baseVariantRange + (kg / 5);
-            const variantBonus = baseVariantBonus + (kg / 90);
-            
             const sizeRangeMod = baseSizeRange * modifier;
             const sizeBonusMod = baseSizeBonus * modifier;
             const variantRangeMod = baseVariantRange * modifier;
             const variantBonusMod = baseVariantBonus * modifier;
             
-            const sizeRangeTotal = sizeRange + sizeRangeMod;
-            const sizeBonusTotal = sizeBonus + sizeBonusMod;
-            const variantRangeTotal = variantRange + variantRangeMod;
-            const variantBonusTotal = variantBonus + variantBonusMod;
+            const sizeRangeTotal = Math.min(88, (baseSizeRange + sizeRangeMod) + (kg / 5));
+            const sizeBonusTotal = (baseSizeBonus + sizeBonusMod) + (kg / 50);
+            const variantRangeTotal = Math.min(75, (baseVariantRange + variantRangeMod) + (kg / 5));
+            const variantBonusTotal = (baseVariantBonus + variantBonusMod) + (kg / 90);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Grants prickly plants in <strong>${sizeRangeTotal.toFixed(1)}</strong> studs a <strong>${sizeBonusTotal.toFixed(2)}x</strong> size bonus and prickly plants in <strong>${variantRangeTotal.toFixed(1)}</strong> studs a <strong>${variantBonusTotal.toFixed(3)}x</strong> variant chance!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases size range by 0.2 studs, size bonus by 0.02x, variant range by 0.2 studs, and variant bonus by 0.011x"
+        perKgImpact: () => "Each additional kg increases size range by 0.2 studs (max 88), size bonus by 0.02x, variant range by 0.2 studs (max 75), and variant bonus by 0.011x"
     },
     bloodowl: {
         name: "Blood Owl",
@@ -955,14 +948,14 @@ export const CHESTS_EVENTS_OTHER_PETS = {
             // Apply modifiers
             const chance1Mod = baseChance1 * modifier;
             const chance2Mod = baseChance2 * modifier;
-            const chance1Total = Math.min(7, chance1 + chance1Mod);
+            const chance1Total = Math.min(8, chance1 + chance1Mod);
             const chance2Total = Math.min(4, chance2 + chance2Mod);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `<strong>Dual Ability:</strong><br>Fruits that have apple in the name have a <strong>${chance1Total.toFixed(2)}%</strong> chance to duplicate when collected!<br>Harvesting Sugar Apple crops have a <strong>${chance2Total.toFixed(2)}%</strong> chance to apply Warped mutation to a random fruit in your garden${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases apple duplication chance by 0.025% (max 7%) and increases Warped mutation chance by 0.05% (max 4%)"
+        perKgImpact: () => "Each additional kg increases apple duplication chance by 0.025% (max 8%) and increases Warped mutation chance by 0.05% (max 4%)"
     },
 
     lemonLion: {

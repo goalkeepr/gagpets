@@ -49,20 +49,22 @@ const dinosaurEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            const kgLimits = "Duplication Max: 133.33 (122.67 🌈)";
             
-            const baseChance = 8 + (0.15 * kg);
-            const extraChance = 5 + (kg / 10);
+            const baseChance = 8;
+            const baseExtra = 5;
             
-            const baseChanceMod = 8 * modifier;
-            const extraChanceMod = 5 * modifier;
-            const baseChanceTotal = baseChance + baseChanceMod;
-            const extraChanceTotal = extraChance + extraChanceMod;
+            const baseChanceMod = baseChance * modifier;
+            const baseExtraMod = baseExtra * modifier;
+            
+            const baseChanceTotal = Math.min(28, (baseChance + baseChanceMod) + (0.15 * kg));
+            const extraChanceTotal = Math.min(25, (baseExtra + baseExtraMod) + (0.1 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `<strong>${baseChanceTotal.toFixed(2)}%</strong> chance harvested fruit duplicates!\nRarer crops have lower chance to duplicate.\n\n<strong>${extraChanceTotal.toFixed(2)}%</strong> extra chance for Prehistoric type fruit to duplicate${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases duplication chance by 0.15% and prehistoric fruit bonus by 0.1%"
+        perKgImpact: () => "Each additional kg increases duplication chance by 0.15% (max 28%) and prehistoric fruit bonus by 0.1% (max 25%)"
     },
 
     trex: {

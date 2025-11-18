@@ -29,9 +29,10 @@
         </div>
         
         <div class="navigation-links">
-            <a href="pettracker.html">📋 Pet Tracker</a>
-            <a href="fruittypes.html">🍎 Fruit Types</a>
-            <a href="recipes.html">🍳 Recipes</a>
+            <a href="/pettracker">📋 Pet Tracker</a>
+            <a href="/fruittypes">🍎 Fruit Types</a>
+            <a href="/recipes">🍳 Recipes</a>
+            <a href="/petlimits">📊 Pet Limits</a>
         </div>
         
         <div class="calculator">
@@ -180,8 +181,8 @@
                         </div>
                     </div>
                     <div style="margin-top: 15px;">
-                        <label for="ageSlider">Age Slider (1-100):</label>
-                        <input type="range" id="ageSlider" min="1" max="100" value="50" style="width: 100%;">
+                        <label for="ageSlider">Age Slider (1-125):</label>
+                        <input type="range" id="ageSlider" min="1" max="125" value="50" style="width: 100%;">
                         <span id="ageSliderValue" style="font-weight: bold; margin-left: 10px;">50</span>
                     </div>
                 </div>
@@ -529,8 +530,8 @@
 
         // Constants for better maintainability
         const CONSTANTS = {
-            MIN_WEIGHT: 0,
-            MAX_WEIGHT: 1000,
+            MIN_WEIGHT: 0.88,
+            MAX_WEIGHT: 140.40,
             WEIGHT_STEP: 0.01,
             DEBOUNCE_DELAY: 300
         };

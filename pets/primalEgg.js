@@ -86,18 +86,17 @@ const primalEggPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            const kgLimits = "Chance Max: 63.33 (59.33 🌈)";
             
-            const baseChance = 6;
-            const chance = baseChance + (0.3 * kg);
-            
+            const baseChance = 6;            
             const chanceMod = baseChance * modifier;
-            const chanceTotal = chance + chanceMod;
+            const chanceTotal = Math.min(25, baseChance + chanceMod + (0.3 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Grants a <strong>${chanceTotal.toFixed(1)}%</strong> chance to duplicate a crafted item${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases crafted item duplication chance by 0.3%"
+        perKgImpact: () => "Each additional kg increases crafted item duplication chance by 0.3% (max 25%)"
     },
 
     dilophosaurus: {

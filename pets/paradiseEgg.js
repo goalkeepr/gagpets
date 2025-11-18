@@ -49,7 +49,7 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
-            const kgLimits = "Cooldown Min: 98.50 (78.30 🌈)";
+            const kgLimits = "Cooldown Min: 98.50 (78.30 🌈), Cooldown Advance Max: (120.00 🌈)";
             
             const baseSeconds = 606;
             const secondsMod = baseSeconds * modifier;
@@ -58,17 +58,17 @@ export const PARADISE_EGG_PETS = {
             
             const baseRange = 20;
             const rangeMod = baseRange * modifier;
-            const range = baseRange + rangeMod + (kg / 5);
+            const range = Math.min(60, (baseRange + rangeMod) + (kg / 5));
             
             const baseCooldownAdvance = 65;
             const cooldownAdvanceMod = baseCooldownAdvance * modifier;
-            const cooldownAdvance = baseCooldownAdvance + cooldownAdvanceMod + (0.6 * kg);
+            const cooldownAdvance = Math.min(150, (baseCooldownAdvance + cooldownAdvanceMod) + (0.6 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(seconds)}</strong>, fans its feathers and all active pets within <strong>${range.toFixed(1)}</strong> studs will advance cooldown for their abilities by <strong>${Utils.formatTime(cooldownAdvance)}</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg decreases feather time by 6 seconds (min 15s), increases range by 0.2 studs, and increases cooldown advance by 0.6 seconds."
+        perKgImpact: () => "Each additional kg decreases feather time by 6 seconds (min 15s), increases range by 0.2 studs (max 60), and increases cooldown advance by 0.6 seconds (max 150s)."
     },
     capybara: {
         name: "Capybara",
@@ -87,21 +87,22 @@ export const PARADISE_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
-            const kgLimits = "XP Gain Max: 90.00 (88.00 🌈)";
+            const kgLimits = "Range Max: 102.00 (90.40 🌈), XP Gain Max: 90.00 (88.00 🌈)";
             
-            const studs = 14.5 + (kg / 4);
-            const xp = 3 + (0.3 * kg);
+            const baseStuds = 14.5;
+            const baseXp = 3;
             
-            const studsMod = 15.5 * modifier;
-            const xpMod = 3 * modifier;
-            const studsTotal = studs + studsMod;
-            const xpTotal = Math.min(30, xp + xpMod);
+            const studsMod = baseStuds * modifier;
+            const xpMod = baseXp * modifier;
+            
+            const studsTotal = Math.min(40, (baseStuds + studsMod) + (kg / 4));
+            const xpTotal = Math.min(30, (baseXp + xpMod) + (0.3 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `All pets within <strong>${studsTotal.toFixed(1)}</strong> studs won't lose hunger and will gain <strong>${xpTotal.toFixed(1)}</strong> XP every second${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases buff range by 0.25 studs and XP gain by 0.3 (max 30)"
+        perKgImpact: () => "Each additional kg increases buff range by 0.25 studs (max 40) and XP gain by 0.3 (max 30)"
     },
     scarletmacaw: {
         name: "Scarlet Macaw",

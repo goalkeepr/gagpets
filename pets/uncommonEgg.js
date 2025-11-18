@@ -118,12 +118,12 @@ export const UNCOMMON_EGG_PETS = {
             const hatchSpeed = 10 + (kg / 10);
             
             const hatchSpeedMod = 10 * modifier;
-            const hatchSpeedTotal = hatchSpeed + hatchSpeedMod;
+            const hatchSpeedTotal = Math.min(35, hatchSpeed + hatchSpeedMod);
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Increases egg hatch speed by <strong>${hatchSpeedTotal.toFixed(1)}%</strong>!${displayText}`;
         },
-        perKgImpact: () => "Each additional kg increases egg hatch speed by 0.1%"
+        perKgImpact: () => "Each additional kg increases egg hatch speed by 0.1% (max 35%)"
     }
 };

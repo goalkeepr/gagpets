@@ -706,10 +706,10 @@
                             </datalist>
                         </td>
                         <td>
-                            <input type="number" id="quickAddAge" placeholder="Age" min="1" max="100" value="1" style="width: 70px;">
+                            <input type="number" id="quickAddAge" placeholder="Age" min="1" max="125" value="1" style="width: 70px;">
                         </td>
                         <td>
-                            <input type="number" id="quickAddWeight" placeholder="Weight" min="0.88" max="114.40" step="0.01" value="1.60" style="width: 90px;">
+                            <input type="number" id="quickAddWeight" placeholder="Weight" min="0.88" max="140.40" step="0.01" value="1.60" style="width: 90px;">
                         </td>
                         <td class="weight-highlight" id="quickAddWeightAt100">-</td>
                         <td id="quickAddSizeClass">-</td>
@@ -788,7 +788,7 @@
                 </div>
                 <div class="form-row">
                     <label for="petWeight">Current Weight (kg) *</label>
-                    <input type="number" id="petWeight" required min="0.88" max="114.40" step="0.01" value="1.60" placeholder="1.60">
+                    <input type="number" id="petWeight" required min="0.88" max="140.40" step="0.01" value="1.60" placeholder="1.60">
                 </div>
                 <div class="form-row">
                     <label for="petMutation">Mutation</label>
@@ -1380,8 +1380,8 @@
                     return;
                 }
                 
-                if (!currentWeight || currentWeight < 0.88 || currentWeight > 114.40) {
-                    alert('Please enter a valid weight (0.88-114.40 kg)');
+                if (!currentWeight || currentWeight < 0.88 || currentWeight > 140.40) {
+                    alert('Please enter a valid weight (0.88-140.40 kg)');
                     document.getElementById('quickAddWeight').focus();
                     return;
                 }

@@ -14,25 +14,27 @@ export const MYTHICAL_EGG_PETS = {
         source: "Mythical Egg",
         probability: 8.5,
         obtainable: true,
-        description: "Duplicates harvested fruits with fruit-type bonus",
+        description: "Dual ability: Duplicates harvested fruits with bonus for Fruit types",
         calculate: (kg, modifierType = "none", customModifierValue = null) => {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
             
-            const baseChance = 5 + (kg / 10);
-            const fruitBonus = 5 + (kg / 10);
+            // First ability - General fruit duplication
+            const baseChance1 = 5;
+            const chance1Mod = baseChance1 * modifier;
+            const chance1Total = Math.min(30, (baseChance1 + chance1Mod) + (0.1 * kg));
             
-            const baseChanceMod = 5 * modifier;
-            const fruitBonusMod = 5 * modifier;
-            const baseChanceTotal = baseChance + baseChanceMod;
-            const fruitBonusTotal = fruitBonus + fruitBonusMod;
+            // Second ability - Fruit type bonus
+            const baseChance2 = 5;
+            const chance2Mod = baseChance2 * modifier;
+            const chance2Total = Math.min(25, (baseChance2 + chance2Mod) + (0.1 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
-            return `<strong>${baseChanceTotal.toFixed(1)}%</strong> chance harvested fruit duplicate!\nRarer crops have lower chance to duplicate.\n\n<strong>${fruitBonusTotal.toFixed(1)}%</strong> extra chance for Fruit type crops to duplicate!${displayText}`;
+            return `<strong>Dual Ability:</strong><br><strong>${chance1Total.toFixed(1)}%</strong> chance harvested fruit duplicate! Rarer crops have lower chance to duplicate.<br><strong>${chance2Total.toFixed(1)}%</strong> extra chance for Fruit type crops to duplicate${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases fruit duplication chance by 0.1% and fruit-type bonus by 0.1%"
+        perKgImpact: () => "Each additional kg increases duplicate chance by 0.1% (max 30%) and Fruit type bonus by 0.1% (max 25%)"
     },
     brownmouse: {
         name: "Brown Mouse",
@@ -155,18 +157,16 @@ export const MYTHICAL_EGG_PETS = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            const kgLimits = "Chance Max: 66.67 (60.00 🌈)";
             
             const baseChance = 10;
-            const chancePerKg = 0.3;
-            const chance = baseChance + (chancePerKg * kg);
-            
             const chanceMod = baseChance * modifier;
-            const chanceTotal = chance + chanceMod;
+            const chanceTotal = Math.min(30, (baseChance + chanceMod) + (0.3 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `<strong>${chanceTotal.toFixed(1)}%</strong> chance to not consume a use when using the Reclaimer${displayText}!`;
         },
-        perKgImpact: () => "Each additional kg increases Reclaimer conservation chance by 0.3%"
+        perKgImpact: () => "Each additional kg increases Reclaimer conservation chance by 0.3% (max 30%)"
     }
 };

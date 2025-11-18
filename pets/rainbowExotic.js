@@ -208,25 +208,25 @@ const rainbowExoticPets = {
             if (!Utils.isValidWeight(kg)) return "Invalid weight";
             
             const { value: modifier, text: modifierText, style: modifierStyle } = getModifierDetails(modifierType, customModifierValue);
+            const kgLimits = "Cooldown Min: No Limit (99.42 🌈), Amount Max: 35.00 (32.00 🌈)";
             
             const baseCooldown = 912;
             const baseAmount = 6;
             
             const cooldown = Math.max(15, baseCooldown - (6 * kg));
-            const amount = baseAmount + (0.4 * kg);
             
             const cooldownMod = baseCooldown * modifier;
             const amountMod = baseAmount * modifier;
             
             const adjustedBaseCooldown = baseCooldown - cooldownMod;
             const cooldownTotal = Math.max(15, adjustedBaseCooldown - (6 * kg));
-            const amountTotal = amount + amountMod;
+            const amountTotal = Math.min(20, (baseAmount + amountMod) + (0.4 * kg));
             
             const displayText = modifier > 0 ? ` <span style='${modifierStyle}'>${modifierText}</span>` : "";
             
             return `Every <strong>${Utils.formatTime(cooldownTotal)}</strong>, devours a random mutation from <strong>${amountTotal.toFixed(1)}</strong> fruits in your garden each, then roars, spreading those mutations to 1 random fruit in your garden! Prioritizes applying mutations to a favorited fruit${displayText}.`;
         },
-        perKgImpact: () => "Each additional kg decreases cooldown by 6s (min 15s) and increases fruits affected by 0.4"
+        perKgImpact: () => "Each additional kg decreases cooldown by 6s (min 15s) and increases fruits affected by 0.4 (max 20)"
     },
 
     rainbowManekiNeko: {
